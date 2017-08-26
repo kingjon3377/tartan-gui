@@ -25,10 +25,15 @@ shared class DanceDatabase(String filename) {
         *sql.Select("select id, name, shortname from shape").execute()
             .map(DanceFormationImpl.fromSql).map((shape) => shape.id->shape)
     };
+    Map<Integer, DanceProgression> progressions = map {
+        *sql.Select("select id, name from progression").execute()
+                .map(DanceProgressionImpl.fromSql).map((type) => type.id->type)
+    };
     value danceStatement =
             sql.Select("SELECT dance.id, dance.name, dance.barsperrepeat, dance.shape_id,
                             dance.type_id, dance.couples_id,
-                            publication.name AS publicationName
+                            publication.name AS publicationName,
+                            dance.progression_id
                         FROM dance, dancespublicationsmap, publication
                         WHERE dance.id = dancespublicationsmap.dance_id AND
                             publication.id = dancespublicationsmap.publication_id");
@@ -69,7 +74,18 @@ shared class DanceDatabase(String filename) {
             couples = couplesRaw;
         }
         assert (is String source = row["publicationname"]);
-        return DanceRowImpl(id, name, length, shape, type, couples, source);
+        assert (exists progressionStr = row["progression_id"]);
+        DanceProgression progression;
+        switch (progressionNum = parseSqlNullableInt(progressionStr))
+        case (is SqlNull) {
+            process.writeLine("Progression for ``name`` was SQL null");
+            progression = DanceProgressionImpl.unknown;
+        }
+        case (is Integer) {
+            assert (exists temp = progressions[progressionNum]);
+            progression = temp;
+        }
+        return DanceRowImpl(id, name, length, shape, type, couples, source, progression);
     }
     "The dances in the database."
     shared {DanceRow*} dances => danceStatement.execute().map(danceRowBuilder);
@@ -90,8 +106,10 @@ shared interface DanceRow {
     shared formal Integer couples;
     "The source for the dance."
     shared formal String source;
+    "The progression used between times through the dance."
+    shared formal DanceProgression progression;
 }
-class DanceRowImpl(id, name, length, shape, type, couples, source) satisfies DanceRow {
+class DanceRowImpl(id, name, length, shape, type, couples, source, progression) satisfies DanceRow {
     "This dance's ID in the database"
     shared actual Integer id;
     "The name of this dance"
@@ -106,6 +124,8 @@ class DanceRowImpl(id, name, length, shape, type, couples, source) satisfies Dan
     shared actual Integer couples;
     "Who devised the dance."
     shared actual String source;
+    "The progression used between times through the dance."
+    shared actual DanceProgression progression;
     shared actual String string =>
             "\"``name``\" is a ``length``-bar ``type.name`` for ``couples
                 `` couples in a ``shape.name``, from \"``source``\".";
@@ -169,6 +189,31 @@ class DanceTypeImpl satisfies DanceType {
         assert (is String shortName = row["short_name"]);
         abbreviation = shortName;
     }
+}
+"""How couples (or dancers) "progress" from one round of the dance to the next."""
+shared interface DanceProgression {
+	"The number that identifies this progression in the database."
+	shared formal Integer id;
+	"A textual description of this progression."
+	shared formal String name;
+	"Whether this dance is danced only once through."
+	shared Boolean onlyOnce => name == "OnceOnly";
+}
+"An implementation of [[DanceProgression]]"
+class DanceProgressionImpl satisfies DanceProgression {
+	shared actual Integer id;
+	shared actual String name;
+	shared new (Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	shared new fromSql(Map<String, Object> row) {
+		assert (exists idStr = row["id"]);
+		id = parseSqlInt(idStr);
+		assert (is String nameStr = row["name"]);
+		name = nameStr;
+	}
+	shared new unknown extends DanceProgressionImpl(-1, "Unknown") {}
 }
 Integer parseSqlInt(Object obj) {
     if (is Integer obj) {
