@@ -1,3 +1,6 @@
 .idea/workspace.xml
 .idea/qaplug_profiles.xml
 modules/*
+/.exploded/
+/modules/
+/bin/
