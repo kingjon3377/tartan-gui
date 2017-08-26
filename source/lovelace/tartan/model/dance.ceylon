@@ -37,5 +37,7 @@ shared class Dance(title, source, tempo, times, length, formation) {
 	   output."""
 	shared MutableList<Figure|NamedFigure|String> contents =
 			ArrayList<Figure|NamedFigure|String>();
+	"A (very simple) String representation of the dance (for use in lists)"
+	shared actual String string => "``title`` (``times``x``length````tempo``) (``source``)";
 }
 
