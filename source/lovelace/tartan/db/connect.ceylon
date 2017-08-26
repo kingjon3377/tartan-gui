@@ -1,12 +1,16 @@
 import ceylon.dbc {
     newConnectionFromDataSource,
-    Sql
+    Sql,
+    SqlNull
 }
 import org.sqlite {
     SQLiteDataSource
 }
 import java.lang {
     IllegalArgumentException
+}
+import ceylon.language.meta {
+    type
 }
 "Connection to the dance database."
 shared class DanceDatabase(String filename) {
@@ -34,19 +38,32 @@ shared class DanceDatabase(String filename) {
         assert (is String name = row["name"]);
         assert (exists lengthStr = row["barsperrepeat"]);
         Integer length = parseSqlInt(lengthStr);
-        assert (exists shapeStr = row["shape_id"],
-            exists shape = shapes[parseSqlInt(shapeStr)]);
+        assert (exists shapeStr = row["shape_id"]);
+        DanceFormation shape;
+        switch (shapeNum = parseSqlNullableInt(shapeStr))
+        case (is SqlNull) {
+            process.writeLine("Formation for ``name`` was SQL null");
+            shape = DanceFormationImpl.unknown;
+        }
+        case (is Integer) {
+            assert (exists temp = shapes[shapeNum]);
+            shape = temp;
+        }
         assert (exists typeStr = row["type_id"],
             exists type = types[parseSqlInt(typeStr)]);
         assert (exists couplesStr = row["couples_id"]);
-        Integer couplesRaw = parseSqlInt(couplesStr);
+        Integer|SqlNull couplesRaw = parseSqlNullableInt(couplesStr);
         Integer couples;
         // The database helpfully uses the number of couples for the ID in that table
         // for dances that actually use couples, and then IDs in the 50s for dances with
         // one to five individuals or 2 trios, in the 90s for other or unknown, and in the
         // 100s for more complicated arrangements. For our purposes, any of the cases more
-        // complicated than a simple number of couples is filed under "other".
-        if (couplesRaw > 10) {
+        // complicated than a simple number of couples is filed under "other". This field
+        // can also be NULL, in shich case we also use "other".
+        if (is SqlNull couplesRaw) {
+            process.writeLine("Number of couples for ``name`` was SQL null");
+            couples = -1;
+        } else if (couplesRaw > 10) {
             couples = -1;
         } else {
             couples = couplesRaw;
@@ -120,6 +137,7 @@ class DanceFormationImpl satisfies DanceFormation {
         assert (is String shortName = row["shortname"]);
         abbreviation = shortName;
     }
+    shared new unknown extends DanceFormationImpl(-1, "Unknown", "?") {}
 }
 "A type of dance---with perhaps vanishingly rare exceptions, all are jigs, reels,
  strathspeys, or medleys, but it's conceivable that the database's IDs for these would
@@ -159,6 +177,13 @@ Integer parseSqlInt(Object obj) {
         assert (is Integer retval = Integer.parse(obj));
         return retval;
     } else {
-        throw IllegalArgumentException("Got non-numeric value when we expected a number");
+        throw IllegalArgumentException("Got non-numeric value, a ``type(obj)``, when we expected a number");
+    }
+}
+Integer|SqlNull parseSqlNullableInt(Object obj) {
+    if (is SqlNull obj) {
+        return obj;
+    } else {
+        return parseSqlInt(obj);
     }
 }
