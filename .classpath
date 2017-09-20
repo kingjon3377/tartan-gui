@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/3.19.3"/>
+	<classpathentry kind="src" path="source"/>
+	<classpathentry exported="true" kind="con" path="com.redhat.ceylon.eclipse.ui.cpcontainer.RUNTIME_CONTAINER/default"/>
+	<classpathentry exported="true" kind="con" path="com.redhat.ceylon.eclipse.ui.cpcontainer.CEYLON_CONTAINER/default"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/1.3.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/3.19.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Ceylon: ceylon.collection/1.3.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Ceylon: ceylon.dbc/1.3.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Ceylon: ceylon.decimal/1.3.2"/>
@@ -8,8 +25,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Ceylon: ceylon.language/1.3.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Ceylon: ceylon.whole/1.3.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Ceylon: org.xerial:sqlite-jdbc/3.19.3"/>
-	<classpathentry kind="src" path="source"/>
-	<classpathentry exported="true" kind="con" path="com.redhat.ceylon.eclipse.ui.cpcontainer.RUNTIME_CONTAINER/default"/>
-	<classpathentry exported="true" kind="con" path="com.redhat.ceylon.eclipse.ui.cpcontainer.CEYLON_CONTAINER/default"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
