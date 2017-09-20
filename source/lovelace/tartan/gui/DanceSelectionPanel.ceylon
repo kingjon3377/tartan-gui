@@ -95,9 +95,9 @@ JPanel danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> program
 	value leftButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-left-300px.png"));
 	leftButton.addActionListener((evt) => process.writeLine("leftButton pressed"));
 	inner.add(Box.createVerticalGlue());
-	inner.add(rightButton, javaString(BorderLayout.pageStart));
+	inner.add(rightButton);
 	inner.add(Box.createVerticalStrut(5));
-	inner.add(leftButton, javaString(BorderLayout.pageEnd));
+	inner.add(leftButton);
 	inner.add(Box.createVerticalGlue());
 	retval.add(inner, javaString(BorderLayout.center));
 	value selectedListModel = ListModelAdapter(program);
