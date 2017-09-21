@@ -9,7 +9,8 @@ import javax.swing {
 	ListModel,
 	JSplitPane,
 	JComponent,
-	JScrollPane
+	JScrollPane,
+	JTextField
 }
 import java.awt {
     BorderLayout,
@@ -27,7 +28,8 @@ import ceylon.interop.java {
 }
 import java.lang {
     Thread,
-	ArrayIndexOutOfBoundsException
+	ArrayIndexOutOfBoundsException,
+	Types
 }
 import javax.imageio {
     ImageIO
@@ -43,6 +45,9 @@ import ceylon.collection {
 import javax.swing.event {
 	ListDataListener,
 	ListDataEvent
+}
+import java.awt.event {
+	ActionEvent
 }
 "Get an image from the classpath as an icon, in the absence of a Ceylon SDK API to do so."
 Image loadImage(String filename) {
@@ -87,7 +92,6 @@ class ListModelAdapter<Element>(MutableList<Element> list)
 	}
 }
 JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> program) {
-	value danceList = JList<DanceRow>(DanceSearchResultsListModel(db));
 	JPanel inner = JPanel();
 	inner.layout = BoxLayout(inner, BoxLayout.pageAxis);
 	value rightButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-right-300px.png"));
@@ -100,6 +104,32 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 	inner.maximumSize = Dimension(60, 4096);
 	inner.preferredSize = Dimension(40, 480);
 	inner.minimumSize = Dimension(20, 45);
+
+	JPanel filterPanel = JPanel(BorderLayout());
+	JTextField filterField = JTextField(15);
+	filterPanel.add(filterField, Types.nativeString(BorderLayout.center));
+	JButton filterButton = JButton("Search");
+	filterPanel.add(filterButton, Types.nativeString(BorderLayout.lineEnd));
+
+	JPanel left = JPanel(BorderLayout());
+	value danceListModel = DanceSearchResultsListModel(db);
+	value danceList = JList<DanceRow>(danceListModel);
+	left.add(JScrollPane(danceList), Types.nativeString(BorderLayout.center));
+	left.add(filterPanel, Types.nativeString(BorderLayout.north));
+
+	void filterDanceList(ActionEvent _) {
+		String search = filterField.text.trimmed;
+		if (search.empty) {
+			danceListModel.search(null);
+		} else {
+			danceListModel.search(search);
+		}
+		danceList.repaint();
+	}
+
+	filterField.addActionListener(filterDanceList);
+	filterButton.addActionListener(filterDanceList);
+
 	value selectedListModel = ListModelAdapter(program);
 	value selectedList = JList<ProgramElement>(selectedListModel);
 	selectedList.minimumSize = Dimension(400, 100);
@@ -114,7 +144,7 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 		}
 	});
 	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, inner, JScrollPane(selectedList));
-	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, JScrollPane(danceList), secondSplitPane);
+	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, left, secondSplitPane);
 	secondSplitPane.resizeWeight = 0.0;
 	firstSplitPane.resizeWeight = 0.5;
 	return firstSplitPane;
