@@ -9,7 +9,8 @@ import java.lang {
     ArrayIndexOutOfBoundsException
 }
 import javax.swing.event {
-    ListDataListener
+    ListDataListener,
+	ListDataEvent
 }
 import ceylon.collection {
     MutableList,
@@ -39,13 +40,29 @@ class DanceSearchResultsListModel(DanceDatabase db) satisfies SwingListModel<Dan
 				return;
 			}
 			currentSearch = term;
+			value removeEvent = ListDataEvent(this, ListDataEvent.intervalRemoved, 0, backing.size - 1);
 			backing.clear();
+			for (listener in listeners) {
+				listener.intervalRemoved(removeEvent);
+			}
 			backing.addAll(db.dances.filter(
 						(dance) => dance.name.lowercased.contains(term.lowercased)));
+			value addEvent = ListDataEvent(this, ListDataEvent.intervalAdded, 0, backing.size - 1);
+			for (listener in listeners) {
+				listener.intervalRemoved(addEvent);
+			}
 		} else if (currentSearch exists) {
 			currentSearch = null;
+			value removeEvent = ListDataEvent(this, ListDataEvent.intervalRemoved, 0, backing.size - 1);
 			backing.clear();
+			for (listener in listeners) {
+				listener.intervalRemoved(removeEvent);
+			}
 			backing.addAll(db.dances);
+			value addEvent = ListDataEvent(this, ListDataEvent.intervalAdded, 0, backing.size - 1);
+			for (listener in listeners) {
+				listener.intervalRemoved(addEvent);
+			}
 		}
 	}
 }
