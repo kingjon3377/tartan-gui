@@ -6,7 +6,10 @@ import javax.swing {
     WindowConstants,
     BoxLayout,
     Box,
-	ListModel
+	ListModel,
+	JSplitPane,
+	JComponent,
+	JScrollPane
 }
 import java.awt {
     BorderLayout,
@@ -82,13 +85,10 @@ class ListModelAdapter<Element>(MutableList<Element> list)
 		}
 	}
 }
-JPanel danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> program) {
-	JPanel retval = JPanel(BorderLayout());
+JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> program) {
 	value danceList = JList<DanceRow>(DanceSearchResultsListModel(db));
 	danceList.maximumSize = Dimension(620, 480);
 	danceList.preferredSize = Dimension(310, 480);
-	retval.add(danceList,
-		javaString(BorderLayout.lineStart));
 	JPanel inner = JPanel();
 	inner.layout = BoxLayout(inner, BoxLayout.pageAxis);
 	value rightButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-right-300px.png"));
@@ -99,12 +99,14 @@ JPanel danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> program
 	inner.add(Box.createVerticalStrut(5));
 	inner.add(leftButton);
 	inner.add(Box.createVerticalGlue());
-	retval.add(inner, javaString(BorderLayout.center));
+	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, JScrollPane(danceList), inner);
+	firstSplitPane.resizeWeight = 1.0;
 	value selectedListModel = ListModelAdapter(program);
 	value selectedList = JList<ProgramElement>(selectedListModel);
-	retval.add(selectedList, javaString(BorderLayout.lineEnd));
 	selectedList.maximumSize = Dimension(620, 480);
 	selectedList.preferredSize = Dimension(310, 480);
 	rightButton.addActionListener((evt) => selectedListModel.addElement(convertDance(danceList.selectedValue)));
-	return retval;
+	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, firstSplitPane, JScrollPane(selectedList));
+	secondSplitPane.resizeWeight = 0.5;
+	return secondSplitPane;
 }
