@@ -93,7 +93,6 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 	inner.layout = BoxLayout(inner, BoxLayout.pageAxis);
 	value rightButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-right-300px.png"));
 	value leftButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-left-300px.png"));
-	leftButton.addActionListener((evt) => process.writeLine("leftButton pressed"));
 	inner.add(Box.createVerticalGlue());
 	inner.add(rightButton);
 	inner.add(Box.createVerticalStrut(5));
@@ -106,6 +105,11 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 	selectedList.maximumSize = Dimension(620, 480);
 	selectedList.preferredSize = Dimension(310, 480);
 	rightButton.addActionListener((evt) => selectedListModel.addElement(convertDance(danceList.selectedValue)));
+	leftButton.addActionListener((evt) {
+		if (exists selection = selectedList.selectedIndex, selection >= 0) {
+			selectedListModel.removeElement(selection);
+		}
+	});
 	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, firstSplitPane, JScrollPane(selectedList));
 	secondSplitPane.resizeWeight = 0.5;
 	return secondSplitPane;
