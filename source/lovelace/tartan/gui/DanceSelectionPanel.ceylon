@@ -88,8 +88,6 @@ class ListModelAdapter<Element>(MutableList<Element> list)
 }
 JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> program) {
 	value danceList = JList<DanceRow>(DanceSearchResultsListModel(db));
-	danceList.maximumSize = Dimension(620, 480);
-	danceList.preferredSize = Dimension(310, 480);
 	JPanel inner = JPanel();
 	inner.layout = BoxLayout(inner, BoxLayout.pageAxis);
 	value rightButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-right-300px.png"));
@@ -99,12 +97,12 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 	inner.add(Box.createVerticalStrut(5));
 	inner.add(leftButton);
 	inner.add(Box.createVerticalGlue());
-	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, JScrollPane(danceList), inner);
-	firstSplitPane.resizeWeight = 1.0;
+	inner.maximumSize = Dimension(60, 4096);
+	inner.preferredSize = Dimension(40, 480);
+	inner.minimumSize = Dimension(20, 45);
 	value selectedListModel = ListModelAdapter(program);
 	value selectedList = JList<ProgramElement>(selectedListModel);
-	selectedList.maximumSize = Dimension(620, 480);
-	selectedList.preferredSize = Dimension(310, 480);
+	selectedList.minimumSize = Dimension(400, 100);
 	rightButton.addActionListener((evt) {
 		if (exists selection = danceList.selectedValue, !program.narrow<Dance>().map(Dance.title).equals(selection.name)) {
 			selectedListModel.addElement(convertDance(selection));
@@ -115,7 +113,9 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 			selectedListModel.removeElement(selection);
 		}
 	});
-	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, firstSplitPane, JScrollPane(selectedList));
-	secondSplitPane.resizeWeight = 0.5;
-	return secondSplitPane;
+	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, inner, JScrollPane(selectedList));
+	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, JScrollPane(danceList), secondSplitPane);
+	secondSplitPane.resizeWeight = 0.0;
+	firstSplitPane.resizeWeight = 0.5;
+	return firstSplitPane;
 }
