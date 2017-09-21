@@ -88,7 +88,7 @@ shared class DanceDatabase(String filename) {
         return DanceRowImpl(id, name, length, shape, type, couples, source, progression);
     }
     "The dances in the database."
-    shared {DanceRow*} dances => danceStatement.execute().map(danceRowBuilder);
+    shared {DanceRow*} dances = danceStatement.execute().map(danceRowBuilder);
 }
 "A dance in the database."
 shared interface DanceRow {
