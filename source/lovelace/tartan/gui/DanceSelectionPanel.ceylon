@@ -33,7 +33,8 @@ import javax.imageio {
     ImageIO
 }
 import lovelace.tartan.model {
-	ProgramElement
+	ProgramElement,
+	Dance
 }
 import ceylon.collection {
 	MutableList,
@@ -104,7 +105,11 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 	value selectedList = JList<ProgramElement>(selectedListModel);
 	selectedList.maximumSize = Dimension(620, 480);
 	selectedList.preferredSize = Dimension(310, 480);
-	rightButton.addActionListener((evt) => selectedListModel.addElement(convertDance(danceList.selectedValue)));
+	rightButton.addActionListener((evt) {
+		if (exists selection = danceList.selectedValue, !program.narrow<Dance>().map(Dance.title).equals(selection.name)) {
+			selectedListModel.addElement(convertDance(selection));
+		}
+	});
 	leftButton.addActionListener((evt) {
 		if (exists selection = selectedList.selectedIndex, selection >= 0) {
 			selectedListModel.removeElement(selection);
