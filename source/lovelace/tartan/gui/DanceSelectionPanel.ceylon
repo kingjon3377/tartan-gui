@@ -10,7 +10,8 @@ import javax.swing {
 	JSplitPane,
 	JComponent,
 	JScrollPane,
-	JTextField
+	JTextField,
+	DropMode
 }
 import java.awt {
     BorderLayout,
@@ -60,7 +61,7 @@ class ImageButton(Image image) extends JButton() {
 	minimumSize = Dimension(20, 20);
 }
 class ListModelAdapter<Element>(MutableList<Element> list)
-		satisfies ListModel<Element> given Element satisfies Object {
+		satisfies ListModel<Element>&Reorderable given Element satisfies Object {
 	MutableList<ListDataListener> listeners = ArrayList<ListDataListener>();
 	shared actual void addListDataListener(ListDataListener listener) => listeners.add(listener);
 	shared actual void removeListDataListener(ListDataListener listener) => listeners.remove(listener);
@@ -88,6 +89,21 @@ class ListModelAdapter<Element>(MutableList<Element> list)
 			if (exists index = list.firstIndexWhere(element.equals)) {
 				removeElement(index);
 			}
+		}
+	}
+	shared actual void reorder(Integer fromIndex, Integer toIndex) {
+		if (fromIndex != toIndex, exists item = list.delete(fromIndex)) {
+			if (fromIndex > toIndex) {
+				list.insert(toIndex, item);
+			} else {
+				list.insert(toIndex - 1, item);
+			}
+		}
+		value addedEvent = ListDataEvent(this, ListDataEvent.intervalAdded, toIndex, toIndex);
+		value removedEvent = ListDataEvent(this, ListDataEvent.intervalRemoved, fromIndex, fromIndex);
+		for (listener in listeners) {
+			listener.intervalRemoved(removedEvent);
+			listener.intervalAdded(addedEvent);
 		}
 	}
 }
@@ -133,6 +149,9 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 	value selectedListModel = ListModelAdapter(program);
 	value selectedList = JList<ProgramElement>(selectedListModel);
 	selectedList.minimumSize = Dimension(400, 100);
+	selectedList.transferHandler = programElementTransferHandler;
+	selectedList.dropMode = DropMode.insert;
+	selectedList.dragEnabled = true;
 	rightButton.addActionListener((evt) {
 		if (exists selection = danceList.selectedValue, !program.narrow<Dance>().map(Dance.title).equals(selection.name)) {
 			selectedListModel.addElement(convertDance(selection));
