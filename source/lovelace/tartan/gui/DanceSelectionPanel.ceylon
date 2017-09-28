@@ -2,8 +2,6 @@ import javax.swing {
     JPanel,
     JList,
     JButton,
-    JFrame,
-    WindowConstants,
     BoxLayout,
     Box,
 	ListModel,
@@ -23,9 +21,6 @@ import lovelace.tartan.db {
     DanceRow,
     DanceDatabase,
 	convertDance
-}
-import ceylon.interop.java {
-    javaString
 }
 import java.lang {
     Thread,
