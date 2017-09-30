@@ -149,7 +149,7 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 	selectedList.dragEnabled = true;
 	rightButton.addActionListener((evt) {
 		if (exists selection = danceList.selectedValue, !program.narrow<Dance>().map(Dance.title).equals(selection.name)) {
-			selectedListModel.addElement(convertDance(selection));
+			selectedListModel.addElement(convertDance(selection, db.cribText(selection)));
 		}
 	});
 	leftButton.addActionListener((evt) {

@@ -8,6 +8,13 @@ shared class Figure(description, bars = null) {
 	shared variable String description;
 	"The bars on which this figure is danced, if any is specified."
 	shared variable String? bars;
+	shared actual String string {
+		if (exists temp = bars) {
+			return "``temp``: ``description``";
+		} else {
+			return description;
+		}
+	}
 }
 
 """A "named figure" in a dance: a series of figures that should be grouped together and

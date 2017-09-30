@@ -87,8 +87,18 @@ shared class DanceDatabase(String filename) {
         }
         return DanceRowImpl(id, name, length, shape, type, couples, source, progression);
     }
+    value cribStatement = sql.Select("SELECT text FROM dancecrib
+                                      WHERE dance_id = ? ORDER BY format ASC LIMIT 1");
     "The dances in the database."
     shared {DanceRow*} dances = danceStatement.execute().map(danceRowBuilder);
+    """The "crib" text (directions) for the given dance in the database."""
+    shared String? cribText(DanceRow dance) {
+        if (exists row = cribStatement.execute(dance.id).first, is String retval = row["text"]) {
+                return retval;
+            } else {
+                return null;
+            }
+    }
 }
 "A dance in the database."
 shared interface DanceRow {
