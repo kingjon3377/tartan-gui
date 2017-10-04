@@ -32,7 +32,9 @@ import javax.imageio {
 }
 import lovelace.tartan.model {
 	ProgramElement,
-	Dance
+	Dance,
+	Intermission,
+	AuldLangSyne
 }
 import ceylon.collection {
 	MutableList,
@@ -157,7 +159,21 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 			selectedListModel.removeElement(selection);
 		}
 	});
-	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, inner, JScrollPane(selectedList));
+	JPanel rightPanel = JPanel(BorderLayout());
+	rightPanel.add(JScrollPane(selectedList), Types.nativeString(BorderLayout.center));
+	JPanel specialPanel = JPanel(BorderLayout());
+	JButton breakButton = JButton("Add Break");
+	breakButton.addActionListener((evt) {
+		selectedListModel.addElement(Intermission());
+	});
+	specialPanel.add(breakButton, Types.nativeString(BorderLayout.lineStart));
+	JButton alsButton = JButton("""<html>Add &ldquo;Auld Lang Syne&rdquo;</html>""");
+	alsButton.addActionListener((evt) {
+		selectedListModel.addElement(AuldLangSyne());
+	});
+	specialPanel.add(alsButton, Types.nativeString(BorderLayout.lineEnd));
+	rightPanel.add(specialPanel, Types.nativeString(BorderLayout.pageEnd));
+	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, inner, rightPanel);
 	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, left, secondSplitPane);
 	secondSplitPane.resizeWeight = 0.0;
 	firstSplitPane.resizeWeight = 0.5;
