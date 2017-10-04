@@ -18,7 +18,8 @@ import javax.swing {
 	JFrame,
 	JTabbedPane,
 	JFileChooser,
-	WindowConstants
+	WindowConstants,
+	JSplitPane
 }
 import javax.swing.filechooser {
 	FileFilter
@@ -36,8 +37,12 @@ JFrame programEditingWindow(DanceDatabase db) {
 	retval.setMinimumSize(Dimension(400, 300));
 	value pane = JTabbedPane(JTabbedPane.top, JTabbedPane.scrollTabLayout);
 	retval.contentPane = pane;
-	pane.add("Select Dances", danceSelectionPanel(db, program));
+	value dsp = danceSelectionPanel(db, program);
+	pane.add("Select Dances", dsp);
 	retval.pack();
+	if (is JSplitPane dsp) {
+		dsp.setDividerLocation(0.5);
+	}
 	retval.defaultCloseOperation = WindowConstants.disposeOnClose;
 	return retval;
 }
