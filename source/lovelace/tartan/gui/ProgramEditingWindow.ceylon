@@ -33,12 +33,14 @@ import lovelace.tartan.model {
 }
 JFrame programEditingWindow(DanceDatabase db) {
 	MutableList<ProgramElement> program = ArrayList<ProgramElement>();
+	MutableListModel<ProgramElement> programModel = ListModelAdapter(program);
 	JFrame retval = JFrame("Dance Program Editor");
 	retval.setMinimumSize(Dimension(400, 300));
 	value pane = JTabbedPane(JTabbedPane.top, JTabbedPane.scrollTabLayout);
 	retval.contentPane = pane;
-	value dsp = danceSelectionPanel(db, program);
+	value dsp = danceSelectionPanel(db, programModel);
 	pane.add("Select Dances", dsp);
+	pane.add("Edit Selected Dances", programEditingPanel(programModel));
 	retval.pack();
 	if (is JSplitPane dsp) {
 		dsp.setDividerLocation(0.5);

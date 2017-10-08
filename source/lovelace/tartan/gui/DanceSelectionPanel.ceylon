@@ -57,8 +57,23 @@ class ImageButton(Image image) extends JButton() {
 	preferredSize = Dimension(40, 40);
 	minimumSize = Dimension(20, 20);
 }
+interface MutableListModel<Element>
+		satisfies ListModel<Element>&Reorderable&Correspondence<Integer,Element>
+		given Element satisfies Object {
+	shared formal void addElement(Element element);
+	shared formal void removeElement(Integer|Element element);
+	shared actual Element? get(Integer index) {
+		if ((0:size).contains(index)) {
+			return getElementAt(index);
+		} else {
+			return null;
+		}
+	}
+	shared actual Boolean defines(Integer index) => (0:size).contains(index);
+	shared formal Iterable<Element> asIterable;
+}
 class ListModelAdapter<Element>(MutableList<Element> list)
-		satisfies ListModel<Element>&Reorderable given Element satisfies Object {
+		satisfies MutableListModel<Element> given Element satisfies Object {
 	MutableList<ListDataListener> listeners = ArrayList<ListDataListener>();
 	shared actual void addListDataListener(ListDataListener listener) => listeners.add(listener);
 	shared actual void removeListDataListener(ListDataListener listener) => listeners.remove(listener);
@@ -70,13 +85,13 @@ class ListModelAdapter<Element>(MutableList<Element> list)
 		}
 	}
 	shared actual Integer size => list.size;
-	shared void addElement(Element element) {
+	shared actual void addElement(Element element) {
 		list.add(element);
 		for (listener in listeners) {
 			listener.intervalAdded(ListDataEvent(this, ListDataEvent.intervalAdded, list.size - 1, list.size - 1));
 		}
 	}
-	shared void removeElement(Integer|Element element) {
+	shared actual void removeElement(Integer|Element element) {
 		if (is Integer element) {
 			list.delete(element);
 			for (listener in listeners) {
@@ -103,8 +118,9 @@ class ListModelAdapter<Element>(MutableList<Element> list)
 			listener.intervalAdded(addedEvent);
 		}
 	}
+	shared actual Iterable<Element> asIterable => list;
 }
-JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> program) {
+JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement> program) {
 	JPanel inner = JPanel();
 	inner.layout = BoxLayout(inner, BoxLayout.pageAxis);
 	value rightButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-right-300px.png"));
@@ -143,33 +159,33 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableList<ProgramElement> pro
 	filterField.addActionListener(filterDanceList);
 	filterButton.addActionListener(filterDanceList);
 
-	value selectedListModel = ListModelAdapter(program);
-	value selectedList = JList<ProgramElement>(selectedListModel);
+	value selectedList = JList<ProgramElement>(program);
 	selectedList.minimumSize = Dimension(400, 100);
 	selectedList.transferHandler = programElementTransferHandler;
 	selectedList.dropMode = DropMode.insert;
 	selectedList.dragEnabled = true;
 	rightButton.addActionListener((evt) {
-		if (exists selection = danceList.selectedValue, !program.narrow<Dance>().map(Dance.title).equals(selection.name)) {
-			selectedListModel.addElement(convertDance(selection, db.cribText(selection)));
+		if (exists selection = danceList.selectedValue, !program.asIterable.narrow<Dance>().map(Dance.title).equals(selection.name)) {
+			program.addElement(convertDance(selection, db.cribText(selection)));
 		}
 	});
 	leftButton.addActionListener((evt) {
 		if (exists selection = selectedList.selectedIndex, selection >= 0) {
-			selectedListModel.removeElement(selection);
+			program.removeElement(selection);
 		}
 	});
 	JPanel rightPanel = JPanel(BorderLayout());
 	rightPanel.add(JScrollPane(selectedList), Types.nativeString(BorderLayout.center));
 	JPanel specialPanel = JPanel(BorderLayout());
+	// TODO: These should add at (before? after?) the current selection, not always at the end
 	JButton breakButton = JButton("Add Break");
 	breakButton.addActionListener((evt) {
-		selectedListModel.addElement(Intermission());
+		program.addElement(Intermission());
 	});
 	specialPanel.add(breakButton, Types.nativeString(BorderLayout.lineStart));
 	JButton alsButton = JButton("""<html>Add &ldquo;Auld Lang Syne&rdquo;</html>""");
 	alsButton.addActionListener((evt) {
-		selectedListModel.addElement(AuldLangSyne());
+		program.addElement(AuldLangSyne());
 	});
 	specialPanel.add(alsButton, Types.nativeString(BorderLayout.lineEnd));
 	rightPanel.add(specialPanel, Types.nativeString(BorderLayout.pageEnd));
