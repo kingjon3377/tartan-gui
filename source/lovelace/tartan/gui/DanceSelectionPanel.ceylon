@@ -1,8 +1,6 @@
 import javax.swing {
     JPanel,
     JList,
-    BoxLayout,
-    Box,
 	JSplitPane,
 	JComponent,
 	JScrollPane,
@@ -40,22 +38,20 @@ import lovelace.tartan.gui.model {
 }
 import lovelace.tartan.gui.controls {
 	ImageButton,
-	ListenedButton
+	ListenedButton,
+	BoxDirection,
+	boxPanel,
+	boxGlue,
+	BoxStrut
 }
 "Get an image from the classpath as an icon, in the absence of a Ceylon SDK API to do so."
 Image loadImage(String filename) {
 	return ImageIO.read(Thread.currentThread().contextClassLoader.getResourceAsStream(filename));
 }
 JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement> program) {
-	JPanel inner = JPanel();
-	inner.layout = BoxLayout(inner, BoxLayout.pageAxis);
 	value rightButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-right-300px.png"));
 	value leftButton = ImageButton(loadImage("/lovelace/tartan/gui/arrow-left-300px.png"));
-	inner.add(Box.createVerticalGlue());
-	inner.add(rightButton);
-	inner.add(Box.createVerticalStrut(5));
-	inner.add(leftButton);
-	inner.add(Box.createVerticalGlue());
+	JPanel inner = boxPanel(BoxDirection.pageAxis, boxGlue, rightButton, BoxStrut(5), leftButton, boxGlue);
 	inner.maximumSize = Dimension(60, 4096);
 	inner.preferredSize = Dimension(40, 480);
 	inner.minimumSize = Dimension(20, 45);
