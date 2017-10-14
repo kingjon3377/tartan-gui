@@ -1,7 +1,6 @@
 import javax.swing {
     JPanel,
     JList,
-    JButton,
     BoxLayout,
     Box,
 	JSplitPane,
@@ -40,7 +39,8 @@ import lovelace.tartan.gui.model {
 	MutableListModel
 }
 import lovelace.tartan.gui.controls {
-	ImageButton
+	ImageButton,
+	ListenedButton
 }
 "Get an image from the classpath as an icon, in the absence of a Ceylon SDK API to do so."
 Image loadImage(String filename) {
@@ -63,14 +63,10 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement
 	JPanel filterPanel = JPanel(BorderLayout());
 	JTextField filterField = JTextField(15);
 	filterPanel.add(filterField, Types.nativeString(BorderLayout.center));
-	JButton filterButton = JButton("Search");
-	filterPanel.add(filterButton, Types.nativeString(BorderLayout.lineEnd));
 
 	JPanel left = JPanel(BorderLayout());
 	value danceListModel = DanceSearchResultsListModel(db);
 	value danceList = JList<DanceRow>(danceListModel);
-	left.add(JScrollPane(danceList), Types.nativeString(BorderLayout.center));
-	left.add(filterPanel, Types.nativeString(BorderLayout.north));
 
 	void filterDanceList(ActionEvent _) {
 		String search = filterField.text.trimmed;
@@ -82,8 +78,12 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement
 		danceList.repaint();
 	}
 
+	filterPanel.add(ListenedButton("Search", filterDanceList), Types.nativeString(BorderLayout.lineEnd));
+
+	left.add(JScrollPane(danceList), Types.nativeString(BorderLayout.center));
+	left.add(filterPanel, Types.nativeString(BorderLayout.north));
+
 	filterField.addActionListener(filterDanceList);
-	filterButton.addActionListener(filterDanceList);
 
 	value selectedList = JList<ProgramElement>(program);
 	selectedList.minimumSize = Dimension(400, 100);
@@ -104,16 +104,9 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement
 	rightPanel.add(JScrollPane(selectedList), Types.nativeString(BorderLayout.center));
 	JPanel specialPanel = JPanel(BorderLayout());
 	// TODO: These should add at (before? after?) the current selection, not always at the end
-	JButton breakButton = JButton("Add Break");
-	breakButton.addActionListener((evt) {
-		program.addElement(Intermission());
-	});
-	specialPanel.add(breakButton, Types.nativeString(BorderLayout.lineStart));
-	JButton alsButton = JButton("""<html>Add &ldquo;Auld Lang Syne&rdquo;</html>""");
-	alsButton.addActionListener((evt) {
-		program.addElement(AuldLangSyne());
-	});
-	specialPanel.add(alsButton, Types.nativeString(BorderLayout.lineEnd));
+	specialPanel.add(ListenedButton("Add Break", (_) => program.addElement(Intermission())), Types.nativeString(BorderLayout.lineStart));
+	specialPanel.add(ListenedButton("""<html>Add &ldquo;Auld Lang Syne&rdquo;</html>""",
+		(_) => program.addElement(AuldLangSyne())), Types.nativeString(BorderLayout.lineEnd));
 	rightPanel.add(specialPanel, Types.nativeString(BorderLayout.pageEnd));
 	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, inner, rightPanel);
 	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, left, secondSplitPane);
