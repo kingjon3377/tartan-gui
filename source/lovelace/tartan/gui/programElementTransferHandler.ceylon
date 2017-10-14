@@ -24,6 +24,10 @@ import ceylon.logging {
 	Logger,
 	logger
 }
+import lovelace.tartan.gui.model {
+	IntTransferable,
+	Reorderable
+}
 "Logger."
 Logger log = logger(`module lovelace.tartan.gui`);
 "A transfer-handler to let the user drag items in the list of program elements."

@@ -10,7 +10,7 @@ import java.lang {
 	ObjectArray
 }
 "A [[Transferable]] implementation transferring a single Integer."
-class IntTransferable(DataFlavor flavor, Integer payload) satisfies Transferable {
+shared class IntTransferable(DataFlavor flavor, Integer payload) satisfies Transferable {
 	shared actual ObjectArray<DataFlavor> transferDataFlavors =>
 			createJavaObjectArray({flavor});
 	shared actual Boolean isDataFlavorSupported(DataFlavor possibility) =>

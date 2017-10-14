@@ -4,7 +4,6 @@ import javax.swing {
     JButton,
     BoxLayout,
     Box,
-	ListModel,
 	JSplitPane,
 	JComponent,
 	JScrollPane,
@@ -14,8 +13,7 @@ import javax.swing {
 import java.awt {
     BorderLayout,
     Dimension,
-	Image,
-	Graphics
+	Image
 }
 import lovelace.tartan.db {
     DanceRow,
@@ -24,7 +22,6 @@ import lovelace.tartan.db {
 }
 import java.lang {
     Thread,
-	ArrayIndexOutOfBoundsException,
 	Types
 }
 import javax.imageio {
@@ -36,89 +33,18 @@ import lovelace.tartan.model {
 	Intermission,
 	AuldLangSyne
 }
-import ceylon.collection {
-	MutableList,
-	ArrayList
-}
-import javax.swing.event {
-	ListDataListener,
-	ListDataEvent
-}
 import java.awt.event {
 	ActionEvent
+}
+import lovelace.tartan.gui.model {
+	MutableListModel
+}
+import lovelace.tartan.gui.controls {
+	ImageButton
 }
 "Get an image from the classpath as an icon, in the absence of a Ceylon SDK API to do so."
 Image loadImage(String filename) {
 	return ImageIO.read(Thread.currentThread().contextClassLoader.getResourceAsStream(filename));
-}
-class ImageButton(Image image) extends JButton() {
-	shared actual void paintComponent(Graphics pen) => pen.drawImage(image, 0, 0, width, height, null);
-	maximumSize = Dimension(60, 60);
-	preferredSize = Dimension(40, 40);
-	minimumSize = Dimension(20, 20);
-}
-interface MutableListModel<Element>
-		satisfies ListModel<Element>&Reorderable&Correspondence<Integer,Element>
-		given Element satisfies Object {
-	shared formal void addElement(Element element);
-	shared formal void removeElement(Integer|Element element);
-	shared actual Element? get(Integer index) {
-		if ((0:size).contains(index)) {
-			return getElementAt(index);
-		} else {
-			return null;
-		}
-	}
-	shared actual Boolean defines(Integer index) => (0:size).contains(index);
-	shared formal Iterable<Element> asIterable;
-}
-class ListModelAdapter<Element>(MutableList<Element> list)
-		satisfies MutableListModel<Element> given Element satisfies Object {
-	MutableList<ListDataListener> listeners = ArrayList<ListDataListener>();
-	shared actual void addListDataListener(ListDataListener listener) => listeners.add(listener);
-	shared actual void removeListDataListener(ListDataListener listener) => listeners.remove(listener);
-	shared actual Element getElementAt(Integer index) {
-		if (exists retval = list[index]) {
-			return retval;
-		} else {
-			throw ArrayIndexOutOfBoundsException(index);
-		}
-	}
-	shared actual Integer size => list.size;
-	shared actual void addElement(Element element) {
-		list.add(element);
-		for (listener in listeners) {
-			listener.intervalAdded(ListDataEvent(this, ListDataEvent.intervalAdded, list.size - 1, list.size - 1));
-		}
-	}
-	shared actual void removeElement(Integer|Element element) {
-		if (is Integer element) {
-			list.delete(element);
-			for (listener in listeners) {
-				listener.intervalRemoved(ListDataEvent(this, ListDataEvent.intervalRemoved, element, element));
-			}
-		} else {
-			if (exists index = list.firstIndexWhere(element.equals)) {
-				removeElement(index);
-			}
-		}
-	}
-	shared actual void reorder(Integer fromIndex, Integer toIndex) {
-		if (fromIndex != toIndex, exists item = list.delete(fromIndex)) {
-			if (fromIndex > toIndex) {
-				list.insert(toIndex, item);
-			} else {
-				list.insert(toIndex - 1, item);
-			}
-		}
-		value addedEvent = ListDataEvent(this, ListDataEvent.intervalAdded, toIndex, toIndex);
-		value removedEvent = ListDataEvent(this, ListDataEvent.intervalRemoved, fromIndex, fromIndex);
-		for (listener in listeners) {
-			listener.intervalRemoved(removedEvent);
-			listener.intervalAdded(addedEvent);
-		}
-	}
-	shared actual Iterable<Element> asIterable => list;
 }
 JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement> program) {
 	JPanel inner = JPanel();

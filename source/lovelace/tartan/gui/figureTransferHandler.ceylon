@@ -20,6 +20,10 @@ import java.awt {
 import java.lang {
 	IllegalArgumentException
 }
+import lovelace.tartan.gui.model {
+	IntTransferable,
+	Reorderable
+}
 "A transfer-handler to let the user drag and drop figures within a dance."
 object figureTransferHandler extends TransferHandler() {
 	DataFlavor flavor = DataFlavor(`Figure`, "DanceElement");

@@ -27,6 +27,11 @@ import java.lang {
 import javax.swing.event {
 	ListDataListener
 }
+import lovelace.tartan.gui.model {
+	MutableListModel,
+	ListModelAdapter
+}
+// TODO: Do we really need this?
 object emptyDataModel satisfies ListModel<Figure|NamedFigure|String> {
 	MutableList<ListDataListener> listeners = ArrayList<ListDataListener>();
 	shared actual void addListDataListener(ListDataListener listener) => listeners.add(listener);

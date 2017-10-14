@@ -31,6 +31,10 @@ import lovelace.tartan.db {
 import lovelace.tartan.model {
 	ProgramElement
 }
+import lovelace.tartan.gui.model {
+	MutableListModel,
+	ListModelAdapter
+}
 JFrame programEditingWindow(DanceDatabase db) {
 	MutableList<ProgramElement> program = ArrayList<ProgramElement>();
 	MutableListModel<ProgramElement> programModel = ListModelAdapter(program);
