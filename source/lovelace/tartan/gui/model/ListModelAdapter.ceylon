@@ -47,12 +47,12 @@ shared class ListModelAdapter<Element>(MutableList<Element> list)
 			} else {
 				list.insert(toIndex - 1, item);
 			}
-		}
-		value addedEvent = ListDataEvent(this, ListDataEvent.intervalAdded, toIndex, toIndex);
-		value removedEvent = ListDataEvent(this, ListDataEvent.intervalRemoved, fromIndex, fromIndex);
-		for (listener in listeners) {
-			listener.intervalRemoved(removedEvent);
-			listener.intervalAdded(addedEvent);
+			value addedEvent = ListDataEvent(this, ListDataEvent.intervalAdded, toIndex, toIndex);
+			value removedEvent = ListDataEvent(this, ListDataEvent.intervalRemoved, fromIndex, fromIndex);
+			for (listener in listeners) {
+				listener.intervalRemoved(removedEvent);
+				listener.intervalAdded(addedEvent);
+			}
 		}
 	}
 	shared actual Iterable<Element> asIterable => list;
