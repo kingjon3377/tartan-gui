@@ -1,6 +1,5 @@
 import ceylon.collection {
-	ArrayList,
-	MutableList
+	ArrayList
 }
 import lovelace.tartan.model {
 	ProgramElement,
@@ -13,33 +12,18 @@ import javax.swing {
 	DropMode,
 	JComponent,
 	JPanel,
-	JSplitPane,
-	ListModel
+	JSplitPane
 }
 import java.awt {
 	Dimension,
 	BorderLayout
 }
 import java.lang {
-	Types,
-	ArrayIndexOutOfBoundsException
-}
-import javax.swing.event {
-	ListDataListener
+	Types
 }
 import lovelace.tartan.gui.model {
 	MutableListModel,
 	ListModelAdapter
-}
-// TODO: Do we really need this?
-object emptyDataModel satisfies ListModel<Figure|NamedFigure|String> {
-	MutableList<ListDataListener> listeners = ArrayList<ListDataListener>();
-	shared actual void addListDataListener(ListDataListener listener) => listeners.add(listener);
-	shared actual Figure|NamedFigure|String getElementAt(Integer index) {
-		throw ArrayIndexOutOfBoundsException(index);
-	}
-	shared actual void removeListDataListener(ListDataListener listener) => listeners.remove(listener);
-	shared actual Integer size => 0;
 }
 object elementEditingPanel extends JPanel(BorderLayout()) {
 	variable ProgramElement? _current = null;
@@ -47,14 +31,11 @@ object elementEditingPanel extends JPanel(BorderLayout()) {
 	value list = JList(ListModelAdapter(ArrayList<Figure|NamedFigure|String>()));
 	assign current {
 		_current = current;
-		process.writeLine("Emptying list model");
-		list.model = emptyDataModel;
 		if (is Dance current) {
 			list.model = ListModelAdapter(current.contents);
 		} else {
 			list.model = ListModelAdapter(ArrayList<Figure|NamedFigure|String>());
 		}
-		process.writeLine("List model now has ``list.model.size`` elements");
 	}
 	list.transferHandler = figureTransferHandler;
 	list.dropMode = DropMode.insert;
