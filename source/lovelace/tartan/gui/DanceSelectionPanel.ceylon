@@ -86,7 +86,8 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement
 		}
 	});
 	leftButton.addActionListener((evt) {
-		if (exists selection = selectedList.selectedIndex, selection >= 0) {
+		value selection = selectedList.selectedIndex;
+		if (selection >= 0) {
 			program.removeElement(selection);
 		}
 	});
