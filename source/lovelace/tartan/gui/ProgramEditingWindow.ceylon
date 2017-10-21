@@ -35,6 +35,14 @@ import lovelace.tartan.gui.model {
 	MutableListModel,
 	ListModelAdapter
 }
+import ceylon.language.meta.declaration {
+	Module,
+	Package
+}
+import ceylon.logging {
+	Priority,
+	addLogWriter
+}
 JFrame programEditingWindow(DanceDatabase db) {
 	MutableList<ProgramElement> program = ArrayList<ProgramElement>();
 	MutableListModel<ProgramElement> programModel = ListModelAdapter(program);
@@ -52,7 +60,16 @@ JFrame programEditingWindow(DanceDatabase db) {
 	retval.defaultCloseOperation = WindowConstants.disposeOnClose;
 	return retval;
 }
+void logWriter(Priority priority, Module|Package mod,
+	String message, Throwable? except) {
+	process.writeErrorLine("``priority`` (``mod``): ``message``");
+	if (exists except) {
+		process.writeErrorLine(except.message);
+		except.printStackTrace();
+	}
+}
 shared void run() {
+	addLogWriter(logWriter);
 	DanceDatabase db;
 	for (arg in process.arguments) {
 		if (parsePath(arg).resource is File) {
