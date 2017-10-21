@@ -71,11 +71,12 @@ Integer timesThrough(DanceFormation shape, DanceProgression progression, Integer
 	}
 	String base = stripFromEnd(stripFromStart(crib, "<table>"), "</table>").trimmed;
 	for (line in base.split('\n'.equals).map(String.trimmed)) {
-		String current = stripFromEnd(stripFromStart(line, """<tr><td class=""bars"">"""), "</td>");
+		String current = stripFromEnd(stripFromStart(line, """<tr><td class="bars">"""), "</td>");
 		value splitted = current.split('<'.equals, true, false, 1);
 		String bars = splitted.first;
 		assert (exists rest = splitted.rest.first);
-		retval.add(Figure(stripFromStart(rest, """/td><td class=""desc"">"""), bars));
+		// Opening < was stripped off by split()
+		retval.add(Figure(stripFromStart(rest, """/td><td class="desc">"""), bars));
 	}
 	return {*retval};
 }
