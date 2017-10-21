@@ -47,7 +47,7 @@ shared class DanceDatabase(String filename) {
         DanceFormation shape;
         switch (shapeNum = parseSqlNullableInt(shapeStr))
         case (is SqlNull) {
-            process.writeLine("Formation for ``name`` was SQL null");
+            log.debug("Formation for ``name`` was SQL null");
             shape = DanceFormationImpl.unknown;
         }
         case (is Integer) {
@@ -66,7 +66,7 @@ shared class DanceDatabase(String filename) {
         // complicated than a simple number of couples is filed under "other". This field
         // can also be NULL, in shich case we also use "other".
         if (is SqlNull couplesRaw) {
-            process.writeLine("Number of couples for ``name`` was SQL null");
+            log.debug("Number of couples for ``name`` was SQL null");
             couples = -1;
         } else if (couplesRaw > 10) {
             couples = -1;
@@ -78,7 +78,7 @@ shared class DanceDatabase(String filename) {
         DanceProgression progression;
         switch (progressionNum = parseSqlNullableInt(progressionStr))
         case (is SqlNull) {
-            process.writeLine("Progression for ``name`` was SQL null");
+            log.debug("Progression for ``name`` was SQL null");
             progression = DanceProgressionImpl.unknown;
         }
         case (is Integer) {
