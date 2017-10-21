@@ -9,6 +9,7 @@ import java.awt.datatransfer {
 import javax.swing {
 	TransferHandler,
 	SwingList=JList,
+	SwingTable=JTable,
 	JComponent
 }
 import java.io {
@@ -43,6 +44,8 @@ object figureTransferHandler extends TransferHandler() {
 	shared actual Transferable createTransferable(JComponent component) {
 		if (is SwingList<out Anything> component) {
 			return IntTransferable(flavor, component.selectedIndex);
+		} else if (is SwingTable component) {
+			return IntTransferable(flavor, component.selectedRow);
 		} else {
 			throw IllegalArgumentException("Tried to create transferable from non-list");
 		}
@@ -69,6 +72,11 @@ object figureTransferHandler extends TransferHandler() {
 			is Reorderable model = component.model,
 			is SwingList<out Anything>.DropLocation dropLocation) {
 			Integer index = dropLocation.index;
+			model.reorder(payload, index);
+			return true;
+		} else if (is SwingTable component, is Reorderable model = component.model,
+				is SwingTable.DropLocation dropLocation) {
+			Integer index = dropLocation.row;
 			model.reorder(payload, index);
 			return true;
 		} else {

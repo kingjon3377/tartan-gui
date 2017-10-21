@@ -12,7 +12,9 @@ import javax.swing {
 	DropMode,
 	JComponent,
 	JPanel,
-	JSplitPane
+	JSplitPane,
+	JTable,
+	JScrollPane
 }
 import java.awt {
 	Dimension,
@@ -23,24 +25,30 @@ import java.lang {
 }
 import lovelace.tartan.gui.model {
 	MutableListModel,
-	ListModelAdapter
+	TableModelAdapter
 }
 object elementEditingPanel extends JPanel(BorderLayout()) {
 	variable ProgramElement? _current = null;
 	shared ProgramElement? current => _current;
-	value list = JList(ListModelAdapter(ArrayList<Figure|NamedFigure|String>()));
+	value table = JTable(TableModelAdapter(ArrayList<Figure|NamedFigure|String>(), ""));
 	assign current {
 		_current = current;
 		if (is Dance current) {
-			list.model = ListModelAdapter(current.contents);
+			table.model = TableModelAdapter(current.contents, current.title);
+			for (row in 0:table.rowCount) {
+				value rendered = table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);
+				table.rowHeight = rendered.preferredSize.height.integer;
+			}
 		} else {
-			list.model = ListModelAdapter(ArrayList<Figure|NamedFigure|String>());
+			table.model = TableModelAdapter(ArrayList<Figure|NamedFigure|String>(), "");
 		}
 	}
-	list.transferHandler = figureTransferHandler;
-	list.dropMode = DropMode.insert;
-	list.dragEnabled = true;
-	add(list, Types.nativeString(BorderLayout.center));
+	table.transferHandler = figureTransferHandler;
+	table.dropMode = DropMode.insert;
+	table.dragEnabled = true;
+	//table.cellEditor = danceElementEditor;
+	table.setDefaultRenderer(Types.classForType<Object>(), danceElementRenderer);
+	add(JScrollPane(table), Types.nativeString(BorderLayout.center));
 }
 JComponent programEditingPanel(MutableListModel<ProgramElement> program) {
 	value selectedList = JList<ProgramElement>(program);

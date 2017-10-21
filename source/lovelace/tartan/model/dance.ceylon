@@ -19,6 +19,7 @@ shared class Figure(description, bars = null) {
 
 """A "named figure" in a dance: a series of figures that should be grouped together and
    further indented from the rest of the dance."""
+// TODO: Should this have an (optional) "name" and/or "bars" field?
 shared class NamedFigure(<Figure|String>* initialContents) {
 	"The sub-figures in this named figure, and any other text that needs to be printed."
 	shared MutableList<Figure|String> contents = ArrayList { *initialContents };
