@@ -9,11 +9,15 @@ import java.lang {
 	Types,
 	ArrayIndexOutOfBoundsException,
 	IllegalArgumentException,
-	Class
+	Class,
+	JString=String
 }
 import javax.swing.event {
 	TableModelListener,
 	TableModelEvent
+}
+import ceylon.language.meta {
+	type
 }
 // TODO: add an interface to let callers add and remove elements, notifying listeners when they do
 shared class TableModelAdapter<Element>(MutableList<Element> list, String title)
@@ -39,8 +43,10 @@ shared class TableModelAdapter<Element>(MutableList<Element> list, String title)
 			if (rowIndex >= 0, rowIndex <= list.size) {
 				if (is Element val) {
 					list[rowIndex] = val;
+				} else if (is JString val) {
+					setValueAt(val.string, rowIndex, columnIndex);
 				} else {
-					throw IllegalArgumentException("Unexpected type of list item");
+					throw IllegalArgumentException("Unexpected type of list item: ``type(val)``");
 				}
 			} else {
 				throw ArrayIndexOutOfBoundsException(rowIndex);
