@@ -40,14 +40,14 @@ class DanceSearchResultsListModel(DanceDatabase db) satisfies SwingListModel<Dan
 				return;
 			}
 			currentSearch = term;
-			value removeEvent = ListDataEvent(this, ListDataEvent.intervalRemoved, 0, backing.size - 1);
+			value removeEvent = ListDataEvent(this, ListDataEvent.intervalRemoved, 0, max({backing.size - 1, 0}));
 			backing.clear();
 			for (listener in listeners) {
 				listener.intervalRemoved(removeEvent);
 			}
 			backing.addAll(db.dances.filter(
 						(dance) => dance.name.lowercased.contains(term.lowercased)));
-			value addEvent = ListDataEvent(this, ListDataEvent.intervalAdded, 0, backing.size - 1);
+			value addEvent = ListDataEvent(this, ListDataEvent.intervalAdded, 0, max({backing.size - 1, 0}));
 			for (listener in listeners) {
 				listener.intervalRemoved(addEvent);
 			}
