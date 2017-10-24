@@ -16,7 +16,8 @@ import lovelace.tartan.model {
 }
 import lovelace.tartan.gui.controls {
 	BorderedPanel,
-	ImageButton
+	ImageButton,
+	ListenedButton
 }
 import java.lang {
 	Types
@@ -86,7 +87,7 @@ JPanel danceStringEditor(variable String string, Anything(String) accept, Anythi
 	});
 	return BorderedPanel.horizontalLine(null, field, BorderedPanel.horizontalLine(okButton, null, cancelButton));
 }
-class NamedFigureEditor(NamedFigure nfigure) extends JPanel(GridLayout(0, 1)) {
+class NamedFigureEditor(NamedFigure nfigure, Anything() stopOperation) extends JPanel(GridLayout(0, 1)) {
 	// TODO: Need a way to drag-and-drop within a named figure
 	for (num->figure in nfigure.contents.indexed) {
 		switch (figure)
@@ -104,13 +105,16 @@ class NamedFigureEditor(NamedFigure nfigure) extends JPanel(GridLayout(0, 1)) {
 		}
 	}
 	value addButton = JButton("Add movement");
+	value buttonPanel = BorderedPanel.horizontalLine(addButton, null,
+		ListenedButton("Done Editing", (_) => stopOperation()));
 	addButton.addActionListener((_) {
 		Figure newFigure = Figure("description of movement", "bars");
 		nfigure.contents.add(newFigure);
 		add(FigureEditor(newFigure));
-		remove(addButton);
-		add(addButton);
+		remove(buttonPanel);
+		add(buttonPanel);
 	});
+	add(buttonPanel);
 }
 object danceElementEditor satisfies TableCellEditor {
 	MutableList<CellEditorListener> listeners = ArrayList<CellEditorListener>();
@@ -124,7 +128,7 @@ object danceElementEditor satisfies TableCellEditor {
 		current = val;
 		switch (val)
 		case (is NamedFigure) {
-			return NamedFigureEditor(val);
+			return NamedFigureEditor(val, stopCellEditing);
 		}
 		case (is String) {
 			// FIXME: This won't actually successfully apply edit
