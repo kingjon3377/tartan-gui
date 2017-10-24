@@ -46,7 +46,7 @@ object elementEditingPanel extends JPanel(BorderLayout()) {
 	table.transferHandler = figureTransferHandler;
 	table.dropMode = DropMode.insert;
 	table.dragEnabled = true;
-	//table.cellEditor = danceElementEditor;
+	table.setDefaultEditor(`Object`, danceElementEditor);
 	table.setDefaultRenderer(Types.classForType<Object>(), danceElementRenderer);
 	add(JScrollPane(table), Types.nativeString(BorderLayout.center));
 }
