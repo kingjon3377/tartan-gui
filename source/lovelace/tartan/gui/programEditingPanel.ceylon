@@ -25,7 +25,12 @@ import java.lang {
 }
 import lovelace.tartan.gui.model {
 	MutableListModel,
-	TableModelAdapter
+	TableModelAdapter,
+	MutableSingleColumnTableModel
+}
+import lovelace.tartan.gui.controls {
+	BorderedPanel,
+	ListenedButton
 }
 object elementEditingPanel extends JPanel(BorderLayout()) {
 	variable ProgramElement? _current = null;
@@ -49,6 +54,23 @@ object elementEditingPanel extends JPanel(BorderLayout()) {
 	table.setDefaultEditor(`Object`, danceElementEditor);
 	table.setDefaultRenderer(Types.classForType<Object>(), danceElementRenderer);
 	add(JScrollPane(table), Types.nativeString(BorderLayout.center));
+	add(BorderedPanel.horizontalLine(ListenedButton("Add Figure", (_) {
+		if (is MutableSingleColumnTableModel<Figure|NamedFigure|String> model = table.model,
+				is Dance temp = current) {
+			model.addElement(Figure("Figure To Be Entered", "Bars TBD"));
+		}
+	}), ListenedButton("Add Multi-Movement Figure", (_) {
+		if (is MutableSingleColumnTableModel<Figure|NamedFigure|String> model = table.model,
+				is Dance temp = current) {
+			model.addElement(NamedFigure(Figure("First Movement of Figure", "Bars TBD")));
+		}
+	}), ListenedButton("Remove Selected Figure", (_) {
+		Integer selection = table.selectedRow;
+		if (is MutableSingleColumnTableModel<Figure|NamedFigure|String> model = table.model,
+				is Dance temp = current, selection >= 0, selection < table.rowCount) {
+			model.removeElement(selection);
+		}
+	})), Types.nativeString(BorderLayout.pageEnd));
 }
 JComponent programEditingPanel(MutableListModel<ProgramElement> program) {
 	value selectedList = JList<ProgramElement>(program);
