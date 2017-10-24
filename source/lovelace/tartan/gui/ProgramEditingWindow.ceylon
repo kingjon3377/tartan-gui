@@ -43,6 +43,9 @@ import ceylon.logging {
 	Priority,
 	addLogWriter
 }
+import java.lang {
+	System
+}
 JFrame programEditingWindow(DanceDatabase db) {
 	MutableList<ProgramElement> program = ArrayList<ProgramElement>();
 	MutableListModel<ProgramElement> programModel = ListModelAdapter(program);
@@ -70,6 +73,10 @@ void logWriter(Priority priority, Module|Package mod,
 }
 shared void run() {
 	addLogWriter(logWriter);
+	System.setProperty("com.apple.mrj.application.apple.menu.about.name",
+		"SCD Program Editor");
+	System.setProperty("apple.awt.application.name", "SCD Program Editor");
+	System.setProperty("apple.laf.useScreenMenuBar", "true");
 	DanceDatabase db;
 	for (arg in process.arguments) {
 		if (parsePath(arg).resource is File) {
