@@ -29,7 +29,11 @@ import lovelace.tartan.model {
 	AuldLangSyne
 }
 import java.awt.event {
-	ActionEvent
+	ActionEvent,
+	KeyEvent,
+	KeyAdapter,
+	MouseAdapter,
+	MouseEvent
 }
 import lovelace.tartan.gui.model {
 	MutableListModel
@@ -80,9 +84,25 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement
 	selectedList.transferHandler = programElementTransferHandler;
 	selectedList.dropMode = DropMode.insert;
 	selectedList.dragEnabled = true;
-	rightButton.addActionListener((evt) {
+	void addDance() {
 		if (exists selection = danceList.selectedValue, !program.asIterable.narrow<Dance>().map(Dance.title).equals(selection.name)) {
 			program.addElement(convertDance(selection, db.cribText(selection)));
+		}
+	}
+	rightButton.addActionListener((evt) => addDance());
+	danceList.addKeyListener(object extends KeyAdapter() {
+		shared actual void keyPressed(KeyEvent evt) {
+			if (evt.keyCode == KeyEvent.vkEnter) {
+				addDance();
+			}
+		}
+		shared actual void keyTyped(KeyEvent evt) => keyPressed(evt);
+	});
+	danceList.addMouseListener(object extends MouseAdapter() {
+		shared actual void mouseClicked(MouseEvent evt) {
+			if (evt.clickCount == 2 || evt.clickCount == 3) {
+				addDance();
+			}
 		}
 	});
 	leftButton.addActionListener((evt) {
