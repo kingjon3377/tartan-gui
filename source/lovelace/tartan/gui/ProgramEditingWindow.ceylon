@@ -55,10 +55,14 @@ JFrame programEditingWindow(DanceDatabase db) {
 	retval.contentPane = pane;
 	value dsp = danceSelectionPanel(db, programModel);
 	pane.add("Select Dances", dsp);
-	pane.add("Edit Selected Dances", programEditingPanel(programModel));
+	value pep = programEditingPanel(programModel);
+	pane.add("Edit Selected Dances", pep);
 	retval.pack();
 	if (is JSplitPane dsp) {
 		dsp.setDividerLocation(0.5);
+	}
+	if (is JSplitPane pep) {
+		pep.setDividerLocation(0.5);
 	}
 	retval.defaultCloseOperation = WindowConstants.disposeOnClose;
 	return retval;
