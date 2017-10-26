@@ -19,7 +19,8 @@ import javax.swing {
 	JTabbedPane,
 	JFileChooser,
 	WindowConstants,
-	JSplitPane
+	JSplitPane,
+	JMenuBar
 }
 import javax.swing.filechooser {
 	FileFilter
@@ -29,7 +30,8 @@ import lovelace.tartan.db {
 	DanceDatabase
 }
 import lovelace.tartan.model {
-	ProgramElement
+	ProgramElement,
+	ProgramMetadata
 }
 import lovelace.tartan.gui.model {
 	MutableListModel,
@@ -46,7 +48,7 @@ import ceylon.logging {
 import java.lang {
 	System
 }
-JFrame programEditingWindow(DanceDatabase db) {
+JFrame programEditingWindow(DanceDatabase db, ProgramMetadata metadata) {
 	MutableList<ProgramElement> program = ArrayList<ProgramElement>();
 	MutableListModel<ProgramElement> programModel = ListModelAdapter(program);
 	JFrame retval = JFrame("Dance Program Editor");
@@ -65,6 +67,9 @@ JFrame programEditingWindow(DanceDatabase db) {
 		pep.setDividerLocation(0.5);
 	}
 	retval.defaultCloseOperation = WindowConstants.disposeOnClose;
+	JMenuBar menuBar = JMenuBar();
+	menuBar.add(fileMenu(programModel, metadata));
+	retval.jMenuBar = menuBar;
 	return retval;
 }
 void logWriter(Priority priority, Module|Package mod,
@@ -101,5 +106,8 @@ shared void run() {
 			return;
 		}
 	}
-	programEditingWindow(db).visible = true;
+	// TODO If a non-DB argument, read previously-written project from it
+	// FIXME: Add UI for editing metadata
+	ProgramMetadata metadata = ProgramMetadata();
+	programEditingWindow(db, metadata).visible = true;
 }
