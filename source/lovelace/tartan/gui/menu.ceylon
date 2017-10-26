@@ -102,6 +102,7 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 				writer.writeLine(string);
 			}
 		}
+		String quoted(String string) => string.replace("&", "\\&").replace("<b>", "\\textbf{").replace("</b>", "}");
 		writeIfNonempty(metadata.extraPrologue);
 		writer.writeLine("""\begin{document}""");
 		writeIfNonempty(metadata.preCoverText);
@@ -126,7 +127,7 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 						writer.write("[``bars``]");
 					}
 					// TODO: Other quoting/HTML-to-TeX conversion stuff
-					writer.writeLine("{``figure.description.replace("&", "\\&")``}");
+					writer.writeLine("{``quoted(figure.description)``}");
 				}
 				for (figure in item.contents) {
 					switch (figure)
