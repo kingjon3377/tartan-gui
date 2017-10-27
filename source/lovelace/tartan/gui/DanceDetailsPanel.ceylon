@@ -2,7 +2,6 @@ import javax.swing {
 	JPanel,
 	JLabel,
 	JTextField,
-	JComponent,
 	JComboBox,
 	JSpinner,
 	SpinnerNumberModel
@@ -14,8 +13,6 @@ import lovelace.tartan.model {
 	Dance
 }
 import java.awt {
-	GridBagLayout,
-	GridBagConstraints,
 	BorderLayout
 }
 import java.lang {
