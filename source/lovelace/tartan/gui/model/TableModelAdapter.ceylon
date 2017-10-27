@@ -29,7 +29,7 @@ shared interface MutableSingleColumnTableModel<Element>
 	shared formal Iterable<Element> asIterable;
 	shared actual Integer columnCount => 1;
 }
-shared class TableModelAdapter<Element>(MutableList<Element> list, String title)
+shared class TableModelAdapter<Element>(MutableList<Element> list)
 		satisfies MutableSingleColumnTableModel<Element> given Element satisfies Object {
 	MutableList<TableModelListener> listeners = ArrayList<TableModelListener>();
 	shared actual void addTableModelListener(TableModelListener listener) => listeners.add(listener);
@@ -87,7 +87,7 @@ shared class TableModelAdapter<Element>(MutableList<Element> list, String title)
 	}
 
 	shared actual Class<out Object> getColumnClass(Integer columnIndex) => Types.classForType<Object>();
-	shared actual String getColumnName(Integer columnIndex) => title;
+	shared actual String getColumnName(Integer columnIndex) => "Directions";
 	shared actual Integer rowCount => list.size;
 	shared actual void addElement(Element element) {
 		list.add(element);

@@ -35,17 +35,19 @@ import lovelace.tartan.gui.controls {
 object elementEditingPanel extends JPanel(BorderLayout()) {
 	variable ProgramElement? _current = null;
 	shared ProgramElement? current => _current;
-	value table = JTable(TableModelAdapter(ArrayList<Figure|NamedFigure|String>(), ""));
+	value table = JTable(TableModelAdapter(ArrayList<Figure|NamedFigure|String>()));
+	value detailsPanel = DanceDetailsPanel();
 	assign current {
 		_current = current;
+		detailsPanel.current = current;
 		if (is Dance current) {
-			table.model = TableModelAdapter(current.contents, current.title);
+			table.model = TableModelAdapter(current.contents);
 			for (row in 0:table.rowCount) {
 				value rendered = table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);
 				table.rowHeight = rendered.preferredSize.height.integer;
 			}
 		} else {
-			table.model = TableModelAdapter(ArrayList<Figure|NamedFigure|String>(), "");
+			table.model = TableModelAdapter(ArrayList<Figure|NamedFigure|String>());
 		}
 	}
 	table.transferHandler = figureTransferHandler;
@@ -53,6 +55,7 @@ object elementEditingPanel extends JPanel(BorderLayout()) {
 	table.dragEnabled = true;
 	table.setDefaultEditor(`Object`, danceElementEditor);
 	table.setDefaultRenderer(Types.classForType<Object>(), danceElementRenderer);
+	add(detailsPanel, Types.nativeString(BorderLayout.pageStart));
 	add(JScrollPane(table), Types.nativeString(BorderLayout.center));
 	add(BorderedPanel.horizontalLine(ListenedButton("Add Figure", (_) {
 		if (is MutableSingleColumnTableModel<Figure|NamedFigure|String> model = table.model,
