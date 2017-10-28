@@ -8,4 +8,5 @@ module lovelace.tartan.gui "1.0.0" {
 	import ceylon.interop.java "1.3.3";
 	import ceylon.file "1.3.3";
 	import ceylon.logging "1.3.3";
+	import lovelace.tartan.latex "1.0.0";
 }

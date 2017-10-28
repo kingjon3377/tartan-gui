@@ -36,6 +36,9 @@ import ceylon.file {
 	Nil,
 	File
 }
+import lovelace.tartan.latex {
+	writeLaTeXProgram
+}
 JMenuItem menuItem(String text, Integer mnemonic, String description,
 		Anything() handler, KeyStroke* accelerators) {
 	JMenuItem retval = JMenuItem(text, mnemonic);
@@ -87,111 +90,7 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 		return;
 	}
 	try (writer = actualFile.Overwriter()) {
-		writer.writeLine("""\documentclass{tartan}""");
-		String quoted(String string) => string.replace("&", "\\&").replace("<b>", "\\textbf{").replace("</b>", "}");
-		writer.writeLine("\\tartangroupname{``metadata.groupCoverName``}");
-		writer.writeLine("\\tartangroupname*{``metadata.groupTitleName``}");
-		writer.writeLine("\\tartanballname{``metadata.eventCoverName``}");
-		writer.writeLine("\\tartanballname*{``metadata.eventTitleName``}");
-		writer.writeLine("\\tartanballdate{``metadata.coverDate``}");
-		writer.writeLine("\\tartanballdate*{``metadata.titleDate``}");
-		writer.writeLine("\\tartanhall{``metadata.coverLocation``}");
-		writer.writeLine("\\tartanhall*{``metadata.titleLocation``}");
-		writer.writeLine("\\tartanhalladdress{``metadata.locationAddress``}");
-		writer.writeLine("\\tartantimes{``metadata.titleTimes.replace("\n", "\\\\*\n")``}");
-		writer.writeLine("\\tartanmusicians{``metadata.musicians``}");
-		writer.writeLine("""\begin{document}""");
-		String latexImage(String imageFilename) {
-			for (extension in {".png", ".jpg", ".pdf"}) { // only extensions graphicx supports
-				if (imageFilename.endsWith(extension)) {
-					return imageFilename.removeTerminal(extension);
-				}
-			}
-			return imageFilename;
-		}
-		if (exists coverImage = metadata.coverImage) {
-			if ({metadata.groupCoverName, metadata.eventCoverName, metadata.coverDate,
-					metadata.coverLocation}.every(String.empty)) {
-				writer.writeLine("\\tartanimage{``latexImage(coverImage)``}");
-			} else {
-				writer.writeLine("\\tartanimagecover{``latexImage(coverImage)``}");
-			}
-		} else if (!{metadata.groupCoverName, metadata.eventCoverName, metadata.coverDate,
-					metadata.coverLocation}.every(String.empty)) {
-			writer.writeLine("""\tartancover""");
-		}
-		if (metadata.titleOnCover) {
-			writer.writeLine("""\clearpage""");
-		} else {
-			writer.writeLine("""\cleardoublepage""");
-		}
-		if (!{metadata.groupTitleName, metadata.eventTitleName, metadata.titleDate, metadata.titleLocation,
-				metadata.locationAddress, metadata.titleTimes, metadata.musicians}.every(String.empty)) {
-			writer.writeLine("""\maketartantitle""");
-		}
-		writer.writeLine("""\clearpage""");
-		writer.writeLine("""\listofdances""");
-		writer.writeLine("""\clearpage""");
-		for (item in program.asIterable) {
-			switch (item)
-			case (is Dance) {
-				writer.write("\\begin{scdance}{``item.title``}{``item.source``}");
-				writer.writeLine("{``item.tempo``}{``item.times``x``item.length``}{``item.formation``}");
-				void writeSimpleFigure(Figure figure) {
-					writer.write("""\scfigure""");
-					if (exists bars = figure.bars) {
-						writer.write("[``bars``]");
-					}
-					// TODO: Other quoting/HTML-to-TeX conversion stuff
-					writer.writeLine("{``quoted(figure.description)``}");
-				}
-				for (figure in item.contents) {
-					switch (figure)
-					case (is Figure) {
-						writeSimpleFigure(figure);
-					}
-					case (is NamedFigure) {
-						writer.write("""\namedfigure{""");
-						for (subfigure in figure.contents) {
-							switch (subfigure)
-							case (is Figure) {
-								writeSimpleFigure(subfigure);
-							}
-							case (is String) {
-								writer.write(subfigure);
-							}
-						}
-						writer.writeLine("}");
-					}
-					case (is String) {
-						writer.write(figure);
-					}
-				}
-				writer.writeLine("""\end{scdance}""");
-			}
-			case (is Intermission) {
-				String text = item.description;
-				writer.write("""\intermission""");
-				if ("Intermission" != text || text.empty) {
-					writer.writeLine();
-				} else {
-					writer.writeLine("[``text``]");
-				}
-			}
-		}
-		for (image in metadata.insidePostDanceImages) {
-			writer.writeLine("""\clearpage""");
-			writer.writeLine("\\tartanimage{``latexImage(image)``}");
-		}
-		if (metadata.printAuldLangSyne) {
-			writer.writeLine("""\clearpage""");
-			writer.writeLine("""\auldlangsyne""");
-		}
-		if (exists image = metadata.backCoverImage) {
-			writer.writeLine("""\cleartoverso""");
-			writer.writeLine("\\tartanimage{``latexImage(image)``}");
-		}
-		writer.writeLine("""\end{document}""");
+		writeLaTeXProgram(writer.write, program.asIterable, metadata);
 	}
 }
 JMenu fileMenu(MutableListModel<ProgramElement> program, ProgramMetadata metadata) {
