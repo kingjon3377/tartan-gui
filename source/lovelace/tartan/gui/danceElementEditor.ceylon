@@ -23,7 +23,9 @@ import java.lang {
 	Types
 }
 import java.awt.event {
-	ActionEvent
+	ActionEvent,
+	KeyEvent,
+	KeyAdapter
 }
 import javax.swing.table {
 	TableCellEditor
@@ -64,11 +66,22 @@ class FigureEditor(Figure figure, Anything() cancel = noop) extends JPanel(Borde
 	barsField.addActionListener(okListener);
 	descField.addActionListener(okListener);
 	value cancelButton = ImageButton(loadImage("/lovelace/tartan/gui/Red-X-Icon-300px.png"));
-	cancelButton.addActionListener((_) {
+	void cancelListener(Anything _) {
 		barsField.text = figure.bars else "";
 		descField.text = figure.description;
 		cancel();
-	});
+	}
+	object escapeListener extends KeyAdapter() {
+		shared actual void keyTyped(KeyEvent event) {
+			if (event.keyCode == KeyEvent.vkEscape) {
+				cancelListener(event);
+			}
+		}
+		shared actual void keyReleased(KeyEvent event) => keyTyped(event);
+	}
+	barsField.addKeyListener(escapeListener);
+	descField.addKeyListener(escapeListener);
+	cancelButton.addActionListener(cancelListener);
 	add(BorderedPanel.horizontalLine(okButton, null, cancelButton),
 		Types.nativeString(BorderLayout.lineEnd));
 }
