@@ -24,7 +24,14 @@ void writePrologue(Anything(String) ostream, ProgramMetadata metadata) {
 // TODO: Split this method to reduce its length and complexity.
 shared void writeLaTeXProgram(Anything(String) ostream, {ProgramElement*} program, ProgramMetadata metadata) {
 	void writeLine(String string) => ostream("``string``\n");
-	String quoted(String string) => string.replace("&", "\\&").replace("<b>", "\\textbf{").replace("</b>", "}");
+	String quoted(String string) => string.replace("&", "\\&")
+			.replace("<b>", "\\textbf{").replace("</b>", "}").replace("½", """\nicefrac{1}{2}""")
+			.replace("¾", """\nicefrac{3}{4}""").replace("“", """``""").replace("”", """''""")
+			.replace("–", "---").replace("’", "'").replace("„", """``""").replace("‟", """''""")
+			.replace("‘", "'").replace("‗", """`""").replace("\f", "").replace("¼", """\nicefrac{1}{4}""")
+			.replace("‑", "--").replace("─", "---").replace("—", "---").replace(";", ";")
+			.replace("⅔", """\nicefrac{2}{3}""").replace("⅜", """\nicefrac{3}{8}""")
+			.replace("⅞", """\nicefrac{7}{8}""");
 	void writeSimpleCommand(String command, String? arg = null) {
 		if (exists arg) {
 			writeLine("\\``command``{``arg``}");
