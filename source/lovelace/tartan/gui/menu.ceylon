@@ -221,8 +221,9 @@ JMenu fileMenu(MutableListModel<ProgramElement> program, ProgramMetadata metadat
 		// TODO: Wire the "quit" code up to the Mac quit-handling system
 	} else {
 		retval.addSeparator();
+		// FIXME: Check whether program or metadata have been modified, and if so ask whether to save first
 		retval.add(menuItem("Exit", KeyEvent.vkX, "Quit the app",
-			() => nothing, KeyStroke.getKeyStroke(KeyEvent.vkQ, shortcutMask)));
+			() => process.exit(0), KeyStroke.getKeyStroke(KeyEvent.vkQ, shortcutMask)));
 	}
 	return retval;
 }
