@@ -42,6 +42,7 @@ shared void writeLaTeXProgram(Anything(String) ostream, {ProgramElement*} progra
 	// TODO: Add a comment explaining that any modifications to the generated LaTeX file may not be recognized if it is opened again
 	writeSimpleCommand("documentclass", "tartan");
 	writePrologue(ostream, metadata);
+	writeSimpleCommand("begin", "document");
 	String latexImage(String imageFilename) {
 		for (extension in {".png", ".jpg", ".pdf"}) { // only extensions graphicx supports
 			if (imageFilename.endsWith(extension)) {
