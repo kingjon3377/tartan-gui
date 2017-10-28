@@ -13,41 +13,38 @@ shared class ProgramMetadata() {
 	"The filename this program was loaded from or should be saved to."
 	// TODO: Use ceylon.file type instead of String here?
 	shared variable String? filename = null;
-	"""The text to put on the cover in large print. Usually includes the name of the
-	   group; the title, location, date, and time(s) of the ball; and the name(s) of the
-	   musician(s) providing the music. It will be centered and typeset in "large" text."""
-	shared variable String coverText = "";
-	"Any extra TeX packages to import. If Auld Lang Syne is to be printed in the program,
-	 the `verse` class will be added even if not present here (and not double-included if
-	 present here), but any other needed packages must be listed here."
-	MutableList<String> extraPackagesList = ArrayList<String>();
-	"Add a LaTeX package to the list of packages imported in the program's preamble."
-	shared void addExtraPackage(
-		"The name of the package. May only contain alphanumeric characters, hyphens, and underscores."
-		String pkg) {
-		"A (portable) LaTeX package name may only contain alphanumeric characters, hyphens, and underscores."
-		assert (pkg.every((char) => char.letter || char.digit || "-_".contains(char)));
-		if (!extraPackagesList.contains(pkg)) {
-			extraPackagesList.add(pkg);
-		} else {
-			log.info("Double inclusion of LaTeX package ``pkg``");
-		}
-	}
-	"Remove a LaTeX package from the list of packages imported in the program's preamble."
-	shared void removeExtraPackage(String pkg) => extraPackagesList.remove(pkg);
-	"LaTeX packages to import in the preamble. If Auld Lang Syne is to be printed in the program,
-	 the LaTeX export routine should import the `verse` package exactly once whether it is in this
-	 list or not."
-	shared {String*} extraPackages => {*extraPackagesList};
-	"Any text (LaTeX code) to write in the prologue after the documentclass and package imports."
-	shared variable String extraPrologue = "";
-	"Any text (LaTeX code) to write before the cover."
-	shared variable String preCoverText = "";
-	// TODO: Allow formatting of teh cover to be customized? In documentclass or here?
-	"Any text (LaTeX code) to write after the cover before the list of dances."
-	shared variable String postCoverText = "";
-	"Any text (LaTeX code) to write after the list of dances and before the first dance."
-	shared variable String preDancesText = "";
-	"Any text (LaTeX code) to write after the dance cribs before the end of the document."
-	shared variable String postDancesText = "";
+	"The name of the group putting on the event, as you would like it to appear on the cover."
+	shared variable String groupCoverName = "";
+	"The name of the group putting on the event, as you would like it to appear on the title page."
+	shared variable String groupTitleName = "";
+	"The name of the event as you would like it to appear on the cover."
+	shared variable String eventCoverName = "";
+	"The name of the event as you would like it to appear on the title page."
+	shared variable String eventTitleName = "";
+	"The date of the event, as you would like it to appear on the cover."
+	shared variable String coverDate = "";
+	"The date of the event, as you would like it to appear on the title page."
+	shared variable String titleDate = "";
+	"The location of the event, as you would like it to appear on the cover."
+	shared variable String coverLocation = "";
+	"The location of the event, as you would like it to appear on the title page."
+	shared variable String titleLocation = "";
+	"The address of the event, if you would like it to appear on the title page."
+	shared variable String locationAddress = "";
+	"""The time(s) of the event (e.g. "Gather 6 p.m., Dinner 6:30 p.m., Dance 7:30 p.m.")
+	   Newlines will be replaced with "\\*" for LaTeX"""
+	shared variable String titleTimes = "";
+	"The name(s) of musician(s) providing music for the event. If provided, this will be
+	 typeset on the title page."
+	shared variable String musicians = "";
+	"The filename of an image to put on the cover."
+	shared variable String? coverImage = null;
+	"Whether to put the title page on the back of the cover."
+	shared variable Boolean titleOnCover = false;
+	"Whether to print the text of Auld Lang Syne after the last dance's crib."
+	shared variable Boolean printAuldLangSyne = false;
+	"The filename of an image to put on the back cover (or, rather, the last page)."
+	shared variable String? backCoverImage = null;
+	"Filenames of images to put after the last dance's crib, before Auld Lang Syne."
+	shared MutableList<String> insidePostDanceImages = ArrayList<String>();
 }

@@ -88,34 +88,57 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 	}
 	try (writer = actualFile.Overwriter()) {
 		writer.writeLine("""\documentclass{tartan}""");
-		Boolean auldLangSyne = !program.asIterable.narrow<AuldLangSyne>().empty;
+		Boolean auldLangSyne = metadata.printAuldLangSyne;
 		if (auldLangSyne) {
 			writer.writeLine("""\usepackage{verse}""");
 		}
-		for (pkg in metadata.extraPackages) {
-			if ("verse" != pkg || !auldLangSyne) {
-				writer.writeLine("\\usePackage{``pkg``}");
-			}
-		}
-		void writeIfNonempty(String string) {
-			if (!string.empty) {
-				writer.writeLine(string);
-			}
+		if (metadata.coverImage exists || metadata.backCoverImage exists || !metadata.insidePostDanceImages.empty) {
+			writer.writeLine("""\usepackage{graphicx}""");
 		}
 		String quoted(String string) => string.replace("&", "\\&").replace("<b>", "\\textbf{").replace("</b>", "}");
-		writeIfNonempty(metadata.extraPrologue);
+		writer.writeLine("\\tartangroupname{``metadata.groupCoverName``}");
+		writer.writeLine("\\tartangroupname*{``metadata.groupTitleName``}");
+		writer.writeLine("\\tartanballname{``metadata.eventCoverName``}");
+		writer.writeLine("\\tartanballname*{``metadata.eventTitleName``}");
+		writer.writeLine("\\tartanballdate{``metadata.coverDate``}");
+		writer.writeLine("\\tartanballdate*{``metadata.titleDate``}");
+		writer.writeLine("\\tartanhall{``metadata.coverLocation``}");
+		writer.writeLine("\\tartanhall*{``metadata.titleLocation``}");
+		writer.writeLine("\\tartanhalladdress{``metadata.locationAddress``}");
+		writer.writeLine("\\tartantimes{``metadata.titleTimes.replace("\n", "\\\\*\n")``}");
+		writer.writeLine("\\tartanmusicians{``metadata.musicians``}");
 		writer.writeLine("""\begin{document}""");
-		writeIfNonempty(metadata.preCoverText);
-		writer.writeLine("""\begin{center}""");
-		writer.write("""\large""");
-		writeIfNonempty(metadata.coverText);
-		writer.writeLine("""\normalsize""");
-		writer.writeLine("""\end{center}""");
-		writeIfNonempty(metadata.postCoverText);
+		String latexImage(String imageFilename) {
+			for (extension in {".png", ".jpg", ".pdf"}) { // only extensions graphicx supports
+				if (imageFilename.endsWith(extension)) {
+					return imageFilename.removeTerminal(extension);
+				}
+			}
+			return imageFilename;
+		}
+		if (exists coverImage = metadata.coverImage) {
+			if ({metadata.groupCoverName, metadata.eventCoverName, metadata.coverDate,
+					metadata.coverLocation}.every(String.empty)) {
+				writer.writeLine("\\tartanimage{``latexImage(coverImage)``}");
+			} else {
+				writer.writeLine("\\tartanimagecover{``latexImage(coverImage)``}");
+			}
+		} else if (!{metadata.groupCoverName, metadata.eventCoverName, metadata.coverDate,
+					metadata.coverLocation}.every(String.empty)) {
+			writer.writeLine("""\tartancover""");
+		}
+		if (metadata.titleOnCover) {
+			writer.writeLine("""\clearpage""");
+		} else {
+			writer.writeLine("""\cleardoublepage""");
+		}
+		if (!{metadata.groupTitleName, metadata.eventTitleName, metadata.titleDate, metadata.titleLocation,
+				metadata.locationAddress, metadata.titleTimes, metadata.musicians}.every(String.empty)) {
+			writer.writeLine("""\maketartantitle""");
+		}
 		writer.writeLine("""\clearpage""");
 		writer.writeLine("""\listofdances""");
 		writer.writeLine("""\clearpage""");
-		writeIfNonempty(metadata.preDancesText);
 		for (item in program.asIterable) {
 			switch (item)
 			case (is Dance) {
@@ -169,7 +192,18 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 				writer.writeLine("""\auldlangsyne""");
 			}
 		}
-		writeIfNonempty(metadata.postDancesText);
+		for (image in metadata.insidePostDanceImages) {
+			writer.writeLine("""\clearpage""");
+			writer.writeLine("\\tartanimage{``latexImage(image)``}");
+		}
+		if (metadata.printAuldLangSyne) {
+			writer.writeLine("""\clearpage""");
+			writer.writeLine("""\auldlangsyne""");
+		}
+		if (exists image = metadata.backCoverImage) {
+			writer.writeLine("""\cleartoverso""");
+			writer.writeLine("\\tartanimage{``latexImage(image)``}");
+		}
 		writer.writeLine("""\end{document}""");
 	}
 }

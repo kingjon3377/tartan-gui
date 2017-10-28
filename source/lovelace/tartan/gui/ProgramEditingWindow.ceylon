@@ -59,6 +59,7 @@ JFrame programEditingWindow(DanceDatabase db, ProgramMetadata metadata) {
 	pane.add("Select Dances", dsp);
 	value pep = programEditingPanel(programModel);
 	pane.add("Edit Selected Dances", pep);
+	pane.add("Edit Other Content", metadataEditingPanel(metadata));
 	retval.pack();
 	if (is JSplitPane dsp) {
 		dsp.setDividerLocation(0.5);
