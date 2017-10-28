@@ -51,17 +51,18 @@ class FigureEditor(Figure figure, Anything() cancel = noop) extends JPanel(Borde
 	}
 	void setText(String text) => figure.description = text;
 	JTextField barsField = JTextField(figure.bars else "", 6);
-	barsField.addActionListener((_) => setBars(barsField.text));
 	JTextField descField = JTextField(figure.description, 20);
-	descField.addActionListener((_) => setText(descField.text));
 	BorderedPanel left = BorderedPanel.horizontalLine(barsField, null, descField);
 	add(left, Types.nativeString(BorderLayout.lineStart));
 	value okButton = ImageButton(loadImage("/lovelace/tartan/gui/Green-Check-Mark-Icon-300px.png"));
-	okButton.addActionListener((_) {
+	void okListener(ActionEvent _) {
 		setBars(barsField.text);
 		setText(descField.text);
 		cancel();
-	});
+	}
+	okButton.addActionListener(okListener);
+	barsField.addActionListener(okListener);
+	descField.addActionListener(okListener);
 	value cancelButton = ImageButton(loadImage("/lovelace/tartan/gui/Red-X-Icon-300px.png"));
 	cancelButton.addActionListener((_) {
 		barsField.text = figure.bars else "";
