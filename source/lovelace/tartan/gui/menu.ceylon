@@ -88,13 +88,6 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 	}
 	try (writer = actualFile.Overwriter()) {
 		writer.writeLine("""\documentclass{tartan}""");
-		Boolean auldLangSyne = metadata.printAuldLangSyne;
-		if (auldLangSyne) {
-			writer.writeLine("""\usepackage{verse}""");
-		}
-		if (metadata.coverImage exists || metadata.backCoverImage exists || !metadata.insidePostDanceImages.empty) {
-			writer.writeLine("""\usepackage{graphicx}""");
-		}
 		String quoted(String string) => string.replace("&", "\\&").replace("<b>", "\\textbf{").replace("</b>", "}");
 		writer.writeLine("\\tartangroupname{``metadata.groupCoverName``}");
 		writer.writeLine("\\tartangroupname*{``metadata.groupTitleName``}");
