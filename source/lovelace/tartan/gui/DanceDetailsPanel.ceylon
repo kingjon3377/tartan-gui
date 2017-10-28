@@ -8,7 +8,6 @@ import javax.swing {
 }
 import lovelace.tartan.model {
 	ProgramElement,
-	AuldLangSyne,
 	Intermission,
 	Dance
 }
@@ -51,7 +50,6 @@ class DanceDetailsPanel() extends JPanel(BorderLayout()) {
 		dance.formation = formationBox.selectedItem.string;
 	}
 	void applyToIntermission(Intermission interm) => interm.description = titleField.text.trimmed;
-	void applyToAuldLangSyne(AuldLangSyne als) => als.description = titleField.text.trimmed;
 	variable Anything() apply = noop;
 	void revertDance(Dance dance) {
 		titleLabel.text = "Dance Title:";
@@ -76,15 +74,6 @@ class DanceDetailsPanel() extends JPanel(BorderLayout()) {
 	void revertIntermission(Intermission interm) {
 		titleLabel.text = "Break Description:";
 		titleField.text = interm.description;
-		sourceField.text = "";
-		tempoBox.selectedItem = "";
-		timesModel.\ivalue = JInteger.valueOf(1);
-		barsModel.\ivalue = JInteger.valueOf(0);
-		formationBox.selectedItem = "";
-	}
-	void revertAuldLangSyne(AuldLangSyne als) {
-		titleLabel.text = "ALS Description:";
-		titleField.text = als.description;
 		sourceField.text = "";
 		tempoBox.selectedItem = "";
 		timesModel.\ivalue = JInteger.valueOf(1);
@@ -146,19 +135,6 @@ class DanceDetailsPanel() extends JPanel(BorderLayout()) {
 			revertButton.enabled = true;
 			apply = () => applyToIntermission(current);
 			revert = () => revertIntermission(current);
-			revert();
-		}
-		case (is AuldLangSyne) {
-			titleField.enabled = true;
-			sourceField.enabled = false;
-			tempoBox.enabled = false;
-			timesBox.enabled = false;
-			barsBox.enabled = false;
-			formationBox.enabled = false;
-			applyButton.enabled = true;
-			revertButton.enabled = true;
-			apply = () => applyToAuldLangSyne(current);
-			revert = () => revertAuldLangSyne(current);
 			revert();
 		}
 	}

@@ -4,10 +4,4 @@ shared class Intermission(description = "Intermission") {
 	shared variable String description;
 	shared actual String string => description;
 }
-"The singing of Auld Lang Syne."
-shared class AuldLangSyne(description = "Auld Lang Syne") {
-	"How to describe this in the program."
-	shared variable String description;
-	shared actual String string => description;
-}
-shared alias ProgramElement => Dance|Intermission|AuldLangSyne;
+shared alias ProgramElement => Dance|Intermission;

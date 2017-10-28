@@ -25,8 +25,7 @@ import javax.imageio {
 import lovelace.tartan.model {
 	ProgramElement,
 	Dance,
-	Intermission,
-	AuldLangSyne
+	Intermission
 }
 import java.awt.event {
 	ActionEvent,
@@ -111,12 +110,9 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement
 			program.removeElement(selection);
 		}
 	});
-	// TODO: These should add at (before? after?) the current selection, not always at the end
-	value specialPanel = BorderedPanel.horizontalLine(
-		ListenedButton("Add Break", (_) => program.addElement(Intermission())), null,
-		ListenedButton("""<html>Add &ldquo;Auld Lang Syne&rdquo;</html>""",
-			(_) => program.addElement(AuldLangSyne())));
-	value rightPanel = BorderedPanel.verticalLine(null, JScrollPane(selectedList), specialPanel);
+	// TODO: Breaks should add at (before? after?) the current selection, not always at the end
+	value rightPanel = BorderedPanel.verticalLine(null, JScrollPane(selectedList),
+		ListenedButton("Add Break", (_) => program.addElement(Intermission())));
 	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, inner, rightPanel);
 	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, left, secondSplitPane);
 	secondSplitPane.resizeWeight = 0.0;

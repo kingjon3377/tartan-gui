@@ -9,7 +9,6 @@ import javax.swing {
 }
 import lovelace.tartan.model {
 	ProgramElement,
-	AuldLangSyne,
 	ProgramMetadata,
 	Dance,
 	Intermission,
@@ -184,12 +183,6 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 				} else {
 					writer.writeLine("[``text``]");
 				}
-			}
-			case (is AuldLangSyne) {
-				// TODO: Actually use the "description" attribute
-				// TODO: Make printing of text of the song optional
-				// TODO: IN practice, this (the command to print the text) shouldn't be part of the "program" at all
-				writer.writeLine("""\auldlangsyne""");
 			}
 		}
 		for (image in metadata.insidePostDanceImages) {
