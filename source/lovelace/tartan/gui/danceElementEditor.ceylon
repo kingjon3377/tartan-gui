@@ -54,8 +54,8 @@ class FigureEditor(Figure figure, Anything() cancel = noop) extends JPanel(Borde
 	void setText(String text) => figure.description = text;
 	JTextField barsField = JTextField(figure.bars else "", 6);
 	JTextField descField = JTextField(figure.description, 20);
-	BorderedPanel left = BorderedPanel.horizontalLine(barsField, null, descField);
-	add(left, Types.nativeString(BorderLayout.lineStart));
+	add(barsField, Types.nativeString(BorderLayout.lineStart));
+	add(descField, Types.nativeString(BorderLayout.center));
 	value okButton = ImageButton(loadImage("/lovelace/tartan/gui/Green-Check-Mark-Icon-300px.png"));
 	void okListener(ActionEvent _) {
 		setBars(barsField.text);
