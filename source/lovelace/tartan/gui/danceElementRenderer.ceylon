@@ -1,8 +1,10 @@
 import javax.swing {
-	JTable
+	JTable,
+	JLabel
 }
 import java.awt {
-	Component
+	Component,
+	Dimension
 }
 import javax.swing.table {
 	DefaultTableCellRenderer
@@ -36,16 +38,17 @@ object danceElementRenderer extends DefaultTableCellRenderer() {
 				if (is Figure movement) {
 					if (exists bars = movement.bars) {
 						builder.append(bars);
+					} else {
+						builder.append("&nbsp;");
 					}
 					builder.append("</td><td>");
 					builder.append(movement.description);
 				} else {
-					builder.append("</td><td>");
+					builder.append("&nbsp;</td><td>");
 					builder.append(movement);
 				}
 				builder.append("</td></tr>");
 			}
-			builder.append("</table></html>");
 			return super.getTableCellRendererComponent(table, Types.nativeString(builder.string), isSelected,
 				hasFocus, rowIndex, columnIndex);
 		}

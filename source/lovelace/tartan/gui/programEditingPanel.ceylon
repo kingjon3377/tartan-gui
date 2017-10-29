@@ -32,20 +32,34 @@ import lovelace.tartan.gui.controls {
 	BorderedPanel,
 	ListenedButton
 }
+import javax.swing.table {
+	TableModel
+}
+import javax.swing.event {
+	TableModelEvent
+}
 object elementEditingPanel extends JPanel(BorderLayout()) {
 	variable ProgramElement? _current = null;
 	shared ProgramElement? current => _current;
 	value table = JTable(TableModelAdapter(ArrayList<Figure|NamedFigure|String>()));
+	void fixHeights() {
+		for (row in 0:table.rowCount) {
+			value rendered = table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);
+			value edited = table.prepareEditor(table.getCellEditor(row, 0), row, 0);
+			table.setRowHeight(row,
+				Integer.max({rendered.preferredSize.height.integer, rendered.minimumSize.height.integer,
+					edited.preferredSize.height.integer, edited.minimumSize.height.integer}));
+		}
+	}
 	value detailsPanel = DanceDetailsPanel();
 	assign current {
 		_current = current;
 		detailsPanel.current = current;
 		if (is Dance current) {
-			table.model = TableModelAdapter(current.contents);
-			for (row in 0:table.rowCount) {
-				value rendered = table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);
-				table.rowHeight = rendered.preferredSize.height.integer;
-			}
+			TableModel model = TableModelAdapter(current.contents);
+			model.addTableModelListener((_) => fixHeights());
+			table.model = model;
+			fixHeights();
 		} else {
 			table.model = TableModelAdapter(ArrayList<Figure|NamedFigure|String>());
 		}
@@ -66,6 +80,7 @@ object elementEditingPanel extends JPanel(BorderLayout()) {
 		if (is MutableSingleColumnTableModel<Figure|NamedFigure|String> model = table.model,
 				is Dance temp = current) {
 			model.addElement(NamedFigure(Figure("First Movement of Figure", "Bars TBD")));
+			fixHeights();
 		}
 	}), ListenedButton("Remove Selected Figure", (_) {
 		Integer selection = table.selectedRow;

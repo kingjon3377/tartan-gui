@@ -124,8 +124,8 @@ class NamedFigureEditor(NamedFigure nfigure, Anything() stopOperation) extends J
 	addButton.addActionListener((_) {
 		Figure newFigure = Figure("description of movement", "bars");
 		nfigure.contents.add(newFigure);
-		add(FigureEditor(newFigure));
 		remove(buttonPanel);
+		add(FigureEditor(newFigure));
 		add(buttonPanel);
 	});
 	add(buttonPanel);
