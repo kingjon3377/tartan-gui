@@ -25,7 +25,7 @@ shared class NamedFigure(<Figure|String>* initialContents) {
 	shared MutableList<Figure|String> contents = ArrayList { *initialContents };
 }
 "A dance."
-shared class Dance(title, source, tempo, times, length, formation) {
+shared class Dance(title, source, tempo, times, length, formation, <Figure|NamedFigure|String>* initialContents) {
 	"The title or name of the dance."
 	shared variable String title;
 	"The source from which the dance is taken. (Or the name of its deviser.)"
@@ -44,7 +44,7 @@ shared class Dance(title, source, tempo, times, length, formation) {
 	   other text that needs to be printed inside the "scdance" environment in the
 	   output."""
 	shared MutableList<Figure|NamedFigure|String> contents =
-			ArrayList<Figure|NamedFigure|String>();
+			ArrayList<Figure|NamedFigure|String> { *initialContents };
 	"A (very simple) String representation of the dance (for use in lists)"
 	shared actual String string => "``title`` (``times``x``length````tempo``) (``source``)";
 }
