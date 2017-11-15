@@ -38,7 +38,7 @@ import ceylon.file {
 }
 import lovelace.tartan.latex {
 	writeLaTeXProgram,
-	readLaTeXProgram
+	LaTeXReader
 }
 import ceylon.collection {
 	ArrayList,
@@ -83,7 +83,7 @@ void readFromFile(MutableListModel<ProgramElement> program, ProgramMetadata meta
 		// FIXME: Report this to the user
 		return;
 	}
-	value readingResult = readLaTeXProgram(input);
+	value readingResult = LaTeXReader().readLaTeXProgram(input);
 	if (is ParseException readingResult) {
 		// FIXME: Report this to the user
 	} else {
