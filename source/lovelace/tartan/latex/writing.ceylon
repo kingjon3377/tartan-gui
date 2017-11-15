@@ -113,7 +113,7 @@ shared void writeLaTeXProgram(Anything(String) ostream, {ProgramElement*} progra
 		case (is Intermission) {
 			String text = item.description;
 			ostream("""\intermission""");
-			if ("Intermission" != text || text.empty) {
+			if ("Intermission" == text || text.empty) {
 				ostream("\n");
 			} else {
 				writeLine("[``text``]");
