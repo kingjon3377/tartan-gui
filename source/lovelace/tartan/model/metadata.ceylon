@@ -6,6 +6,9 @@ import ceylon.logging {
 	Logger,
 	logger
 }
+import ceylon.language.meta.model {
+	Value
+}
 Logger log = logger(`module lovelace.tartan.model`);
 "Information having to do with the ball program as exported or imported, beyond the list of dances and
  their directions."
@@ -59,6 +62,36 @@ shared class ProgramMetadata {
 	shared variable String? backCoverImage = null;
 	"Filenames of images to put after the last dance's crib, before Auld Lang Syne."
 	shared MutableList<String> insidePostDanceImages = ArrayList<String>();
+	shared actual String string {
+		StringBuilder builder = StringBuilder();
+		builder.append("Metadata:");
+		builder.appendNewline();
+		//for (item in `ProgramMetadata`.getDeclaredAttributes()) {
+		for (item in {`ProgramMetadata.groupCoverName`, `ProgramMetadata.groupTitleName`,
+				`ProgramMetadata.eventCoverName`, `ProgramMetadata.eventTitleName`,
+				`ProgramMetadata.coverDate`, `ProgramMetadata.titleDate`,
+				`ProgramMetadata.coverLocation`, `ProgramMetadata.titleLocation`,
+				`ProgramMetadata.locationAddress`, `ProgramMetadata.titleTimes`,
+				`ProgramMetadata.musicians`, `ProgramMetadata.coverImage`,
+				`ProgramMetadata.titleOnCover`, `ProgramMetadata.printAuldLangSyne`,
+				`ProgramMetadata.backCoverImage`, `ProgramMetadata.insidePostDanceImages`}) {
+			if (item.declaration.name == "string") {
+				continue;
+			} else {
+				builder.append("- ");
+				builder.append(item.declaration.name);
+				builder.append(": ");
+				Value<String?|Boolean|List<String>, Nothing> bound = item.bind(this);
+				if (exists val = bound.get()) {
+					builder.append(val.string);
+				} else {
+					builder.append("null");
+				}
+				builder.appendNewline();
+			}
+		}
+		return builder.string;
+	}
 	shared actual Boolean equals(Object other) {
 		if (is ProgramMetadata other) {
 			// We deliberately omit filename here
