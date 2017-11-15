@@ -9,7 +9,19 @@ import ceylon.logging {
 Logger log = logger(`module lovelace.tartan.model`);
 "Information having to do with the ball program as exported or imported, beyond the list of dances and
  their directions."
-shared class ProgramMetadata() {
+shared class ProgramMetadata {
+	static Boolean equalOrNull<Type>(Type? first, Type? second) given Type satisfies Object {
+		if (exists first) {
+			if (exists second) {
+				return first == second;
+			} else {
+				return false;
+			}
+		} else {
+			return !second exists;
+		}
+	}
+	shared new () {}
 	"The filename this program was loaded from or should be saved to."
 	// TODO: Use ceylon.file type instead of String here?
 	shared variable String? filename = null;
@@ -47,4 +59,38 @@ shared class ProgramMetadata() {
 	shared variable String? backCoverImage = null;
 	"Filenames of images to put after the last dance's crib, before Auld Lang Syne."
 	shared MutableList<String> insidePostDanceImages = ArrayList<String>();
+	shared actual Boolean equals(Object other) {
+		if (is ProgramMetadata other) {
+			// We deliberately omit filename here
+			return groupCoverName == other.groupCoverName && groupTitleName == other.groupTitleName &&
+					eventCoverName == other.eventCoverName && eventTitleName == other.eventTitleName &&
+					coverDate == other.coverDate && titleDate == other.titleDate &&
+					coverLocation == other.coverLocation && titleLocation == other.titleLocation &&
+					locationAddress == other.locationAddress && titleTimes == other.titleTimes &&
+					musicians == other.musicians && equalOrNull(coverImage, other.coverImage) &&
+					titleOnCover == other.titleOnCover && printAuldLangSyne == other.printAuldLangSyne &&
+					equalOrNull(backCoverImage, other.backCoverImage) &&
+					insidePostDanceImages == other.insidePostDanceImages;
+		} else {
+			return false;
+		}
+	}
+	shared actual Integer hash {
+		variable value hash = 1;
+		hash = 31*hash + groupCoverName.hash;
+		hash = 31*hash + groupTitleName.hash;
+		hash = 31*hash + eventCoverName.hash;
+		hash = 31*hash + eventTitleName.hash;
+		hash = 31*hash + coverDate.hash;
+		hash = 31*hash + titleDate.hash;
+		hash = 31*hash + coverLocation.hash;
+		hash = 31*hash + titleLocation.hash;
+		hash = 31*hash + locationAddress.hash;
+		hash = 31*hash + titleTimes.hash;
+		hash = 31*hash + musicians.hash;
+		hash = 31*hash + titleOnCover.hash;
+		hash = 31*hash + printAuldLangSyne.hash;
+		hash = 31*hash + insidePostDanceImages.hash;
+		return hash;
+	}
 }

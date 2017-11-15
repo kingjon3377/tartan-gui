@@ -72,4 +72,12 @@ shared class ListModelAdapter<Element>(MutableList<Element> list)
 		}
 	}
 	shared actual Iterable<Element> asIterable => list;
+	shared actual Boolean equals(Object other) {
+		if (is ListModelAdapter<Element> other) {
+			return other.list == list;
+		} else {
+			return false;
+		}
+	}
+	shared actual Integer hash => list.hash;
 }
