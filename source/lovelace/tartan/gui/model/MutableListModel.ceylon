@@ -16,4 +16,6 @@ shared interface MutableListModel<Element>
 	}
 	shared actual Boolean defines(Integer index) => (0:size).contains(index);
 	shared formal Iterable<Element> asIterable;
+	shared formal void clear();
+	shared formal void addElements({Element*} elements);
 }

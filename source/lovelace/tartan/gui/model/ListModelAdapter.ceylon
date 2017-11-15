@@ -28,6 +28,22 @@ shared class ListModelAdapter<Element>(MutableList<Element> list)
 			listener.intervalAdded(ListDataEvent(this, ListDataEvent.intervalAdded, list.size - 1, list.size - 1));
 		}
 	}
+	shared actual void addElements({Element*} elements) {
+		if (!elements.empty) {
+			Integer oldSize = size;
+			list.addAll(elements);
+			for (listener in listeners) {
+				listener.intervalAdded(ListDataEvent(this, ListDataEvent.intervalAdded, oldSize, list.size - 1));
+			}
+		}
+	}
+	shared actual void clear() {
+		Integer oldSize = size;
+		list.clear();
+		for (listener in listeners) {
+			listener.intervalRemoved(ListDataEvent(this, ListDataEvent.intervalRemoved, 0, oldSize));
+		}
+	}
 	shared actual void removeElement(Integer|Element element) {
 		if (is Integer element) {
 			list.delete(element);
