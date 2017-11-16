@@ -185,7 +185,7 @@ shared class LaTeXReader {
 	Figure parseFigure(Stack<Character> ourStack) {
 		// The `\scfigure` has already been parsed at this point.
 		String bars = parseOptionalBlock(ourStack);
-		String desc = blockContents(ourStack); // TODO: further parsing
+		String desc = blockContents(ourStack);
 		String? barsTemp;
 		if (bars.empty) {
 			barsTemp = null;
