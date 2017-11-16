@@ -85,7 +85,13 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement
 	selectedList.dragEnabled = true;
 	void addDance() {
 		if (exists selection = danceList.selectedValue, !program.asIterable.narrow<Dance>().map(Dance.title).equals(selection.name)) {
-			program.addElement(convertDance(selection, db.cribText(selection)));
+			value dance = convertDance(selection, db.cribText(selection));
+			value target = selectedList.selectedIndex;
+			if (target >= 0) {
+				program.insertElement(dance, target);
+			} else {
+				program.addElement(dance);
+			}
 		}
 	}
 	rightButton.addActionListener((evt) => addDance());
@@ -110,9 +116,15 @@ JComponent danceSelectionPanel(DanceDatabase db, MutableListModel<ProgramElement
 			program.removeElement(selection);
 		}
 	});
-	// TODO: Breaks should add at (before? after?) the current selection, not always at the end
 	value rightPanel = BorderedPanel.verticalLine(null, JScrollPane(selectedList),
-		ListenedButton("Add Break", (_) => program.addElement(Intermission())));
+		ListenedButton("Add Break", (_) {
+			value selection = selectedList.selectedIndex;
+			if (selection >= 0) {
+				program.insertElement(Intermission(), selection);
+			} else {
+				program.addElement(Intermission());
+			}
+		}));
 	JSplitPane secondSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, inner, rightPanel);
 	JSplitPane firstSplitPane = JSplitPane(JSplitPane.horizontalSplit, true, left, secondSplitPane);
 	secondSplitPane.resizeWeight = 0.0;
