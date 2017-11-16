@@ -55,7 +55,7 @@ object latexFilter extends FileFilter() {
 	shared actual String description => "LaTeX documents";
 }
 void readFromFile(MutableListModel<ProgramElement> program, ProgramMetadata metadata,
-		Component? parent = null) {
+		IMetadataConsumer metadataPanel, Component? parent = null) {
 	JFileChooser chooser = JFileChooser();
 	chooser.fileFilter = latexFilter;
 	chooser.showOpenDialog(parent);
@@ -90,7 +90,7 @@ void readFromFile(MutableListModel<ProgramElement> program, ProgramMetadata meta
 			to = metadata;
 		};
 		metadata.filename = chosenFilename;
-		// TODO: Notify any listeners that the metadata object has changed
+		metadataPanel.revert();
 		program.clear();
 		program.addElements(readingResult.rest);
 	}
@@ -151,7 +151,7 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 	}
 }
 suppressWarnings("expressionTypeNothing")
-JMenu fileMenu(MutableListModel<ProgramElement> program, ProgramMetadata metadata) {
+JMenu fileMenu(MutableListModel<ProgramElement> program, ProgramMetadata metadata, IMetadataConsumer metadataPanel) {
 	Boolean onMac = operatingSystem.name == "mac";
 	Integer shortcutMask;
 	if (onMac) {
@@ -161,7 +161,8 @@ JMenu fileMenu(MutableListModel<ProgramElement> program, ProgramMetadata metadat
 	}
 	JMenu retval = JMenu("File");
 	retval.add(menuItem("Open", KeyEvent.vkO, "Open an existing program for further editing",
-		() => readFromFile(program, metadata, retval), KeyStroke.getKeyStroke(KeyEvent.vkO, shortcutMask)));
+		() => readFromFile(program, metadata, metadataPanel, retval),
+		KeyStroke.getKeyStroke(KeyEvent.vkO, shortcutMask)));
 	retval.add(menuItem("Save", KeyEvent.vkS, "Save the program to file",
 		() => saveToFile(program, metadata, metadata.filename, retval),
 		KeyStroke.getKeyStroke(KeyEvent.vkS, shortcutMask)));

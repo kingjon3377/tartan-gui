@@ -59,7 +59,8 @@ JFrame programEditingWindow(DanceDatabase db, ProgramMetadata metadata) {
 	pane.add("Select Dances", dsp);
 	value pep = programEditingPanel(programModel);
 	pane.add("Edit Selected Dances", pep);
-	pane.add("Edit Other Content", metadataEditingPanel(metadata));
+	value mep = metadataEditingPanel(metadata);
+	pane.add("Edit Other Content", mep);
 	retval.pack();
 	if (is JSplitPane dsp) {
 		dsp.setDividerLocation(0.5);
@@ -69,7 +70,7 @@ JFrame programEditingWindow(DanceDatabase db, ProgramMetadata metadata) {
 	}
 	retval.defaultCloseOperation = WindowConstants.disposeOnClose;
 	JMenuBar menuBar = JMenuBar();
-	menuBar.add(fileMenu(programModel, metadata));
+	menuBar.add(fileMenu(programModel, metadata, mep));
 	retval.jMenuBar = menuBar;
 	return retval;
 }
