@@ -9,4 +9,4 @@ install:
     - unzip ceylon.zip
 script:
     - ceylon-1.3.3/bin/ceylon compile
-    - ceylon-1.3.3/bin/ceylon test
+    - ceylon-1.3.3/bin/ceylon test lovelace.tartan.latex
