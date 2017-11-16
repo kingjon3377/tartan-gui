@@ -9,11 +9,7 @@ import javax.swing {
 }
 import lovelace.tartan.model {
 	ProgramElement,
-	ProgramMetadata,
-	Dance,
-	Intermission,
-	Figure,
-	NamedFigure
+	ProgramMetadata
 }
 import lovelace.tartan.gui.model {
 	MutableListModel
@@ -39,10 +35,6 @@ import ceylon.file {
 import lovelace.tartan.latex {
 	writeLaTeXProgram,
 	LaTeXReader
-}
-import ceylon.collection {
-	ArrayList,
-	MutableList
 }
 JMenuItem menuItem(String text, Integer mnemonic, String description,
 		Anything() handler, KeyStroke* accelerators) {

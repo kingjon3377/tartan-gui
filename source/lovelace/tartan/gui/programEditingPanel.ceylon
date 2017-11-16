@@ -35,9 +35,6 @@ import lovelace.tartan.gui.controls {
 import javax.swing.table {
 	TableModel
 }
-import javax.swing.event {
-	TableModelEvent
-}
 object elementEditingPanel extends JPanel(BorderLayout()) {
 	variable ProgramElement? _current = null;
 	shared ProgramElement? current => _current;

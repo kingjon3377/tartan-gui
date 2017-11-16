@@ -1,10 +1,8 @@
 import javax.swing {
-	JTable,
-	JLabel
+	JTable
 }
 import java.awt {
-	Component,
-	Dimension
+	Component
 }
 import javax.swing.table {
 	DefaultTableCellRenderer
