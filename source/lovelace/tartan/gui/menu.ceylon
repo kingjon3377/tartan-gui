@@ -146,6 +146,7 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 		writeLaTeXProgram(writer.write, program.asIterable, metadata);
 	}
 }
+suppressWarnings("expressionTypeNothing")
 JMenu fileMenu(MutableListModel<ProgramElement> program, ProgramMetadata metadata) {
 	Boolean onMac = operatingSystem.name == "mac";
 	Integer shortcutMask;
