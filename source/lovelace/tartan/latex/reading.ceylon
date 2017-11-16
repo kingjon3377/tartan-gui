@@ -44,6 +44,11 @@ shared class LaTeXReader {
 	variable Boolean haveHadCover = false;
 	variable Boolean haveHadTitle = false;
 	variable Boolean nextIsBackCover = false;
+	// TODO: Can we get back to a single input stack and a single StringBuilder?
+	"Parse a LaTeX command, minus its initial backslash. In other words, assuming the previous character
+	 was a backslash, we return a concatenation of every character at the top of the stack until we run
+	 into one that is not a letter or an asterisk; we do not consume that character, unless it is whitespace,
+	 in which case we do."
 	String parseCommand(Stack<Character> localInput) {
 		// This will be called after the '\' has been popped off, I think.
 		StringBuilder builder = StringBuilder();
@@ -51,6 +56,7 @@ shared class LaTeXReader {
 			if (top.whitespace) {
 				break;
 			} else if (top.letter || top == '*') { // Assuming no macro with '@' makes it into a document
+				// TODO: Should numerals count here too?
 				builder.appendCharacter(top);
 			} else {
 				localInput.push(top);
@@ -59,13 +65,14 @@ shared class LaTeXReader {
 		}
 		return builder.string;
 	}
+	"If the cursor is at the beginning of a { ... } block, we return its contents, replacing some LaTeX idioms
+	 with HTML equivalents (`\textbf{}` with HTML bold tags, for example)."
+	throws(`class ParseException`, "if there are fewer } than { in the input")
 	String blockContents(Stack<Character> localInput) {
-		// If the cursor is at the beginning of a { ... } block, return its contents, which
-		// may need to be further parsed. (TODO: is that the best way?)
 		// TODO: Pop off any whitespace first.
 		StringBuilder buffer = StringBuilder();
 		if (exists first = localInput.pop()) {
-			if (first != '{') {
+			if (first != '{') { // TODO: If we test this without popping it, we can massively simplify the rest.
 				localInput.push(first);
 				return "";
 			}
@@ -116,9 +123,10 @@ shared class LaTeXReader {
 			return "";
 		}
 	}
+	"If the cursor is at the beginning of a [ ... ] block, returns its contents. Unlike [[blockContents]], this
+	 does not (currently) do any additional parsing."
+	throws(`class ParseException`, "if there are fewer ] than [ in the input")
 	String parseOptionalBlock(Stack<Character> localInput) {
-		// If the cursor is at the beginning of a [ ... ] block, return its contents, which
-		// may need to be further parsed. (TODO: is that the best way?)
 		StringBuilder buffer = StringBuilder();
 		if (exists first = localInput.pop()) {
 			if (first != '[') {
@@ -142,6 +150,14 @@ shared class LaTeXReader {
 			return "";
 		}
 	}
+	"Parse the contents of a LaTeX environment. This is separated out so it can object to constructs that the LaTeX
+	 compiler might not refuse to compile but that don't make sense, like a dance inside another dance. However,
+	 while we log an error if the dance-length parameter of a dance can't be parsed (it's supposed to be TxB, where T
+	 is the number of times through and B is the length of each time through the dance in bars), that will not cause
+	 parsing of the document to fail."
+	throws(`class ParseException`,
+		"if a dance is inside another dance, the environment name is the empty string, or we're given an
+		 environment we don't know how to handle.")
 	void handleEnvironment(String environment, ProgramMetadata mRetval, MutableList<ProgramElement> pRetval,
 			Stack<Character> innerStack, Dance|NamedFigure? currentDance = null) {
 		switch (environment)
@@ -182,6 +198,8 @@ shared class LaTeXReader {
 			throw ParseException("Unhandled LaTeX environment ``environment``");
 		}
 	}
+	"""Parses the arguments to an `\scfigure` command, which has already been removed from the input stack,
+	   and returns a [[Figure]] based on those arguments."""
 	Figure parseFigure(Stack<Character> ourStack) {
 		// The `\scfigure` has already been parsed at this point.
 		String bars = parseOptionalBlock(ourStack);
@@ -194,7 +212,17 @@ shared class LaTeXReader {
 		}
 		return Figure(desc, barsTemp);
 	}
-	"""Returns true if this is an \end{}"""
+	"""Handles any LaTeX (backslash-prefixed) command. For "metadata" commands specified by the `tartan`
+	   documentclass, changes the provided [[ProgramMetadata]] instance to match. For the `\tartanimage`
+	   command, we do some heuristics to figure out whether this is the cover image, back cover image,
+	   or other end-of-program-filler image. `\begin{}` delegates to [[handleEnvironment]].
+	   This returns true if this is an `\end{}`, so [[handleEnvironment]] can exit cleanly. `\scfigure`,
+	   `\namedfigure`, and `\intermission` are parsed into the model classes they represent, so long as it's
+	   legal for them to appear here. Other `tartan`-provided commands (and other commands used in our exporter)
+	   are mostly essentially no-ops (except for helping the which-kind-of-image-is-this heuristics)."""
+	throws(`class ParseException`,
+		"if command name is empty, a documentclass other than tartan is specified, or a
+		 legal-nesting invariant is violated")
 	Boolean handleCommand(String command, ProgramMetadata mRetval, MutableList<ProgramElement> pRetval,
 			Dance|NamedFigure? currentContext, Stack<Character> ourStack) {
 		switch (command)
@@ -322,6 +350,7 @@ shared class LaTeXReader {
 			}
 		}
 		case ("intermission") {
+			// TODO: Object if we're in the middle of a dance or named figure. And do the same for most other commands.
 			String argument = parseOptionalBlock(ourStack);
 			if (!argument.empty) {
 				pRetval.add(Intermission(argument));
@@ -337,6 +366,8 @@ shared class LaTeXReader {
 		}
 		return false;
 	}
+	"The main loop of the parser, which is a separate method because it simplifies things for [[handleCommand]] and
+	 [[handleEnvironment]] to be able to call it."
 	void parseTokens(Stack<Character> inputStack, ProgramMetadata mRetval, MutableList<ProgramElement> pRetval,
 			Dance|NamedFigure? currentContext = null) {
 		while (exists top = inputStack.pop()) {
@@ -353,6 +384,9 @@ shared class LaTeXReader {
 			}
 		}
 	}
+	"Parses a LaTeX representation of a Ball program, provided as a String, and returns the
+	 [[ProgramMetadata]] and program elements it contains if parsing succeeds; if parsing fails,
+	 a [[ParseException]] explaining where and why it failed is returned."
 	shared [ProgramMetadata, ProgramElement*]|ParseException readLaTeXProgram(String input) {
 		ProgramMetadata mRetval = ProgramMetadata();
 		MutableList<ProgramElement> pRetval = ArrayList<ProgramElement>();
