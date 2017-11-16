@@ -108,7 +108,6 @@ shared void run() {
 		}
 	}
 	// TODO If a non-DB argument, read previously-written project from it
-	// FIXME: Add UI for editing metadata
 	ProgramMetadata metadata = ProgramMetadata();
 	programEditingWindow(db, metadata).visible = true;
 }

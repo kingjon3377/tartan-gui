@@ -115,7 +115,6 @@ void assignMetadata(ProgramMetadata from, ProgramMetadata to) {
 	to.insidePostDanceImages.clear();
 	to.insidePostDanceImages.addAll(from.insidePostDanceImages);
 }
-// FIXME: Extract actual writing into a method taking Anything(String), or returning String, so we can write tests
 void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metadata,
 		String? passedFilename, Component? parent = null) {
 	String filename;
