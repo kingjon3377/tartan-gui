@@ -41,6 +41,9 @@ shared class LaTeXReader {
 		addLogWriter(logWriter);
 	}
 	shared new () {}
+	variable Boolean haveHadCover = false;
+	variable Boolean haveHadTitle = false;
+	variable Boolean nextIsBackCover = false;
 	String parseCommand(Stack<Character> localInput) {
 		// This will be called after the '\' has been popped off, I think.
 		StringBuilder builder = StringBuilder();
@@ -72,11 +75,41 @@ shared class LaTeXReader {
 					braceLevel--;
 					if (braceLevel == 0) {
 						return buffer.string;
+					} else {
+						buffer.appendCharacter('}');
 					}
 				} else if (top == '{') {
 					braceLevel++;
+					buffer.appendCharacter('{');
+				} else if (top == '\\') {
+					if (exists next = localInput.top, next == '\\') {
+						localInput.pop();
+						if (exists yetNext = localInput.top, yetNext == '*') {
+							localInput.pop();
+						}
+						if (exists yetNext = localInput.top, yetNext == '\n') {
+							localInput.pop();
+						}
+						buffer.appendNewline();
+						continue;
+					} else if (exists next = localInput.top, next == '&') {
+						localInput.pop();
+						buffer.appendCharacter(next);
+						continue;
+					}
+					switch (nextCommand = parseCommand(localInput))
+					case ("textbf") {
+						buffer.append("<b>");
+						buffer.append(blockContents(localInput));
+						buffer.append("</b>");
+					}
+					else {
+						buffer.appendCharacter(top);
+						buffer.append(nextCommand);
+					}
+				} else {
+					buffer.appendCharacter(top);
 				}
-				buffer.appendCharacter(top);
 			}
 			throw ParseException("Unbalanced curly braces in block");
 		} else {
@@ -202,12 +235,55 @@ shared class LaTeXReader {
 			mRetval.locationAddress = blockContents(ourStack);
 		}
 		case ("tartantimes") {
-			mRetval.titleTimes = blockContents(ourStack).replace("\\\\*\n", "\n");
+			mRetval.titleTimes = blockContents(ourStack);
 		}
 		case ("tartanmusicians") {
 			mRetval.musicians = blockContents(ourStack);
 		}
-		case ("tartancover"|"listofdances"|"clearpage"|"cleardoublepage"|"maketartantitle") { }
+		case ("tartancover") {
+			mRetval.coverImage = null;
+			haveHadCover = true;
+		}
+		case ("listofdances") {
+			haveHadCover = true;
+			haveHadTitle = true;
+		}
+		case ("tartanimage") {
+			if (nextIsBackCover) {
+				if (exists oldBackCover = mRetval.backCoverImage) {
+					mRetval.insidePostDanceImages.add(oldBackCover);
+				}
+				mRetval.backCoverImage = blockContents(ourStack);
+			} else if (haveHadCover) {
+				mRetval.insidePostDanceImages.add(blockContents(ourStack));
+			} else {
+				mRetval.coverImage = blockContents(ourStack);
+				haveHadCover = true;
+			}
+		}
+		case ("cleartoverso") {
+			nextIsBackCover = true;
+		}
+		case ("tartanimagecover") {
+			mRetval.coverImage = blockContents(ourStack);
+			haveHadCover = true;
+		}
+		case ("clearpage") {
+			if (haveHadCover, !haveHadTitle) {
+				mRetval.titleOnCover = true;
+				haveHadTitle = true;
+			}
+		}
+		case ("cleardoublepage") {
+			if (haveHadCover, !haveHadTitle) {
+				mRetval.titleOnCover = false;
+				haveHadTitle = true;
+			}
+		}
+		case ("maketartantitle") {
+			haveHadCover = true;
+			haveHadTitle = true;
+		}
 		case ("begin") {
 			handleEnvironment(blockContents(ourStack), mRetval, pRetval, ourStack, currentContext);
 		}
