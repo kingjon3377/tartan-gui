@@ -71,57 +71,56 @@ shared class LaTeXReader {
 	String blockContents(Stack<Character> localInput) {
 		// TODO: Pop off any whitespace first.
 		StringBuilder buffer = StringBuilder();
-		if (exists first = localInput.pop()) {
-			if (first != '{') { // TODO: If we test this without popping it, we can massively simplify the rest.
-				localInput.push(first);
-				return "";
-			}
-			variable Integer braceLevel = 1;
-			while (exists top = localInput.pop()) {
-				if (top == '}') {
-					braceLevel--;
-					if (braceLevel == 0) {
-						return buffer.string;
-					} else {
-						buffer.appendCharacter('}');
-					}
-				} else if (top == '{') {
-					braceLevel++;
-					buffer.appendCharacter('{');
-				} else if (top == '\\') {
-					if (exists next = localInput.top, next == '\\') {
-						localInput.pop();
-						if (exists yetNext = localInput.top, yetNext == '*') {
-							localInput.pop();
-						}
-						if (exists yetNext = localInput.top, yetNext == '\n') {
-							localInput.pop();
-						}
-						buffer.appendNewline();
-						continue;
-					} else if (exists next = localInput.top, next == '&') {
-						localInput.pop();
-						buffer.appendCharacter(next);
-						continue;
-					}
-					switch (nextCommand = parseCommand(localInput))
-					case ("textbf") {
-						buffer.append("<b>");
-						buffer.append(blockContents(localInput));
-						buffer.append("</b>");
-					}
-					else {
-						buffer.appendCharacter(top);
-						buffer.append(nextCommand);
-					}
-				} else {
-					buffer.appendCharacter(top);
-				}
-			}
-			throw ParseException("Unbalanced curly braces in block");
-		} else {
+		if (exists first = localInput.top, first != '{') {
+			return "";
+		} else if (!localInput.top exists) { // TODO: Throw here instead?
 			return "";
 		}
+		variable Integer braceLevel = 0;
+		while (exists top = localInput.pop()) {
+			if (top == '}') {
+				braceLevel--;
+				if (braceLevel == 0) {
+					return buffer.string;
+				} else {
+					buffer.appendCharacter('}');
+				}
+			} else if (top == '{') {
+				braceLevel++;
+				if (braceLevel > 1) {
+					buffer.appendCharacter('{');
+				}
+			} else if (top == '\\') {
+				if (exists next = localInput.top, next == '\\') {
+					localInput.pop();
+					if (exists yetNext = localInput.top, yetNext == '*') {
+						localInput.pop();
+					}
+					if (exists yetNext = localInput.top, yetNext == '\n') {
+						localInput.pop();
+					}
+					buffer.appendNewline();
+					continue;
+				} else if (exists next = localInput.top, next == '&') {
+					localInput.pop();
+					buffer.appendCharacter(next);
+					continue;
+				}
+				switch (nextCommand = parseCommand(localInput))
+				case ("textbf") {
+					buffer.append("<b>");
+					buffer.append(blockContents(localInput));
+					buffer.append("</b>");
+				}
+				else {
+					buffer.appendCharacter(top);
+					buffer.append(nextCommand);
+				}
+			} else {
+				buffer.appendCharacter(top);
+			}
+		}
+		throw ParseException("Unbalanced curly braces in block");
 	}
 	"If the cursor is at the beginning of a [ ... ] block, returns its contents. Unlike [[blockContents]], this
 	 does not (currently) do any additional parsing."
