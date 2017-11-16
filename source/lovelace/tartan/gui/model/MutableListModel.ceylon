@@ -6,6 +6,7 @@ shared interface MutableListModel<Element>
 		satisfies ListModel<Element>&Reorderable&Correspondence<Integer,Element>
 		given Element satisfies Object {
 	shared formal void addElement(Element element);
+	shared formal void insertElement(Element element, Integer index);
 	shared formal void removeElement(Integer|Element element);
 	shared actual Element? get(Integer index) {
 		if ((0:size).contains(index)) {

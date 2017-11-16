@@ -28,6 +28,9 @@ shared class ListModelAdapter<Element>(MutableList<Element> list)
 			listener.intervalAdded(ListDataEvent(this, ListDataEvent.intervalAdded, list.size - 1, list.size - 1));
 		}
 	}
+	shared actual void insertElement(Element element, Integer index) {
+		list.insert(index, element);
+	}
 	shared actual void addElements({Element*} elements) {
 		if (!elements.empty) {
 			Integer oldSize = size;
