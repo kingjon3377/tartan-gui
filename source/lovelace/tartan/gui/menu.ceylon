@@ -72,12 +72,17 @@ void readFromFile(MutableListModel<ProgramElement> program, ProgramMetadata meta
 			input = builder.string;
 		}
 	} else {
-		// FIXME: Report this to the user
+		if (chooser.selectedFile exists) {
+			JOptionPane.showMessageDialog(parent, "Chosen file could not be opened", "File Not Found",
+				JOptionPane.errorMessage);
+		}
 		return;
 	}
 	value readingResult = LaTeXReader().readLaTeXProgram(input);
 	if (is ParseException readingResult) {
-		// FIXME: Report this to the user
+		log.error("Error reading from file:", readingResult);
+		JOptionPane.showMessageDialog(parent, "Reading from chosen file failed", "Parsing Error",
+			JOptionPane.errorMessage);
 	} else {
 		ProgramMetadata returnedMetadata = readingResult.first;
 		assignMetadata {
