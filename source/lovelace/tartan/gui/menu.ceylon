@@ -55,21 +55,23 @@ object latexFilter extends FileFilter() {
 	shared actual String description => "LaTeX documents";
 }
 void readFromFile(MutableListModel<ProgramElement> program, ProgramMetadata metadata,
-		IMetadataConsumer metadataPanel, Component? parent = null) {
+		IMetadataConsumer? metadataPanel, Component? parent = null) {
 	JFileChooser chooser = JFileChooser();
 	chooser.fileFilter = latexFilter;
 	chooser.showOpenDialog(parent);
-	String input;
-	String chosenFilename;
 	if (exists filename = chooser.selectedFile?.path, is File file = parsePath(filename).resource) {
-		chosenFilename = filename;
-		try (reader = file.Reader()) {
-			StringBuilder builder = StringBuilder();
-			while (exists line = reader.readLine()) {
-				builder.append(line);
-				builder.appendNewline();
+		if (exists readingResult = readFromSpecifiedFile(file, parent)) {
+			ProgramMetadata returnedMetadata = readingResult.first;
+			assignMetadata {
+				from = returnedMetadata;
+				to = metadata;
+			};
+			metadata.filename = filename;
+			if (exists metadataPanel) {
+				metadataPanel.revert();
 			}
-			input = builder.string;
+			program.clear();
+			program.addElements(readingResult.rest);
 		}
 	} else {
 		if (chooser.selectedFile exists) {
@@ -78,21 +80,26 @@ void readFromFile(MutableListModel<ProgramElement> program, ProgramMetadata meta
 		}
 		return;
 	}
+}
+[ProgramMetadata, ProgramElement*]? readFromSpecifiedFile(File file, Component? parent = null) {
+	String input;
+	try (reader = file.Reader()) {
+		StringBuilder builder = StringBuilder();
+		while (exists line = reader.readLine()) {
+			builder.append(line);
+			builder.appendNewline();
+		}
+		input = builder.string;
+	}
 	value readingResult = LaTeXReader().readLaTeXProgram(input);
 	if (is ParseException readingResult) {
 		log.error("Error reading from file:", readingResult);
 		JOptionPane.showMessageDialog(parent, "Reading from chosen file failed", "Parsing Error",
 			JOptionPane.errorMessage);
+		return null;
 	} else {
-		ProgramMetadata returnedMetadata = readingResult.first;
-		assignMetadata {
-			from = returnedMetadata;
-			to = metadata;
-		};
-		metadata.filename = chosenFilename;
-		metadataPanel.revert();
-		program.clear();
-		program.addElements(readingResult.rest);
+		readingResult.first.filename = file.path.string;
+		return readingResult;
 	}
 }
 void assignMetadata(ProgramMetadata from, ProgramMetadata to) {

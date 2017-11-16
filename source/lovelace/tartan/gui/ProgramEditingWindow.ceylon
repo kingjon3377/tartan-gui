@@ -48,8 +48,8 @@ import ceylon.logging {
 import java.lang {
 	System
 }
-JFrame programEditingWindow(DanceDatabase db, ProgramMetadata metadata) {
-	MutableList<ProgramElement> program = ArrayList<ProgramElement>();
+JFrame programEditingWindow(DanceDatabase db, ProgramMetadata metadata, ProgramElement* initialProgram) {
+	MutableList<ProgramElement> program = ArrayList<ProgramElement> { *initialProgram };
 	MutableListModel<ProgramElement> programModel = ListModelAdapter(program);
 	JFrame retval = JFrame("Dance Program Editor");
 	retval.setMinimumSize(Dimension(400, 300));
@@ -110,5 +110,22 @@ shared void run() {
 	}
 	// TODO If a non-DB argument, read previously-written project from it
 	ProgramMetadata metadata = ProgramMetadata();
-	programEditingWindow(db, metadata).visible = true;
+	{ProgramElement*} initialProgram;
+	for (arg in process.arguments) {
+		if (arg.endsWith(".tex"), is File file = parsePath(arg).resource) {
+			if (exists readingResult = readFromSpecifiedFile(file, null)) {
+				ProgramMetadata returnedMetadata = readingResult.first;
+				assignMetadata {
+					from = returnedMetadata;
+					to = metadata;
+				};
+				metadata.filename = arg;
+				initialProgram = {*readingResult.rest};
+				break;
+			}
+		}
+	} else {
+		initialProgram = {};
+	}
+	programEditingWindow(db, metadata, *initialProgram).visible = true;
 }
