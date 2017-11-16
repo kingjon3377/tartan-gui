@@ -39,7 +39,8 @@ shared void writeLaTeXProgram(Anything(String) ostream, {ProgramElement*} progra
 			writeLine("\\``command``");
 		}
 	}
-	// TODO: Add a comment explaining that any modifications to the generated LaTeX file may not be recognized if it is opened again
+	writeLine("% This LaTeX file was produced by the tartan-gui graphical editor;");
+	writeLine("% if you edit it by hand, that editor may not be able to read it again.");
 	writeSimpleCommand("documentclass", "tartan");
 	writePrologue(ostream, metadata);
 	writeSimpleCommand("begin", "document");
