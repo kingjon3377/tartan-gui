@@ -65,6 +65,105 @@ shared class LaTeXReader {
 		}
 		return builder.string;
 	}
+	void defaultFraction(String numerator, String denominator, StringBuilder buffer) {
+		buffer.append(numerator);
+		buffer.append("/");
+		buffer.append(denominator);
+	}
+	"""Writes a fraction to the buffer. If a "nice" Unicode glyph is available, this routine uses it;
+	   otherwise it simply separate the numerator from the denominator with a slash."""
+	void parseFraction(String numerator, String denominator, StringBuilder buffer) {
+		switch (numerator)
+		case ("1") {
+			switch (denominator)
+			case ("2") {
+				buffer.append("½");
+			}
+			case ("3") {
+				buffer.append("⅓");
+			}
+			case ("4") {
+				buffer.append("¼");
+			}
+			case ("5") {
+				buffer.append("⅕");
+			}
+			case ("6") {
+				buffer.append("⅙");
+			}
+			case ("7") {
+				buffer.append("⅐");
+			}
+			case ("8") {
+				buffer.append("⅛");
+			}
+			case ("9") {
+				buffer.append("⅑");
+			}
+			case ("10") {
+				buffer.append("⅒");
+			}
+			else {
+				defaultFraction(numerator, denominator, buffer);
+			}
+		}
+		case ("2") {
+			switch (denominator)
+			case ("3") {
+				buffer.append("⅔");
+			}
+			case ("5") {
+				buffer.append("⅖");
+			}
+			else {
+				defaultFraction(numerator, denominator, buffer);
+			}
+		}
+		case ("3") {
+			switch (denominator)
+			case ("4") {
+				buffer.append("¾");
+			}
+			case ("5") {
+				buffer.append("⅗");
+			}
+			case ("8") {
+				buffer.append("⅜");
+			}
+			else {
+				defaultFraction(numerator, denominator, buffer);
+			}
+		}
+		case ("4") {
+			if (denominator == "5") {
+				buffer.append("⅘");
+			} else {
+				defaultFraction(numerator, denominator, buffer);
+			}
+		}
+		case ("5") {
+			switch (denominator)
+			case ("6") {
+				buffer.append("⅚");
+			}
+			case ("8") {
+				buffer.append("⅝");
+			}
+			else {
+				defaultFraction(numerator, denominator, buffer);
+			}
+		}
+		case ("7") {
+			if (denominator == "8") {
+				buffer.append("⅞");
+			} else {
+				defaultFraction(numerator, denominator, buffer);
+			}
+		}
+		else {
+			defaultFraction(numerator, denominator, buffer);
+		}
+	}
 	"If the cursor is at the beginning of a { ... } block, we return its contents, replacing some LaTeX idioms
 	 with HTML equivalents (`\textbf{}` with HTML bold tags, for example)."
 	throws(`class ParseException`, "if there are fewer } than { in the input")
@@ -111,6 +210,11 @@ shared class LaTeXReader {
 					buffer.append("<b>");
 					buffer.append(blockContents(localInput));
 					buffer.append("</b>");
+				}
+				case ("nicefrac") {
+					String numerator = blockContents(localInput).trimmed;
+					String denominator = blockContents(localInput).trimmed;
+					parseFraction(numerator, denominator, buffer);
 				}
 				else {
 					buffer.appendCharacter(top);
