@@ -220,6 +220,20 @@ shared class LaTeXReader {
 					buffer.appendCharacter(top);
 					buffer.append(nextCommand);
 				}
+			} else if (top == '`') {
+				if (exists next = localInput.top, next == '`') {
+					localInput.pop();
+					buffer.appendCharacter('“');
+				} else {
+					buffer.appendCharacter(top);
+				}
+			} else if (top == '\'') {
+				if (exists next = localInput.top, next == '\'') {
+					localInput.pop();
+					buffer.appendCharacter('”');
+				} else {
+					buffer.appendCharacter(top);
+				}
 			} else {
 				buffer.appendCharacter(top);
 			}
