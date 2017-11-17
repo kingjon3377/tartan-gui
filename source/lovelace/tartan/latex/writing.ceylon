@@ -7,7 +7,12 @@ import lovelace.tartan.model {
 	Intermission
 }
 void writePrologue(Anything(String) ostream, ProgramMetadata metadata) {
-	void writePrologueLine(String command, String arg) => ostream("\\``command``{``arg``}\n");
+	void writePrologueLine(String command, String arg) {
+		if (!arg.trimmed.empty) {
+			ostream("\\``command``{``arg``}\n");
+		}
+	}
+	// TODO: Don't write starred forms when the same as unstarred
 	writePrologueLine("tartangroupname", metadata.groupCoverName);
 	writePrologueLine("tartangroupname*", metadata.groupTitleName);
 	writePrologueLine("tartanballname", metadata.eventCoverName);
