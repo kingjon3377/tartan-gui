@@ -21,7 +21,7 @@ import ceylon.collection {
 	MutableList,
 	Stack
 }
-shared class LaTeXReader {
+shared class LaTeXReader { // FIXME: We need tests for this!
 	static void logWriter(Priority priority, Module|Package mod,
 		String message, Throwable? except) {
 		process.writeErrorLine("``priority`` (``mod``): ``message``");
@@ -168,7 +168,9 @@ shared class LaTeXReader {
 	 with HTML equivalents (`\textbf{}` with HTML bold tags, for example)."
 	throws(`class ParseException`, "if there are fewer } than { in the input")
 	String blockContents(Stack<Character> localInput) {
-		// TODO: Pop off any whitespace first.
+		while (exists top = localInput.top, top.whitespace) {
+			localInput.pop();
+		}
 		StringBuilder buffer = StringBuilder();
 		if (exists first = localInput.top, first != '{') {
 			return "";
