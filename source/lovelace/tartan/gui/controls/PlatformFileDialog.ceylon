@@ -26,7 +26,7 @@ shared class PlatformFileDialog(Frame? parentWindow) {
 			return wrapped.selectedFile.path;
 		}
 		case (is AWTFileDialog) {
-			return wrapped.file;
+			return wrapped.files.array.first?.path;
 		}
 	}
 	assign filename {
