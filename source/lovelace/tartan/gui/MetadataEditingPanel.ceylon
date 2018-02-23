@@ -8,17 +8,18 @@ import javax.swing {
 	GroupLayout,
 	JTextArea,
 	JSeparator,
-	JFileChooser,
 	JCheckBox,
 	JComponent,
 	JButton,
 	JScrollPane
 }
 import java.awt {
-	Component
+	Component,
+	Frame
 }
 import lovelace.tartan.gui.controls {
-	ListenedButton
+	ListenedButton,
+	PlatformFileDialog
 }
 import javax.swing.filechooser {
 	FileFilter
@@ -50,25 +51,19 @@ class ImageFileChooser(Anything(String?) handler, Component? parent = null) {
 	value chosenFileField = JTextField(10);
 	chosenFileField.editable = false;
 	shared JComponent field => chosenFileField;
-	// TODO: Use AWT FileChooser on Mac
-	JFileChooser chooser = JFileChooser();
+	PlatformFileDialog chooser = PlatformFileDialog(if (is Frame parent) then parent else null);
 	assign filename {
 		_filename = filename;
-		if (exists filename) {
-			chooser.selectedFile = JFile(filename);
-			chosenFileField.text = filename;
-		} else {
-			chooser.selectedFile = null;
-			chosenFileField.text = "";
-		}
+		chooser.filename = filename;
+		chosenFileField.text = filename else "";
 	}
 	chooser.fileFilter = imageFilter;
 	JButton _button = ListenedButton("Choose File", (_) {
-		chooser.showOpenDialog(parent);
-		if (exists file = chooser.selectedFile) {
-			_filename = file.path;
-			chosenFileField.text = file.path;
-			handler(file.path);
+		chooser.showOpenDialog();
+		if (exists file = chooser.filename) {
+			_filename = file;
+			chosenFileField.text = file;
+			handler(file);
 		} else {
 			_filename = null;
 			chosenFileField.text = "";
