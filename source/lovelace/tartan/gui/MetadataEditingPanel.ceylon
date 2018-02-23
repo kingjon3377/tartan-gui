@@ -11,7 +11,8 @@ import javax.swing {
 	JCheckBox,
 	JComponent,
 	JButton,
-	JScrollPane
+	JScrollPane,
+	SwingList=JList
 }
 import java.awt {
 	Component,
@@ -33,6 +34,9 @@ import javax.swing.event {
 }
 import javax.swing.text {
 	JTextComponent
+}
+import lovelace.tartan.gui.model {
+	ListModelAdapter
 }
 interface IMetadataConsumer {
 	shared formal void revert();
@@ -141,6 +145,7 @@ JPanel&IMetadataConsumer metadataEditingPanel(ProgramMetadata metadata) {
 	setupTextFieldListener(locationAddressBox, (str) => metadata.locationAddress = str);
 	value timesLabel = JLabel("Event time(s):");
 	value timesArea = JTextArea(3, 15);
+	timesArea.maximumSize = timesArea.preferredSize;
 	setupTextFieldListener(timesArea, (str) => metadata.titleTimes = str);
 	JScrollPane timesAreaWrapped = JScrollPane(timesArea);
 	value musiciansLabel = JLabel("Musicians:");
@@ -151,6 +156,24 @@ JPanel&IMetadataConsumer metadataEditingPanel(ProgramMetadata metadata) {
 	value coverImageSelector = ImageFileChooser((str) => metadata.coverImage = str, retval);
 	value backImageLabel = JLabel("Back cover image:");
 	value backImageSelector = ImageFileChooser((str) => metadata.backCoverImage = str, retval);
+	value fillerImageLabel = JLabel("Images after last dance:");
+	value fillerImageListModel = ListModelAdapter(metadata.insidePostDanceImages);
+	value fillerImageList = SwingList<String>(fillerImageListModel);
+	value fillerImageListWrapped = JScrollPane(fillerImageList);
+	PlatformFileDialog fillerChooser = PlatformFileDialog(null);
+	fillerChooser.fileFilter = imageFilter;
+	value fillerImageAdd = ListenedButton("Add Image", (_) {
+		fillerChooser.showOpenDialog();
+		if (exists file = fillerChooser.filename) {
+			fillerImageListModel.addElement(file);
+		}
+	});
+	value fillerImageRemove = ListenedButton("Remove Image", (_) {
+		Integer index = fillerImageList.selectedIndex;
+		if (index >= 0) {
+			fillerImageListModel.removeElement(index);
+		}
+	});
 	value titleOnCoverLabel = JLabel("Print title page on back of cover?");
 	value titleOnCoverField = JCheckBox();
 	titleOnCoverField.addChangeListener((_) => metadata.titleOnCover = titleOnCoverField.selected);
@@ -179,21 +202,28 @@ JPanel&IMetadataConsumer metadataEditingPanel(ProgramMetadata metadata) {
 	// TODO: images between last dance and Auld Lang Syne or the back cover
 	layout.autoCreateGaps = true;
 	layout.autoCreateContainerGaps = true;
-	layout.setVerticalGroup(createSequentialGroup(
-		createParallelGroup(GroupLayout.Alignment.baseline, coverHeaderLabel, titleHeaderLabel),
-		createParallelGroup(GroupLayout.Alignment.baseline, groupNameLabel, groupNameCoverBox, groupNameTitleBox),
-		createParallelGroup(GroupLayout.Alignment.baseline, eventNameLabel, eventNameCoverBox, eventNameTitleBox),
-		createParallelGroup(GroupLayout.Alignment.baseline, dateLabel, dateCoverBox, dateTitleBox),
-		createParallelGroup(GroupLayout.Alignment.baseline, locationLabel, locationCoverBox, locationTitleBox),
-		createParallelGroup(GroupLayout.Alignment.baseline, locationAddressLabel, locationAddressBox),
-		createParallelGroup(GroupLayout.Alignment.baseline, timesLabel, timesAreaWrapped),
-		createParallelGroup(GroupLayout.Alignment.baseline, musiciansLabel, musiciansBox), firstSeparator,
-		createParallelGroup(GroupLayout.Alignment.baseline, coverImageLabel, coverImageSelector.field,
-			coverImageSelector.button),
-		createParallelGroup(GroupLayout.Alignment.baseline, backImageLabel, backImageSelector.field,
-			backImageSelector.button),
-		createParallelGroup(GroupLayout.Alignment.center, titleOnCoverLabel, titleOnCoverField),
-		createParallelGroup(GroupLayout.Alignment.center, auldLangSyneLabel, auldLangSyneField)));
+	layout.setVerticalGroup(
+		createSequentialGroup(
+			createParallelGroup(GroupLayout.Alignment.baseline, coverHeaderLabel, titleHeaderLabel),
+			createParallelGroup(GroupLayout.Alignment.baseline, groupNameLabel, groupNameCoverBox, groupNameTitleBox),
+			createParallelGroup(GroupLayout.Alignment.baseline, eventNameLabel, eventNameCoverBox, eventNameTitleBox),
+			createParallelGroup(GroupLayout.Alignment.baseline, dateLabel, dateCoverBox, dateTitleBox),
+			createParallelGroup(GroupLayout.Alignment.baseline, locationLabel, locationCoverBox, locationTitleBox),
+			createParallelGroup(GroupLayout.Alignment.baseline, locationAddressLabel, locationAddressBox),
+			createParallelGroup(GroupLayout.Alignment.baseline, timesLabel, timesAreaWrapped),
+			createParallelGroup(GroupLayout.Alignment.baseline, musiciansLabel, musiciansBox),
+			firstSeparator,
+			fillerImageLabel,
+			createParallelGroup(GroupLayout.Alignment.leading,
+				createSequentialGroup(
+					createParallelGroup(GroupLayout.Alignment.baseline, coverImageLabel, coverImageSelector.field,
+						coverImageSelector.button),
+					createParallelGroup(GroupLayout.Alignment.baseline, backImageLabel, backImageSelector.field,
+						backImageSelector.button),
+					createParallelGroup(GroupLayout.Alignment.center, titleOnCoverLabel, titleOnCoverField),
+					createParallelGroup(GroupLayout.Alignment.center, auldLangSyneLabel, auldLangSyneField)),
+				fillerImageListWrapped),
+			createParallelGroup(GroupLayout.Alignment.baseline, fillerImageAdd, fillerImageRemove)));
 	layout.setHorizontalGroup(createParallelGroup(GroupLayout.Alignment.leading, firstSeparator,
 		createSequentialGroup(
 			createParallelGroup(GroupLayout.Alignment.leading, groupNameLabel, eventNameLabel, dateLabel,
@@ -206,6 +236,7 @@ JPanel&IMetadataConsumer metadataEditingPanel(ProgramMetadata metadata) {
 				titleOnCoverField, auldLangSyneField),
 			createParallelGroup(GroupLayout.Alignment.leading, titleHeaderLabel, groupNameTitleBox,
 				eventNameTitleBox, dateTitleBox, locationTitleBox, locationAddressBox, timesAreaWrapped,
-				musiciansBox))));
+				musiciansBox, fillerImageLabel, fillerImageListWrapped, createSequentialGroup(fillerImageAdd,
+					fillerImageRemove)))));
 	return retval;
 }
