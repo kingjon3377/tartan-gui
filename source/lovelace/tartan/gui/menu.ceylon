@@ -109,7 +109,7 @@ void assignMetadata(ProgramMetadata from, ProgramMetadata to) {
 	// Skip the filename, as we'll assign that immediately after this method anyway.
 	to.groupCoverName = from.groupCoverName;
 	to.groupTitleName = from.groupTitleName;
-	to.groupCoverName = from.groupCoverName;
+	to.eventCoverName = from.eventCoverName;
 	to.eventTitleName = from.eventTitleName;
 	to.coverDate = from.coverDate;
 	to.titleDate = from.titleDate;
