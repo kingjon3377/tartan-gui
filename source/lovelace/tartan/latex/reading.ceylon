@@ -349,53 +349,98 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 			throw ParseException("Unhandled backslash-quoted character");
 		}
 		case ("documentclass") {
+			if (exists currentContext) {
+				throw ParseException("documentclass in the middle of a dance");
+			}
 			if (blockContents(ourStack) != "tartan") {
 				throw ParseException("We only support the tartan documentclass");
 			}
 			return false;
 		}
 		case ("tartangroupname") {
+			if (exists currentContext) {
+				throw ParseException("""\tartangroupname in the middle of a dance""");
+			}
 			mRetval.groupCoverName = blockContents(ourStack);
 		}
 		case ("tartangroupname*") {
+			if (exists currentContext) {
+				throw ParseException("""\tartangroupname* in the middle of a dance""");
+			}
 			mRetval.groupTitleName = blockContents(ourStack);
 		}
 		case ("tartanballname") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanballname in the middle of a dance""");
+			}
 			mRetval.eventCoverName = blockContents(ourStack);
 		}
 		case ("tartanballname*") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanballname* in the middle of a dance""");
+			}
 			mRetval.eventTitleName = blockContents(ourStack);
 		}
 		case ("tartanballdate") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanballdate in the middle of a dance""");
+			}
 			mRetval.coverDate = blockContents(ourStack);
 		}
 		case ("tartanballdate*") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanballdate* in the middle of a dance""");
+			}
 			mRetval.titleDate = blockContents(ourStack);
 		}
 		case ("tartanhall") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanhall in the middle of a dance""");
+			}
 			mRetval.coverLocation = blockContents(ourStack);
 		}
 		case ("tartanhall*") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanhall* in the middle of a dance""");
+			}
 			mRetval.titleLocation = blockContents(ourStack);
 		}
 		case ("tartanhalladdress") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanhalladdress in the middle of a dance""");
+			}
 			mRetval.locationAddress = blockContents(ourStack);
 		}
 		case ("tartantimes") {
+			if (exists currentContext) {
+				throw ParseException("""\tartantimes in the middle of a dance""");
+			}
 			mRetval.titleTimes = blockContents(ourStack);
 		}
 		case ("tartanmusicians") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanmusicians in the middle of a dance""");
+			}
 			mRetval.musicians = blockContents(ourStack);
 		}
 		case ("tartancover") {
+			if (exists currentContext) {
+				throw ParseException("""\tartancover in the middle of a dance""");
+			}
 			mRetval.coverImage = null;
 			haveHadCover = true;
 		}
 		case ("listofdances") {
+			if (exists currentContext) {
+				throw ParseException("""\listofdances in the middle of a dance""");
+			}
 			haveHadCover = true;
 			haveHadTitle = true;
 		}
 		case ("tartanimage") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanimage in the middle of a dance""");
+			}
 			if (nextIsBackCover) {
 				if (exists oldBackCover = mRetval.backCoverImage) {
 					mRetval.insidePostDanceImages.add(oldBackCover);
@@ -409,25 +454,42 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 			}
 		}
 		case ("cleartoverso") {
+			if (exists currentContext) {
+				throw ParseException("""\cleartoverso in the middle of a dance""");
+			}
 			nextIsBackCover = true;
 		}
 		case ("tartanimagecover") {
+			if (exists currentContext) {
+				throw ParseException("""\tartanimagecover in the middle of a dance""");
+			}
 			mRetval.coverImage = blockContents(ourStack);
 			haveHadCover = true;
 		}
 		case ("clearpage") {
+			if (exists currentContext) {
+				// we're clearly not delimiting the title page!
+				return false;
+			}
 			if (haveHadCover, !haveHadTitle) {
 				mRetval.titleOnCover = true;
 				haveHadTitle = true;
 			}
 		}
 		case ("cleardoublepage") {
+			if (exists currentContext) {
+				// we're clearly not delimiting the title page!
+				return false;
+			}
 			if (haveHadCover, !haveHadTitle) {
 				mRetval.titleOnCover = false;
 				haveHadTitle = true;
 			}
 		}
 		case ("maketartantitle") {
+			if (exists currentContext) {
+				throw ParseException("""maketartantitle in the middle of a dance""");
+			}
 			haveHadCover = true;
 			haveHadTitle = true;
 		}
@@ -469,7 +531,9 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 			}
 		}
 		case ("intermission") {
-			// TODO: Object if we're in the middle of a dance or named figure. And do the same for most other commands.
+			if (exists currentContext) {
+				throw ParseException("Intermission in the middle of a dance");
+			}
 			String argument = parseOptionalBlock(ourStack);
 			if (!argument.empty) {
 				pRetval.add(Intermission(argument));
@@ -478,6 +542,9 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 			}
 		}
 		case ("auldlangsyne") {
+			if (exists currentContext) {
+				throw ParseException("Auld Lang Syne in the middle of a dance");
+			}
 			mRetval.printAuldLangSyne = true;
 		}
 		else {
