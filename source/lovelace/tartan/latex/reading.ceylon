@@ -55,8 +55,7 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 		while (exists top = localInput.pop()) {
 			if (top.whitespace) {
 				break;
-			} else if (top.letter || top == '*') { // Assuming no macro with '@' makes it into a document
-				// TODO: Should numerals count here too?
+			} else if (top.letter || top == '*' || top.digit) { // Assuming no macro with '@' makes it into a document
 				builder.appendCharacter(top);
 			} else {
 				localInput.push(top);
