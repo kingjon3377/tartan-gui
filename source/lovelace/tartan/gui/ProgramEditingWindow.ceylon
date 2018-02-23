@@ -11,13 +11,13 @@ import java.awt {
 	Dimension
 }
 import java.io {
-	JFile=File
+	JFile=File,
+	FilenameFilter
 }
 
 import javax.swing {
 	JFrame,
 	JTabbedPane,
-	JFileChooser,
 	WindowConstants,
 	JSplitPane,
 	JMenuBar
@@ -47,6 +47,9 @@ import ceylon.logging {
 }
 import java.lang {
 	System
+}
+import lovelace.tartan.gui.controls {
+	PlatformFileDialog
 }
 JFrame programEditingWindow(DanceDatabase db, ProgramMetadata metadata, ProgramElement* initialProgram) {
 	MutableList<ProgramElement> program = ArrayList<ProgramElement> { *initialProgram };
@@ -95,14 +98,22 @@ shared void run() {
 			break;
 		}
 	} else {
-		JFileChooser chooser = JFileChooser();
-		chooser.fileFilter = object extends FileFilter() {
-			shared actual Boolean accept(JFile file) =>
-					file.name.endsWith(".db") || file.name.endsWith(".sqlite") || file.name.endsWith(".sqlite3");
-			shared actual String description => "SQLite Databases";
-		};
-		if (chooser.showOpenDialog(null) == JFileChooser.approveOption) {
-			db = DanceDatabase(chooser.selectedFile.path);
+		PlatformFileDialog chooser = PlatformFileDialog(null);
+		if (operatingSystem.name == "mac") {
+			chooser.fileFilter = object satisfies FilenameFilter {
+				shared actual Boolean accept(JFile dir, String name) =>
+						name.endsWith(".db") || name.endsWith(".sqlite") || name.endsWith(".sqlite3");
+			};
+		} else {
+			chooser.fileFilter = object extends FileFilter() {
+				shared actual Boolean accept(JFile file) =>
+						file.name.endsWith(".db") || file.name.endsWith(".sqlite") || file.name.endsWith(".sqlite3");
+				shared actual String description => "SQLite Databases";
+			};
+		}
+		chooser.showOpenDialog();
+		if (exists filename = chooser.filename) {
+			db = DanceDatabase(filename);
 		} else {
 			process.writeLine("User probably pressed 'cancel'");
 			return;
