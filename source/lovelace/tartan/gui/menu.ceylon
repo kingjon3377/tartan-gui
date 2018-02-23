@@ -4,7 +4,6 @@ import javax.swing {
 	KeyStroke,
 	InputMap,
 	JComponent,
-	JFileChooser,
 	JOptionPane
 }
 import lovelace.tartan.model {
@@ -25,7 +24,8 @@ import java.io {
 	JFile=File
 }
 import java.awt {
-	Component
+	Component,
+	Frame
 }
 import ceylon.file {
 	parsePath,
@@ -35,6 +35,9 @@ import ceylon.file {
 import lovelace.tartan.latex {
 	writeLaTeXProgram,
 	LaTeXReader
+}
+import lovelace.tartan.gui.controls {
+	PlatformFileDialog
 }
 JMenuItem menuItem(String text, Integer mnemonic, String description,
 		Anything() handler, KeyStroke* accelerators) {
@@ -56,10 +59,10 @@ object latexFilter extends FileFilter() {
 }
 void readFromFile(MutableListModel<ProgramElement> program, ProgramMetadata metadata,
 		IMetadataConsumer? metadataPanel, Component? parent = null) {
-	JFileChooser chooser = JFileChooser();
+	PlatformFileDialog chooser = PlatformFileDialog(if (is Frame parent) then parent else null);
 	chooser.fileFilter = latexFilter;
-	chooser.showOpenDialog(parent);
-	if (exists filename = chooser.selectedFile?.path, is File file = parsePath(filename).resource) {
+	chooser.showOpenDialog();
+	if (exists filename = chooser.filename, is File file = parsePath(filename).resource) {
 		if (exists readingResult = readFromSpecifiedFile(file, parent)) {
 			ProgramMetadata returnedMetadata = readingResult.first;
 			assignMetadata {
@@ -74,7 +77,7 @@ void readFromFile(MutableListModel<ProgramElement> program, ProgramMetadata meta
 			program.addElements(readingResult.rest);
 		}
 	} else {
-		if (chooser.selectedFile exists) {
+		if (chooser.filename exists) {
 			JOptionPane.showMessageDialog(parent, "Chosen file could not be opened", "File Not Found",
 				JOptionPane.errorMessage);
 		}
@@ -128,12 +131,11 @@ void saveToFile(MutableListModel<ProgramElement> program, ProgramMetadata metada
 	if (exists passedFilename) {
 		filename = passedFilename;
 	} else {
-		// TODO: Use AWT file-chooser on Mac?
-		JFileChooser chooser = JFileChooser();
+		PlatformFileDialog chooser = PlatformFileDialog(if (is Frame parent) then parent else null);
 		chooser.fileFilter = latexFilter;
-		chooser.showSaveDialog(parent);
-		if (exists chosenFile = chooser.selectedFile) {
-			filename = chosenFile.path;
+		chooser.showSaveAsDialog();
+		if (exists chosenFile = chooser.filename) {
+			filename = chosenFile;
 		} else {
 			log.info("User canceled from save dialog");
 			return;
