@@ -21,6 +21,9 @@ shared Dance convertDance(DanceRow dbRow, String? crib) {
 	if (exists crib) {
 		if (crib.startsWith("<table>")) {
 			retval.contents.addAll(convertHtmlCrib(crib));
+			if (retval.contents.narrow<Figure>().map(Figure.description).any((str) => str.contains("><"))) {
+				log.warn("Looks like HTML leaked in while parsing ``dbRow.name``");
+			}
 		} else {
 			retval.contents.addAll(convertAceCrib(crib));
 		}
