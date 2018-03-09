@@ -36,7 +36,7 @@ shared void writeLaTeXProgram(Anything(String) ostream, {ProgramElement*} progra
 			.replace("‘", "'").replace("‗", """`""").replace("\f", "").replace("¼", """\nicefrac{1}{4}""")
 			.replace("‑", "--").replace("─", "---").replace("—", "---").replace(";", ";")
 			.replace("⅔", """\nicefrac{2}{3}""").replace("⅜", """\nicefrac{3}{8}""")
-			.replace("⅞", """\nicefrac{7}{8}""");
+			.replace("⅞", """\nicefrac{7}{8}""").replace("{", """\{""").replace("}","""\}""");
 	void writeSimpleCommand(String command, String? arg = null) {
 		if (exists arg) {
 			writeLine("\\``command``{``arg``}");

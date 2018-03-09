@@ -201,7 +201,7 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 					}
 					buffer.appendNewline();
 					continue;
-				} else if (exists next = localInput.top, next == '&') {
+				} else if (exists next = localInput.top, next == '&' || next == '{' || next == '}') {
 					localInput.pop();
 					buffer.appendCharacter(next);
 					continue;
