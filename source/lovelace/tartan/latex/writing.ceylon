@@ -6,14 +6,14 @@ import lovelace.tartan.model {
 	Figure,
 	Intermission
 }
-String quoted(String string) => string.replace("&", "\\&")
+String quoted(String string) => string.replace("&", "\\&").replace("{", """\{""").replace("}","""\}""")
 		.replace("<b>", "\\textbf{").replace("</b>", "}").replace("½", """\nicefrac{1}{2}""")
 		.replace("¾", """\nicefrac{3}{4}""").replace("“", """``""").replace("”", """''""")
 		.replace("–", "---").replace("’", "'").replace("„", """``""").replace("‟", """''""")
 		.replace("‘", "'").replace("‗", """`""").replace("\f", "").replace("¼", """\nicefrac{1}{4}""")
 		.replace("‑", "--").replace("─", "---").replace("—", "---").replace(";", ";")
 		.replace("⅔", """\nicefrac{2}{3}""").replace("⅜", """\nicefrac{3}{8}""")
-		.replace("⅞", """\nicefrac{7}{8}""").replace("{", """\{""").replace("}","""\}""");
+		.replace("⅞", """\nicefrac{7}{8}""");
 void writePrologue(Anything(String) ostream, ProgramMetadata metadata) {
 	void writePrologueLine(String command, String arg) {
 		if (!arg.trimmed.empty) {
