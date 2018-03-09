@@ -217,6 +217,10 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 					String denominator = blockContents(localInput).trimmed;
 					parseFraction(numerator, denominator, buffer);
 				}
+				case ("vspace*"|"vspace") {
+					blockContents(localInput); // Ignore argument
+					continue;
+				}
 				else {
 					buffer.appendCharacter(top);
 					buffer.append(nextCommand);

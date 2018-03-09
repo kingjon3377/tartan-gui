@@ -78,7 +78,9 @@ shared void writeLaTeXProgram(Anything(String) ostream, {ProgramElement*} progra
 		writeSimpleCommand("maketartantitle");
 	}
 	writeSimpleCommand("clearpage");
+	writeSimpleCommand("vspace*", """\fill""");
 	writeSimpleCommand("listofdances");
+	writeSimpleCommand("vspace", """\fill""");
 	writeSimpleCommand("clearpage");
 	for (item in program) {
 		switch (item)
