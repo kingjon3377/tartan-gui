@@ -217,10 +217,6 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 					String denominator = blockContents(localInput).trimmed;
 					parseFraction(numerator, denominator, buffer);
 				}
-				case ("vspace*"|"vspace") {
-					blockContents(localInput); // Ignore argument
-					continue;
-				}
 				else {
 					buffer.appendCharacter(top);
 					buffer.append(nextCommand);
@@ -549,6 +545,9 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 				throw ParseException("Auld Lang Syne in the middle of a dance");
 			}
 			mRetval.printAuldLangSyne = true;
+		}
+		case ("vspace*"|"vspace") {
+			blockContents(ourStack); // Ignore argument
 		}
 		else {
 			throw ParseException("Unhandled command \\``command``");
