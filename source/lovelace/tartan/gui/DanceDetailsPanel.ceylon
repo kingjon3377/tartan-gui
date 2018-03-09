@@ -37,7 +37,7 @@ class DanceDetailsPanel() extends JPanel(BorderLayout()) {
 	SpinnerNumberModel barsModel = SpinnerNumberModel(0, 0, 256, 4);
 	JSpinner barsBox = JSpinner(barsModel);
 	JComboBox<String> formationBox = JComboBox(Array<String?> { "2C (3C set)", "2C (4C set)", "3C (4C set)",
-		"3C set", "3C Triangle", "4C set", "Sq Set" });
+		"3C set", "3C Triangle", "4C set", "Sq Set", "5C Set" });
 	formationBox.editable = true;
 	void applyToDance(Dance dance) {
 		dance.title = titleField.text.trimmed;
