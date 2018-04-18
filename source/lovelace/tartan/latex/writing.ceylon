@@ -7,7 +7,8 @@ import lovelace.tartan.model {
 	Intermission
 }
 String quoted(String string) => string.replace("&", "\\&").replace("{", """\{""").replace("}","""\}""")
-		.replace("<b>", "\\textbf{").replace("</b>", "}").replace("½", """\nicefrac{1}{2}""")
+		.replace("<b>", "\\textbf{").replace("</b>", "}").replace("<i>", "\\textit{").replace("</i>", "}")
+		.replace("½", """\nicefrac{1}{2}""")
 		.replace("¾", """\nicefrac{3}{4}""").replace("“", """``""").replace("”", """''""")
 		.replace("–", "---").replace("’", "'").replace("„", """``""").replace("‟", """''""")
 		.replace("‘", "'").replace("‗", """`""").replace("\f", "").replace("¼", """\nicefrac{1}{4}""")

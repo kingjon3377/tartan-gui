@@ -217,6 +217,11 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 					String denominator = blockContents(localInput).trimmed;
 					parseFraction(numerator, denominator, buffer);
 				}
+				case ("textit") {
+					buffer.append("<i>");
+					buffer.append(blockContents(localInput));
+					buffer.append("</i>");
+				}
 				else {
 					buffer.appendCharacter(top);
 					buffer.append(nextCommand);
