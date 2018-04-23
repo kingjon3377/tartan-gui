@@ -222,6 +222,11 @@ shared class LaTeXReader { // FIXME: We need tests for this!
 					buffer.append(blockContents(localInput));
 					buffer.append("</i>");
 				}
+				case ("textsuperscript") {
+					buffer.append("<sup>");
+					buffer.append(blockContents(localInput));
+					buffer.append("</sup>");
+				}
 				else {
 					buffer.appendCharacter(top);
 					buffer.append(nextCommand);
