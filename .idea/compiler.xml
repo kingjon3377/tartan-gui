@@ -13,5 +13,18 @@
       <entry name="!?*.aj" />
       <entry name="!?*.ceylon" />
     </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="lovelace.tartan" />
+        <module name="tartan-gui" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="lovelace.tartan" target="1.8" />
+      <module name="tartan-gui" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

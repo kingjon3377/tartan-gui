@@ -4,3 +4,6 @@ modules/*
 /.exploded/
 /modules/
 /bin/
+/out/
+/target/
+dependency-reduced-pom.xml
