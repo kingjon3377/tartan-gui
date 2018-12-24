@@ -39,7 +39,7 @@ public class ElementEditingPanel extends JPanel {
 					DanceMember.class, "Directions");
 	private final JTable table = new JTable(tableModel);
 
-	private void fixHeights(@Nullable final Object _) {
+	private void fixHeights(@Nullable final Object ignored) {
 		for (int row = 0; row < table.getRowCount(); row++) {
 			final Component renderer =
 					table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);

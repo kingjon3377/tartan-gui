@@ -28,13 +28,13 @@ public final class DanceStringEditor extends JPanel {
 	@NotNull
 	private final Runnable cancel;
 
-	private void okListener(ActionEvent _) {
+	private void okListener(ActionEvent ignored) {
 		String text = field.getText();
 		string = text;
 		consumer.accept(text);
 	}
 
-	private void cancelListener(ActionEvent _) {
+	private void cancelListener(ActionEvent ignored) {
 		field.setText(string);
 		cancel.run();
 	}

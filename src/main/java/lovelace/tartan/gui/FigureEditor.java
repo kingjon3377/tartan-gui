@@ -93,12 +93,12 @@ public class FigureEditor extends JPanel {
 		figure.setDescription(text);
 	}
 
-	private void okListener(ActionEvent _) {
+	private void okListener(ActionEvent ignored) {
 		setBars(barsField.getText());
 		setText(descriptionField.getText());
 		cancel.run();
 	}
-	private void cancelListener(AWTEvent _) {
+	private void cancelListener(AWTEvent ignored) {
 		barsField.setText(Objects.toString(figure.getBars(), ""));
 		descriptionField.setText(figure.getDescription());
 		cancel.run();
