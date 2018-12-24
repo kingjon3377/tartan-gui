@@ -48,7 +48,7 @@ public class ImageFileChooser {
 	private final PlatformFileDialog chooser;
 
 	private void buttonHandler(final ActionEvent ignored) {
-		chooser.showOpenDialog();;
+		chooser.showOpenDialog();
 		@Nullable File file = chooser.getFilename();
 		if (file == null) {
 			filename = null;
