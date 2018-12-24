@@ -1,5 +1,6 @@
 package lovelace.tartan.gui.controls;
 
+import java.awt.Component;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
@@ -21,7 +22,7 @@ public final class PlatformFileDialog {
 	 * The wrapped dialog. Must be either a {@link java.awt.FileDialog} or {@link
 	 * javax.swing.JFileChooser}.
 	 */
-	private final @NotNull Object wrapped;
+	private final @NotNull Component wrapped;
 	/**
 	 * The parent window for this dialog.
 	 */
@@ -113,7 +114,7 @@ public final class PlatformFileDialog {
 	public void showOpenDialog() {
 		if (wrapped instanceof FileDialog) {
 			((FileDialog) wrapped).setMode(FileDialog.LOAD);
-			((FileDialog) wrapped).setVisible(true);
+			wrapped.setVisible(true);
 		} else {
 			((JFileChooser) wrapped).showOpenDialog(parent);
 		}
@@ -124,7 +125,7 @@ public final class PlatformFileDialog {
 	public void showSaveAsDialog() {
 		if (wrapped instanceof FileDialog) {
 			((FileDialog) wrapped).setMode(FileDialog.SAVE);
-			((FileDialog) wrapped).setVisible(true);
+			wrapped.setVisible(true);
 		} else {
 			((JFileChooser) wrapped).showSaveDialog(parent);
 		}
