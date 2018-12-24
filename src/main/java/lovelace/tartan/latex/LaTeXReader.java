@@ -346,13 +346,19 @@ public final class LaTeXReader {
 	 * @param dance the dance we're in, for use in the error message if parsing fails
 	 */
 	private static int parseTimesThrough(String[] array, String dance) {
-		try {
-			return Integer.parseInt(array[0]);
-		} catch (ArrayIndexOutOfBoundsException | NumberFormatException except) {
+		if (array.length > 0) {
+			try {
+				return Integer.parseInt(array[0]);
+			} catch (NumberFormatException except) {
+				LOGGER.severe(() -> String.format(
+						"Times through couldn't be extracted from dance-length parameter " +
+								"for dance '%s'",
+						dance));
+				return 0;
+			}
+		} else {
 			LOGGER.severe(() -> String.format(
-					"Times through couldn't be extracted from dance-length parameter " +
-							"for dance '%s'",
-					dance));
+					"No dance-length parameter provided for dance '%s'", dance));
 			return 0;
 		}
 	}
@@ -366,12 +372,19 @@ public final class LaTeXReader {
 	 * @param dance the dance we're in, for use in the error message if parsing fails
 	 */
 	private static int parseBars(String[] array, String dance) {
-		try {
-			return Integer.parseInt(array[1]);
-		} catch (ArrayIndexOutOfBoundsException | NumberFormatException except) {
+		if (array.length > 1) {
+			try {
+				return Integer.parseInt(array[1]);
+			} catch (NumberFormatException except) {
+				LOGGER.severe(() -> String.format(
+						"Length-in-bars couldn't be extracted from dance-length parameter " +
+								"for dance '%s'",
+						dance));
+				return 0;
+			}
+		} else {
 			LOGGER.severe(() -> String.format(
-					"Length-in-bars couldn't be extracted from dance-length parameter " +
-							"for dance '%s'",
+					"No length-in-bars provided in dance-length parameter for dance '%s'",
 					dance));
 			return 0;
 		}
