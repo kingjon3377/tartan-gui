@@ -347,8 +347,8 @@ public final class ProgramMetadata {
 	}
 
 	/**
-	 * @return The filename of an image to put on the back cover/last page, or null if
-	 * none specified
+	 * @param image The filename of an image to put on the back cover/last page, or null
+	 *                if none specified
 	 */
 	public void setBackCoverImage(@Nullable Path image) {
 		backCoverImage = Optional.ofNullable(image);
