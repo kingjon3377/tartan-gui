@@ -52,7 +52,7 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 					builder.append(((SimplestMember) movement).getString());
 				} else {
 					LOGGER.warning("Unexpected type of member of named figure");
-					builder.append(Objects.toString(movement));
+					builder.append(movement);
 				}
 				builder.append("</td></tr>");
 			}

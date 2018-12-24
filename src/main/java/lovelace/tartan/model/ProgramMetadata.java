@@ -364,7 +364,7 @@ public final class ProgramMetadata {
 			builder.append(field.getName());
 			builder.append(": ");
 			try {
-				builder.append(Objects.toString(field.get(this)));
+				builder.append(field.get(this));
 			} catch (IllegalAccessException except) {
 				builder.append("[threw exception]");
 			}
