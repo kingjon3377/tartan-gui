@@ -102,18 +102,7 @@ public final class PlatformFileDialog {
 			if (filter instanceof FileFilter) {
 				((JFileChooser) wrapped).setFileFilter((FileFilter) filter);
 			} else if (filter instanceof FilenameFilter) {
-				((JFileChooser) wrapped).setFileFilter(new FileFilter() {
-					@Override
-					public boolean accept(final File f) {
-						return ((FilenameFilter) filter)
-									   .accept(f.getParentFile(), f.getName());
-					}
-
-					@Override
-					public String getDescription() {
-						return "Unknown";
-					}
-				});
+				((JFileChooser) wrapped).setFileFilter(new FilenameFilterWrapper(filter));
 			}
 		}
 	}
@@ -138,6 +127,27 @@ public final class PlatformFileDialog {
 			((FileDialog) wrapped).setVisible(true);
 		} else {
 			((JFileChooser) wrapped).showSaveDialog(parent);
+		}
+	}
+
+	/**
+	 * A wrapper around a {@link FilenameFilter} to meet the {@link FileFilter} interface.
+	 */
+	private static class FilenameFilterWrapper extends FileFilter {
+		private final FilenameFilter filter;
+
+		public FilenameFilterWrapper(final FilenameFilter filter) {
+			this.filter = filter;
+		}
+
+		@Override
+		public boolean accept(final File f) {
+			return filter.accept(f.getParentFile(), f.getName());
+		}
+
+		@Override
+		public String getDescription() {
+			return "Unknown";
 		}
 	}
 }
