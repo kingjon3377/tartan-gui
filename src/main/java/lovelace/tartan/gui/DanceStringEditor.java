@@ -44,8 +44,8 @@ public final class DanceStringEditor extends JPanel {
 	public DanceStringEditor(String string, Consumer<@NotNull String> consumer) {
 		this(string, consumer, DanceStringEditor::noop);
 	}
-	public DanceStringEditor(String string, Consumer<@NotNull String> consumer,
-							 Runnable cancel) {
+	public DanceStringEditor(String string, @NotNull Consumer<@NotNull String> consumer,
+							 @NotNull Runnable cancel) {
 		super(new BorderLayout());
 		field = new JTextField(string, 26);
 		field.addActionListener(this::okListener);

@@ -60,7 +60,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @param description The description of the figure.
 	 * @param bars        The bars on which this figure is danced.
 	 */
-	public Figure(String description, String bars) {
+	public Figure(@NotNull String description, String bars) {
 		this.description = description;
 		this.bars = Optional.ofNullable(bars);
 	}
@@ -70,7 +70,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 *
 	 * @param description The description of the figure.
 	 */
-	public Figure(String description) {
+	public Figure(@NotNull String description) {
 		this.description = description;
 		this.bars = Optional.empty();
 	}

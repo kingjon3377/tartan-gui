@@ -58,6 +58,7 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * The name of this dance.
 	 */
+	@NotNull
 	@Override
 	public String getName() {
 		return name;
@@ -74,6 +75,7 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * What shape of set the dance is danced in.
 	 */
+	@NotNull
 	@Override
 	public DanceFormation getShape() {
 		return shape;
@@ -82,6 +84,7 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * What type of dance this is.
 	 */
+	@NotNull
 	@Override
 	public DanceType getType() {
 		return type;
@@ -98,6 +101,7 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * The source for this dance.
 	 */
+	@NotNull
 	@Override
 	public String getSource() {
 		return source;
@@ -106,6 +110,7 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * The progression used between times through the dance.
 	 */
+	@NotNull
 	@Override
 	public DanceProgression getProgression() {
 		return progression;
