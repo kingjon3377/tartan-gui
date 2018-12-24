@@ -37,7 +37,7 @@ public final class DanceStringEditor extends JPanel {
 		cancel.run();
 	}
 
-	private static final void noop() {}
+	private static void noop() {}
 
 	public DanceStringEditor(String string, Consumer<@NotNull String> consumer) {
 		this(string, consumer, DanceStringEditor::noop);

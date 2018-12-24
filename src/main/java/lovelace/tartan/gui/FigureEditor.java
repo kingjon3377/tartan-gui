@@ -101,6 +101,6 @@ public class FigureEditor extends JPanel {
 		cancel.run();
 	}
 
-	private static final void noop() {
+	private static void noop() {
 	}
 }
