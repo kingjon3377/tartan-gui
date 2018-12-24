@@ -103,7 +103,8 @@ public final class PlatformFileDialog {
 			if (filter instanceof FileFilter) {
 				((JFileChooser) wrapped).setFileFilter((FileFilter) filter);
 			} else if (filter instanceof FilenameFilter) {
-				((JFileChooser) wrapped).setFileFilter(new FilenameFilterWrapper(filter));
+				((JFileChooser) wrapped).setFileFilter(new FilenameFilterWrapper(
+					(FilenameFilter) filter));
 			}
 		}
 	}
