@@ -3,7 +3,6 @@ package lovelace.tartan.gui.model;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -34,7 +33,7 @@ public final class IntTransferable implements Transferable {
 	@NotNull
 	@Override
 	public Object getTransferData(final DataFlavor flavor)
-			throws UnsupportedFlavorException, IOException {
+			throws UnsupportedFlavorException {
 		if (this.flavor.equals(flavor)) {
 			return payload;
 		} else {
