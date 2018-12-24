@@ -78,9 +78,7 @@ public class ProgramEditingWindow extends JFrame {
 		final MetadataEditingPanel mep = new MetadataEditingPanel(metadata);
 		pane.add("Edit Other Content", mep);
 		pack();
-		if (dsp instanceof JSplitPane) {
-			((JSplitPane) dsp).setDividerLocation(0.5);
-		}
+		dsp.setDividerLocation(0.5);
 		if (pep instanceof JSplitPane) {
 			((JSplitPane) pep).setDividerLocation(0.5);
 		}
