@@ -198,7 +198,7 @@ public final class LaTeXReader {
 	}
 
 	/**
-	 * If the cursor is at the begining of a curly-brace block, return its cotents,
+	 * If the cursor is at the beginning of a curly-brace block, return its contents,
 	 * replacing some LaTeX idioms with HTML equivalents (e.g. <pre>\\textbf{}</pre> with
 	 * HTML bold tags).
 	 *
@@ -686,12 +686,12 @@ public final class LaTeXReader {
 			break;
 		case "namedfigure":
 			if (currentContext instanceof Dance) {
-				final NamedFigure nfigure = new NamedFigure();
+				final NamedFigure namedFigure = new NamedFigure();
 				final String contents = blockContents(ourQueue);
 				parseTokens(contents.chars().mapToObj(i -> (char) i).collect(
 						Collectors.toCollection(LinkedList::new)),
-						mRetval, pRetval, nfigure);
-				((Dance) currentContext).getContents().add(nfigure);
+						mRetval, pRetval, namedFigure);
+				((Dance) currentContext).getContents().add(namedFigure);
 			} else if (currentContext instanceof NamedFigure) {
 				throw new ParseException("Named figure nested inside named figure", -1);
 			} else {

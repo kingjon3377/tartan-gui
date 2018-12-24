@@ -27,7 +27,7 @@ public class DanceDetailsPanel extends JPanel {
 	private final JTextField titleField = new JTextField();
 	private final JTextField sourceField = new JTextField();
 	private final JComboBox<String> tempoBox =
-			new JComboBox<>( // TODO: Take tempi from database
+			new JComboBox<>( // TODO: Take tempos from database
 					new String[]{"Jig", "Reel", "Strathspey", "Medley", "Waltz",
 							"Hornpipe",
 							"Step", "Quadrille", "March", "Polka", "Unknown", "Other"});
@@ -48,8 +48,8 @@ public class DanceDetailsPanel extends JPanel {
 		dance.setFormation(Objects.toString(formationBox.getSelectedItem(), "none"));
 	}
 
-	private void applyToIntermission(Intermission interm) {
-		interm.setDescription(titleField.getText().trim());
+	private void applyToIntermission(Intermission intermission) {
+		intermission.setDescription(titleField.getText().trim());
 	}
 
 	private void noop() {
@@ -68,9 +68,9 @@ public class DanceDetailsPanel extends JPanel {
 		formationBox.setSelectedItem(dance.getFormation());
 	}
 
-	private void revertIntermission(final Intermission interm) {
+	private void revertIntermission(final Intermission intermission) {
 		titleLabel.setText("Break Description:");
-		titleField.setText(interm.getDescription());
+		titleField.setText(intermission.getDescription());
 		sourceField.setText("");
 		tempoBox.setSelectedItem("");
 		timesModel.setValue(1);

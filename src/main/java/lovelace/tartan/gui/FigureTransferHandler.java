@@ -44,7 +44,7 @@ public class FigureTransferHandler extends TransferHandler {
 	}
 
 	/**
-	 * Craete a wrapper to transfer contents of the given component, which must be a
+	 * Create a wrapper to transfer contents of the given component, which must be a
 	 * {@link JList} or {@link JTable}.
 	 */
 	@Override

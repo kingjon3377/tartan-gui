@@ -65,11 +65,11 @@ public final class MetadataEditingPanel extends JPanel {
 				.addDocumentListener(new TextBoxChangeListener(field, handler));
 	}
 
-	private final GroupLayout glayout;
+	private final GroupLayout groupLayout;
 
 	private GroupLayout.Group createParallelGroup(GroupLayout.Alignment alignment,
 												  Object... members) {
-		@NotNull GroupLayout.Group retval = glayout.createParallelGroup(alignment);
+		@NotNull GroupLayout.Group retval = groupLayout.createParallelGroup(alignment);
 		for (Object member : members) {
 			if (member instanceof Component) {
 				retval = retval.addComponent((Component) member);
@@ -84,7 +84,7 @@ public final class MetadataEditingPanel extends JPanel {
 	}
 
 	private GroupLayout.Group createSequentialGroup(Object... members) {
-		@NotNull GroupLayout.Group retval = glayout.createSequentialGroup();
+		@NotNull GroupLayout.Group retval = groupLayout.createSequentialGroup();
 		for (Object member : members) {
 			if (member instanceof Component) {
 				retval = retval.addComponent((Component) member);
@@ -138,8 +138,8 @@ public final class MetadataEditingPanel extends JPanel {
 	}
 
 	public MetadataEditingPanel(@NotNull final ProgramMetadata metadata) {
-		glayout = new GroupLayout(this);
-		setLayout(glayout);
+		groupLayout = new GroupLayout(this);
+		setLayout(groupLayout);
 		this.metadata = metadata;
 		final JLabel coverHeaderLabel = new JLabel("On Cover:");
 		final JLabel titleHeaderLabel = new JLabel("On Title Page:");
@@ -201,9 +201,9 @@ public final class MetadataEditingPanel extends JPanel {
 				auldLangSyneField.isSelected()));
 		revert();
 		// TODO: images between last dance and Auld Lang Syne or the back cover
-		glayout.setAutoCreateGaps(true);
-		glayout.setAutoCreateContainerGaps(true);
-		glayout.setVerticalGroup(
+		groupLayout.setAutoCreateGaps(true);
+		groupLayout.setAutoCreateContainerGaps(true);
+		groupLayout.setVerticalGroup(
 				createSequentialGroup(
 						createParallelGroup(GroupLayout.Alignment.BASELINE,
 								coverHeaderLabel, titleHeaderLabel),
@@ -243,7 +243,7 @@ public final class MetadataEditingPanel extends JPanel {
 								fillerImageListWrapped),
 						createParallelGroup(GroupLayout.Alignment.BASELINE,
 								fillerImageAdd, fillerImageRemove)));
-		glayout.setHorizontalGroup(
+		groupLayout.setHorizontalGroup(
 				createParallelGroup(GroupLayout.Alignment.LEADING, firstSeparator,
 						createSequentialGroup(
 								createParallelGroup(GroupLayout.Alignment.LEADING,

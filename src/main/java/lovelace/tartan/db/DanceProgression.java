@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface DanceProgression {
 	/**
-	 * @return the number identifyig this progression in the database
+	 * @return the number identifying this progression in the database
 	 */
 	int getId();
 	/**

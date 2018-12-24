@@ -6,7 +6,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * A {@link Transferable} implementation transfering a single integer.
+ * A {@link Transferable} implementation transferring a single integer.
  *
  * @author Jonathan Lovelace
  */

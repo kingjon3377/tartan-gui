@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A wrappera round {@link java.awt.FileDialog} on the Mac platform and {@link
+ * A wrapper around {@link java.awt.FileDialog} on the Mac platform and {@link
  * javax.swing.JFileChooser} on other platforms.
  *
  * @author Jonathan Lovelace
@@ -71,8 +71,8 @@ public final class PlatformFileDialog {
 	}
 
 	/**
-	 * @return the dialog's file filter, which will be either a {@link
-	 * javax.swing.filechooser.FileFilter} or a {@link java.io.FilenameFilter}.
+	 * @return the dialog's file filter, which will be either a
+	 * {@link javax.swing.filechooser.FileFilter} or a {@link java.io.FilenameFilter}.
 	 */
 	public Object getFileFilter() {
 		if (wrapped instanceof FileDialog) {
