@@ -5,6 +5,7 @@ package lovelace.tartan.gui.model;
  *
  * @author Jonathan Lovelace
  */
+@FunctionalInterface
 public interface Reorderable {
 	/**
 	 * Move a row of a list or table from one position to another.
