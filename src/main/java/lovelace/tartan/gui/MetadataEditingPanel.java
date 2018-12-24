@@ -113,7 +113,7 @@ public final class MetadataEditingPanel extends JPanel {
 	private final ImageFileChooser backImageSelector;
 	private final JCheckBox titleOnCoverField = new JCheckBox();
 	private final JCheckBox auldLangSyneField = new JCheckBox();
-	@NotNull ProgramMetadata metadata;
+	private final @NotNull ProgramMetadata metadata;
 
 	public void revert() {
 		groupNameCoverBox.setText(metadata.getGroupCoverName());

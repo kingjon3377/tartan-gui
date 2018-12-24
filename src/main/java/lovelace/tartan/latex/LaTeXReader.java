@@ -29,7 +29,7 @@ public final class LaTeXReader {
 	/**
 	 * Logger.
 	 */
-	private static Logger LOGGER = Logger.getLogger(LaTeXReader.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(LaTeXReader.class.getName());
 
 	/**
 	 * Skip a comment, not including the initial '%' character.
