@@ -19,6 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import lovelace.tartan.db.DanceDatabase;
@@ -69,7 +70,7 @@ public class ProgramEditingWindow extends JFrame {
 				new ReorderableListModel<>(program);
 		setMinimumSize(new Dimension(400, 300));
 		final JTabbedPane pane =
-				new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
+				new JTabbedPane(SwingConstants.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
 		setContentPane(pane);
 		final DanceSelectionPanel dsp = new DanceSelectionPanel(db, programModel);
 		pane.add("Select Dances", dsp);
