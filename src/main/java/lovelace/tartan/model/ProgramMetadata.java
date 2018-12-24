@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,8 +18,8 @@ public final class ProgramMetadata {
 	/**
 	 * The filename this program was loaded from or should be saved to.
 	 */
-	@NotNull
-	private Optional<Path> filename = Optional.empty();
+	@Nullable
+	private Path filename = null;
 	/**
 	 * The name of the group putting on the event, as it should appear on the cover.
 	 */
@@ -81,8 +80,8 @@ public final class ProgramMetadata {
 	/**
 	 * The filename of an image to put on the cover.
 	 */
-	@NotNull
-	private Optional<Path> coverImage = Optional.empty();
+	@Nullable
+	private Path coverImage = null;
 	/**
 	 * Whether to put the title page on the back of the cover.
 	 */
@@ -94,8 +93,8 @@ public final class ProgramMetadata {
 	/**
 	 * The filename of an image to put on the back cover (or, rather, the last page).
 	 */
-	@NotNull
-	private Optional<Path> backCoverImage = Optional.empty();
+	@Nullable
+	private Path backCoverImage = null;
 	/**
 	 * Filenames of images to put after the last dance's crib, before Auld Lang Syne (or
 	 * before the back cover if Auld Lang Syne is not included).
@@ -107,7 +106,7 @@ public final class ProgramMetadata {
 	 */
 	@Nullable
 	public Path getFilename() {
-		return filename.orElse(null);
+		return filename;
 	}
 
 	/**
@@ -205,7 +204,7 @@ public final class ProgramMetadata {
 	 */
 	@Nullable
 	public Path getCoverImage() {
-		return coverImage.orElse(null);
+		return coverImage;
 	}
 
 	/**
@@ -228,7 +227,7 @@ public final class ProgramMetadata {
 	 */
 	@Nullable
 	public Path getBackCoverImage() {
-		return backCoverImage.orElse(null);
+		return backCoverImage;
 	}
 
 	/**
@@ -243,7 +242,7 @@ public final class ProgramMetadata {
 	 * @param filename The filename this program was loaded from or should be saved to.
 	 */
 	public void setFilename(@Nullable Path filename) {
-		this.filename = Optional.ofNullable(filename);
+		this.filename = filename;
 	}
 
 	/**
@@ -329,7 +328,7 @@ public final class ProgramMetadata {
 	 * @param image The filename of an image to put on the cover, or null to specify none
 	 */
 	public void setCoverImage(@Nullable Path image) {
-		coverImage = Optional.ofNullable(image);
+		coverImage = image;
 	}
 
 	/**
@@ -351,7 +350,7 @@ public final class ProgramMetadata {
 	 *                if none specified
 	 */
 	public void setBackCoverImage(@Nullable Path image) {
-		backCoverImage = Optional.ofNullable(image);
+		backCoverImage = image;
 	}
 	/**
 	 * @return a String representation of this object, mainly for debugging use.
@@ -394,8 +393,8 @@ public final class ProgramMetadata {
 						   locationAddress.equals(that.locationAddress) &&
 						   titleTimes.equals(that.titleTimes) &&
 						   musicians.equals(that.musicians) &&
-						   coverImage.equals(that.coverImage) &&
-						   backCoverImage.equals(that.backCoverImage) &&
+						   Objects.equals(coverImage, that.coverImage) &&
+						   Objects.equals(backCoverImage, that.backCoverImage) &&
 						   insidePostDanceImages.equals(that.insidePostDanceImages);
 		} else {
 			return false;

@@ -1,6 +1,6 @@
 package lovelace.tartan.model;
 
-import java.util.Optional;
+import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,7 +31,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 */
 	@Nullable
 	public String getBars() {
-		return bars.orElse(null);
+		return bars;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 *             specified.
 	 */
 	public void setBars(@Nullable String bars) {
-		this.bars = Optional.ofNullable(bars);
+		this.bars = bars;
 	}
 
 	/**
@@ -51,8 +51,8 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	/**
 	 * The bars on which this figure is danced, if any is specified.
 	 */
-	@NotNull
-	private Optional<String> bars;
+	@Nullable
+	private String bars;
 
 	/**
 	 * Constructor.
@@ -60,9 +60,9 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @param description The description of the figure.
 	 * @param bars        The bars on which this figure is danced.
 	 */
-	public Figure(@NotNull String description, String bars) {
+	public Figure(@NotNull String description, @Nullable String bars) {
 		this.description = description;
-		this.bars = Optional.ofNullable(bars);
+		this.bars = bars;
 	}
 
 	/**
@@ -72,7 +72,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 */
 	public Figure(@NotNull String description) {
 		this.description = description;
-		this.bars = Optional.empty();
+		this.bars = null;
 	}
 
 	/**
@@ -80,11 +80,11 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 */
 	@Override
 	public String toString() {
-		final Optional<String> localBars = bars;
-		if (localBars.isPresent()) {
-			return String.format("%s: %s", bars.get(), description);
-		} else {
+		final @Nullable String localBars = bars;
+		if (localBars == null) {
 			return description;
+		} else {
+			return String.format("%s: %s", bars, description);
 		}
 	}
 
@@ -96,7 +96,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	public boolean equals(Object other) {
 		if (other instanceof Figure) {
 			final Figure that = (Figure) other;
-			return bars.equals(that.bars) && description.equals(that.description);
+			return Objects.equals(bars, that.bars) && description.equals(that.description);
 		} else {
 			return false;
 		}
@@ -107,6 +107,6 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 */
 	@Override
 	public int hashCode() {
-		return description.hashCode() + 31 * bars.hashCode();
+		return description.hashCode() + 31 * Objects.hashCode(bars);
 	}
 }
