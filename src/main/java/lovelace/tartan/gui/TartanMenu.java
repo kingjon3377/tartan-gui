@@ -98,7 +98,7 @@ public final class TartanMenu {
 				metadataPanel.revert();
 			}
 			program.clear();
-			pair.get().getSecond().forEach(program::add);
+			program.addAll(pair.get().getSecond());
 		}
 	}
 
