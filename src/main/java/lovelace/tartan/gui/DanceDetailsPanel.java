@@ -1,6 +1,7 @@
 package lovelace.tartan.gui;
 
 import java.awt.BorderLayout;
+import java.util.Objects;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -41,10 +42,10 @@ public class DanceDetailsPanel extends JPanel {
 	private void applyToDance(final Dance dance) {
 		dance.setTitle(titleField.getText().trim());
 		dance.setSource(sourceField.getText().trim());
-		dance.setTempo(tempoBox.getSelectedItem().toString()); // Avoiding casting
+		dance.setTempo(Objects.toString(tempoBox.getSelectedItem(), "none")); // Avoiding casting
 		dance.setTimes(timesModel.getNumber().intValue());
 		dance.setLength(barsModel.getNumber().intValue());
-		dance.setFormation(formationBox.getSelectedItem().toString());
+		dance.setFormation(Objects.toString(formationBox.getSelectedItem(), "none"));
 	}
 
 	private void applyToIntermission(Intermission interm) {

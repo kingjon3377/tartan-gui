@@ -4,6 +4,7 @@ import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Optional;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import org.jetbrains.annotations.NotNull;
@@ -62,7 +63,8 @@ public final class PlatformFileDialog {
 	 */
 	public void setFilename(@Nullable final File filename) {
 		if (wrapped instanceof FileDialog) {
-			((FileDialog) wrapped).setFile(filename.getPath());
+			((FileDialog) wrapped)
+					.setFile(Optional.ofNullable(filename).map(File::getPath).orElse(""));
 		} else {
 			((JFileChooser) wrapped).setSelectedFile(filename);
 		}
