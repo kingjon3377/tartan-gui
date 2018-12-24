@@ -1,7 +1,8 @@
 package lovelace.tartan.gui.controls;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import javax.swing.JPanel;
 import org.jetbrains.annotations.Nullable;
 
 /**

@@ -1,9 +1,9 @@
 package lovelace.tartan.gui;
 
-import java.awt.*;
+import java.awt.Component;
 import java.util.Objects;
 import java.util.logging.Logger;
-import javax.swing.*;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import lovelace.tartan.model.Figure;
 import lovelace.tartan.model.NamedFigure;

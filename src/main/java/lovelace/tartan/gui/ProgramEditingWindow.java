@@ -1,6 +1,6 @@
 package lovelace.tartan.gui;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.nio.file.Path;
@@ -11,7 +11,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
+import javax.swing.DropMode;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import lovelace.tartan.db.DanceDatabase;
 import lovelace.tartan.gui.controls.PlatformFileDialog;

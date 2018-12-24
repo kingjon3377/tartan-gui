@@ -1,13 +1,16 @@
 package lovelace.tartan.gui;
 
-import java.awt.*;
+import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JList;
+import javax.swing.ListModel;
+import javax.swing.TransferHandler;
 import lovelace.tartan.gui.model.IntTransferable;
 import lovelace.tartan.gui.model.Reorderable;
 import lovelace.tartan.model.Dance;

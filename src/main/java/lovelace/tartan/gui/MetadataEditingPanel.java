@@ -1,11 +1,20 @@
 package lovelace.tartan.gui;
 
-import java.awt.*;
+import java.awt.Component;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Consumer;
-import javax.swing.*;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.JTextComponent;

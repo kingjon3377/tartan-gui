@@ -1,7 +1,7 @@
 package lovelace.tartan.gui.controls;
 
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JButton;
 import org.jetbrains.annotations.NotNull;
 
 /**

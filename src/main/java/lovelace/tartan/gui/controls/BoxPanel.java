@@ -1,9 +1,11 @@
 package lovelace.tartan.gui.controls;
 
-import java.awt.*;
+import java.awt.Component;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import org.jetbrains.annotations.NotNull;
 
 /**

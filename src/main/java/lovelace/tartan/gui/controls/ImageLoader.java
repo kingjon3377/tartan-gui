@@ -1,6 +1,6 @@
 package lovelace.tartan.gui.controls;
 
-import java.awt.*;
+import java.awt.Image;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;

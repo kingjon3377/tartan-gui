@@ -1,7 +1,9 @@
 package lovelace.tartan.gui.controls;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.JButton;
 import org.jetbrains.annotations.NotNull;
 
 /**

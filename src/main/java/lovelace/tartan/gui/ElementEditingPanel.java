@@ -1,9 +1,13 @@
 package lovelace.tartan.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
-import javax.swing.*;
+import javax.swing.DropMode;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.gui.model.SingleColumnTableModel;
