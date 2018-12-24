@@ -38,7 +38,6 @@ import org.jetbrains.annotations.Nullable;
 public class ProgramEditingWindow extends JFrame {
 	private static final Logger LOGGER =
 			Logger.getLogger(ProgramEditingWindow.class.getName());
-	private final ReorderableListModel<@NotNull ProgramElement> programModel;
 
 	private static JComponent programEditingPanel(
 			final ReorderableListModel<ProgramElement> program) {
@@ -66,7 +65,8 @@ public class ProgramEditingWindow extends JFrame {
 								final ProgramMetadata metadata,
 								@NotNull final List<ProgramElement> program) {
 		super("Dance Program Editor");
-		programModel = new ReorderableListModel<>(program);
+		final ReorderableListModel<@NotNull ProgramElement> programModel =
+				new ReorderableListModel<>(program);
 		setMinimumSize(new Dimension(400, 300));
 		final JTabbedPane pane =
 				new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
