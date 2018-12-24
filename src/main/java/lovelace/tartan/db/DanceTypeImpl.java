@@ -1,5 +1,6 @@
 package lovelace.tartan.db;
 
+import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -81,5 +82,10 @@ public class DanceTypeImpl implements DanceType {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		return id + 31 * Objects.hash(name, abbreviation);
 	}
 }
