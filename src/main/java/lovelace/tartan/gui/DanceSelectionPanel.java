@@ -107,7 +107,7 @@ public class DanceSelectionPanel extends JSplitPane {
 				BorderedPanel.verticalLine(filterPanel, new JScrollPane(danceList),
 						null);
 		filterField.addActionListener(this::filterDanceList);
-		selectedList = new JList<ProgramElement>(program);
+		selectedList = new JList<>(program);
 		selectedList.setMinimumSize(new Dimension(400, 100));
 		selectedList.setTransferHandler(new ProgramElementTransferHandler());
 		selectedList.setDropMode(DropMode.INSERT);

@@ -35,7 +35,7 @@ public class ElementEditingPanel extends JPanel {
 
 	@NotNull
 	private SingleColumnTableModel<DanceMember> tableModel =
-			new SingleColumnTableModel<DanceMember>(new ArrayList<DanceMember>(),
+			new SingleColumnTableModel<>(new ArrayList<>(),
 					DanceMember.class, "Directions");
 	private final JTable table = new JTable(tableModel);
 
