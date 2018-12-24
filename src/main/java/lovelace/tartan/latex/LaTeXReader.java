@@ -167,7 +167,7 @@ public final class LaTeXReader {
 			}
 			break;
 		case "4":
-			if (denominator == "5") {
+			if ("5".equals(denominator)) {
 				buffer.append("⅘");
 			} else {
 				defaultFraction(numerator, denominator, buffer);
@@ -186,7 +186,7 @@ public final class LaTeXReader {
 			}
 			break;
 		case "7":
-			if (denominator == "8") {
+			if ("8".equals(denominator)) {
 				buffer.append("⅞");
 			} else {
 				defaultFraction(numerator, denominator, buffer);
