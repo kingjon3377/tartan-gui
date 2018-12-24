@@ -192,12 +192,9 @@ public final class SingleColumnTableModel<Element>
 
 	@Override
 	public boolean add(final Element element) {
-		if (wrapped.add(element)) {
-			fireInsertionEvent(wrapped.size() - 1);
-			return true;
-		} else {
-			return false;
-		}
+		wrapped.add(element);
+		fireInsertionEvent(wrapped.size() - 1);
+		return true;
 	}
 
 	@Override
@@ -221,9 +218,8 @@ public final class SingleColumnTableModel<Element>
 	public boolean addAll(@NotNull final Collection<? extends Element> collection) {
 		boolean retval = false;
 		for (Element item : collection) {
-			if (add(item)) {
-				retval = true;
-			}
+			add(item);
+			retval = true;
 		}
 		return retval;
 	}
