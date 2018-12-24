@@ -221,7 +221,7 @@ public final class LaTeXReader {
 		final StringBuilder buffer = new StringBuilder();
 		int braceLevel = 0;
 		while (!localInput.isEmpty()) {
-			char top = localInput.pop();
+			final char top = localInput.pop();
 			if (top == '}') {
 				braceLevel--;
 				final int temp = braceLevel;
