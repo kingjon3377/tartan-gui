@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  *
  * @author Jonathan Lovelace
  */
-public class ImageLoader {
+public final class ImageLoader {
 	private ImageLoader() {
 	}
 
