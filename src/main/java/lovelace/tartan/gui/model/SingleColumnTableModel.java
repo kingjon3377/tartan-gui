@@ -98,7 +98,7 @@ public final class SingleColumnTableModel<Element>
 		if (columnIndex == 0) {
 			return wrapped.get(rowIndex);
 		} else {
-			throw new ArrayIndexOutOfBoundsException(columnIndex);
+			throw new IndexOutOfBoundsException("Column must be 0");
 		}
 	}
 
@@ -118,10 +118,11 @@ public final class SingleColumnTableModel<Element>
 							"Unexpected type of list item: " + val.getClass().getName());
 				}
 			} else {
-				throw new ArrayIndexOutOfBoundsException(rowIndex);
+				throw new IndexOutOfBoundsException(String.format(
+						"Row must be between 0 and %d", wrapped.size()));
 			}
 		} else {
-			throw new ArrayIndexOutOfBoundsException(columnIndex);
+			throw new IndexOutOfBoundsException("Column must be 0");
 		}
 		fireEvents(
 				new TableModelEvent(this, rowIndex, columnIndex,
