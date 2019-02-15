@@ -80,7 +80,7 @@ public class ReorderableListModel<Element> extends AbstractList<Element>
 	}
 
 	@Override
-	public Element remove(int index) {
+	public Element remove(final int index) {
 		Element retval = wrapped.remove(index);
 		final ListDataEvent event =
 				new ListDataEvent(this, ListDataEvent.INTERVAL_REMOVED, index, index);

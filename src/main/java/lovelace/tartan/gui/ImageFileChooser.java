@@ -71,7 +71,8 @@ public class ImageFileChooser {
 		this(handler, null);
 	}
 
-	public ImageFileChooser(@NotNull final Consumer<@Nullable Path> handler, @Nullable Component parent) {
+	public ImageFileChooser(@NotNull final Consumer<@Nullable Path> handler,
+			@Nullable final Component parent) {
 		@Nullable final Frame parentFrame;
 		if (parent instanceof Frame) {
 			parentFrame = (Frame) parent;

@@ -41,14 +41,15 @@ public final class SingleColumnTableModel<Element>
 	private final String columnName;
 	private final Class<Element> cls;
 
-	public SingleColumnTableModel(List<Element> wrapped, Class<Element> cls, String columnName) {
+	public SingleColumnTableModel(final List<Element> wrapped, final Class<Element> cls,
+			final String columnName) {
 		this.wrapped = wrapped;
 		this.cls = cls;
 		this.columnName = columnName;
 	}
 
 	@Deprecated
-	public SingleColumnTableModel(List<Element> wrapped, Class<Element> cls) {
+	public SingleColumnTableModel(final List<Element> wrapped, final Class<Element> cls) {
 		this(wrapped, cls, "Directions");
 	}
 

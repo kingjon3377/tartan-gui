@@ -25,7 +25,7 @@ public class Intermission implements ProgramElement {
 	/**
 	 * @param description how to describe the break in the program
 	 */
-	public void setDescription(@NotNull String description) {
+	public void setDescription(@NotNull final String description) {
 		this.description = description;
 	}
 

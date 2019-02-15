@@ -151,9 +151,10 @@ public class Dance implements ProgramElement, FigureParent {
 	/**
 	 * Constructor.
 	 */
-	public Dance(@NotNull String title, @NotNull String source, @NotNull String tempo,
-				 int times, int length, @NotNull String formation,
-				 @NotNull DanceMember... initialContents) {
+	public Dance(@NotNull final String title, @NotNull final String source,
+				 @NotNull final String tempo, final int times, final int length,
+				 @NotNull final String formation,
+				 @NotNull final DanceMember... initialContents) {
 		this.title = title;
 		this.source = source;
 		this.tempo = tempo;
@@ -177,7 +178,7 @@ public class Dance implements ProgramElement, FigureParent {
 	 * @return whether it is an identical dance.
 	 */
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(final Object other) {
 		if (other instanceof Dance) {
 			final Dance that = (Dance) other;
 			return title.equals(that.title) && source.equals(that.source) &&

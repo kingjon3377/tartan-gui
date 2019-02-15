@@ -36,7 +36,7 @@ public final class LaTeXReader {
 	 *
 	 * @param localInput the queue from which to read
 	 */
-	private static void skipComment(@NotNull Deque<Character> localInput) {
+	private static void skipComment(@NotNull final Deque<Character> localInput) {
 		while (!localInput.isEmpty()) {
 			char top = localInput.pop();
 			if ('\n' == top) {
@@ -59,7 +59,7 @@ public final class LaTeXReader {
 	 *
 	 * @param localInput the queue from which to read
 	 */
-	static private String parseCommand(@NotNull Deque<Character> localInput) {
+	static private String parseCommand(@NotNull final Deque<Character> localInput) {
 		final StringBuilder builder = new StringBuilder();
 		while (!localInput.isEmpty()) {
 			final char top = localInput.peekFirst();
@@ -85,9 +85,9 @@ public final class LaTeXReader {
 	 * @param denominator the denominator of the fraction
 	 * @param buffer      the buffer to write to
 	 */
-	private static void defaultFraction(@NotNull String numerator,
-										@NotNull String denominator,
-										@NotNull StringBuilder buffer) {
+	private static void defaultFraction(@NotNull final String numerator,
+										@NotNull final String denominator,
+										@NotNull final StringBuilder buffer) {
 		buffer.append(numerator);
 		buffer.append('/');
 		buffer.append(denominator);
@@ -102,9 +102,9 @@ public final class LaTeXReader {
 	 * @param denominator the denominator of the fraction
 	 * @param buffer      the buffer to write to
 	 */
-	private static void parseFraction(@NotNull String numerator,
-									  @NotNull String denominator,
-									  @NotNull StringBuilder buffer) {
+	private static void parseFraction(@NotNull final String numerator,
+									  @NotNull final String denominator,
+									  @NotNull final StringBuilder buffer) {
 		switch (numerator) {
 		case "1":
 			switch (denominator) {
@@ -345,7 +345,7 @@ public final class LaTeXReader {
 	 * @param array the array.
 	 * @param dance the dance we're in, for use in the error message if parsing fails
 	 */
-	private static int parseTimesThrough(String[] array, String dance) {
+	private static int parseTimesThrough(final String[] array, final String dance) {
 		if (array.length > 0) {
 			try {
 				return Integer.parseInt(array[0]);
@@ -371,7 +371,7 @@ public final class LaTeXReader {
 	 * @param array the array.
 	 * @param dance the dance we're in, for use in the error message if parsing fails
 	 */
-	private static int parseBars(String[] array, String dance) {
+	private static int parseBars(final String[] array, final String dance) {
 		if (array.length > 1) {
 			try {
 				return Integer.parseInt(array[1]);
@@ -404,7 +404,7 @@ public final class LaTeXReader {
 	private void handleEnvironment(@NotNull final String environment,
 								   @NotNull final ProgramMetadata mRetval,
 								   @NotNull final List<@NotNull ProgramElement> pRetval,
-								   @NotNull Deque<Character> innerQueue)
+								   @NotNull final Deque<Character> innerQueue)
 			throws ParseException {
 		handleEnvironment(environment, mRetval, pRetval, innerQueue, null);
 	}
@@ -430,8 +430,8 @@ public final class LaTeXReader {
 	private void handleEnvironment(@NotNull final String environment,
 								   @NotNull final ProgramMetadata mRetval,
 								   @NotNull final List<@NotNull ProgramElement> pRetval,
-								   @NotNull Deque<Character> innerQueue,
-								   @Nullable FigureParent currentDance)
+								   @NotNull final Deque<Character> innerQueue,
+								   @Nullable final FigureParent currentDance)
 			throws ParseException {
 		switch (environment) {
 		case "":
@@ -469,7 +469,7 @@ public final class LaTeXReader {
 	 * @throws ParseException when thrown by {@link #parseOptionalBlock(Deque)} or {@link
 	 *                        #blockContents(Deque)}
 	 */
-	private static Figure parseFigure(@NotNull Deque<Character> ourQueue)
+	private static Figure parseFigure(@NotNull final Deque<Character> ourQueue)
 			throws ParseException {
 		final String bars = parseOptionalBlock(ourQueue);
 		final String desc = blockContents(ourQueue);

@@ -241,7 +241,7 @@ public final class ProgramMetadata {
 	/**
 	 * @param filename The filename this program was loaded from or should be saved to.
 	 */
-	public void setFilename(@Nullable Path filename) {
+	public void setFilename(@Nullable final Path filename) {
 		this.filename = filename;
 	}
 
@@ -249,7 +249,7 @@ public final class ProgramMetadata {
 	 * @param name The name of the group putting on the event, as it should appear on the
 	 * cover.
 	 */
-	public void setGroupCoverName(@NotNull String name) {
+	public void setGroupCoverName(@NotNull final String name) {
 		groupCoverName = name;
 	}
 
@@ -257,91 +257,91 @@ public final class ProgramMetadata {
 	 * @param name The name of the group putting on the event, as it should appear on the
 	 * title page.
 	 */
-	public void setGroupTitleName(@NotNull String name) {
+	public void setGroupTitleName(@NotNull final String name) {
 		groupTitleName = name;
 	}
 
 	/**
 	 * @param name The name of the event as it should appear on the cover.
 	 */
-	public void setEventCoverName(@NotNull String name) {
+	public void setEventCoverName(@NotNull final String name) {
 		eventCoverName = name;
 	}
 
 	/**
 	 * @param name The name of the event as it should appear on the title page.
 	 */
-	public void setEventTitleName(@NotNull String name) {
+	public void setEventTitleName(@NotNull final String name) {
 		eventTitleName = name;
 	}
 
 	/**
 	 * @param date The date of the event, as it should appear on the cover.
 	 */
-	public void setCoverDate(@NotNull String date) {
+	public void setCoverDate(@NotNull final String date) {
 		coverDate = date;
 	}
 
 	/**
 	 * @param date The date of the event, as it should appear on the title page.
 	 */
-	public void setTitleDate(@NotNull String date) {
+	public void setTitleDate(@NotNull final String date) {
 		titleDate = date;
 	}
 
 	/**
 	 * @param location The location of the event, as it should appear on the cover.
 	 */
-	public void setCoverLocation(@NotNull String location) {
+	public void setCoverLocation(@NotNull final String location) {
 		coverLocation = location;
 	}
 
 	/**
 	 * @param location The location of the event, as it should appear on the title page.
 	 */
-	public void setTitleLocation(@NotNull String location) {
+	public void setTitleLocation(@NotNull final String location) {
 		titleLocation = location;
 	}
 
 	/**
 	 * @param address The address of the event, if it should appear on the title page.
 	 */
-	public void setLocationAddress(@NotNull String address) {
+	public void setLocationAddress(@NotNull final String address) {
 		locationAddress = address;
 	}
 
 	/**
 	 * @param times The time(s) of the event
 	 */
-	public void setTitleTimes(@NotNull String times) {
+	public void setTitleTimes(@NotNull final String times) {
 		titleTimes = times;
 	}
 
 	/**
 	 * @param musicians The name(s) of the musician(s) providing music for the event.
 	 */
-	public void setMusicians(@NotNull String musicians) {
+	public void setMusicians(@NotNull final String musicians) {
 		this.musicians = musicians;
 	}
 
 	/**
 	 * @param image The filename of an image to put on the cover, or null to specify none
 	 */
-	public void setCoverImage(@Nullable Path image) {
+	public void setCoverImage(@Nullable final Path image) {
 		coverImage = image;
 	}
 
 	/**
 	 * @param enabled Whether to put the title page on the back of the cover.
 	 */
-	public void setTitleOnCover(boolean enabled) {
+	public void setTitleOnCover(final boolean enabled) {
 		titleOnCover = enabled;
 	}
 
 	/**
 	 * @param enabled Whether to print the text of Auld Lang Syne after the last dance's crib.
 	 */
-	public void setPrintAuldLangSyne(boolean enabled) {
+	public void setPrintAuldLangSyne(final boolean enabled) {
 		printAuldLangSyne = enabled;
 	}
 
@@ -349,7 +349,7 @@ public final class ProgramMetadata {
 	 * @param image The filename of an image to put on the back cover/last page, or null
 	 *                if none specified
 	 */
-	public void setBackCoverImage(@Nullable Path image) {
+	public void setBackCoverImage(@Nullable final Path image) {
 		backCoverImage = image;
 	}
 	/**
