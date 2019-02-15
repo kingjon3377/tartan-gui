@@ -13,10 +13,9 @@ You may modify or redistribute this software under the terms of [the GNU General
 Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.en.html), which
 is also found in the COPYING file in this repository.
 
-This application uses (and pre-compiled distributions of it bundle) platform
-libraries provided by [the Ceylon language](https://ceylon-lang.org), and [the
-Xerial SQLite database driver](https://github.com/xerial/sqlite-jdbc), under
-the terms of the Apache license, which is found in the file ApacheLicense.md in
-this repository.
+This application uses (and pre-compiled distributions of it bundle) the [Xerial
+SQLite database driver](https://github.com/xerial/sqlite-jdbc), under the terms
+of the Apache license, which is found in the file ApacheLicense.md in this
+repository.
 
 [![Build Status](https://travis-ci.org/kingjon3377/tartan-gui.svg?branch=master)](https://travis-ci.org/kingjon3377/tartan-gui)
