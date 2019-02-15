@@ -43,8 +43,10 @@ public final class TartanMenu {
 	private TartanMenu() {
 	}
 
-	private static JMenuItem menuItem(String text, int mnemonic, String description,
-									  Runnable handler, KeyStroke... accelerators) {
+	private static JMenuItem menuItem(final String text, final int mnemonic,
+									  final String description,
+									  final Runnable handler,
+									  final KeyStroke... accelerators) {
 		final JMenuItem retval = new JMenuItem(text, mnemonic);
 		if (accelerators.length > 0) {
 			retval.setAccelerator(accelerators[0]);
@@ -104,13 +106,13 @@ public final class TartanMenu {
 
 	public static Optional<Pair<@NotNull ProgramMetadata,
 									   @NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
-			@NotNull Path file) {
+			@NotNull final Path file) {
 		return readFromSpecifiedFile(file, null);
 	}
 
 	public static Optional<Pair<@NotNull ProgramMetadata,
 									   @NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
-			@NotNull Path file, @Nullable Component parent) {
+			@NotNull final Path file, @Nullable final Component parent) {
 		try {
 			final List<String> lines = Files.readAllLines(file);
 			final StringBuilder builder = new StringBuilder();
@@ -190,7 +192,7 @@ public final class TartanMenu {
 	public static JMenu fileMenu(
 			@NotNull final ReorderableListModel<@NotNull ProgramElement> program,
 			@NotNull final ProgramMetadata metadata,
-			@NotNull MetadataEditingPanel metadataPanel) {
+			@NotNull final MetadataEditingPanel metadataPanel) {
 		final boolean onMac =
 				System.getProperty("os.name").toLowerCase().startsWith("mac");
 		final int shortcutMask =

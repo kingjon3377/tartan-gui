@@ -66,8 +66,9 @@ public final class DatabaseAdapter {
 	 * @return 1 if "OnceOnly", twice the number of couples if a longwise set longer than
 	 * the number of couples, and otherwise the number of couples.
 	 */
-	private static int timesThrough(DanceFormation shape, DanceProgression progression,
-									Integer couples) {
+	private static int timesThrough(final DanceFormation shape,
+									final DanceProgression progression,
+									final Integer couples) {
 		if (progression.isOnlyOnce()) {
 			return 1;
 		} else if (shape.getName().startsWith("Longwise -")) {

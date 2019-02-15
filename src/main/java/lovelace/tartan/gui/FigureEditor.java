@@ -28,7 +28,7 @@ public class FigureEditor extends JPanel {
 	private final JTextField barsField;
 	private final JTextField descriptionField;
 
-	public FigureEditor(Figure figure, Runnable cancel) {
+	public FigureEditor(final Figure figure, final Runnable cancel) {
 		super(new BorderLayout());
 		this.figure = figure;
 		this.cancel = cancel;
@@ -77,7 +77,7 @@ public class FigureEditor extends JPanel {
 				BorderLayout.LINE_END);
 	}
 
-	public FigureEditor(Figure figure) {
+	public FigureEditor(final Figure figure) {
 		this(figure, FigureEditor::noop);
 	}
 
@@ -93,12 +93,12 @@ public class FigureEditor extends JPanel {
 		figure.setDescription(text);
 	}
 
-	private void okListener(ActionEvent ignored) {
+	private void okListener(final ActionEvent ignored) {
 		setBars(barsField.getText());
 		setText(descriptionField.getText());
 		cancel.run();
 	}
-	private void cancelListener(AWTEvent ignored) {
+	private void cancelListener(final AWTEvent ignored) {
 		barsField.setText(Objects.toString(figure.getBars(), ""));
 		descriptionField.setText(figure.getDescription());
 		cancel.run();

@@ -67,8 +67,8 @@ public final class MetadataEditingPanel extends JPanel {
 
 	private final GroupLayout groupLayout;
 
-	private GroupLayout.Group createParallelGroup(GroupLayout.Alignment alignment,
-												  Object... members) {
+	private GroupLayout.Group createParallelGroup(final GroupLayout.Alignment alignment,
+												  final Object... members) {
 		@NotNull GroupLayout.Group retval = groupLayout.createParallelGroup(alignment);
 		for (Object member : members) {
 			if (member instanceof Component) {
@@ -83,7 +83,7 @@ public final class MetadataEditingPanel extends JPanel {
 		return retval;
 	}
 
-	private GroupLayout.Group createSequentialGroup(Object... members) {
+	private GroupLayout.Group createSequentialGroup(final Object... members) {
 		@NotNull GroupLayout.Group retval = groupLayout.createSequentialGroup();
 		for (Object member : members) {
 			if (member instanceof Component) {

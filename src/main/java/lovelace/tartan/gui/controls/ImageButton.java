@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ImageButton extends JButton {
 	@NotNull private final Image image;
-	public ImageButton(@NotNull Image image) {
+	public ImageButton(@NotNull final Image image) {
 		this.image = image;
 		setMaximumSize(new Dimension(60, 60));
 		setPreferredSize(new Dimension(40, 40));

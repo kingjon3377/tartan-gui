@@ -71,7 +71,7 @@ public class DanceFormationImpl implements DanceFormation {
 	@Override
 	public boolean equals(final Object obj) {
 		if (obj instanceof DanceFormation) {
-			DanceFormation formation = (DanceFormation) obj;
+			final DanceFormation formation = (DanceFormation) obj;
 			return id == formation.getId() && name.equals(formation.getName()) &&
 						   abbreviation.equals(formation.getAbbreviation());
 		} else {

@@ -48,7 +48,7 @@ public class DanceDetailsPanel extends JPanel {
 		dance.setFormation(Objects.toString(formationBox.getSelectedItem(), "none"));
 	}
 
-	private void applyToIntermission(Intermission intermission) {
+	private void applyToIntermission(final Intermission intermission) {
 		intermission.setDescription(titleField.getText().trim());
 	}
 
@@ -58,7 +58,7 @@ public class DanceDetailsPanel extends JPanel {
 	@NotNull
 	private Runnable apply = this::noop;
 
-	private void revertDance(Dance dance) {
+	private void revertDance(final Dance dance) {
 		titleLabel.setText("Dance Title:");
 		titleField.setText(dance.getTitle());
 		sourceField.setText(dance.getSource());

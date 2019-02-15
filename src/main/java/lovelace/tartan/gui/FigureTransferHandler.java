@@ -48,7 +48,7 @@ public class FigureTransferHandler extends TransferHandler {
 	 * {@link JList} or {@link JTable}.
 	 */
 	@Override
-	public Transferable createTransferable(JComponent component) {
+	public Transferable createTransferable(final JComponent component) {
 		if (component instanceof JList<?>) {
 			return new IntTransferable(FLAVOR,
 					((JList<?>) component).getSelectedIndex());
@@ -64,7 +64,7 @@ public class FigureTransferHandler extends TransferHandler {
 	 * We only allow move operations.
 	 */
 	@Override
-	public int getSourceActions(JComponent component) {
+	public int getSourceActions(final JComponent component) {
 		return TransferHandler.MOVE;
 	}
 
