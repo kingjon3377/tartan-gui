@@ -36,7 +36,8 @@ public final class Pair<First, Second> {
 	/**
 	 * Factory method.
 	 */
-	public static <First, Second> Pair<First, Second> of(final First first, final Second second) {
+	public static <First, Second> Pair<First, Second> of(final First first,
+														 final Second second) {
 		return new Pair<>(first, second);
 	}
 }

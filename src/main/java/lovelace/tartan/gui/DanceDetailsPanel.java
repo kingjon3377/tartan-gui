@@ -42,7 +42,8 @@ public class DanceDetailsPanel extends JPanel {
 	private void applyToDance(final Dance dance) {
 		dance.setTitle(titleField.getText().trim());
 		dance.setSource(sourceField.getText().trim());
-		dance.setTempo(Objects.toString(tempoBox.getSelectedItem(), "none")); // Avoiding casting
+		dance.setTempo(Objects.toString(tempoBox.getSelectedItem(), // Avoiding casting
+			"none"));
 		dance.setTimes(timesModel.getNumber().intValue());
 		dance.setLength(barsModel.getNumber().intValue());
 		dance.setFormation(Objects.toString(formationBox.getSelectedItem(), "none"));

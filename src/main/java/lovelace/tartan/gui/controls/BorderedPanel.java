@@ -81,7 +81,11 @@ public class BorderedPanel extends JPanel {
 		}
 		this.lineEnd = lineEnd;
 	}
-	public BorderedPanel(final @Nullable Component center, final @Nullable Component pageStart, final @Nullable Component pageEnd, final @Nullable Component lineStart, final @Nullable Component lineEnd) {
+	public BorderedPanel(final @Nullable Component center,
+						 final @Nullable Component pageStart,
+						 final @Nullable Component pageEnd,
+						 final @Nullable Component lineStart,
+						 final @Nullable Component lineEnd) {
 		super(new BorderLayout());
 		setCenter(center);
 		setPageStart(pageStart);

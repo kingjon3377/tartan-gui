@@ -150,7 +150,8 @@ public class DanceSelectionPanel extends JSplitPane {
 								program.add(new Intermission());
 							}
 						}));
-		final JSplitPane secondSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, inner, rightPanel);
+		final JSplitPane secondSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+			true, inner, rightPanel);
 		setLeftComponent(left);
 		setRightComponent(secondSplitPane);
 		secondSplitPane.setResizeWeight(0.0);

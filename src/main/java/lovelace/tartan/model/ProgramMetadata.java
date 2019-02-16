@@ -310,7 +310,8 @@ public final class ProgramMetadata {
 	}
 
 	/**
-	 * @param enabled Whether to print the text of Auld Lang Syne after the last dance's crib.
+	 * @param enabled Whether to print the text of Auld Lang Syne after the last dance's
+	 *                   crib.
 	 */
 	public void setPrintAuldLangSyne(final boolean enabled) {
 		printAuldLangSyne = enabled;

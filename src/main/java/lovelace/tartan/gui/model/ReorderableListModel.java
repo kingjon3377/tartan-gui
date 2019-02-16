@@ -102,7 +102,8 @@ public class ReorderableListModel<Element> extends AbstractList<Element>
 	@Override
 	public void add(final int index, final Element element) {
 		wrapped.add(index, element);
-		final ListDataEvent event = new ListDataEvent(this, ListDataEvent.INTERVAL_ADDED, index, index);
+		final ListDataEvent event = new ListDataEvent(this, ListDataEvent.INTERVAL_ADDED,
+			index, index);
 		for (final ListDataListener listener : listeners) {
 			listener.intervalAdded(event);
 		}
@@ -111,7 +112,8 @@ public class ReorderableListModel<Element> extends AbstractList<Element>
 	@Override
 	public Element set(final int index, final Element element) {
 		final Element retval = wrapped.set(index, element);
-		final ListDataEvent event = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, index, index);
+		final ListDataEvent event = new ListDataEvent(this,
+			ListDataEvent.CONTENTS_CHANGED, index, index);
 		for (final ListDataListener listener : listeners) {
 			listener.contentsChanged(event);
 		}
