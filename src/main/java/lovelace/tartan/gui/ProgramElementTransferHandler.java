@@ -59,8 +59,7 @@ public class ProgramElementTransferHandler extends TransferHandler {
 	 * @param component the component whose contents will be transferred.
 	 */
 	@Override
-	@NotNull
-	public final Transferable createTransferable(final JComponent component) {
+	public final @NotNull Transferable createTransferable(final JComponent component) {
 		if (component instanceof JList<?>) {
 			return new IntTransferable(FLAVOR,
 					((JList<?>) component).getSelectedIndex());

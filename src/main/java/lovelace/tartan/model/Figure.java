@@ -13,15 +13,14 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	/**
 	 * @return The description of the figure.
 	 */
-	@NotNull
-	public String getDescription() {
+	public @NotNull String getDescription() {
 		return description;
 	}
 
 	/**
 	 * @param description The new description of the figure.
 	 */
-	public void setDescription(@NotNull final String description) {
+	public void setDescription(final @NotNull String description) {
 		this.description = description;
 	}
 
@@ -29,8 +28,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @return The bars on which this figure is danced, if any were specified, or
 	 * otherwise null.
 	 */
-	@Nullable
-	public String getBars() {
+	public @Nullable String getBars() {
 		return bars;
 	}
 
@@ -38,21 +36,19 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @param bars The bars on which this figure is to be danced, or null if not
 	 *             specified.
 	 */
-	public void setBars(@Nullable final String bars) {
+	public void setBars(final @Nullable String bars) {
 		this.bars = bars;
 	}
 
 	/**
 	 * The description of the figure.
 	 */
-	@NotNull
-	private String description;
+	private @NotNull String description;
 
 	/**
 	 * The bars on which this figure is danced, if any is specified.
 	 */
-	@Nullable
-	private String bars;
+	private @Nullable String bars;
 
 	/**
 	 * Constructor.
@@ -60,7 +56,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @param description The description of the figure.
 	 * @param bars        The bars on which this figure is danced.
 	 */
-	public Figure(@NotNull final String description, @Nullable final String bars) {
+	public Figure(final @NotNull String description, final @Nullable String bars) {
 		this.description = description;
 		this.bars = bars;
 	}
@@ -70,7 +66,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 *
 	 * @param description The description of the figure.
 	 */
-	public Figure(@NotNull final String description) {
+	public Figure(final @NotNull String description) {
 		this.description = description;
 		this.bars = null;
 	}

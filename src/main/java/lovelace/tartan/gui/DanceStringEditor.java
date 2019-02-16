@@ -19,14 +19,10 @@ import org.jetbrains.annotations.NotNull;
  * @author Jonathan Lovelace
  */
 public final class DanceStringEditor extends JPanel {
-	@NotNull
-	private final JTextField field;
-	@NotNull
-	private String string;
-	@NotNull
-	private final Consumer<@NotNull String> consumer;
-	@NotNull
-	private final Runnable cancel;
+	private final @NotNull JTextField field;
+	private @NotNull String string;
+	private final @NotNull Consumer<@NotNull String> consumer;
+	private final @NotNull Runnable cancel;
 
 	private void okListener(final ActionEvent ignored) {
 		final String text = field.getText();
@@ -44,8 +40,8 @@ public final class DanceStringEditor extends JPanel {
 	public DanceStringEditor(final String string, final Consumer<@NotNull String> consumer) {
 		this(string, consumer, DanceStringEditor::noop);
 	}
-	public DanceStringEditor(@NotNull final String string, @NotNull final Consumer<@NotNull String> consumer,
-							 @NotNull final Runnable cancel) {
+	public DanceStringEditor(final @NotNull String string, final @NotNull Consumer<@NotNull String> consumer,
+							 final @NotNull Runnable cancel) {
 		super(new BorderLayout());
 		this.string = string;
 		field = new JTextField(string, 26);

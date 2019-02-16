@@ -62,9 +62,9 @@ public class ProgramEditingWindow extends JFrame {
 		return retval;
 	}
 
-	public ProgramEditingWindow(@NotNull final DanceDatabase db,
+	public ProgramEditingWindow(final @NotNull DanceDatabase db,
 								final ProgramMetadata metadata,
-								@NotNull final List<ProgramElement> program) {
+								final @NotNull List<ProgramElement> program) {
 		super("Dance Program Editor");
 		final ReorderableListModel<@NotNull ProgramElement> programModel =
 				new ReorderableListModel<>(program);

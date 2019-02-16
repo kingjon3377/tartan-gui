@@ -26,14 +26,14 @@ public final class PlatformFileDialog {
 	/**
 	 * The parent window for this dialog.
 	 */
-	@Nullable private final Frame parent;
+	private final @Nullable Frame parent;
 
 	/**
 	 * Constructor.
 	 *
 	 * @param parentWindow The parent window for this dialog.
 	 */
-	public PlatformFileDialog(@Nullable final Frame parentWindow) {
+	public PlatformFileDialog(final @Nullable Frame parentWindow) {
 		if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
 			wrapped = new FileDialog(parentWindow);
 		} else {
@@ -45,8 +45,7 @@ public final class PlatformFileDialog {
 	/**
 	 * @return the file currently selected in the dialog.
 	 */
-	@Nullable
-	public File getFilename() {
+	public @Nullable File getFilename() {
 		if (wrapped instanceof FileDialog) {
 			final File[] array = ((FileDialog) wrapped).getFiles();
 			if (array.length > 0) {
@@ -62,7 +61,7 @@ public final class PlatformFileDialog {
 	/**
 	 * @param filename a file that should be the new default selection
 	 */
-	public void setFilename(@Nullable final File filename) {
+	public void setFilename(final @Nullable File filename) {
 		if (wrapped instanceof FileDialog) {
 			((FileDialog) wrapped)
 					.setFile(Optional.ofNullable(filename).map(File::getPath).orElse(""));

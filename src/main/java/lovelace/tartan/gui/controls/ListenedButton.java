@@ -14,7 +14,7 @@ public class ListenedButton extends JButton {
 	 * @param text the text of the button
 	 * @param action what to do when the button is pressed
 	 */
-	public ListenedButton(@NotNull final String text, @NotNull final ActionListener action) {
+	public ListenedButton(final @NotNull String text, final @NotNull ActionListener action) {
 		super(text);
 		addActionListener(action);
 	}

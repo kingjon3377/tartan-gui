@@ -37,8 +37,8 @@ public final class MetadataEditingPanel extends JPanel {
 		private final @NotNull Consumer<String> assignee;
 		private final @NotNull JTextComponent field;
 
-		public TextBoxChangeListener(@NotNull final JTextComponent field,
-									 @NotNull final Consumer<String> assignee) {
+		public TextBoxChangeListener(final @NotNull JTextComponent field,
+									 final @NotNull Consumer<String> assignee) {
 			this.assignee = assignee;
 			this.field = field;
 		}
@@ -59,8 +59,8 @@ public final class MetadataEditingPanel extends JPanel {
 		}
 	}
 
-	private static void setupTextFieldListener(@NotNull final JTextComponent field,
-											   @NotNull final Consumer<String> handler) {
+	private static void setupTextFieldListener(final @NotNull JTextComponent field,
+											   final @NotNull Consumer<String> handler) {
 		field.getDocument()
 				.addDocumentListener(new TextBoxChangeListener(field, handler));
 	}
@@ -137,7 +137,7 @@ public final class MetadataEditingPanel extends JPanel {
 		auldLangSyneField.setSelected(metadata.getPrintAuldLangSyne());
 	}
 
-	public MetadataEditingPanel(@NotNull final ProgramMetadata metadata) {
+	public MetadataEditingPanel(final @NotNull ProgramMetadata metadata) {
 		groupLayout = new GroupLayout(this);
 		setLayout(groupLayout);
 		this.metadata = metadata;
@@ -179,7 +179,7 @@ public final class MetadataEditingPanel extends JPanel {
 		final JButton fillerImageAdd = new ListenedButton("Add Image",
 				(ignored) -> { // TODO: convert from lambda to class method?
 					fillerChooser.showOpenDialog();
-					@Nullable final File file = fillerChooser.getFilename();
+					final @Nullable File file = fillerChooser.getFilename();
 					if (file != null) {
 						fillerImageListModel.add(file.toPath());
 					}

@@ -27,8 +27,7 @@ public final class NamedFigure implements DanceMember, FigureParent {
 	/**
 	 * @return the list of sub-figures
 	 */
-	@NotNull
-	public List<@NotNull NamedFigureMember> getContents() {
+	public @NotNull List<@NotNull NamedFigureMember> getContents() {
 		return contents;
 	}
 

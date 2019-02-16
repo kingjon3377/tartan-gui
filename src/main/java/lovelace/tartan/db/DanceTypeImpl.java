@@ -17,15 +17,13 @@ public class DanceTypeImpl implements DanceType {
 	/**
 	 * The name of this type of dance.
 	 */
-	@NotNull
-	private final String name;
+	private final @NotNull String name;
 
 	/**
 	 * The short abbreviation of this type. All dance types in the database as of this
 	 * writing are single characters, but the database schema allows up to four.
 	 */
-	@NotNull
-	private final String abbreviation;
+	private final @NotNull String abbreviation;
 
 	/**
 	 * @return the number identifying this type in the database
@@ -61,8 +59,8 @@ public class DanceTypeImpl implements DanceType {
 	 * @param name         The name of this type of dance.
 	 * @param abbreviation The short abbreviation of this type.
 	 */
-	public DanceTypeImpl(final int id, @NotNull final String name,
-						 @NotNull final String abbreviation) {
+	public DanceTypeImpl(final int id, final @NotNull String name,
+						 final @NotNull String abbreviation) {
 		this.id = id;
 		this.name = name;
 		this.abbreviation = abbreviation;

@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Jonathan Lovelace
  */
 public class ImageButton extends JButton {
-	@NotNull private final Image image;
-	public ImageButton(@NotNull final Image image) {
+	private final @NotNull Image image;
+	public ImageButton(final @NotNull Image image) {
 		this.image = image;
 		setMaximumSize(new Dimension(60, 60));
 		setPreferredSize(new Dimension(40, 40));
@@ -21,7 +21,7 @@ public class ImageButton extends JButton {
 	}
 
 	@Override
-	protected void paintComponent(@NotNull final Graphics pen) {
+	protected void paintComponent(final @NotNull Graphics pen) {
 		pen.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 	}
 }

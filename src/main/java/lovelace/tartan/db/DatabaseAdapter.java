@@ -33,8 +33,8 @@ public final class DatabaseAdapter {
 	 *              available
 	 * @return the {@link Dance} object based on the row and the crib
 	 */
-	public static Dance convertDance(@NotNull final DanceRow dbRow,
-									 @Nullable final String crib) {
+	public static Dance convertDance(final @NotNull DanceRow dbRow,
+									 final @Nullable String crib) {
 		final Dance retval =
 				new Dance(dbRow.getName(), dbRow.getSource(), dbRow.getType().getName(),
 						timesThrough(dbRow.getShape(), dbRow.getProgression(),
@@ -90,8 +90,7 @@ public final class DatabaseAdapter {
 	 * @param crib the crib to parse
 	 * @return the figures it represents
 	 */
-	@NotNull
-	private static List<@NotNull Figure> convertAceCrib(@NotNull final String crib) {
+	private static @NotNull List<@NotNull Figure> convertAceCrib(final @NotNull String crib) {
 		if (crib.startsWith("<table>")) {
 			throw new IllegalArgumentException("Can't handle HTML cribs here");
 		}
@@ -110,9 +109,8 @@ public final class DatabaseAdapter {
 		return Collections.unmodifiableList(retval);
 	}
 
-	@NotNull
-	private static String stripFromStart(@NotNull final String string,
-										 @NotNull final String pattern) {
+	private static @NotNull String stripFromStart(final @NotNull String string,
+												  final @NotNull String pattern) {
 		if (string.startsWith(pattern)) {
 			return string.substring(pattern.length());
 		} else {
@@ -122,9 +120,8 @@ public final class DatabaseAdapter {
 		}
 	}
 
-	@NotNull
-	private static String stripFromEnd(@NotNull final String string,
-									   @NotNull final String pattern) {
+	private static @NotNull String stripFromEnd(final @NotNull String string,
+												final @NotNull String pattern) {
 		if (string.endsWith(pattern)) {
 			return string.substring(0, string.length() - pattern.length());
 		} else {
@@ -134,8 +131,7 @@ public final class DatabaseAdapter {
 		}
 	}
 
-	@NotNull
-	private static List<@NotNull Figure> convertHtmlCrib(@NotNull final String crib) {
+	private static @NotNull List<@NotNull Figure> convertHtmlCrib(final @NotNull String crib) {
 		final String base =
 				stripFromEnd(stripFromStart(crib, "<table>"), "</table>").trim();
 		final String[] split = base.split("\n");

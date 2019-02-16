@@ -18,70 +18,57 @@ public final class ProgramMetadata {
 	/**
 	 * The filename this program was loaded from or should be saved to.
 	 */
-	@Nullable
-	private Path filename = null;
+	private @Nullable Path filename = null;
 	/**
 	 * The name of the group putting on the event, as it should appear on the cover.
 	 */
-	@NotNull
-	private String groupCoverName = "";
+	private @NotNull String groupCoverName = "";
 	/**
 	 * The name of the group putting on the event, as it should appear on the title page.
 	 */
-	@NotNull
-	private String groupTitleName = "";
+	private @NotNull String groupTitleName = "";
 	/**
 	 * The name of the event as it should appear on the cover.
 	 */
-	@NotNull
-	private String eventCoverName = "";
+	private @NotNull String eventCoverName = "";
 	/**
 	 * The name of the event as it should appear on the title page.
 	 */
-	@NotNull
-	private String eventTitleName = "";
+	private @NotNull String eventTitleName = "";
 	/**
 	 * The date of the event, as it should appear on the cover.
 	 */
-	@NotNull
-	private String coverDate = "";
+	private @NotNull String coverDate = "";
 	/**
 	 * The date of the event, as it should appear on the title page.
 	 */
-	@NotNull
-	private String titleDate = "";
+	private @NotNull String titleDate = "";
 	/**
 	 * The location of the event, as it should appear on the cover.
 	 */
-	@NotNull
-	private String coverLocation = "";
+	private @NotNull String coverLocation = "";
 	/**
 	 * The location of the event, as it should appear on the title page.
 	 */
-	@NotNull
-	private String titleLocation = "";
+	private @NotNull String titleLocation = "";
 	/**
 	 * The address of the event, if it should appear on the title page.
 	 */
-	@NotNull
-	private String locationAddress = "";
+	private @NotNull String locationAddress = "";
 	/**
 	 * The time(s) of the event (e.g. "Gather 6 p.m., Dinner 6:30 p.m., Dance 7:30 p.m."
 	 * Newlines will replaced with hard-linebreak commands for LaTeX.
 	 */
-	@NotNull
-	private String titleTimes = "";
+	private @NotNull String titleTimes = "";
 	/**
 	 * The name(s) of the musician(s) providing music for the event. If provided, this
 	 * will be typeset on the title page.
 	 */
-	@NotNull
-	private String musicians = "";
+	private @NotNull String musicians = "";
 	/**
 	 * The filename of an image to put on the cover.
 	 */
-	@Nullable
-	private Path coverImage = null;
+	private @Nullable Path coverImage = null;
 	/**
 	 * Whether to put the title page on the back of the cover.
 	 */
@@ -93,8 +80,7 @@ public final class ProgramMetadata {
 	/**
 	 * The filename of an image to put on the back cover (or, rather, the last page).
 	 */
-	@Nullable
-	private Path backCoverImage = null;
+	private @Nullable Path backCoverImage = null;
 	/**
 	 * Filenames of images to put after the last dance's crib, before Auld Lang Syne (or
 	 * before the back cover if Auld Lang Syne is not included).
@@ -104,8 +90,7 @@ public final class ProgramMetadata {
 	/**
 	 * @return The filename this program was loaded from or should be saved to.
 	 */
-	@Nullable
-	public Path getFilename() {
+	public @Nullable Path getFilename() {
 		return filename;
 	}
 
@@ -113,8 +98,7 @@ public final class ProgramMetadata {
 	 * @return The name of the group putting on the event, as it should appear on the
 	 * cover.
 	 */
-	@NotNull
-	public String getGroupCoverName() {
+	public @NotNull String getGroupCoverName() {
 		return groupCoverName;
 	}
 
@@ -122,88 +106,77 @@ public final class ProgramMetadata {
 	 * @return The name of the group putting on the event, as it should appear on the
 	 * title page.
 	 */
-	@NotNull
-	public String getGroupTitleName() {
+	public @NotNull String getGroupTitleName() {
 		return groupTitleName;
 	}
 
 	/**
 	 * @return The name of the event as it should appear on the cover.
 	 */
-	@NotNull
-	public String getEventCoverName() {
+	public @NotNull String getEventCoverName() {
 		return eventCoverName;
 	}
 
 	/**
 	 * @return The name of the event as it should appear on the title page.
 	 */
-	@NotNull
-	public String getEventTitleName() {
+	public @NotNull String getEventTitleName() {
 		return eventTitleName;
 	}
 
 	/**
 	 * @return The date of the event, as it should appear on the cover.
 	 */
-	@NotNull
-	public String getCoverDate() {
+	public @NotNull String getCoverDate() {
 		return coverDate;
 	}
 
 	/**
 	 * @return The date of the event, as it should appear on the title page.
 	 */
-	@NotNull
-	public String getTitleDate() {
+	public @NotNull String getTitleDate() {
 		return titleDate;
 	}
 
 	/**
 	 * @return The location of the event, as it should appear on the cover.
 	 */
-	@NotNull
-	public String getCoverLocation() {
+	public @NotNull String getCoverLocation() {
 		return coverLocation;
 	}
 
 	/**
 	 * @return The location of the event, as it should appear on the title page.
 	 */
-	@NotNull
-	public String getTitleLocation() {
+	public @NotNull String getTitleLocation() {
 		return titleLocation;
 	}
 
 	/**
 	 * @return The address of the event, if it should appear on the title page.
 	 */
-	@NotNull
-	public String getLocationAddress() {
+	public @NotNull String getLocationAddress() {
 		return locationAddress;
 	}
 
 	/**
 	 * @return The time(s) of the event
 	 */
-	@NotNull
-	public String getTitleTimes() {
+	public @NotNull String getTitleTimes() {
 		return titleTimes;
 	}
 
 	/**
 	 * @return The name(s) of the musician(s) providing music for the event.
 	 */
-	@NotNull
-	public String getMusicians() {
+	public @NotNull String getMusicians() {
 		return musicians;
 	}
 
 	/**
 	 * @return The filename of an image to put on the cover, or null if none specified
 	 */
-	@Nullable
-	public Path getCoverImage() {
+	public @Nullable Path getCoverImage() {
 		return coverImage;
 	}
 
@@ -225,8 +198,7 @@ public final class ProgramMetadata {
 	 * @return The filename of an image to put on the back cover/last page, or null if
 	 * none specified
 	 */
-	@Nullable
-	public Path getBackCoverImage() {
+	public @Nullable Path getBackCoverImage() {
 		return backCoverImage;
 	}
 
@@ -234,14 +206,13 @@ public final class ProgramMetadata {
 	 * @return the list of filenames of images to put after the last dance's crib, before
 	 * Auld Lang Syne (or before the back cover if Auld Lang Syne is not included).
 	 */
-	@NotNull
-	public final List<@NotNull Path> getInsidePostDanceImages() {
+	public final @NotNull List<@NotNull Path> getInsidePostDanceImages() {
 		return insidePostDanceImages;
 	}
 	/**
 	 * @param filename The filename this program was loaded from or should be saved to.
 	 */
-	public void setFilename(@Nullable final Path filename) {
+	public void setFilename(final @Nullable Path filename) {
 		this.filename = filename;
 	}
 
@@ -249,7 +220,7 @@ public final class ProgramMetadata {
 	 * @param name The name of the group putting on the event, as it should appear on the
 	 * cover.
 	 */
-	public void setGroupCoverName(@NotNull final String name) {
+	public void setGroupCoverName(final @NotNull String name) {
 		groupCoverName = name;
 	}
 
@@ -257,77 +228,77 @@ public final class ProgramMetadata {
 	 * @param name The name of the group putting on the event, as it should appear on the
 	 * title page.
 	 */
-	public void setGroupTitleName(@NotNull final String name) {
+	public void setGroupTitleName(final @NotNull String name) {
 		groupTitleName = name;
 	}
 
 	/**
 	 * @param name The name of the event as it should appear on the cover.
 	 */
-	public void setEventCoverName(@NotNull final String name) {
+	public void setEventCoverName(final @NotNull String name) {
 		eventCoverName = name;
 	}
 
 	/**
 	 * @param name The name of the event as it should appear on the title page.
 	 */
-	public void setEventTitleName(@NotNull final String name) {
+	public void setEventTitleName(final @NotNull String name) {
 		eventTitleName = name;
 	}
 
 	/**
 	 * @param date The date of the event, as it should appear on the cover.
 	 */
-	public void setCoverDate(@NotNull final String date) {
+	public void setCoverDate(final @NotNull String date) {
 		coverDate = date;
 	}
 
 	/**
 	 * @param date The date of the event, as it should appear on the title page.
 	 */
-	public void setTitleDate(@NotNull final String date) {
+	public void setTitleDate(final @NotNull String date) {
 		titleDate = date;
 	}
 
 	/**
 	 * @param location The location of the event, as it should appear on the cover.
 	 */
-	public void setCoverLocation(@NotNull final String location) {
+	public void setCoverLocation(final @NotNull String location) {
 		coverLocation = location;
 	}
 
 	/**
 	 * @param location The location of the event, as it should appear on the title page.
 	 */
-	public void setTitleLocation(@NotNull final String location) {
+	public void setTitleLocation(final @NotNull String location) {
 		titleLocation = location;
 	}
 
 	/**
 	 * @param address The address of the event, if it should appear on the title page.
 	 */
-	public void setLocationAddress(@NotNull final String address) {
+	public void setLocationAddress(final @NotNull String address) {
 		locationAddress = address;
 	}
 
 	/**
 	 * @param times The time(s) of the event
 	 */
-	public void setTitleTimes(@NotNull final String times) {
+	public void setTitleTimes(final @NotNull String times) {
 		titleTimes = times;
 	}
 
 	/**
 	 * @param musicians The name(s) of the musician(s) providing music for the event.
 	 */
-	public void setMusicians(@NotNull final String musicians) {
+	public void setMusicians(final @NotNull String musicians) {
 		this.musicians = musicians;
 	}
 
 	/**
 	 * @param image The filename of an image to put on the cover, or null to specify none
 	 */
-	public void setCoverImage(@Nullable final Path image) {
+	public void setCoverImage(final @Nullable Path image) {
 		coverImage = image;
 	}
 
@@ -349,7 +320,7 @@ public final class ProgramMetadata {
 	 * @param image The filename of an image to put on the back cover/last page, or null
 	 *                if none specified
 	 */
-	public void setBackCoverImage(@Nullable final Path image) {
+	public void setBackCoverImage(final @Nullable Path image) {
 		backCoverImage = image;
 	}
 	/**

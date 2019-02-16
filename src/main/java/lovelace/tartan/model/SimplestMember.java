@@ -12,28 +12,26 @@ public final class SimplestMember implements NamedFigureMember, DanceMember {
 	/**
 	 * The string we wrap.
 	 */
-	@NotNull
-	private String string;
+	private @NotNull String string;
 
 	/**
 	 * @return The string we wrap
 	 */
-	@NotNull
-	public String getString() {
+	public @NotNull String getString() {
 		return string;
 	}
 
 	/**
 	 * @param string the string to now wrap
 	 */
-	public void setString(@NotNull final String string) {
+	public void setString(final @NotNull String string) {
 		this.string = string;
 	}
 
 	/**
 	 * @param string The string to wrap
 	 */
-	public SimplestMember(@NotNull final String string) {
+	public SimplestMember(final @NotNull String string) {
 		this.string = string;
 	}
 
@@ -41,8 +39,7 @@ public final class SimplestMember implements NamedFigureMember, DanceMember {
 	 * @return The string we wrap.
 	 */
 	@Override
-	@NotNull
-	public String toString() {
+	public @NotNull String toString() {
 		return string;
 	}
 

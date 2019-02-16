@@ -16,8 +16,7 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * The name of this dance.
 	 */
-	@NotNull
-	private final String name;
+	private final @NotNull String name;
 	/**
 	 * How many bars per time through the dance.
 	 */
@@ -25,13 +24,11 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * What shape of set the dance is danced in.
 	 */
-	@NotNull
-	private final DanceFormation shape;
+	private final @NotNull DanceFormation shape;
 	/**
 	 * What type of dance this is.
 	 */
-	@NotNull
-	private final DanceType type;
+	private final @NotNull DanceType type;
 	/**
 	 * How many couples dance in this dance.
 	 */
@@ -39,13 +36,11 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * The source for this dance.
 	 */
-	@NotNull
-	private final String source;
+	private final @NotNull String source;
 	/**
 	 * The progression used between times through the dance.
 	 */
-	@NotNull
-	private final DanceProgression progression;
+	private final @NotNull DanceProgression progression;
 
 	/**
 	 * This dance's ID in the database.
@@ -58,9 +53,8 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * The name of this dance.
 	 */
-	@NotNull
 	@Override
-	public String getName() {
+	public @NotNull String getName() {
 		return name;
 	}
 
@@ -75,18 +69,16 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * What shape of set the dance is danced in.
 	 */
-	@NotNull
 	@Override
-	public DanceFormation getShape() {
+	public @NotNull DanceFormation getShape() {
 		return shape;
 	}
 
 	/**
 	 * What type of dance this is.
 	 */
-	@NotNull
 	@Override
-	public DanceType getType() {
+	public @NotNull DanceType getType() {
 		return type;
 	}
 
@@ -101,18 +93,16 @@ public final class DanceRowImpl implements DanceRow {
 	/**
 	 * The source for this dance.
 	 */
-	@NotNull
 	@Override
-	public String getSource() {
+	public @NotNull String getSource() {
 		return source;
 	}
 
 	/**
 	 * The progression used between times through the dance.
 	 */
-	@NotNull
 	@Override
-	public DanceProgression getProgression() {
+	public @NotNull DanceProgression getProgression() {
 		return progression;
 	}
 
@@ -128,11 +118,11 @@ public final class DanceRowImpl implements DanceRow {
 	 * @param source      Who devised the dance, or what source it is taken from
 	 * @param progression The progression used between times through the dance
 	 */
-	public DanceRowImpl(final int id, @NotNull final String name, final int length,
-						@NotNull final DanceFormation shape,
-						@NotNull final DanceType type, final int couples,
-						@NotNull final String source,
-						@NotNull final DanceProgression progression) {
+	public DanceRowImpl(final int id, final @NotNull String name, final int length,
+						final @NotNull DanceFormation shape,
+						final @NotNull DanceType type, final int couples,
+						final @NotNull String source,
+						final @NotNull DanceProgression progression) {
 		this.id = id;
 		this.name = name;
 		this.length = length;

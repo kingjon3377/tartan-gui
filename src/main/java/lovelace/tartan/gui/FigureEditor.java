@@ -81,7 +81,7 @@ public class FigureEditor extends JPanel {
 		this(figure, FigureEditor::noop);
 	}
 
-	private void setBars(@NotNull final String bars) {
+	private void setBars(final @NotNull String bars) {
 		if (bars.isEmpty()) {
 			figure.setBars(null);
 		} else {
@@ -89,7 +89,7 @@ public class FigureEditor extends JPanel {
 		}
 	}
 
-	private void setText(@NotNull final String text) {
+	private void setText(final @NotNull String text) {
 		figure.setDescription(text);
 	}
 

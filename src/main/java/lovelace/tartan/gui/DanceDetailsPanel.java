@@ -55,8 +55,7 @@ public class DanceDetailsPanel extends JPanel {
 	private void noop() {
 	}
 
-	@NotNull
-	private Runnable apply = this::noop;
+	private @NotNull Runnable apply = this::noop;
 
 	private void revertDance(final Dance dance) {
 		titleLabel.setText("Dance Title:");
@@ -78,8 +77,7 @@ public class DanceDetailsPanel extends JPanel {
 		formationBox.setSelectedItem("");
 	}
 
-	@NotNull
-	private Runnable revert = this::noop;
+	private @NotNull Runnable revert = this::noop;
 
 	private final JButton applyButton =
 			new ListenedButton("Apply", (ignored) -> apply.run());
@@ -110,15 +108,13 @@ public class DanceDetailsPanel extends JPanel {
 		add(bottomPanel, BorderLayout.PAGE_END);
 	}
 
-	@Nullable
-	private ProgramElement current = null;
+	private @Nullable ProgramElement current = null;
 
-	@Nullable
-	public ProgramElement getCurrent() {
+	public @Nullable ProgramElement getCurrent() {
 		return current;
 	}
 
-	public void setCurrent(@Nullable final ProgramElement current) {
+	public void setCurrent(final @Nullable ProgramElement current) {
 		this.current = current;
 		if (current == null) {
 			titleField.setEnabled(false);

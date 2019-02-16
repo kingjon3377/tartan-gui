@@ -69,20 +69,20 @@ public final class LaTeXWriter {
 		writePrologueLine(ostream, "tartanmusicians", metadata.getMusicians());
 	}
 
-	private static void writeLine(@NotNull final Appendable ostream,
-			@NotNull final String string) throws IOException {
+	private static void writeLine(final @NotNull Appendable ostream,
+								  final @NotNull String string) throws IOException {
 		ostream.append(string);
 		ostream.append('\n');
 	}
 
-	private static void writeSimpleCommand(@NotNull final Appendable ostream,
-										   @NotNull final String command) throws IOException {
+	private static void writeSimpleCommand(final @NotNull Appendable ostream,
+										   final @NotNull String command) throws IOException {
 		writeSimpleCommand(ostream, command, null);
 	}
 
-	private static void writeSimpleCommand(@NotNull final Appendable ostream,
-										   @NotNull final String command,
-										   @Nullable final String arg) throws IOException {
+	private static void writeSimpleCommand(final @NotNull Appendable ostream,
+										   final @NotNull String command,
+										   final @Nullable String arg) throws IOException {
 		ostream.append('\\');
 		ostream.append(command);
 		if (arg != null) {

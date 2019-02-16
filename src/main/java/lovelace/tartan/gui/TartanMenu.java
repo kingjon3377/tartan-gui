@@ -63,17 +63,17 @@ public final class TartanMenu {
 	private static final FileFilter LATEX_FILTER =
 			new FileNameExtensionFilter("LaTeX documents", "tex");
 
-	static void readFromFile(@NotNull final ReorderableListModel<ProgramElement> program,
-							 @NotNull final ProgramMetadata metadata,
-							 @Nullable final MetadataEditingPanel metadataPanel) {
+	static void readFromFile(final @NotNull ReorderableListModel<ProgramElement> program,
+							 final @NotNull ProgramMetadata metadata,
+							 final @Nullable MetadataEditingPanel metadataPanel) {
 		readFromFile(program, metadata, metadataPanel, null);
 	}
 
-	static void readFromFile(@NotNull final ReorderableListModel<ProgramElement> program,
-							 @NotNull final ProgramMetadata metadata,
-							 @Nullable final MetadataEditingPanel metadataPanel,
-							 @Nullable final Component parent) {
-		@Nullable final Frame parentFrame;
+	static void readFromFile(final @NotNull ReorderableListModel<ProgramElement> program,
+							 final @NotNull ProgramMetadata metadata,
+							 final @Nullable MetadataEditingPanel metadataPanel,
+							 final @Nullable Component parent) {
+		final @Nullable Frame parentFrame;
 		if (parent instanceof Frame) {
 			parentFrame = (Frame) parent;
 		} else {
@@ -82,7 +82,7 @@ public final class TartanMenu {
 		final PlatformFileDialog chooser = new PlatformFileDialog(parentFrame);
 		chooser.setFileFilter(LATEX_FILTER);
 		chooser.showOpenDialog();
-		@Nullable final File filename = chooser.getFilename();
+		final @Nullable File filename = chooser.getFilename();
 		if (filename == null) {
 			return;
 		} else if (!filename.canRead()) {
@@ -106,13 +106,13 @@ public final class TartanMenu {
 
 	public static Optional<Pair<@NotNull ProgramMetadata,
 									   @NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
-			@NotNull final Path file) {
+		final @NotNull Path file) {
 		return readFromSpecifiedFile(file, null);
 	}
 
 	public static Optional<Pair<@NotNull ProgramMetadata,
 									   @NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
-			@NotNull final Path file, @Nullable final Component parent) {
+		final @NotNull Path file, final @Nullable Component parent) {
 		try {
 			final List<String> lines = Files.readAllLines(file);
 			final StringBuilder builder = new StringBuilder();
@@ -156,14 +156,14 @@ public final class TartanMenu {
 	}
 
 	static void saveToFile(
-			@NotNull final ReorderableListModel<@NotNull ProgramElement> program,
-			@NotNull final ProgramMetadata metadata, @Nullable final Path passedFilename,
-			@Nullable final Component parent) {
+		final @NotNull ReorderableListModel<@NotNull ProgramElement> program,
+		final @NotNull ProgramMetadata metadata, final @Nullable Path passedFilename,
+		final @Nullable Component parent) {
 		final Path filename;
 		if (passedFilename != null) {
 			filename = passedFilename;
 		} else {
-			@Nullable final Frame parentFrame;
+			final @Nullable Frame parentFrame;
 			if (parent instanceof Frame) {
 				parentFrame = (Frame) parent;
 			} else {
@@ -172,7 +172,7 @@ public final class TartanMenu {
 			final PlatformFileDialog chooser = new PlatformFileDialog(parentFrame);
 			chooser.setFileFilter(LATEX_FILTER);
 			chooser.showSaveAsDialog();
-			@Nullable final File chosenFile = chooser.getFilename();
+			final @Nullable File chosenFile = chooser.getFilename();
 			if (chosenFile == null) {
 				LOGGER.info("User canceled from save dialog");
 				return;
@@ -190,9 +190,9 @@ public final class TartanMenu {
 	}
 
 	public static JMenu fileMenu(
-			@NotNull final ReorderableListModel<@NotNull ProgramElement> program,
-			@NotNull final ProgramMetadata metadata,
-			@NotNull final MetadataEditingPanel metadataPanel) {
+		final @NotNull ReorderableListModel<@NotNull ProgramElement> program,
+		final @NotNull ProgramMetadata metadata,
+		final @NotNull MetadataEditingPanel metadataPanel) {
 		final boolean onMac =
 				System.getProperty("os.name").toLowerCase().startsWith("mac");
 		final int shortcutMask =

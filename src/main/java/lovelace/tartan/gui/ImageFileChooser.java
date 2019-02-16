@@ -26,13 +26,12 @@ import org.jetbrains.annotations.Nullable;
 public class ImageFileChooser {
 	public static final FileFilter IMAGE_FILTER =
 			new FileNameExtensionFilter("LaTeX-supported images", "png", "jpg", "pdf");
-	@Nullable private File filename = null;
-	private @NotNull final Consumer<@Nullable Path> handler;
-	@Nullable
-	public File getFilename() {
+	private @Nullable File filename = null;
+	private final @NotNull Consumer<@Nullable Path> handler;
+	public @Nullable File getFilename() {
 		return filename;
 	}
-	public void setFilename(@Nullable final File filename) {
+	public void setFilename(final @Nullable File filename) {
 		if (filename == null) {
 			this.filename = null;
 			chosenFileField.setText("");
@@ -49,7 +48,7 @@ public class ImageFileChooser {
 
 	private void buttonHandler(final ActionEvent ignored) {
 		chooser.showOpenDialog();
-		@Nullable final File file = chooser.getFilename();
+		final @Nullable File file = chooser.getFilename();
 		if (file == null) {
 			filename = null;
 			chosenFileField.setText("");
@@ -67,13 +66,13 @@ public class ImageFileChooser {
 		return button;
 	}
 
-	public ImageFileChooser(@NotNull final Consumer<@Nullable Path> handler) {
+	public ImageFileChooser(final @NotNull Consumer<@Nullable Path> handler) {
 		this(handler, null);
 	}
 
-	public ImageFileChooser(@NotNull final Consumer<@Nullable Path> handler,
-			@Nullable final Component parent) {
-		@Nullable final Frame parentFrame;
+	public ImageFileChooser(final @NotNull Consumer<@Nullable Path> handler,
+							final @Nullable Component parent) {
+		final @Nullable Frame parentFrame;
 		if (parent instanceof Frame) {
 			parentFrame = (Frame) parent;
 		} else {

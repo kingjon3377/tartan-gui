@@ -15,8 +15,7 @@ public class Dance implements ProgramElement, FigureParent {
 	/**
 	 * @return The title or name of the dance.
 	 */
-	@NotNull
-	public String getTitle() {
+	public @NotNull String getTitle() {
 		return title;
 	}
 
@@ -30,8 +29,7 @@ public class Dance implements ProgramElement, FigureParent {
 	/**
 	 * @return The source from which the dance is taken, or the name of its deviser.
 	 */
-	@NotNull
-	public String getSource() {
+	public @NotNull String getSource() {
 		return source;
 	}
 
@@ -39,22 +37,21 @@ public class Dance implements ProgramElement, FigureParent {
 	 * @param source The source from which the dance is now said to be taken, or the name
 	 *               of its deviser.
 	 */
-	public void setSource(@NotNull final String source) {
+	public void setSource(final @NotNull String source) {
 		this.source = source;
 	}
 
 	/**
 	 * @return The tempo of the dance: jig, reel, strathspey, or medley.
 	 */
-	@NotNull
-	public String getTempo() {
+	public @NotNull String getTempo() {
 		return tempo;
 	}
 
 	/**
 	 * @param tempo The tempo of the dance: jig, reel, strathspey, or medley.
 	 */
-	public void setTempo(@NotNull final String tempo) {
+	public void setTempo(final @NotNull String tempo) {
 		this.tempo = tempo;
 	}
 
@@ -90,43 +87,38 @@ public class Dance implements ProgramElement, FigureParent {
 	 * @return The formation in which the dance is danced: "2C (4C set)", "Sq. Set", "3C
 	 * set", etc.
 	 */
-	@NotNull
-	public String getFormation() {
+	public @NotNull String getFormation() {
 		return formation;
 	}
 
 	/**
 	 * @param formation the formation in which the dance is to be danced
 	 */
-	public void setFormation(@NotNull final String formation) {
+	public void setFormation(final @NotNull String formation) {
 		this.formation = formation;
 	}
 
 	/**
 	 * @return the list of figures etc. that make up the dance
 	 */
-	@NotNull
-	public List<@NotNull DanceMember> getContents() {
+	public @NotNull List<@NotNull DanceMember> getContents() {
 		return contents;
 	}
 
 	/**
 	 * The title or name of the dance.
 	 */
-	@NotNull
-	private String title;
+	private @NotNull String title;
 	/**
 	 * The source from which the dance is taken, or the name of its deviser.
 	 */
-	@NotNull
-	private String source;
+	private @NotNull String source;
 	/**
 	 * The tempo of the dance: jig, reel, strathspey, or medley.
 	 *
 	 * TODO: make an Enum of cases instead of allowing arbitrary text.
 	 */
-	@NotNull
-	private String tempo;
+	private @NotNull String tempo;
 	/**
 	 * How many times through the dance is danced.
 	 */
@@ -139,8 +131,7 @@ public class Dance implements ProgramElement, FigureParent {
 	 * The formation in which the dance is danced: "2C (4C set)", "Sq. Set", "3C set",
 	 * etc.
 	 */
-	@NotNull
-	private String formation;
+	private @NotNull String formation;
 	/**
 	 * The figures (some of which may be "named figures") that make up the dance, and any
 	 * other text that needs to be printed inside the "scdance" environment in the
@@ -151,10 +142,10 @@ public class Dance implements ProgramElement, FigureParent {
 	/**
 	 * Constructor.
 	 */
-	public Dance(@NotNull final String title, @NotNull final String source,
-				 @NotNull final String tempo, final int times, final int length,
-				 @NotNull final String formation,
-				 @NotNull final DanceMember... initialContents) {
+	public Dance(final @NotNull String title, final @NotNull String source,
+				 final @NotNull String tempo, final int times, final int length,
+				 final @NotNull String formation,
+				 final @NotNull DanceMember... initialContents) {
 		this.title = title;
 		this.source = source;
 		this.tempo = tempo;
@@ -168,8 +159,7 @@ public class Dance implements ProgramElement, FigureParent {
 	 * @return a (very simple) String representation of the dance (for use in lists).
 	 */
 	@Override
-	@NotNull
-	public String toString() {
+	public @NotNull String toString() {
 		return String.format("%s (%dx%d%s) (%s)", title, times, length, tempo, source);
 	}
 

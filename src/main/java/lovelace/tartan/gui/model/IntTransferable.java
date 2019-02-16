@@ -11,11 +11,10 @@ import org.jetbrains.annotations.NotNull;
  * @author Jonathan Lovelace
  */
 public final class IntTransferable implements Transferable {
-	@NotNull
-	private final DataFlavor flavor;
+	private final @NotNull DataFlavor flavor;
 	private final int payload;
 
-	public IntTransferable(@NotNull final DataFlavor flavor, final int payload) {
+	public IntTransferable(final @NotNull DataFlavor flavor, final int payload) {
 		this.flavor = flavor;
 		this.payload = payload;
 	}
@@ -30,9 +29,8 @@ public final class IntTransferable implements Transferable {
 		return this.flavor.equals(flavor);
 	}
 
-	@NotNull
 	@Override
-	public Object getTransferData(final DataFlavor flavor)
+	public @NotNull Object getTransferData(final DataFlavor flavor)
 			throws UnsupportedFlavorException {
 		if (this.flavor.equals(flavor)) {
 			return payload;

@@ -15,8 +15,7 @@ public class DanceProgressionImpl implements DanceProgression {
 	/**
 	 * A brief textual description of this progression.
 	 */
-	@NotNull
-	private final String name;
+	private final @NotNull String name;
 
 	/**
 	 * @return the number identifying this progression in the database
@@ -34,7 +33,7 @@ public class DanceProgressionImpl implements DanceProgression {
 		return name;
 	}
 
-	public DanceProgressionImpl(final int id, @NotNull final String name) {
+	public DanceProgressionImpl(final int id, final @NotNull String name) {
 		this.id = id;
 		this.name = name;
 	}

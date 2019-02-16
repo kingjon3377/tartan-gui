@@ -24,8 +24,7 @@ public class DanceElementEditor implements TableCellEditor {
 	private final List<CellEditorListener> listeners = new ArrayList<>();
 	private final TableCellEditor defaultEditor =
 			new DefaultCellEditor(new JTextField());
-	@Nullable
-	private Object current = null;
+	private @Nullable Object current = null;
 
 	@Override
 	public Component getTableCellEditorComponent(final JTable table, final Object value,
@@ -46,9 +45,8 @@ public class DanceElementEditor implements TableCellEditor {
 		}
 	}
 
-	@Nullable
 	@Override
-	public Object getCellEditorValue() {
+	public @Nullable Object getCellEditorValue() {
 		return current;
 	}
 

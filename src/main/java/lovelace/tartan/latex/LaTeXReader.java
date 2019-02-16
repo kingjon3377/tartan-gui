@@ -36,7 +36,7 @@ public final class LaTeXReader {
 	 *
 	 * @param localInput the queue from which to read
 	 */
-	private static void skipComment(@NotNull final Deque<Character> localInput) {
+	private static void skipComment(final @NotNull Deque<Character> localInput) {
 		while (!localInput.isEmpty()) {
 			final char top = localInput.pop(); // TODO: inline
 			if ('\n' == top) {
@@ -59,7 +59,7 @@ public final class LaTeXReader {
 	 *
 	 * @param localInput the queue from which to read
 	 */
-	static private String parseCommand(@NotNull final Deque<Character> localInput) {
+	private static String parseCommand(final @NotNull Deque<Character> localInput) {
 		final StringBuilder builder = new StringBuilder();
 		while (!localInput.isEmpty()) {
 			final char top = localInput.peekFirst();
@@ -85,9 +85,9 @@ public final class LaTeXReader {
 	 * @param denominator the denominator of the fraction
 	 * @param buffer      the buffer to write to
 	 */
-	private static void defaultFraction(@NotNull final String numerator,
-										@NotNull final String denominator,
-										@NotNull final StringBuilder buffer) {
+	private static void defaultFraction(final @NotNull String numerator,
+										final @NotNull String denominator,
+										final @NotNull StringBuilder buffer) {
 		buffer.append(numerator);
 		buffer.append('/');
 		buffer.append(denominator);
@@ -102,9 +102,9 @@ public final class LaTeXReader {
 	 * @param denominator the denominator of the fraction
 	 * @param buffer      the buffer to write to
 	 */
-	private static void parseFraction(@NotNull final String numerator,
-									  @NotNull final String denominator,
-									  @NotNull final StringBuilder buffer) {
+	private static void parseFraction(final @NotNull String numerator,
+									  final @NotNull String denominator,
+									  final @NotNull StringBuilder buffer) {
 		switch (numerator) {
 		case "1":
 			switch (denominator) {
@@ -206,7 +206,7 @@ public final class LaTeXReader {
 	 * @throws ParseException if there are fewer <pre>}</pre> than <pre>{</pre> in the
 	 *                        input
 	 */
-	static String blockContents(@NotNull final Deque<Character> localInput)
+	static String blockContents(final @NotNull Deque<Character> localInput)
 			throws ParseException {
 		// TODO: Keep track of cursor position so we can give accurate data in thrown
 		//  error
@@ -312,7 +312,7 @@ public final class LaTeXReader {
 	 * @throws ParseException if there are fewer <pre>]</pre> than <pre>[</pre> in the
 	 *                        input
 	 */
-	private static String parseOptionalBlock(@NotNull final Deque<Character> localInput)
+	private static String parseOptionalBlock(final @NotNull Deque<Character> localInput)
 			throws ParseException {
 		if (localInput.isEmpty()) {
 			return "";
@@ -401,10 +401,10 @@ public final class LaTeXReader {
 	 *                        the empty string, or we're given an environment this parser
 	 *                        doesn't know how to handle
 	 */
-	private void handleEnvironment(@NotNull final String environment,
-								   @NotNull final ProgramMetadata mRetval,
-								   @NotNull final List<@NotNull ProgramElement> pRetval,
-								   @NotNull final Deque<Character> innerQueue)
+	private void handleEnvironment(final @NotNull String environment,
+								   final @NotNull ProgramMetadata mRetval,
+								   final @NotNull List<@NotNull ProgramElement> pRetval,
+								   final @NotNull Deque<Character> innerQueue)
 			throws ParseException {
 		handleEnvironment(environment, mRetval, pRetval, innerQueue, null);
 	}
@@ -427,11 +427,11 @@ public final class LaTeXReader {
 	 *                        the empty string, or we're given an environment this parser
 	 *                        doesn't know how to handle
 	 */
-	private void handleEnvironment(@NotNull final String environment,
-								   @NotNull final ProgramMetadata mRetval,
-								   @NotNull final List<@NotNull ProgramElement> pRetval,
-								   @NotNull final Deque<Character> innerQueue,
-								   @Nullable final FigureParent currentDance)
+	private void handleEnvironment(final @NotNull String environment,
+								   final @NotNull ProgramMetadata mRetval,
+								   final @NotNull List<@NotNull ProgramElement> pRetval,
+								   final @NotNull Deque<Character> innerQueue,
+								   final @Nullable FigureParent currentDance)
 			throws ParseException {
 		switch (environment) {
 		case "":
@@ -469,7 +469,7 @@ public final class LaTeXReader {
 	 * @throws ParseException when thrown by {@link #parseOptionalBlock(Deque)} or {@link
 	 *                        #blockContents(Deque)}
 	 */
-	private static Figure parseFigure(@NotNull final Deque<Character> ourQueue)
+	private static Figure parseFigure(final @NotNull Deque<Character> ourQueue)
 			throws ParseException {
 		final String bars = parseOptionalBlock(ourQueue);
 		final String desc = blockContents(ourQueue);

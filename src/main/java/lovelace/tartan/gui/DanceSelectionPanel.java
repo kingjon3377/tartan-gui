@@ -53,7 +53,7 @@ public class DanceSelectionPanel extends JSplitPane {
 	}
 
 	private void addDance() {
-		@Nullable final DanceRow selection = danceList.getSelectedValue();
+		final @Nullable DanceRow selection = danceList.getSelectedValue();
 		if (selection != null && program.stream().filter(Dance.class::isInstance)
 										 .map(Dance.class::cast).map(Dance::getTitle)
 										 .noneMatch(selection.getName()::equals)) {

@@ -16,13 +16,11 @@ public class DanceFormationImpl implements DanceFormation {
 	/**
 	 * The unabbreviated "name" of this formation.
 	 */
-	@NotNull
-	private final String name;
+	private final @NotNull String name;
 	/**
 	 * The "name" of this formation, in abbreviated form.
 	 */
-	@NotNull
-	private final String abbreviation;
+	private final @NotNull String abbreviation;
 
 	/**
 	 * @return the number that identifies this formation in the database.
@@ -55,8 +53,8 @@ public class DanceFormationImpl implements DanceFormation {
 	 * @param name         the unabbreviated "name" of this formation
 	 * @param abbreviation the "name" of this formation, in abbreviated form
 	 */
-	public DanceFormationImpl(final int id, @NotNull final String name,
-							  @NotNull final String abbreviation) {
+	public DanceFormationImpl(final int id, final @NotNull String name,
+							  final @NotNull String abbreviation) {
 		this.id = id;
 		this.name = name;
 		this.abbreviation = abbreviation;

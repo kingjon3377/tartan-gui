@@ -11,21 +11,19 @@ public class Intermission implements ProgramElement {
 	/**
 	 * How to describe the break in the program.
 	 */
-	@NotNull
-	private String description;
+	private @NotNull String description;
 
 	/**
 	 * @return how to describe the break in the program
 	 */
-	@NotNull
-	public String getDescription() {
+	public @NotNull String getDescription() {
 		return description;
 	}
 
 	/**
 	 * @param description how to describe the break in the program
 	 */
-	public void setDescription(@NotNull final String description) {
+	public void setDescription(final @NotNull String description) {
 		this.description = description;
 	}
 

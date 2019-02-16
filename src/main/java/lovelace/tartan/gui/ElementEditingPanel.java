@@ -25,21 +25,18 @@ import org.jetbrains.annotations.Nullable;
  * @author Jonathan Lovelace
  */
 public class ElementEditingPanel extends JPanel {
-	@Nullable
-	private ProgramElement current = null;
+	private @Nullable ProgramElement current = null;
 
-	@Nullable
-	public ProgramElement getCurrent() {
+	public @Nullable ProgramElement getCurrent() {
 		return current;
 	}
 
-	@NotNull
-	private SingleColumnTableModel<DanceMember> tableModel =
+	private @NotNull SingleColumnTableModel<DanceMember> tableModel =
 			new SingleColumnTableModel<>(new ArrayList<>(),
 					DanceMember.class, "Directions");
 	private final JTable table = new JTable(tableModel);
 
-	private void fixHeights(@Nullable final Object ignored) {
+	private void fixHeights(final @Nullable Object ignored) {
 		for (int row = 0; row < table.getRowCount(); row++) {
 			final Component renderer =
 					table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);
@@ -53,11 +50,11 @@ public class ElementEditingPanel extends JPanel {
 
 	private final DanceDetailsPanel detailsPanel = new DanceDetailsPanel();
 
-	public void setCurrent(@Nullable final ProgramElement current) {
+	public void setCurrent(final @Nullable ProgramElement current) {
 		this.current = current;
 		detailsPanel.setCurrent(current);
 		if (current instanceof Dance) {
-			@NotNull final SingleColumnTableModel<DanceMember> model =
+			final @NotNull SingleColumnTableModel<DanceMember> model =
 					new SingleColumnTableModel<>(
 							((Dance) current).getContents(), DanceMember.class,
 							"Directions");
@@ -66,7 +63,7 @@ public class ElementEditingPanel extends JPanel {
 			table.setModel(model);
 			fixHeights(null);
 		} else {
-			@NotNull final SingleColumnTableModel<DanceMember> model =
+			final @NotNull SingleColumnTableModel<DanceMember> model =
 					new SingleColumnTableModel<>(new ArrayList<>(), DanceMember.class,
 							"Directions");
 			tableModel = model;

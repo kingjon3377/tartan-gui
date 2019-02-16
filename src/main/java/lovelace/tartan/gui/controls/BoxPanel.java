@@ -20,10 +20,8 @@ public class BoxPanel extends JPanel {
 		LineAxis(BoxLayout.LINE_AXIS, Box::createHorizontalGlue,
 				Box::createHorizontalStrut);
 		private final int constant;
-		@NotNull
-		private final Supplier<Component> glue;
-		@NotNull
-		private final IntFunction<Component> strut;
+		private final @NotNull Supplier<Component> glue;
+		private final @NotNull IntFunction<Component> strut;
 
 		public int getConstant() {
 			return constant;
@@ -37,8 +35,8 @@ public class BoxPanel extends JPanel {
 			return strut.apply(size);
 		}
 
-		BoxDirection(final int constant, @NotNull final Supplier<Component> glue,
-					 @NotNull final IntFunction<Component> strut) {
+		BoxDirection(final int constant, final @NotNull Supplier<Component> glue,
+					 final @NotNull IntFunction<Component> strut) {
 			this.constant = constant;
 			this.glue = glue;
 			this.strut = strut;
@@ -64,7 +62,7 @@ public class BoxPanel extends JPanel {
 		}
 	}
 
-	public BoxPanel(final BoxDirection direction, @NotNull final Object... contents) {
+	public BoxPanel(final BoxDirection direction, final @NotNull Object... contents) {
 		//noinspection MagicConstant
 		setLayout(new BoxLayout(this, direction.getConstant()));
 		for (final Object item : contents) {

@@ -25,18 +25,15 @@ public class DanceDatabase {
 
 	private static final Logger LOGGER = Logger.getLogger(DanceDatabase.class.getName());
 
-	@NotNull
-	final Connection sql;
+	final @NotNull Connection sql;
 
-	@NotNull
-	final List<DanceRow> dances = new ArrayList<>();
+	final @NotNull List<DanceRow> dances = new ArrayList<>();
 
 	public Collection<DanceRow> getDances() {
 		return dances;
 	}
 
-	@NotNull
-	final PreparedStatement cribStatement;
+	final @NotNull PreparedStatement cribStatement;
 
 	public DanceDatabase(final @NotNull Path filename) throws SQLException {
 		final SQLiteDataSource ds = new SQLiteDataSource();
@@ -145,8 +142,7 @@ public class DanceDatabase {
 						" 1");
 	}
 
-	@Nullable
-	public String cribText(final DanceRow dance) {
+	public @Nullable String cribText(final DanceRow dance) {
 		try {
 			cribStatement.setInt(1, dance.getId());
 		} catch (final SQLException except) {

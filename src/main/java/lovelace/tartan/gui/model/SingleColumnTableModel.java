@@ -174,21 +174,18 @@ public final class SingleColumnTableModel<Element>
 		return wrapped.contains(obj);
 	}
 
-	@NotNull
 	@Override
-	public Iterator<Element> iterator() {
+	public @NotNull Iterator<Element> iterator() {
 		return wrapped.iterator();
 	}
 
-	@NotNull
 	@Override
-	public Object[] toArray() {
+	public @NotNull Object[] toArray() {
 		return wrapped.toArray();
 	}
 
-	@NotNull
 	@Override
-	public <T> T[] toArray(@NotNull final T[] array) {
+	public @NotNull <T> T[] toArray(final @NotNull T[] array) {
 		return wrapped.toArray(array);
 	}
 
@@ -212,12 +209,12 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public boolean containsAll(@NotNull final Collection<?> collection) {
+	public boolean containsAll(final @NotNull Collection<?> collection) {
 		return wrapped.containsAll(collection);
 	}
 
 	@Override
-	public boolean addAll(@NotNull final Collection<? extends Element> collection) {
+	public boolean addAll(final @NotNull Collection<? extends Element> collection) {
 		boolean retval = false;
 		for (final Element item : collection) {
 			add(item);
@@ -228,7 +225,7 @@ public final class SingleColumnTableModel<Element>
 
 	@Override
 	public boolean addAll(final int index,
-						  @NotNull final Collection<? extends Element> collection) {
+						  final @NotNull Collection<? extends Element> collection) {
 		if (wrapped.addAll(index, collection)) {
 			fireEvents(new TableModelEvent(this, index, index + collection.size() - 1,
 					TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT));
@@ -239,7 +236,7 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public boolean removeAll(@NotNull final Collection<?> collection) {
+	public boolean removeAll(final @NotNull Collection<?> collection) {
 		boolean retval = false;
 		for (final Object item : collection) {
 			if (remove(item)) {
@@ -250,7 +247,7 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public boolean retainAll(@NotNull final Collection<?> collection) {
+	public boolean retainAll(final @NotNull Collection<?> collection) {
 		final int oldSize = wrapped.size();
 		// TODO: Implement more granularly
 		if (wrapped.retainAll(collection)) {
@@ -308,21 +305,18 @@ public final class SingleColumnTableModel<Element>
 		return wrapped.lastIndexOf(obj);
 	}
 
-	@NotNull
 	@Override
-	public ListIterator<Element> listIterator() {
+	public @NotNull ListIterator<Element> listIterator() {
 		return wrapped.listIterator();
 	}
 
-	@NotNull
 	@Override
-	public ListIterator<Element> listIterator(final int index) {
+	public @NotNull ListIterator<Element> listIterator(final int index) {
 		return wrapped.listIterator(index);
 	}
 
-	@NotNull
 	@Override
-	public List<Element> subList(final int fromIndex, final int toIndex) {
+	public @NotNull List<Element> subList(final int fromIndex, final int toIndex) {
 		return wrapped.subList(fromIndex, toIndex);
 	}
 }

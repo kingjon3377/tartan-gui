@@ -19,15 +19,14 @@ public final class DanceSearchResultsListModel implements ListModel<DanceRow> {
 	private final DanceDatabase db;
 	private final List<ListDataListener> listeners = new ArrayList<>();
 	private final List<DanceRow> backing = new ArrayList<>();
-	@Nullable
-	private String currentSearch = null;
+	private @Nullable String currentSearch = null;
 
 	public DanceSearchResultsListModel(final DanceDatabase db) {
 		this.db = db;
 		backing.addAll(db.getDances());
 	}
 
-	public void search(@Nullable final String term) {
+	public void search(final @Nullable String term) {
 		if (Objects.equals(term, currentSearch)) {
 			return;
 		}
