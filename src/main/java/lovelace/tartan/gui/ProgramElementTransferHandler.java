@@ -32,7 +32,7 @@ public class ProgramElementTransferHandler extends TransferHandler {
 	 * @param number a number
 	 * @return whether that bit is set in that number
 	 */
-	private static boolean isBitSet(int flag, int number) {
+	private static boolean isBitSet(final int flag, final int number) {
 		return (flag & number) == flag;
 	}
 
@@ -60,7 +60,7 @@ public class ProgramElementTransferHandler extends TransferHandler {
 	 */
 	@Override
 	@NotNull
-	public final Transferable createTransferable(JComponent component) {
+	public final Transferable createTransferable(final JComponent component) {
 		if (component instanceof JList<?>) {
 			return new IntTransferable(FLAVOR,
 					((JList<?>) component).getSelectedIndex());
@@ -89,11 +89,11 @@ public class ProgramElementTransferHandler extends TransferHandler {
 		final Component component = support.getComponent();
 		final DropLocation dropLocation = support.getDropLocation();
 		final Transferable transfer = support.getTransferable();
-		int payload;
+		final int payload;
 		try {
-			Object temp = transfer.getTransferData(FLAVOR);
+			final Object temp = transfer.getTransferData(FLAVOR); // TODO: inline
 			payload = (Integer) temp;
-		} catch (UnsupportedFlavorException | IOException except) {
+		} catch (final UnsupportedFlavorException | IOException except) {
 			LOGGER.log(Level.INFO, "Transfer failure", except);
 			return false;
 		}

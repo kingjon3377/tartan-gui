@@ -85,7 +85,7 @@ public class ProgramEditingWindow extends JFrame {
 		}
 		// TODO: Implement 'modified' flag like the SP map viewer
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		JMenuBar menuBar = new JMenuBar();
+		final JMenuBar menuBar = new JMenuBar();
 		menuBar.add(TartanMenu.fileMenu(programModel, metadata, mep));
 		setJMenuBar(menuBar);
 	}
@@ -110,7 +110,7 @@ public class ProgramEditingWindow extends JFrame {
 		} else {
 			try {
 				return new DanceDatabase(file.toPath());
-			} catch (SQLException except) {
+			} catch (final SQLException except) {
 				JOptionPane.showMessageDialog(null,
 						String.format(
 								"Error trying to open %s as SQLite database",
@@ -127,12 +127,12 @@ public class ProgramEditingWindow extends JFrame {
 		final FilenameFilter filter =
 				(dir, name) -> name.endsWith(".db") || name.endsWith(".sqlite") ||
 									   name.endsWith(".sqlite3");
-		for (String arg : args) {
+		for (final String arg : args) {
 			final Path file = Paths.get(arg);
 			if (file.toFile().canRead() && filter.accept(file.toFile(), arg)) {
 				try {
 					return new DanceDatabase(file);
-				} catch (SQLException except) {
+				} catch (final SQLException except) {
 					JOptionPane.showMessageDialog(null,
 							String.format(
 									"Error trying to open %s as SQLite database",
@@ -164,7 +164,7 @@ public class ProgramEditingWindow extends JFrame {
 		// TODO: If a non-DB argument, read previously-written project from it
 		final ProgramMetadata metadata = new ProgramMetadata();
 		final List<ProgramElement> initialProgram = new ArrayList<>();
-		for (String arg : args) {
+		for (final String arg : args) {
 			if (arg.endsWith(".tex") && new File(arg).canRead()) {
 				final Optional<Pair<@NotNull ProgramMetadata,
 										   @NotNull List<@NotNull ProgramElement>>>

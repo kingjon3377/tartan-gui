@@ -49,7 +49,7 @@ public class ImageFileChooser {
 
 	private void buttonHandler(final ActionEvent ignored) {
 		chooser.showOpenDialog();
-		@Nullable File file = chooser.getFilename();
+		@Nullable final File file = chooser.getFilename();
 		if (file == null) {
 			filename = null;
 			chosenFileField.setText("");

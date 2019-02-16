@@ -100,7 +100,7 @@ public final class LaTeXWriter {
 
 	private String latexImage(final @NotNull Path imageFilename) {
 		final String asString = imageFilename.toString();
-		for (String extension : SUPPORTED_IMAGE_EXTENSIONS) {
+		for (final String extension : SUPPORTED_IMAGE_EXTENSIONS) {
 			if (asString.endsWith(extension)) {
 				return asString.substring(0, asString.length() - extension.length());
 			}
@@ -180,19 +180,19 @@ public final class LaTeXWriter {
 		writeSimpleCommand(out, "listofdances");
 		writeSimpleCommand(out, "vspace", "\\fill");
 		writeSimpleCommand(out, "clearpage");
-		for (ProgramElement item : program) {
+		for (final ProgramElement item : program) {
 			if (item instanceof Dance) {
 				final Dance dance = (Dance) item;
 				out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
 						((Dance) item).getTitle(), ((Dance) item).getSource(),
 						((Dance) item).getTempo(), ((Dance) item).getTimes(),
 						((Dance) item).getLength(), ((Dance) item).getFormation()));
-				for (DanceMember figure : dance.getContents()) {
+				for (final DanceMember figure : dance.getContents()) {
 					if (figure instanceof Figure) {
 						writeSimpleFigure(out, (Figure) figure);
 					} else if (figure instanceof NamedFigure) {
 						out.append("\\namedfigure{");
-						for (NamedFigureMember subfigure : ((NamedFigure) figure)
+						for (final NamedFigureMember subfigure : ((NamedFigure) figure)
 																   .getContents()) {
 							if (subfigure instanceof Figure) {
 								writeSimpleFigure(out, (Figure) subfigure);
@@ -222,7 +222,7 @@ public final class LaTeXWriter {
 				}
 			}
 		}
-		for (Path image : metadata.getInsidePostDanceImages()) {
+		for (final Path image : metadata.getInsidePostDanceImages()) {
 			writeSimpleCommand(out, "clearpage");
 			writeSimpleCommand(out, "tartanimage", latexImage(image));
 		}

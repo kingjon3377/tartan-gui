@@ -39,13 +39,13 @@ public class DanceDatabase {
 	final PreparedStatement cribStatement;
 
 	public DanceDatabase(final @NotNull Path filename) throws SQLException {
-		SQLiteDataSource ds = new SQLiteDataSource();
+		final SQLiteDataSource ds = new SQLiteDataSource();
 		ds.setUrl("jdbc:sqlite:" + filename);
 		sql = ds.getConnection();
-		Map<Integer, DanceType> typesMap = new HashMap<>();
-		try (PreparedStatement typesStatement = sql.prepareStatement(
+		final Map<Integer, DanceType> typesMap = new HashMap<>();
+		try (final PreparedStatement typesStatement = sql.prepareStatement(
 				"SELECT id, name, short_name FROM dancetype");
-			 ResultSet typesResults = typesStatement.executeQuery()) {
+			 final ResultSet typesResults = typesStatement.executeQuery()) {
 			while (typesResults.next()) {
 				final int id = typesResults.getInt("id");
 				final String name = typesResults.getString("name");
@@ -53,10 +53,10 @@ public class DanceDatabase {
 				typesMap.put(id, new DanceTypeImpl(id, name, abbreviation));
 			}
 		}
-		Map<Integer, DanceFormation> shapesMap = new HashMap<>();
-		try (PreparedStatement shapesStatement = sql.prepareStatement(
+		final Map<Integer, DanceFormation> shapesMap = new HashMap<>();
+		try (final PreparedStatement shapesStatement = sql.prepareStatement(
 				"SELECT id, name, shortname FROM shape");
-			 ResultSet shapesResults = shapesStatement.executeQuery()) {
+			 final ResultSet shapesResults = shapesStatement.executeQuery()) {
 			while (shapesResults.next()) {
 				final int id = shapesResults.getInt("id");
 				final String name = shapesResults.getString("name");
@@ -64,17 +64,17 @@ public class DanceDatabase {
 				shapesMap.put(id, new DanceFormationImpl(id, name, abbreviation));
 			}
 		}
-		Map<Integer, DanceProgression> progressionsMap = new HashMap<>();
-		try (PreparedStatement progressionsStatement = sql.prepareStatement(
+		final Map<Integer, DanceProgression> progressionsMap = new HashMap<>();
+		try (final PreparedStatement progressionsStatement = sql.prepareStatement(
 				"SELECT id, name FROM progression");
-			 ResultSet progressionsResults = progressionsStatement.executeQuery()) {
+			 final ResultSet progressionsResults = progressionsStatement.executeQuery()) {
 			while (progressionsResults.next()) {
 				final int id = progressionsResults.getInt("id");
 				final String name = progressionsResults.getString("name");
 				progressionsMap.put(id, new DanceProgressionImpl(id, name));
 			}
 		}
-		try (PreparedStatement danceStatement = sql.prepareStatement(
+		try (final PreparedStatement danceStatement = sql.prepareStatement(
 				"SELECT dance.id, dance.name, dance.barsperrepeat, dance.shape_id, " +
 						"dance" +
 						".type_id, dance.couples_id, publication.name AS " +
@@ -82,12 +82,12 @@ public class DanceDatabase {
 						"dancespublicationsmap, publication WHERE dance.id = " +
 						"dancespublicationsmap.dance_id AND publication.id = " +
 						"dancespublicationsmap.publication_id");
-			 ResultSet danceResults = danceStatement.executeQuery()) {
+			 final ResultSet danceResults = danceStatement.executeQuery()) {
 			while (danceResults.next()) {
 				final int id = danceResults.getInt("id");
 				final String name = danceResults.getString("name");
 				final int length = danceResults.getInt("barsperrepeat");
-				DanceFormation shape;
+				final DanceFormation shape;
 				final int shapeNum = danceResults.getInt("shape_id");
 				if (shapesMap.containsKey(shapeNum)) {
 					shape = shapesMap.get(shapeNum);
@@ -96,7 +96,7 @@ public class DanceDatabase {
 							"Shape for %s was SQL null or an unknown ID", name));
 					shape = DanceFormationImpl.UNKNOWN;
 				}
-				DanceType type;
+				final DanceType type;
 				final int typeNum = danceResults.getInt("type_id");
 				if (typesMap.containsKey(typeNum)) {
 					type = typesMap.get(typeNum);
@@ -146,20 +146,20 @@ public class DanceDatabase {
 	}
 
 	@Nullable
-	public String cribText(DanceRow dance) {
+	public String cribText(final DanceRow dance) {
 		try {
 			cribStatement.setInt(1, dance.getId());
-		} catch (SQLException except) {
+		} catch (final SQLException except) {
 			LOGGER.log(Level.WARNING, "SQL error preparing to get crib text", except);
 			return null;
 		}
-		try (ResultSet result = cribStatement.executeQuery()) {
+		try (final ResultSet result = cribStatement.executeQuery()) {
 			if (result.next()) {
 				return result.getString("text");
 			} else {
 				return null;
 			}
-		} catch (SQLException except) {
+		} catch (final SQLException except) {
 			LOGGER.log(Level.WARNING, "SQL error getting crib text", except);
 			return null;
 		}

@@ -38,7 +38,7 @@ public final class LaTeXReader {
 	 */
 	private static void skipComment(@NotNull final Deque<Character> localInput) {
 		while (!localInput.isEmpty()) {
-			char top = localInput.pop();
+			final char top = localInput.pop(); // TODO: inline
 			if ('\n' == top) {
 				break;
 			}
@@ -349,7 +349,7 @@ public final class LaTeXReader {
 		if (array.length > 0) {
 			try {
 				return Integer.parseInt(array[0]);
-			} catch (NumberFormatException except) {
+			} catch (final NumberFormatException except) {
 				LOGGER.severe(() -> String.format(
 						"Times through couldn't be extracted from dance-length parameter " +
 								"for dance '%s'",
@@ -375,7 +375,7 @@ public final class LaTeXReader {
 		if (array.length > 1) {
 			try {
 				return Integer.parseInt(array[1]);
-			} catch (NumberFormatException except) {
+			} catch (final NumberFormatException except) {
 				LOGGER.severe(() -> String.format(
 						"Length-in-bars couldn't be extracted from dance-length parameter " +
 								"for dance '%s'",

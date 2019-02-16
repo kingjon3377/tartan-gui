@@ -22,9 +22,9 @@ public class NamedFigureEditor extends JPanel {
 	private static final Logger LOGGER =
 			Logger.getLogger(NamedFigureEditor.class.getName());
 
-	public NamedFigureEditor(NamedFigure namedFigure, Runnable stopOperation) {
+	public NamedFigureEditor(final NamedFigure namedFigure, final Runnable stopOperation) {
 		super(new GridLayout(0, 1));
-		for (NamedFigureMember member : namedFigure.getContents()) {
+		for (final NamedFigureMember member : namedFigure.getContents()) {
 			if (member instanceof Figure) {
 				add(new FigureEditor((Figure) member));
 			} else if (member instanceof SimplestMember) {

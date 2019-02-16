@@ -87,7 +87,7 @@ public final class PlatformFileDialog {
 	 * @param filter the new file filter for the dialog; must be either a {@link
 	 *               FileFilter} or a {@link FilenameFilter}.
 	 */
-	public void setFileFilter(Object filter) {
+	public void setFileFilter(final Object filter) {
 		if (wrapped instanceof FileDialog) {
 			if (filter instanceof FilenameFilter) {
 				((FileDialog) wrapped).setFilenameFilter((FilenameFilter) filter);

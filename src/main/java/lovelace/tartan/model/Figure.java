@@ -38,7 +38,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @param bars The bars on which this figure is to be danced, or null if not
 	 *             specified.
 	 */
-	public void setBars(@Nullable String bars) {
+	public void setBars(@Nullable final String bars) {
 		this.bars = bars;
 	}
 
@@ -60,7 +60,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @param description The description of the figure.
 	 * @param bars        The bars on which this figure is danced.
 	 */
-	public Figure(@NotNull String description, @Nullable String bars) {
+	public Figure(@NotNull final String description, @Nullable final String bars) {
 		this.description = description;
 		this.bars = bars;
 	}
@@ -70,7 +70,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 *
 	 * @param description The description of the figure.
 	 */
-	public Figure(@NotNull String description) {
+	public Figure(@NotNull final String description) {
 		this.description = description;
 		this.bars = null;
 	}
@@ -93,7 +93,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @return whether it is the same as this
 	 */
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(final Object other) {
 		if (other instanceof Figure) {
 			final Figure that = (Figure) other;
 			return Objects.equals(bars, that.bars) && description.equals(that.description);

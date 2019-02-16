@@ -121,7 +121,7 @@ public final class TartanMenu {
 				builder.append(System.lineSeparator());
 			}
 			return Optional.of(new LaTeXReader().readLaTeXProgram(builder.toString()));
-		} catch (IOException | ParseException except) {
+		} catch (final IOException | ParseException except) {
 			JOptionPane.showMessageDialog(null,
 					String.format(
 							"Error trying to read LaTeX from %s",

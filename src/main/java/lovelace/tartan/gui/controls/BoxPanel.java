@@ -64,7 +64,7 @@ public class BoxPanel extends JPanel {
 		}
 	}
 
-	public BoxPanel(BoxDirection direction, @NotNull Object... contents) {
+	public BoxPanel(final BoxDirection direction, @NotNull final Object... contents) {
 		//noinspection MagicConstant
 		setLayout(new BoxLayout(this, direction.getConstant()));
 		for (final Object item : contents) {

@@ -72,7 +72,7 @@ public final class DatabaseAdapter {
 		if (progression.isOnlyOnce()) {
 			return 1;
 		} else if (shape.getName().startsWith("Longwise -")) {
-			String abbreviation = shape.getAbbreviation();
+			final String abbreviation = shape.getAbbreviation();
 			final char lastChar = abbreviation.charAt(abbreviation.length() - 1);
 			if (Character.isDigit(lastChar)) {
 				final int setSize = Character.getNumericValue(lastChar);
@@ -96,8 +96,8 @@ public final class DatabaseAdapter {
 			throw new IllegalArgumentException("Can't handle HTML cribs here");
 		}
 		@Nullable String currentBars = null;
-		List<@NotNull Figure> retval = new ArrayList<>();
-		String[] split = crib.split("\n");
+		final List<@NotNull Figure> retval = new ArrayList<>();
+		final String[] split = crib.split("\n");
 		for (final String longLine : split) {
 			final String line = longLine.trim();
 			if (line.endsWith("::")) {
@@ -148,7 +148,7 @@ public final class DatabaseAdapter {
 						"</td></tr>");
 				retval.add(new Figure(current, null));
 			} else {
-				String current =
+				final String current =
 						stripFromEnd(stripFromStart(line, "<tr><td class=\"bars\">"),
 								"</td>");
 				final int firstAngleBracket = current.indexOf('<');

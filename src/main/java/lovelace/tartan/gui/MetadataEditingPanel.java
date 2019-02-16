@@ -70,7 +70,7 @@ public final class MetadataEditingPanel extends JPanel {
 	private GroupLayout.Group createParallelGroup(final GroupLayout.Alignment alignment,
 												  final Object... members) {
 		@NotNull GroupLayout.Group retval = groupLayout.createParallelGroup(alignment);
-		for (Object member : members) {
+		for (final Object member : members) {
 			if (member instanceof Component) {
 				retval = retval.addComponent((Component) member);
 			} else if (member instanceof GroupLayout.Group) {
@@ -85,7 +85,7 @@ public final class MetadataEditingPanel extends JPanel {
 
 	private GroupLayout.Group createSequentialGroup(final Object... members) {
 		@NotNull GroupLayout.Group retval = groupLayout.createSequentialGroup();
-		for (Object member : members) {
+		for (final Object member : members) {
 			if (member instanceof Component) {
 				retval = retval.addComponent((Component) member);
 			} else if (member instanceof GroupLayout.Group) {
@@ -186,7 +186,7 @@ public final class MetadataEditingPanel extends JPanel {
 				});
 		final JButton fillerImageRemove = new ListenedButton("Remove Image",
 				(ignored) -> { // TODO: convert from lambda to class method?
-					int index = fillerImageList.getSelectedIndex();
+					final int index = fillerImageList.getSelectedIndex();
 					if (index >= 0) {
 						fillerImageListModel.remove(index);
 					}

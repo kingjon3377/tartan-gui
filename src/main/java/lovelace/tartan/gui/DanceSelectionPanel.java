@@ -42,7 +42,7 @@ public class DanceSelectionPanel extends JSplitPane {
 	private final ReorderableListModel<ProgramElement> program;
 	private final DanceDatabase db;
 
-	private void filterDanceList(ActionEvent ignored) {
+	private void filterDanceList(final ActionEvent ignored) {
 		final String search = filterField.getText().trim();
 		if (search.isEmpty()) {
 			danceListModel.search(null);
@@ -53,7 +53,7 @@ public class DanceSelectionPanel extends JSplitPane {
 	}
 
 	private void addDance() {
-		@Nullable DanceRow selection = danceList.getSelectedValue();
+		@Nullable final DanceRow selection = danceList.getSelectedValue();
 		if (selection != null && program.stream().filter(Dance.class::isInstance)
 										 .map(Dance.class::cast).map(Dance::getTitle)
 										 .noneMatch(selection.getName()::equals)) {
@@ -68,8 +68,8 @@ public class DanceSelectionPanel extends JSplitPane {
 		}
 	}
 
-	public DanceSelectionPanel(DanceDatabase db,
-							   ReorderableListModel<ProgramElement> program) {
+	public DanceSelectionPanel(final DanceDatabase db,
+							   final ReorderableListModel<ProgramElement> program) {
 		super(JSplitPane.HORIZONTAL_SPLIT, true);
 		this.program = program;
 		this.db = db;
@@ -79,7 +79,7 @@ public class DanceSelectionPanel extends JSplitPane {
 					new ImageButton(ImageLoader.loadImage(
 							// TODO: Check image path once port back to Java complete
 							"lovelace/tartan/gui/arrow-right-300px.png"));
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			rightButton = new JButton("Add");
 		}
 		JButton leftButton;
@@ -88,7 +88,7 @@ public class DanceSelectionPanel extends JSplitPane {
 					new ImageButton(ImageLoader.loadImage(
 							// TODO: Check image path once port back to Java complete
 							"lovelace/tartan/gui/arrow-left-300px.png"));
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			leftButton = new JButton("Add");
 		}
 		final JPanel inner =
@@ -140,7 +140,7 @@ public class DanceSelectionPanel extends JSplitPane {
 				program.remove(selection);
 			}
 		});
-		JPanel rightPanel =
+		final JPanel rightPanel =
 				BorderedPanel.verticalLine(null, new JScrollPane(selectedList),
 						new ListenedButton("Add Break", (ignored) -> {
 							final int selection = selectedList.getSelectedIndex();

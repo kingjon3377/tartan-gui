@@ -17,7 +17,7 @@ public class ReorderableListModel<Element> extends AbstractList<Element>
 	private final List<ListDataListener> listeners = new ArrayList<>();
 	private final List<Element> wrapped;
 
-	public ReorderableListModel(List<Element> list) {
+	public ReorderableListModel(final List<Element> list) {
 		wrapped = list;
 	}
 
@@ -81,7 +81,7 @@ public class ReorderableListModel<Element> extends AbstractList<Element>
 
 	@Override
 	public Element remove(final int index) {
-		Element retval = wrapped.remove(index);
+		final Element retval = wrapped.remove(index);
 		final ListDataEvent event =
 				new ListDataEvent(this, ListDataEvent.INTERVAL_REMOVED, index, index);
 		for (final ListDataListener listener : listeners) {

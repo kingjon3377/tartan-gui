@@ -78,13 +78,13 @@ public final class DanceSearchResultsListModel implements ListModel<DanceRow> {
 	}
 
 	private void fireRemovalEvent(final ListDataEvent event) {
-		for (ListDataListener listener : listeners) {
+		for (final ListDataListener listener : listeners) {
 			listener.intervalRemoved(event);
 		}
 	}
 
 	private void fireInsertionEvent(final ListDataEvent event) {
-		for (ListDataListener listener : listeners) {
+		for (final ListDataListener listener : listeners) {
 			listener.intervalAdded(event);
 		}
 	}

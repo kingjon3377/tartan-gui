@@ -82,7 +82,7 @@ public class LaTeXTest {
 				new Dance("Unsourced Medley", "", "Medley", 1, 64, "Sq. Set",
 						new Figure("dance description here"), new Figure("xyzzy")),
 				new Intermission("Break"));
-		ProgramMetadata startingMetadata = new ProgramMetadata();
+		final ProgramMetadata startingMetadata = new ProgramMetadata();
 		startingMetadata.setGroupCoverName("groupCoverName");
 		startingMetadata.setGroupTitleName("groupTitleName");
 		startingMetadata.setEventCoverName("eventCoverName");
@@ -111,7 +111,7 @@ public class LaTeXTest {
 
 	@Test
 	public void withImageTest() throws IOException, ParseException {
-		List<ProgramElement> startingProgram = Arrays.asList(
+		final List<ProgramElement> startingProgram = Arrays.asList(
 				new Dance("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
 						new Figure("1s & 2s advance and retire and dance back to back",
 								"1-8"),

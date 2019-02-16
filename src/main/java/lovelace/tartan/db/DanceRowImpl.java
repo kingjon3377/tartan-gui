@@ -152,7 +152,7 @@ public final class DanceRowImpl implements DanceRow {
 	@Override
 	public boolean equals(final Object obj) {
 		if (obj instanceof DanceRow) {
-			DanceRow that = (DanceRow) obj;
+			final DanceRow that = (DanceRow) obj;
 			return id == that.getId() && name.equals(that.getName()) &&
 						   length == that.getLength() && shape.equals(that.getShape()) &&
 						   type.equals(that.getType()) && couples == that.getCouples() &&

@@ -42,7 +42,7 @@ public class FigureEditor extends JPanel {
 					ImageLoader.loadImage(
 							// TODO: Check image path once port back to Java complete
 							"lovelace/tartan/gui/Green-Check-Mark-Icon-300px.png"));
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			okButton = new JButton("OK");
 		}
 		okButton.addActionListener(this::okListener);
@@ -54,7 +54,7 @@ public class FigureEditor extends JPanel {
 					new ImageButton(ImageLoader.loadImage(
 							// TODO: Check image path once port back to Java complete
 							"lovelace/tartan/gui/Red-X-Icon-300px.png"));
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			cancelButton = new JButton("Cancel");
 		}
 		final KeyListener escapeListener = new KeyAdapter() {

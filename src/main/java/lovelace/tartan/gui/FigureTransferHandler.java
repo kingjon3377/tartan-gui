@@ -79,10 +79,10 @@ public class FigureTransferHandler extends TransferHandler {
 		final Component component = support.getComponent();
 		final DropLocation dropLocation = support.getDropLocation();
 		final Transferable transfer = support.getTransferable();
-		int payload;
+		final int payload;
 		try {
 			payload = (Integer) transfer.getTransferData(FLAVOR);
-		} catch (UnsupportedFlavorException | IOException except) {
+		} catch (final UnsupportedFlavorException | IOException except) {
 			LOGGER.log(Level.INFO, "Transfer failure", except);
 			return false;
 		}

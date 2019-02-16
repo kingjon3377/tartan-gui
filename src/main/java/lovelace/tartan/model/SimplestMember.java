@@ -33,7 +33,7 @@ public final class SimplestMember implements NamedFigureMember, DanceMember {
 	/**
 	 * @param string The string to wrap
 	 */
-	public SimplestMember(@NotNull String string) {
+	public SimplestMember(@NotNull final String string) {
 		this.string = string;
 	}
 
@@ -51,7 +51,7 @@ public final class SimplestMember implements NamedFigureMember, DanceMember {
 	 * @return whether it is also a NamedFigureMember and wraps an identical string.
 	 */
 	@Override
-	public boolean equals(Object other) {
+	public boolean equals(final Object other) {
 		return other instanceof SimplestMember &&
 					   string.equals(((SimplestMember) other).string);
 	}

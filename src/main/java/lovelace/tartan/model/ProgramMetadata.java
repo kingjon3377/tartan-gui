@@ -358,13 +358,13 @@ public final class ProgramMetadata {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		for (Field field : ProgramMetadata.class.getDeclaredFields()) {
+		for (final Field field : ProgramMetadata.class.getDeclaredFields()) {
 			builder.append("- ");
 			builder.append(field.getName());
 			builder.append(": ");
 			try {
 				builder.append(field.get(this));
-			} catch (IllegalAccessException except) {
+			} catch (final IllegalAccessException except) {
 				builder.append("[threw exception]");
 			}
 			builder.append(System.lineSeparator());
@@ -379,7 +379,7 @@ public final class ProgramMetadata {
 	@Override
 	public boolean equals(final Object other) {
 		if (other instanceof ProgramMetadata) {
-			ProgramMetadata that = (ProgramMetadata) other;
+			final ProgramMetadata that = (ProgramMetadata) other;
 			return titleOnCover == that.titleOnCover &&
 						   printAuldLangSyne == that.printAuldLangSyne &&
 						   groupCoverName.equals(that.groupCoverName) &&

@@ -57,7 +57,7 @@ public class ElementEditingPanel extends JPanel {
 		this.current = current;
 		detailsPanel.setCurrent(current);
 		if (current instanceof Dance) {
-			@NotNull SingleColumnTableModel<DanceMember> model =
+			@NotNull final SingleColumnTableModel<DanceMember> model =
 					new SingleColumnTableModel<>(
 							((Dance) current).getContents(), DanceMember.class,
 							"Directions");
@@ -66,7 +66,7 @@ public class ElementEditingPanel extends JPanel {
 			table.setModel(model);
 			fixHeights(null);
 		} else {
-			@NotNull SingleColumnTableModel<DanceMember> model =
+			@NotNull final SingleColumnTableModel<DanceMember> model =
 					new SingleColumnTableModel<>(new ArrayList<>(), DanceMember.class,
 							"Directions");
 			tableModel = model;
@@ -91,7 +91,7 @@ public class ElementEditingPanel extends JPanel {
 	}
 
 	private void removeFigure(final Object ignored) { // TODO: Disable the button when not a dance or no figure selected
-		int selection = table.getSelectedRow();
+		final int selection = table.getSelectedRow();
 		if (current instanceof Dance && selection >= 0 && selection < table.getRowCount()) {
 			tableModel.remove(selection);
 		}

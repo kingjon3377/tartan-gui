@@ -28,24 +28,24 @@ public final class DanceStringEditor extends JPanel {
 	@NotNull
 	private final Runnable cancel;
 
-	private void okListener(ActionEvent ignored) {
-		String text = field.getText();
+	private void okListener(final ActionEvent ignored) {
+		final String text = field.getText();
 		string = text;
 		consumer.accept(text);
 	}
 
-	private void cancelListener(ActionEvent ignored) {
+	private void cancelListener(final ActionEvent ignored) {
 		field.setText(string);
 		cancel.run();
 	}
 
 	private static void noop() {}
 
-	public DanceStringEditor(String string, Consumer<@NotNull String> consumer) {
+	public DanceStringEditor(final String string, final Consumer<@NotNull String> consumer) {
 		this(string, consumer, DanceStringEditor::noop);
 	}
-	public DanceStringEditor(@NotNull String string, @NotNull Consumer<@NotNull String> consumer,
-							 @NotNull Runnable cancel) {
+	public DanceStringEditor(@NotNull final String string, @NotNull final Consumer<@NotNull String> consumer,
+							 @NotNull final Runnable cancel) {
 		super(new BorderLayout());
 		this.string = string;
 		field = new JTextField(string, 26);
@@ -58,7 +58,7 @@ public final class DanceStringEditor extends JPanel {
 					ImageLoader.loadImage(
 							// TODO: Check image path once port back to Java complete
 							"lovelace/tartan/gui/Green-Check-Mark-Icon-300px.png"));
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			okButton = new JButton("OK");
 		}
 		okButton.addActionListener(this::okListener);
@@ -68,7 +68,7 @@ public final class DanceStringEditor extends JPanel {
 					new ImageButton(ImageLoader.loadImage(
 							// TODO: Check image path once port back to Java complete
 								"lovelace/tartan/gui/Red-X-Icon-300px.png"));
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			cancelButton = new JButton("Cancel");
 		}
 		cancelButton.addActionListener(this::cancelListener);

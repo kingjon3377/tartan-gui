@@ -40,7 +40,7 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 		} else if (value instanceof NamedFigure) {
 			final StringBuilder builder = new StringBuilder();
 			builder.append("<html><table>");
-			for (NamedFigureMember movement : ((NamedFigure) value).getContents()) {
+			for (final NamedFigureMember movement : ((NamedFigure) value).getContents()) {
 				builder.append("<tr><td width=\"10%\">");
 				if (movement instanceof Figure) {
 					builder.append(

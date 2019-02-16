@@ -22,7 +22,7 @@ public final class SingleColumnTableModel<Element>
 	private final List<TableModelListener> listeners = new ArrayList<>();
 
 	private void fireEvents(final TableModelEvent... events) {
-		for (TableModelListener listener : listeners) {
+		for (final TableModelListener listener : listeners) {
 			Arrays.stream(events).forEach(listener::tableChanged);
 		}
 	}
@@ -143,7 +143,7 @@ public final class SingleColumnTableModel<Element>
 	@Override
 	public void reorder(final int fromIndex, final int toIndex) {
 		if (fromIndex != toIndex) {
-			Element item = wrapped.remove(fromIndex);
+			final Element item = wrapped.remove(fromIndex);
 			if (fromIndex > toIndex) {
 				wrapped.add(toIndex, item);
 			} else {
@@ -219,7 +219,7 @@ public final class SingleColumnTableModel<Element>
 	@Override
 	public boolean addAll(@NotNull final Collection<? extends Element> collection) {
 		boolean retval = false;
-		for (Element item : collection) {
+		for (final Element item : collection) {
 			add(item);
 			retval = true;
 		}
@@ -241,7 +241,7 @@ public final class SingleColumnTableModel<Element>
 	@Override
 	public boolean removeAll(@NotNull final Collection<?> collection) {
 		boolean retval = false;
-		for (Object item : collection) {
+		for (final Object item : collection) {
 			if (remove(item)) {
 				retval = true;
 			}
@@ -293,7 +293,7 @@ public final class SingleColumnTableModel<Element>
 
 	@Override
 	public Element remove(final int index) {
-		Element retval = wrapped.remove(index);
+		final Element retval = wrapped.remove(index);
 		fireRemovalEvent(index);
 		return retval;
 	}
