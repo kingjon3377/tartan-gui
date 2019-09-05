@@ -2,7 +2,7 @@ This application is intended to make it easy for non-technical users to create
 and maintain Scottish country dance Ball programs using my
 [tartan](https://github.com/kingjon3377/tartan) LaTeX package. By its 1.0
 release, it will allow you to select dances from a downloaded copy of [the
-Scottish Country Dance Database](http://my.strathspey.org/dd/index/), revise
+Scottish Country Dance Database](https://my.strathspey.org/dd/index/), revise
 their directions, arrange them in any order you like, and write out the Ball
 program to a LaTeX document that you can then typeset (using, for example, the
 copy of [TeXworks](https://en.wikipedia.org/wiki/TeXworks) bundled with
