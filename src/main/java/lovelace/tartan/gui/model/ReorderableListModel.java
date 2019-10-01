@@ -91,11 +91,13 @@ public class ReorderableListModel<Element> extends AbstractList<Element>
 	}
 
 	public void clear() {
-		final ListDataEvent event = new ListDataEvent(this,
+		if (!wrapped.isEmpty()) {
+			final ListDataEvent event = new ListDataEvent(this,
 				ListDataEvent.INTERVAL_REMOVED, 0, wrapped.size() - 1);
-		wrapped.clear();
-		for (final ListDataListener listener : listeners) {
-			listener.intervalRemoved(event);
+			wrapped.clear();
+			for (final ListDataListener listener : listeners) {
+				listener.intervalRemoved(event);
+			}
 		}
 	}
 
