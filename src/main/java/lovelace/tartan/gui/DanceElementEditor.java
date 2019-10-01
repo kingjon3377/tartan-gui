@@ -63,7 +63,7 @@ public class DanceElementEditor implements TableCellEditor {
 	@Override
 	public boolean stopCellEditing() {
 		final ChangeEvent stopEvent = new ChangeEvent(this);
-		for (final CellEditorListener listener : listeners) {
+		for (final CellEditorListener listener : new ArrayList<>(listeners)) {
 			listener.editingStopped(stopEvent);
 		}
 		return true;
@@ -72,7 +72,7 @@ public class DanceElementEditor implements TableCellEditor {
 	@Override
 	public void cancelCellEditing() {
 		final ChangeEvent cancelEvent = new ChangeEvent(this);
-		for (final CellEditorListener listener : listeners) {
+		for (final CellEditorListener listener : new ArrayList<>(listeners)) {
 			listener.editingCanceled(cancelEvent);
 		}
 	}
