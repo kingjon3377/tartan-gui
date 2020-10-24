@@ -3,6 +3,7 @@ package lovelace.tartan.latex;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import lovelace.tartan.model.Dance;
 import lovelace.tartan.model.DanceMember;
@@ -96,7 +97,7 @@ public final class LaTeXWriter {
 	 * The extensions the graphicx package supports.
 	 */
 	private static final List<String> SUPPORTED_IMAGE_EXTENSIONS =
-			Arrays.asList(".png", ".jpg", ".pdf");
+			Collections.unmodifiableList(Arrays.asList(".png", ".jpg", ".pdf"));
 
 	private String latexImage(final @NotNull Path imageFilename) {
 		final String asString = imageFilename.toString();
