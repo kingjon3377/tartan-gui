@@ -2,6 +2,7 @@ package lovelace.tartan.gui.controls;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.util.Objects;
 import javax.swing.JPanel;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,9 +23,9 @@ public class BorderedPanel extends JPanel {
 	}
 
 	public void setCenter(final @Nullable Component center) {
-		if (center != null) {
+		if (Objects.nonNull(center)) {
 			add(center, BorderLayout.CENTER);
-		} else if (this.center != null) {
+		} else if (Objects.nonNull(this.center)) {
 			remove(this.center);
 		}
 		this.center = center;
@@ -35,9 +36,9 @@ public class BorderedPanel extends JPanel {
 	}
 
 	public void setPageStart(final @Nullable Component pageStart) {
-		if (pageStart != null) {
+		if (Objects.nonNull(pageStart)) {
 			add(pageStart, BorderLayout.PAGE_START);
-		} else if (this.pageStart != null) {
+		} else if (Objects.nonNull(this.pageStart)) {
 			remove(this.pageStart);
 		}
 		this.pageStart = pageStart;
@@ -48,9 +49,9 @@ public class BorderedPanel extends JPanel {
 	}
 
 	public void setPageEnd(final @Nullable Component pageEnd) {
-		if (pageEnd != null) {
+		if (Objects.nonNull(pageEnd)) {
 			add(pageEnd, BorderLayout.PAGE_END);
-		} else if (this.pageEnd != null) {
+		} else if (Objects.nonNull(this.pageEnd)) {
 			remove(this.pageEnd);
 		}
 		this.pageEnd = pageEnd;
@@ -61,9 +62,9 @@ public class BorderedPanel extends JPanel {
 	}
 
 	public void setLineStart(final @Nullable Component lineStart) {
-		if (lineStart != null) {
+		if (Objects.nonNull(lineStart)) {
 			add(lineStart, BorderLayout.LINE_START);
-		} else if (this.lineStart != null) {
+		} else if (Objects.nonNull(this.lineStart)) {
 			remove(this.lineStart);
 		}
 		this.lineStart = lineStart;
@@ -74,9 +75,9 @@ public class BorderedPanel extends JPanel {
 	}
 
 	public void setLineEnd(final @Nullable Component lineEnd) {
-		if (lineEnd != null) {
+		if (Objects.nonNull(lineEnd)) {
 			add(lineEnd, BorderLayout.LINE_END);
-		} else if (this.lineEnd != null) {
+		} else if (Objects.nonNull(this.lineEnd)) {
 			remove(this.lineEnd);
 		}
 		this.lineEnd = lineEnd;

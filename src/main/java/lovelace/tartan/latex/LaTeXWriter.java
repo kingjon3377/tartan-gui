@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import lovelace.tartan.model.Dance;
 import lovelace.tartan.model.DanceMember;
 import lovelace.tartan.model.Figure;
@@ -145,7 +146,7 @@ public final class LaTeXWriter {
 		writePrologue(out, metadata);
 		writeSimpleCommand(out, "begin", "document");
 		final @Nullable Path coverImage = metadata.getCoverImage();
-		if (coverImage != null) {
+		if (Objects.nonNull(coverImage)) {
 			// TODO: Add helper "allCoverFieldsEmpty() method to ProgramMetadata
 			if (metadata.getGroupCoverName().isEmpty() &&
 						metadata.getEventCoverName().isEmpty() &&
