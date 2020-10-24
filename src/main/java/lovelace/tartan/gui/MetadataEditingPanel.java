@@ -31,6 +31,23 @@ import org.jetbrains.annotations.Nullable;
  * @author Jonathan Lovelace
  */
 public final class MetadataEditingPanel extends JPanel {
+	private final JTextField groupNameCoverBox = new JTextField(15);
+	private final JTextField groupNameTitleBox = new JTextField(15);
+	private final JTextField eventNameCoverBox = new JTextField(15);
+	private final JTextField eventNameTitleBox = new JTextField(15);
+	private final JTextField dateCoverBox = new JTextField(15);
+	private final JTextField dateTitleBox = new JTextField(15);
+	private final JTextField locationCoverBox = new JTextField(15);
+	private final JTextField locationTitleBox = new JTextField(15);
+	private final JTextField locationAddressBox = new JTextField(15);
+	private final JTextArea timesArea = new JTextArea(3, 15);
+	private final JTextField musiciansBox = new JTextField(15);
+	private final ImageFileChooser coverImageSelector;
+	private final ImageFileChooser backImageSelector;
+	private final JCheckBox titleOnCoverField = new JCheckBox();
+	private final JCheckBox auldLangSyneField = new JCheckBox();
+	private final @NotNull ProgramMetadata metadata;
+
 	// TODO: Make a JTextBox subclass taking both a Consumer<String> and a
 	//  Supplier<String>, and has revert() as an instance method
 	private static final class TextBoxChangeListener implements DocumentListener {
@@ -97,23 +114,6 @@ public final class MetadataEditingPanel extends JPanel {
 		}
 		return retval;
 	}
-
-	private final JTextField groupNameCoverBox = new JTextField(15);
-	private final JTextField groupNameTitleBox = new JTextField(15);
-	private final JTextField eventNameCoverBox = new JTextField(15);
-	private final JTextField eventNameTitleBox = new JTextField(15);
-	private final JTextField dateCoverBox = new JTextField(15);
-	private final JTextField dateTitleBox = new JTextField(15);
-	private final JTextField locationCoverBox = new JTextField(15);
-	private final JTextField locationTitleBox = new JTextField(15);
-	private final JTextField locationAddressBox = new JTextField(15);
-	private final JTextArea timesArea = new JTextArea(3, 15);
-	private final JTextField musiciansBox = new JTextField(15);
-	private final ImageFileChooser coverImageSelector;
-	private final ImageFileChooser backImageSelector;
-	private final JCheckBox titleOnCoverField = new JCheckBox();
-	private final JCheckBox auldLangSyneField = new JCheckBox();
-	private final @NotNull ProgramMetadata metadata;
 
 	public void revert() {
 		groupNameCoverBox.setText(metadata.getGroupCoverName());

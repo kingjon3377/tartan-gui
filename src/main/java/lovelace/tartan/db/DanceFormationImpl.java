@@ -10,6 +10,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public class DanceFormationImpl implements DanceFormation {
 	/**
+	 * A singleton "unknown" formation.
+	 */
+	public static final DanceFormation UNKNOWN =
+			new DanceFormationImpl(-1, "Unknown", "?");
+
+	/**
 	 * The number that identifies this formation in the database.
 	 */
 	private final Integer id;
@@ -59,12 +65,6 @@ public class DanceFormationImpl implements DanceFormation {
 		this.name = name;
 		this.abbreviation = abbreviation;
 	}
-
-	/**
-	 * A singleton "unknown" formation.
-	 */
-	public static final DanceFormation UNKNOWN =
-			new DanceFormationImpl(-1, "Unknown", "?");
 
 	@Override
 	public boolean equals(final Object obj) {

@@ -40,6 +40,9 @@ import org.jetbrains.annotations.Nullable;
 public final class TartanMenu {
 	private static final Logger LOGGER = Logger.getLogger(TartanMenu.class.getName());
 
+	private static final FileFilter LATEX_FILTER =
+			new FileNameExtensionFilter("LaTeX documents", "tex");
+
 	private TartanMenu() {
 	}
 
@@ -59,9 +62,6 @@ public final class TartanMenu {
 		}
 		return retval;
 	}
-
-	private static final FileFilter LATEX_FILTER =
-			new FileNameExtensionFilter("LaTeX documents", "tex");
 
 	static void readFromFile(final @NotNull ReorderableListModel<ProgramElement> program,
 							 final @NotNull ProgramMetadata metadata,

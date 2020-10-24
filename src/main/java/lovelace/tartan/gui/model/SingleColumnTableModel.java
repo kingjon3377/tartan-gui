@@ -21,6 +21,10 @@ public final class SingleColumnTableModel<Element>
 		implements TableModel, Reorderable, List<Element> {
 	private final List<TableModelListener> listeners = new ArrayList<>();
 
+	private final List<Element> wrapped;
+	private final String columnName;
+	private final Class<Element> cls;
+
 	private void fireEvents(final TableModelEvent... events) {
 		for (final TableModelListener listener : listeners) {
 			Arrays.stream(events).forEach(listener::tableChanged);
@@ -36,10 +40,6 @@ public final class SingleColumnTableModel<Element>
 		fireEvents(new TableModelEvent(this, index, index, TableModelEvent.ALL_COLUMNS,
 				TableModelEvent.INSERT));
 	}
-
-	private final List<Element> wrapped;
-	private final String columnName;
-	private final Class<Element> cls;
 
 	public SingleColumnTableModel(final List<Element> wrapped, final Class<Element> cls,
 			final String columnName) {

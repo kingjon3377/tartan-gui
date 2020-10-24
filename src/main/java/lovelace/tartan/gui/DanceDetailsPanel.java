@@ -39,6 +39,17 @@ public class DanceDetailsPanel extends JPanel {
 			new String[]{"2C (3C set)", "2C (4C set)", "3C (4C set)", "3C set",
 					"3C Triangle", "4C set", "Sq Set", "5C Set"});
 
+	private @NotNull Runnable revert = this::noop;
+
+	private @NotNull Runnable apply = this::noop;
+
+	private final JButton applyButton =
+			new ListenedButton("Apply", (ignored) -> apply.run());
+	private final JButton revertButton =
+			new ListenedButton("Revert", (ignored) -> revert.run());
+
+	private @Nullable ProgramElement current = null;
+
 	private void applyToDance(final Dance dance) {
 		dance.setTitle(titleField.getText().trim());
 		dance.setSource(sourceField.getText().trim());
@@ -55,8 +66,6 @@ public class DanceDetailsPanel extends JPanel {
 
 	private void noop() {
 	}
-
-	private @NotNull Runnable apply = this::noop;
 
 	private void revertDance(final Dance dance) {
 		titleLabel.setText("Dance Title:");
@@ -77,13 +86,6 @@ public class DanceDetailsPanel extends JPanel {
 		barsModel.setValue(0);
 		formationBox.setSelectedItem("");
 	}
-
-	private @NotNull Runnable revert = this::noop;
-
-	private final JButton applyButton =
-			new ListenedButton("Apply", (ignored) -> apply.run());
-	private final JButton revertButton =
-			new ListenedButton("Revert", (ignored) -> revert.run());
 
 	public DanceDetailsPanel() {
 		super(new BorderLayout());
@@ -108,8 +110,6 @@ public class DanceDetailsPanel extends JPanel {
 		add(topPanel, BorderLayout.PAGE_START);
 		add(bottomPanel, BorderLayout.PAGE_END);
 	}
-
-	private @Nullable ProgramElement current = null;
 
 	public @Nullable ProgramElement getCurrent() {
 		return current;

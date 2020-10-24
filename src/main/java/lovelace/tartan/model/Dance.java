@@ -13,6 +13,40 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Dance implements ProgramElement, FigureParent {
 	/**
+	 * The title or name of the dance.
+	 */
+	private @NotNull String title;
+	/**
+	 * The source from which the dance is taken, or the name of its deviser.
+	 */
+	private @NotNull String source;
+	/**
+	 * The tempo of the dance: jig, reel, strathspey, or medley.
+	 *
+	 * TODO: make an Enum of cases instead of allowing arbitrary text.
+	 */
+	private @NotNull String tempo;
+	/**
+	 * How many times through the dance is danced.
+	 */
+	private int times;
+	/**
+	 * How many bars of music long each time through the dance is.
+	 */
+	private int length;
+	/**
+	 * The formation in which the dance is danced: "2C (4C set)", "Sq. Set", "3C set",
+	 * etc.
+	 */
+	private @NotNull String formation;
+	/**
+	 * The figures (some of which may be "named figures") that make up the dance, and any
+	 * other text that needs to be printed inside the "scdance" environment in the
+	 * output.
+	 */
+	private final List<@NotNull DanceMember> contents = new ArrayList<>();
+
+	/**
 	 * @return The title or name of the dance.
 	 */
 	public @NotNull String getTitle() {
@@ -104,40 +138,6 @@ public class Dance implements ProgramElement, FigureParent {
 	public @NotNull List<@NotNull DanceMember> getContents() {
 		return contents;
 	}
-
-	/**
-	 * The title or name of the dance.
-	 */
-	private @NotNull String title;
-	/**
-	 * The source from which the dance is taken, or the name of its deviser.
-	 */
-	private @NotNull String source;
-	/**
-	 * The tempo of the dance: jig, reel, strathspey, or medley.
-	 *
-	 * TODO: make an Enum of cases instead of allowing arbitrary text.
-	 */
-	private @NotNull String tempo;
-	/**
-	 * How many times through the dance is danced.
-	 */
-	private int times;
-	/**
-	 * How many bars of music long each time through the dance is.
-	 */
-	private int length;
-	/**
-	 * The formation in which the dance is danced: "2C (4C set)", "Sq. Set", "3C set",
-	 * etc.
-	 */
-	private @NotNull String formation;
-	/**
-	 * The figures (some of which may be "named figures") that make up the dance, and any
-	 * other text that needs to be printed inside the "scdance" environment in the
-	 * output.
-	 */
-	private final List<@NotNull DanceMember> contents = new ArrayList<>();
 
 	/**
 	 * Constructor.
