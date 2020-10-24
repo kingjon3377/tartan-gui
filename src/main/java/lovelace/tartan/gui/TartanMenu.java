@@ -160,9 +160,7 @@ public final class TartanMenu {
 		final @NotNull ProgramMetadata metadata, final @Nullable Path passedFilename,
 		final @Nullable Component parent) {
 		final Path filename;
-		if (passedFilename != null) {
-			filename = passedFilename;
-		} else {
+		if (passedFilename == null) {
 			final @Nullable Frame parentFrame;
 			if (parent instanceof Frame) {
 				parentFrame = (Frame) parent;
@@ -179,6 +177,8 @@ public final class TartanMenu {
 			} else {
 				filename = chosenFile.toPath();
 			}
+		} else {
+			filename = passedFilename;
 		}
 		try (final BufferedWriter writer = Files.newBufferedWriter(filename)) {
 			new LaTeXWriter().writeLaTeXProgram(writer, program, metadata);
