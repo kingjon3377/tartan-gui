@@ -1,7 +1,7 @@
 package lovelace.tartan.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +21,7 @@ public final class NamedFigure implements DanceMember, FigureParent {
 	 * Constructor.
 	 */
 	public NamedFigure(final NamedFigureMember... initialContents) {
-		contents.addAll(Arrays.asList(initialContents));
+		Collections.addAll(contents, initialContents);
 	}
 
 	/**

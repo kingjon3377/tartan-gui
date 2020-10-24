@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -158,8 +159,8 @@ public class LaTeXTest {
 		startingMetadata.setMusicians("musicians");
 		startingMetadata.setCoverImage(Paths.get("path/to/coverImage"));
 		startingMetadata.setBackCoverImage(Paths.get("path/to/backCover"));
-		startingMetadata.getInsidePostDanceImages()
-				.addAll(Arrays.asList(Paths.get("firstExtra"), Paths.get("secondExtra")));
+		Collections.addAll(startingMetadata.getInsidePostDanceImages(),
+				Paths.get("firstExtra"), Paths.get("secondExtra"));
 		startingMetadata.setTitleOnCover(titleOnCover);
 		startingMetadata.setPrintAuldLangSyne(printAuldLangSyne);
 		final StringBuilder builder = new StringBuilder();

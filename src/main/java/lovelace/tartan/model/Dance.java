@@ -1,7 +1,7 @@
 package lovelace.tartan.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
@@ -152,7 +152,7 @@ public class Dance implements ProgramElement, FigureParent {
 		this.times = times;
 		this.length = length;
 		this.formation = formation;
-		contents.addAll(Arrays.asList(initialContents));
+		Collections.addAll(contents, initialContents);
 	}
 
 	/**
