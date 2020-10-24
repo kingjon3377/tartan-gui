@@ -11,6 +11,16 @@ import org.jetbrains.annotations.Nullable;
  */
 public final class Figure implements NamedFigureMember, DanceMember {
 	/**
+	 * The description of the figure.
+	 */
+	private @NotNull String description;
+
+	/**
+	 * The bars on which this figure is danced, if any is specified.
+	 */
+	private @Nullable String bars;
+
+	/**
 	 * @return The description of the figure.
 	 */
 	public @NotNull String getDescription() {
@@ -39,16 +49,6 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	public void setBars(final @Nullable String bars) {
 		this.bars = bars;
 	}
-
-	/**
-	 * The description of the figure.
-	 */
-	private @NotNull String description;
-
-	/**
-	 * The bars on which this figure is danced, if any is specified.
-	 */
-	private @Nullable String bars;
 
 	/**
 	 * Constructor.

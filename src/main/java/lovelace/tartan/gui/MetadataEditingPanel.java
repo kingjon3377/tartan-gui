@@ -47,6 +47,7 @@ public final class MetadataEditingPanel extends JPanel {
 	private final JCheckBox titleOnCoverField = new JCheckBox();
 	private final JCheckBox auldLangSyneField = new JCheckBox();
 	private final @NotNull ProgramMetadata metadata;
+	private final GroupLayout groupLayout;
 
 	// TODO: Make a JTextBox subclass taking both a Consumer<String> and a
 	//  Supplier<String>, and has revert() as an instance method
@@ -81,8 +82,6 @@ public final class MetadataEditingPanel extends JPanel {
 		field.getDocument()
 				.addDocumentListener(new TextBoxChangeListener(field, handler));
 	}
-
-	private final GroupLayout groupLayout;
 
 	private GroupLayout.Group createParallelGroup(final GroupLayout.Alignment alignment,
 												  final Object... members) {

@@ -29,11 +29,11 @@ public class DanceDatabase {
 
 	final @NotNull List<DanceRow> dances = new ArrayList<>();
 
+	final @NotNull PreparedStatement cribStatement;
+
 	public Collection<DanceRow> getDances() {
 		return dances;
 	}
-
-	final @NotNull PreparedStatement cribStatement;
 
 	public DanceDatabase(final @NotNull Path filename) throws SQLException {
 		final SQLiteDataSource ds = new SQLiteDataSource();

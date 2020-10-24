@@ -18,6 +18,12 @@ public class DanceProgressionImpl implements DanceProgression {
 	private final @NotNull String name;
 
 	/**
+	 * A singleton for cases where the database is missing progression information.
+	 */
+	public static final DanceProgression UNKNOWN =
+			new DanceProgressionImpl(-1, "Unknown");
+
+	/**
 	 * @return the number identifying this progression in the database
 	 */
 	@Override
@@ -37,10 +43,4 @@ public class DanceProgressionImpl implements DanceProgression {
 		this.id = id;
 		this.name = name;
 	}
-
-	/**
-	 * A singleton for cases where the database is missing progression information.
-	 */
-	public static final DanceProgression UNKNOWN =
-			new DanceProgressionImpl(-1, "Unknown");
 }

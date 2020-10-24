@@ -28,6 +28,10 @@ public class ImageFileChooser {
 			new FileNameExtensionFilter("LaTeX-supported images", "png", "jpg", "pdf");
 	private @Nullable File filename = null;
 	private final @NotNull Consumer<@Nullable Path> handler;
+	private final JTextField chosenFileField = new JTextField(10);
+	private final PlatformFileDialog chooser;
+	private final JButton button = new ListenedButton("Choose File", this::buttonHandler);
+
 	public @Nullable File getFilename() {
 		return filename;
 	}
@@ -40,11 +44,9 @@ public class ImageFileChooser {
 			chosenFileField.setText(filename.toString());
 		}
 	}
-	private final JTextField chosenFileField = new JTextField(10);
 	public JComponent getField() {
 		return chosenFileField;
 	}
-	private final PlatformFileDialog chooser;
 
 	private void buttonHandler(final ActionEvent ignored) {
 		chooser.showOpenDialog();
@@ -59,8 +61,6 @@ public class ImageFileChooser {
 			handler.accept(file.toPath());
 		}
 	}
-
-	private final JButton button = new ListenedButton("Choose File", this::buttonHandler);
 
 	public JComponent getButton() {
 		return button;

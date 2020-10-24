@@ -23,6 +23,12 @@ import org.jetbrains.annotations.Nullable;
  * @author Jonathan Lovelace
  */
 public final class LaTeXWriter {
+	/**
+	 * The extensions the graphicx package supports.
+	 */
+	private static final List<String> SUPPORTED_IMAGE_EXTENSIONS =
+			Collections.unmodifiableList(Arrays.asList(".png", ".jpg", ".pdf"));
+
 	private static String quoted(final @NotNull String string) {
 		return string.replace("&", "\\&").replace("{", "\\{").replace("}", "\\}")
 					   .replace("<b>", "\\textbf{").replace("</b>", "}")
@@ -92,12 +98,6 @@ public final class LaTeXWriter {
 			ostream.append("}\n");
 		}
 	}
-
-	/**
-	 * The extensions the graphicx package supports.
-	 */
-	private static final List<String> SUPPORTED_IMAGE_EXTENSIONS =
-			Collections.unmodifiableList(Arrays.asList(".png", ".jpg", ".pdf"));
 
 	private String latexImage(final @NotNull Path imageFilename) {
 		final String asString = imageFilename.toString();

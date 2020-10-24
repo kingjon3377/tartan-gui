@@ -27,14 +27,16 @@ import org.jetbrains.annotations.Nullable;
 public class ElementEditingPanel extends JPanel {
 	private @Nullable ProgramElement current = null;
 
-	public @Nullable ProgramElement getCurrent() {
-		return current;
-	}
-
 	private @NotNull SingleColumnTableModel<DanceMember> tableModel =
 			new SingleColumnTableModel<>(new ArrayList<>(),
 					DanceMember.class, "Directions");
 	private final JTable table = new JTable(tableModel);
+
+	private final DanceDetailsPanel detailsPanel = new DanceDetailsPanel();
+
+	public @Nullable ProgramElement getCurrent() {
+		return current;
+	}
 
 	private void fixHeights(final @Nullable Object ignored) {
 		for (int row = 0; row < table.getRowCount(); row++) {
@@ -47,8 +49,6 @@ public class ElementEditingPanel extends JPanel {
 					editor.getPreferredSize().height).max().getAsInt());
 		}
 	}
-
-	private final DanceDetailsPanel detailsPanel = new DanceDetailsPanel();
 
 	public void setCurrent(final @Nullable ProgramElement current) {
 		this.current = current;

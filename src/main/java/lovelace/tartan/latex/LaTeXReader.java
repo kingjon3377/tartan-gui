@@ -26,6 +26,10 @@ import org.jetbrains.annotations.Nullable;
  * @author Jonathan Lovelace
  */
 public final class LaTeXReader {
+	private boolean haveHadCover = false;
+	private boolean haveHadTitle = false;
+	private boolean nextIsBackCover = false;
+
 	/**
 	 * Logger.
 	 */
@@ -45,9 +49,6 @@ public final class LaTeXReader {
 		}
 	}
 
-	private boolean haveHadCover = false;
-	private boolean haveHadTitle = false;
-	private boolean nextIsBackCover = false;
 	// TODO: Can we get back to a single input stack and a single StringBuilder?
 
 	/**

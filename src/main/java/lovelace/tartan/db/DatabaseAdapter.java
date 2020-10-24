@@ -16,14 +16,14 @@ import org.jetbrains.annotations.Nullable;
  * @author Jonathan Lovelace
  */
 public final class DatabaseAdapter {
+	private static final Logger LOGGER =
+			Logger.getLogger(DatabaseAdapter.class.getName());
+
 	/**
 	 * Do not instantiate.
 	 */
 	private DatabaseAdapter() {
 	}
-
-	private static final Logger LOGGER =
-			Logger.getLogger(DatabaseAdapter.class.getName());
 
 	/**
 	 * Convert a dance in the database to a dance suitable to be written to LaTeX.

@@ -26,6 +26,11 @@ public class DanceTypeImpl implements DanceType {
 	private final @NotNull String abbreviation;
 
 	/**
+	 * A singleton for cases where the database doesn't specify a type, if such exist.
+	 */
+	public static final DanceType UNKNOWN = new DanceTypeImpl(-1, "Unknown", "?");
+
+	/**
 	 * @return the number identifying this type in the database
 	 */
 	@Override
@@ -65,11 +70,6 @@ public class DanceTypeImpl implements DanceType {
 		this.name = name;
 		this.abbreviation = abbreviation;
 	}
-
-	/**
-	 * A singleton for cases where the database doesn't specify a type, if such exist.
-	 */
-	public static final DanceType UNKNOWN = new DanceTypeImpl(-1, "Unknown", "?");
 
 	@Override
 	public boolean equals(final Object obj) {

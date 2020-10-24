@@ -32,6 +32,11 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(Parameterized.class)
 public class LaTeXTest {
+	@Parameter
+	public boolean titleOnCover;
+	@Parameter(1)
+	public boolean printAuldLangSyne;
+
 	@Parameters(name = "{index}: [{0}, {1}]")
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][]{{true, true}, {true, false}, {false, true},
@@ -42,11 +47,6 @@ public class LaTeXTest {
 		Arrays.stream(LogManager.getLogManager().getLogger("").getHandlers())
 				.forEach(h -> h.setLevel(Level.FINEST));
 	}
-
-	@Parameter
-	public boolean titleOnCover;
-	@Parameter(1)
-	public boolean printAuldLangSyne;
 
 	@Test
 	public void noImageTest() throws IOException, ParseException {
