@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,7 +95,7 @@ public class ProgramEditingWindow extends JFrame {
 		final FilenameFilter filter =
 				(dir, name) -> name.endsWith(".db") || name.endsWith(".sqlite") ||
 									   name.endsWith(".sqlite3");
-		if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+		if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac")) {
 			chooser.setFileFilter(filter);
 		} else {
 			chooser.setFileFilter(

@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -194,7 +195,7 @@ public final class TartanMenu {
 		final @NotNull ProgramMetadata metadata,
 		final @NotNull MetadataEditingPanel metadataPanel) {
 		final boolean onMac =
-				System.getProperty("os.name").toLowerCase().startsWith("mac");
+				System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac");
 		final int shortcutMask =
 				(onMac) ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;
 		final JMenu retval = new JMenu("File");

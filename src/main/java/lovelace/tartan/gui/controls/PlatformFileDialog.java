@@ -3,6 +3,7 @@ package lovelace.tartan.gui.controls;
 import java.awt.Component;
 import java.awt.FileDialog;
 import java.awt.Frame;
+import java.util.Locale;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Optional;
@@ -34,7 +35,7 @@ public final class PlatformFileDialog {
 	 * @param parentWindow The parent window for this dialog.
 	 */
 	public PlatformFileDialog(final @Nullable Frame parentWindow) {
-		if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+		if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac")) {
 			wrapped = new FileDialog(parentWindow);
 		} else {
 			wrapped = new JFileChooser();
