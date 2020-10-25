@@ -17,14 +17,16 @@ public final class ImageLoader {
 	}
 
 	public static Image loadImage(final String filename) throws IOException {
-		final InputStream stream =
+		try (final InputStream stream =
 				Thread.currentThread().getContextClassLoader()
-						.getResourceAsStream(filename);
-		if (stream == null) {
-			throw new FileNotFoundException(
-					String.format("File %s not found on the classpath", filename));
-		} else {
-			return ImageIO.read(stream);
+						.getResourceAsStream(filename)) {
+			if (stream == null) {
+				throw new FileNotFoundException(
+						String.format("File %s not found on the classpath",
+							filename));
+			} else {
+				return ImageIO.read(stream);
+			}
 		}
 	}
 
