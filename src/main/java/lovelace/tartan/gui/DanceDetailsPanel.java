@@ -64,7 +64,7 @@ public class DanceDetailsPanel extends JPanel {
 		intermission.setDescription(titleField.getText().trim());
 	}
 
-	private void noop() {
+	private void noop() { // deliberate no-op
 	}
 
 	private void revertDance(final Dance dance) {

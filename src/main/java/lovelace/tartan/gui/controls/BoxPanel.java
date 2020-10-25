@@ -46,7 +46,7 @@ public class BoxPanel extends JPanel {
 	}
 
 	public static final class BoxGlue {
-		protected BoxGlue() {
+		protected BoxGlue() { // constructor provided for access specifier only
 		}
 	}
 
