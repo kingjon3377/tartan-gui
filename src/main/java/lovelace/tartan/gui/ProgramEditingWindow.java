@@ -120,7 +120,7 @@ public class ProgramEditingWindow extends JFrame {
 				LOGGER.log(Level.SEVERE, "Error opening SQLite database",
 						except);
 				System.exit(1);
-				throw new IllegalStateException("Returned from System.exit()");
+				throw new IllegalStateException("Returned from System.exit()"); // NOPMD
 			}
 		}
 	}
@@ -142,7 +142,7 @@ public class ProgramEditingWindow extends JFrame {
 					LOGGER.log(Level.SEVERE, "Error opening SQLite database",
 							except);
 					System.exit(1);
-					throw new IllegalStateException("Returned from System.exit()");
+					throw new IllegalStateException("Returned from System.exit()"); // NOPMD
 				}
 			}
 		}
