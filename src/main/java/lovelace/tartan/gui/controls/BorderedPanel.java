@@ -18,11 +18,11 @@ public class BorderedPanel extends JPanel {
 	private @Nullable Component lineStart;
 	private @Nullable Component lineEnd;
 
-	public @Nullable Component getCenter() {
+	public final @Nullable Component getCenter() {
 		return center;
 	}
 
-	public void setCenter(final @Nullable Component center) {
+	public final void setCenter(final @Nullable Component center) {
 		if (Objects.nonNull(center)) {
 			add(center, BorderLayout.CENTER);
 		} else if (Objects.nonNull(this.center)) {
@@ -31,11 +31,11 @@ public class BorderedPanel extends JPanel {
 		this.center = center;
 	}
 
-	public @Nullable Component getPageStart() {
+	public final @Nullable Component getPageStart() {
 		return pageStart;
 	}
 
-	public void setPageStart(final @Nullable Component pageStart) {
+	public final void setPageStart(final @Nullable Component pageStart) {
 		if (Objects.nonNull(pageStart)) {
 			add(pageStart, BorderLayout.PAGE_START);
 		} else if (Objects.nonNull(this.pageStart)) {
@@ -44,11 +44,11 @@ public class BorderedPanel extends JPanel {
 		this.pageStart = pageStart;
 	}
 
-	public @Nullable Component getPageEnd() {
+	public final @Nullable Component getPageEnd() {
 		return pageEnd;
 	}
 
-	public void setPageEnd(final @Nullable Component pageEnd) {
+	public final void setPageEnd(final @Nullable Component pageEnd) {
 		if (Objects.nonNull(pageEnd)) {
 			add(pageEnd, BorderLayout.PAGE_END);
 		} else if (Objects.nonNull(this.pageEnd)) {
@@ -57,11 +57,11 @@ public class BorderedPanel extends JPanel {
 		this.pageEnd = pageEnd;
 	}
 
-	public @Nullable Component getLineStart() {
+	public final @Nullable Component getLineStart() {
 		return lineStart;
 	}
 
-	public void setLineStart(final @Nullable Component lineStart) {
+	public final void setLineStart(final @Nullable Component lineStart) {
 		if (Objects.nonNull(lineStart)) {
 			add(lineStart, BorderLayout.LINE_START);
 		} else if (Objects.nonNull(this.lineStart)) {
@@ -70,11 +70,11 @@ public class BorderedPanel extends JPanel {
 		this.lineStart = lineStart;
 	}
 
-	public @Nullable Component getLineEnd() {
+	public final @Nullable Component getLineEnd() {
 		return lineEnd;
 	}
 
-	public void setLineEnd(final @Nullable Component lineEnd) {
+	public final void setLineEnd(final @Nullable Component lineEnd) {
 		if (Objects.nonNull(lineEnd)) {
 			add(lineEnd, BorderLayout.LINE_END);
 		} else if (Objects.nonNull(this.lineEnd)) {
