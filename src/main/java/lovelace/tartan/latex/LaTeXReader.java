@@ -138,6 +138,7 @@ public final class LaTeXReader {
 				break;
 			default:
 				defaultFraction(numerator, denominator, buffer);
+				break;
 			}
 			break;
 		case "2":
@@ -150,6 +151,7 @@ public final class LaTeXReader {
 				break;
 			default:
 				defaultFraction(numerator, denominator, buffer);
+				break;
 			}
 			break;
 		case "3":
@@ -165,6 +167,7 @@ public final class LaTeXReader {
 				break;
 			default:
 				defaultFraction(numerator, denominator, buffer);
+				break;
 			}
 			break;
 		case "4":
@@ -184,6 +187,7 @@ public final class LaTeXReader {
 				break;
 			default:
 				defaultFraction(numerator, denominator, buffer);
+				break;
 			}
 			break;
 		case "7":
@@ -195,6 +199,7 @@ public final class LaTeXReader {
 			break;
 		default:
 			defaultFraction(numerator, denominator, buffer);
+			break;
 		}
 	}
 
@@ -282,6 +287,7 @@ public final class LaTeXReader {
 				default:
 					buffer.append(top);
 					buffer.append(nextCommand);
+					break;
 				}
 			} else if (top == '`') {
 				if (!localInput.isEmpty() && '`' == localInput.peekFirst()) {
