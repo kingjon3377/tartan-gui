@@ -1,5 +1,0 @@
-language: java
-jdk:
-  - openjdk8
-env:
-  - GIT_NAME="Travis CI" GIT_EMAIL="kingjon3377+travis@gmail.com"

@@ -1,0 +1,20 @@
+name: Build and Test
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '15 5 3 * *'
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: maven
+      - name: Build and test
+        run: mvn --batch-mode compile test
+# TODO: If a release, build platform-native apps and attach to the release
