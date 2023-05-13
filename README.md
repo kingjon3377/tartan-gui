@@ -18,4 +18,4 @@ SQLite database driver](https://github.com/xerial/sqlite-jdbc), under the terms
 of the Apache license, which is found in the file ApacheLicense.md in this
 repository.
 
-[![Build Status](https://travis-ci.org/kingjon3377/tartan-gui.svg?branch=master)](https://travis-ci.org/kingjon3377/tartan-gui)
+[![Build Status](https://github.com/kingjon3377/tartan-gui/actions/workflows/build.yml/badge.svg)](https://github.com/kingjon3377/tartan-gui/actons?query=workflows/build.yml)
