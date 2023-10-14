@@ -23,7 +23,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="lovelace.tartan" target="17" />
       <module name="tartan-gui" target="1.8" />
     </bytecodeTargetLevel>
   </component>
