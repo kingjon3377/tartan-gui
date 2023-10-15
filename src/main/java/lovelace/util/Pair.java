@@ -14,18 +14,21 @@ public final class Pair<First, Second> {
 	 * The second item in this pair.
 	 */
 	private final Second second;
+
 	/**
 	 * @return the first item in this pair.
 	 */
 	public First getFirst() {
 		return first;
 	}
+
 	/**
 	 * @return the second item in this pair.
 	 */
 	public Second getSecond() {
 		return second;
 	}
+
 	/**
 	 * Constructor, private because callers will want to use the factory method.
 	 */
@@ -33,6 +36,7 @@ public final class Pair<First, Second> {
 		this.first = first;
 		this.second = second;
 	}
+
 	/**
 	 * Factory method.
 	 */
