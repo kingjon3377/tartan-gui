@@ -25,11 +25,11 @@ public class DanceDatabase {
 
 	private static final Logger LOGGER = Logger.getLogger(DanceDatabase.class.getName());
 
-	final @NotNull Connection sql;
+	private final @NotNull Connection sql;
 
-	final @NotNull List<DanceRow> dances = new ArrayList<>();
+	private final @NotNull List<DanceRow> dances = new ArrayList<>();
 
-	final @NotNull PreparedStatement cribStatement;
+	private final @NotNull PreparedStatement cribStatement;
 
 	public Collection<DanceRow> getDances() {
 		return dances;
