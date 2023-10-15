@@ -94,10 +94,14 @@ public class BorderedPanel extends JPanel {
 		setLineStart(lineStart);
 		setLineEnd(lineEnd);
 	}
-	public static BorderedPanel horizontalLine(final @Nullable Component lineStart, final @Nullable Component center, final @Nullable Component lineEnd) {
+	public static BorderedPanel horizontalLine(final @Nullable Component lineStart,
+											   final @Nullable Component center,
+											   final @Nullable Component lineEnd) {
 		return new BorderedPanel(center, null, null, lineStart, lineEnd);
 	}
-	public static BorderedPanel verticalLine(final @Nullable Component pageStart, final @Nullable Component center, final @Nullable Component pageEnd) {
+	public static BorderedPanel verticalLine(final @Nullable Component pageStart,
+											 final @Nullable Component center,
+											 final @Nullable Component pageEnd) {
 		return new BorderedPanel(center, pageStart, pageEnd, null, null);
 	}
 }
