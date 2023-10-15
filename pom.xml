@@ -27,7 +27,7 @@
     <dependency>
       <groupId>org.xerial</groupId>
       <artifactId>sqlite-jdbc</artifactId>
-      <version>3.41.2.2</version>
+      <version>3.42.0.1</version> <!-- 3.43.0.0 breaks some JDBC wrappers; try bumping to 3.43.0.2 -->
     </dependency>
   </dependencies>
 
