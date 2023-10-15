@@ -87,9 +87,9 @@ public class FigureTransferHandler extends TransferHandler {
 			return false;
 		}
 		if (component instanceof JList<?> &&
-					((JList) component).getModel() instanceof Reorderable &&
+					((JList<?>) component).getModel() instanceof Reorderable &&
 					dropLocation instanceof JList.DropLocation) {
-			((Reorderable) ((JList) component).getModel())
+			((Reorderable) ((JList<?>) component).getModel())
 					.reorder(payload, ((JList.DropLocation) dropLocation).getIndex());
 			return true;
 		} else if (component instanceof JTable &&
