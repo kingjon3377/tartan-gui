@@ -180,12 +180,12 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public @NotNull Object[] toArray() {
+	public @NotNull Object @NotNull [] toArray() {
 		return wrapped.toArray();
 	}
 
 	@Override
-	public @NotNull <T> T[] toArray(final @NotNull T[] array) {
+	public @NotNull <T> T @NotNull [] toArray(final @NotNull T @NotNull [] array) {
 		return wrapped.toArray(array);
 	}
 
