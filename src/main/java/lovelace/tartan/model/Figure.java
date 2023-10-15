@@ -90,8 +90,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 */
 	@Override
 	public boolean equals(final Object other) {
-		if (other instanceof Figure) {
-			final Figure that = (Figure) other;
+		if (other instanceof Figure that) {
 			return Objects.equals(bars, that.bars) && description.equals(that.description);
 		} else {
 			return false;

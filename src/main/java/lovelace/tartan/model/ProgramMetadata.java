@@ -350,8 +350,7 @@ public final class ProgramMetadata {
 	 */
 	@Override
 	public boolean equals(final Object other) {
-		if (other instanceof ProgramMetadata) {
-			final ProgramMetadata that = (ProgramMetadata) other;
+		if (other instanceof ProgramMetadata that) {
 			return titleOnCover == that.titleOnCover &&
 						   printAuldLangSyne == that.printAuldLangSyne &&
 						   groupCoverName.equals(that.groupCoverName) &&

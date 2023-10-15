@@ -73,8 +73,7 @@ public class DanceTypeImpl implements DanceType {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj instanceof DanceType) {
-			final DanceType type = (DanceType) obj;
+		if (obj instanceof DanceType type) {
 			return id == type.getId() && name.equals(type.getName()) &&
 						   abbreviation.equals(((DanceType) obj).getAbbreviation());
 		} else {

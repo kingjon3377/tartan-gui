@@ -183,8 +183,7 @@ public final class LaTeXWriter {
 		writeSimpleCommand(out, "vspace", "\\fill");
 		writeSimpleCommand(out, "clearpage");
 		for (final ProgramElement item : program) {
-			if (item instanceof Dance) {
-				final Dance dance = (Dance) item;
+			if (item instanceof Dance dance) {
 				out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
 						((Dance) item).getTitle(), ((Dance) item).getSource(),
 						((Dance) item).getTempo(), ((Dance) item).getTimes(),
