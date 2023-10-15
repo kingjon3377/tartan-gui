@@ -28,7 +28,7 @@ public final class LaTeXWriter {
 	 * The extensions the graphicx package supports.
 	 */
 	private static final List<String> SUPPORTED_IMAGE_EXTENSIONS =
-			Collections.unmodifiableList(Arrays.asList(".png", ".jpg", ".pdf"));
+			List.of(".png", ".jpg", ".pdf");
 
 	private static String quoted(final @NotNull String string) {
 		return string.replace("&", "\\&").replace("{", "\\{").replace("}", "\\}")
