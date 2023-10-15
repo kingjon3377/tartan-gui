@@ -45,20 +45,30 @@ public class BoxPanel extends JPanel {
 		}
 	}
 
-	public static final class BoxGlue {
+	public interface BoxParameter {
+		Component getComponent(final BoxDirection direction);
+	}
+
+	public static final class BoxGlue implements BoxParameter {
 		protected BoxGlue() { // constructor provided for access specifier only
+		}
+
+		@Override
+		public Component getComponent(final BoxDirection direction) {
+			return direction.createGlue();
 		}
 	}
 
-	public static final class BoxStrut {
+	public static final class BoxStrut implements BoxParameter {
 		private final int size;
-
-		public int getSize() {
-			return size;
-		}
 
 		public BoxStrut(final int size) {
 			this.size = size;
+		}
+
+		@Override
+		public Component getComponent(final BoxDirection direction) {
+			return direction.createStrut(size);
 		}
 	}
 
@@ -66,10 +76,8 @@ public class BoxPanel extends JPanel {
 		//noinspection MagicConstant
 		setLayout(new BoxLayout(this, direction.getConstant()));
 		for (final Object item : contents) {
-			if (item instanceof BoxGlue) {
-				add(direction.createGlue());
-			} else if (item instanceof BoxStrut) {
-				add(direction.createStrut(((BoxStrut) item).getSize()));
+			if (item instanceof BoxParameter) {
+				add(((BoxParameter) item).getComponent(direction));
 			} else if (item instanceof Component) {
 				add((Component) item);
 			} else {
