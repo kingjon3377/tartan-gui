@@ -83,18 +83,7 @@ public class LaTeXTest {
 				new Dance("Unsourced Medley", "", "Medley", 1, 64, "Sq. Set",
 						new Figure("dance description here"), new Figure("xyzzy")),
 				new Intermission("Break"));
-		final ProgramMetadata startingMetadata = new ProgramMetadata();
-		startingMetadata.setGroupCoverName("groupCoverName");
-		startingMetadata.setGroupTitleName("groupTitleName");
-		startingMetadata.setEventCoverName("eventCoverName");
-		startingMetadata.setEventTitleName("eventTitleName");
-		startingMetadata.setCoverDate("coverDate");
-		startingMetadata.setTitleDate("titleDate");
-		startingMetadata.setCoverLocation("coverLocation");
-		startingMetadata.setTitleLocation("titleLocation");
-		startingMetadata.setLocationAddress("locationAddress");
-		startingMetadata.setTitleTimes("titleTimes\nsecondLine");
-		startingMetadata.setMusicians("musicians");
+		final ProgramMetadata startingMetadata = makeTestMetadata();
 		startingMetadata.setTitleOnCover(titleOnCover);
 		startingMetadata.setPrintAuldLangSyne(printAuldLangSyne);
 		final StringBuilder builder = new StringBuilder();
@@ -108,6 +97,23 @@ public class LaTeXTest {
 				readMetadata);
 		assertEquals("Dances should be (de)serialized correctly", startingProgram,
 				readProgram);
+	}
+
+	@NotNull
+	private static ProgramMetadata makeTestMetadata() {
+		final ProgramMetadata startingMetadata = new ProgramMetadata();
+		startingMetadata.setGroupCoverName("groupCoverName");
+		startingMetadata.setGroupTitleName("groupTitleName");
+		startingMetadata.setEventCoverName("eventCoverName");
+		startingMetadata.setEventTitleName("eventTitleName");
+		startingMetadata.setCoverDate("coverDate");
+		startingMetadata.setTitleDate("titleDate");
+		startingMetadata.setCoverLocation("coverLocation");
+		startingMetadata.setTitleLocation("titleLocation");
+		startingMetadata.setLocationAddress("locationAddress");
+		startingMetadata.setTitleTimes("titleTimes\nsecondLine");
+		startingMetadata.setMusicians("musicians");
+		return startingMetadata;
 	}
 
 	@Test
@@ -145,18 +151,7 @@ public class LaTeXTest {
 						new Figure("dance description here"), new Figure("xyzzy")),
 				new Intermission("Break")
 		);
-		final ProgramMetadata startingMetadata = new ProgramMetadata();
-		startingMetadata.setGroupCoverName("groupCoverName");
-		startingMetadata.setGroupTitleName("groupTitleName");
-		startingMetadata.setEventCoverName("eventCoverName");
-		startingMetadata.setEventTitleName("eventTitleName");
-		startingMetadata.setCoverDate("coverDate");
-		startingMetadata.setTitleDate("titleDate");
-		startingMetadata.setCoverLocation("coverLocation");
-		startingMetadata.setTitleLocation("titleLocation");
-		startingMetadata.setLocationAddress("locationAddress");
-		startingMetadata.setTitleTimes("titleTimes\nsecondLine");
-		startingMetadata.setMusicians("musicians");
+		final ProgramMetadata startingMetadata = makeTestMetadata();
 		startingMetadata.setCoverImage(Paths.get("path/to/coverImage"));
 		startingMetadata.setBackCoverImage(Paths.get("path/to/backCover"));
 		Collections.addAll(startingMetadata.getInsidePostDanceImages(),
