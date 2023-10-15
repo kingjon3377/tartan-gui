@@ -44,7 +44,7 @@ public class Dance implements ProgramElement, FigureParent {
 	 * other text that needs to be printed inside the "scdance" environment in the
 	 * output.
 	 */
-	private final List<@NotNull DanceMember> contents = new ArrayList<>();
+	private final List<@NotNull DanceMember> contents;
 
 	/**
 	 * @return The title or name of the dance.
@@ -152,6 +152,7 @@ public class Dance implements ProgramElement, FigureParent {
 		this.times = times;
 		this.length = length;
 		this.formation = formation;
+		contents = new ArrayList<>(initialContents.length);
 		Collections.addAll(contents, initialContents);
 	}
 

@@ -164,7 +164,7 @@ public class ProgramEditingWindow extends JFrame {
 		}
 		// TODO: If a non-DB argument, read previously-written project from it
 		final ProgramMetadata metadata = new ProgramMetadata();
-		final List<ProgramElement> initialProgram = new ArrayList<>();
+		final List<ProgramElement> initialProgram = new ArrayList<>(args.length);
 		for (final String arg : args) {
 			if (arg.endsWith(".tex") && new File(arg).canRead()) {
 				final Path file = Paths.get(arg);

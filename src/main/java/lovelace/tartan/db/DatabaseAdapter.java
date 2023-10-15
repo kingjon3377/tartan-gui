@@ -95,8 +95,8 @@ public final class DatabaseAdapter {
 			throw new IllegalArgumentException("Can't handle HTML cribs here");
 		}
 		@Nullable String currentBars = null;
-		final List<@NotNull Figure> retval = new ArrayList<>();
 		final String[] split = crib.split("\n");
+		final List<@NotNull Figure> retval = new ArrayList<>(split.length);
 		for (final String longLine : split) {
 			final String line = longLine.trim();
 			if (line.endsWith("::")) {
@@ -135,7 +135,7 @@ public final class DatabaseAdapter {
 		final String base =
 				stripFromEnd(stripFromStart(crib, "<table>"), "</table>").trim();
 		final String[] split = base.split("\n");
-		final List<@NotNull Figure> retval = new ArrayList<>();
+		final List<@NotNull Figure> retval = new ArrayList<>(split.length);
 		for (final String longLine : split) {
 			final String line = longLine.trim();
 			if (line.startsWith("<tr><td class=\"expl\" colspan=\"2\">")) {

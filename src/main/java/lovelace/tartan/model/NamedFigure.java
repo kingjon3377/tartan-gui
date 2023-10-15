@@ -15,12 +15,13 @@ public final class NamedFigure implements DanceMember, FigureParent {
 	/**
 	 * The list of sub-figures.
 	 */
-	private final List<@NotNull NamedFigureMember> contents = new ArrayList<>();
+	private final List<@NotNull NamedFigureMember> contents;
 
 	/**
 	 * Constructor.
 	 */
 	public NamedFigure(final NamedFigureMember... initialContents) {
+		contents = new ArrayList<>(initialContents.length);
 		Collections.addAll(contents, initialContents);
 	}
 
