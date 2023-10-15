@@ -100,7 +100,7 @@ public final class LaTeXWriter {
 		}
 	}
 
-	private String latexImage(final @NotNull Path imageFilename) {
+	private static String latexImage(final @NotNull Path imageFilename) {
 		final String asString = imageFilename.toString();
 		for (final String extension : SUPPORTED_IMAGE_EXTENSIONS) {
 			if (asString.endsWith(extension)) {
