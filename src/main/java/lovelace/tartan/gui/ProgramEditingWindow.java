@@ -167,13 +167,13 @@ public class ProgramEditingWindow extends JFrame {
 		final List<ProgramElement> initialProgram = new ArrayList<>();
 		for (final String arg : args) {
 			if (arg.endsWith(".tex") && new File(arg).canRead()) {
+				final Path file = Paths.get(arg);
 				final Optional<Pair<@NotNull ProgramMetadata,
 										   @NotNull List<@NotNull ProgramElement>>>
-						maybePair =
-						TartanMenu.readFromSpecifiedFile(Paths.get(arg), null);
+						maybePair = TartanMenu.readFromSpecifiedFile(file, null);
 				if (maybePair.isPresent()) {
 					TartanMenu.assignMetadata(maybePair.get().getFirst(), metadata);
-					metadata.setFilename(Paths.get(arg));
+					metadata.setFilename(file);
 					initialProgram.addAll(maybePair.get().getSecond());
 					break;
 				} else {
