@@ -144,7 +144,7 @@ public class DanceDatabase {
 
 	public @Nullable String cribText(final DanceRow dance) {
 		try {
-			cribStatement.setInt(1, dance.getId());
+			cribStatement.setInt(1, dance.id());
 		} catch (final SQLException except) {
 			LOGGER.log(Level.WARNING, "SQL error preparing to get crib text", except);
 			return null;

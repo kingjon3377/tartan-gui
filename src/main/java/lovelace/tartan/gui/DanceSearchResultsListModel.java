@@ -50,7 +50,7 @@ public final class DanceSearchResultsListModel implements ListModel<DanceRow> {
 			fireRemovalEvent(removeEvent);
 			final String lowered = term.toLowerCase(Locale.getDefault());
 			db.getDances().stream()
-					.filter((dance) -> dance.getName().toLowerCase(Locale.getDefault())
+					.filter((dance) -> dance.name().toLowerCase(Locale.getDefault())
 						.contains(lowered))
 					.forEach(backing::add);
 			fireInsertionEvent(new ListDataEvent(this, ListDataEvent.INTERVAL_ADDED, 0,

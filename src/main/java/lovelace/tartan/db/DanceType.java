@@ -13,16 +13,16 @@ public interface DanceType {
 	/**
 	 * @return the number identifying this type in the database
 	 */
-	int getId();
+	int id();
 
 	/**
 	 * @return the name of this type of dance
 	 */
-	@NotNull String getName();
+	@NotNull String name();
 	/**
 	 * All dance types in the database as of this writing are single characters, but the
 	 * database schema allows up to four.
 	 * @return the short abbreviation of this type.
 	 */
-	@NotNull String getAbbreviation();
+	@NotNull String abbreviation();
 }

@@ -1,30 +1,19 @@
 package lovelace.tartan.db;
 
-import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * An implementation of {@link DanceType}.
  *
+ * @param id           The number identifying this type in the database.
+ * @param name         The name of this type of dance.
+ * @param abbreviation The short abbreviation of this type. All dance types in the
+ *                     database as of this writing are single characters, but the database
+ *                     schema allows up to four.
  * @author Jonathan Lovelace
  */
-public class DanceTypeImpl implements DanceType {
-	/**
-	 * The number identifying this type in the database.
-	 */
-	private final int id;
-
-	/**
-	 * The name of this type of dance.
-	 */
-	private final @NotNull String name;
-
-	/**
-	 * The short abbreviation of this type. All dance types in the database as of this
-	 * writing are single characters, but the database schema allows up to four.
-	 */
-	private final @NotNull String abbreviation;
-
+public record DanceTypeImpl(int id, @NotNull String name, @NotNull String abbreviation)
+	implements DanceType {
 	/**
 	 * A singleton for cases where the database doesn't specify a type, if such exist.
 	 */
@@ -34,7 +23,7 @@ public class DanceTypeImpl implements DanceType {
 	 * @return the number identifying this type in the database
 	 */
 	@Override
-	public int getId() {
+	public int id() {
 		return id;
 	}
 
@@ -42,7 +31,7 @@ public class DanceTypeImpl implements DanceType {
 	 * @return the name of this type of dance
 	 */
 	@Override
-	public @NotNull String getName() {
+	public @NotNull String name() {
 		return name;
 	}
 
@@ -53,7 +42,7 @@ public class DanceTypeImpl implements DanceType {
 	 * @return the short abbreviation of this type.
 	 */
 	@Override
-	public @NotNull String getAbbreviation() {
+	public @NotNull String abbreviation() {
 		return abbreviation;
 	}
 
@@ -64,25 +53,17 @@ public class DanceTypeImpl implements DanceType {
 	 * @param name         The name of this type of dance.
 	 * @param abbreviation The short abbreviation of this type.
 	 */
-	public DanceTypeImpl(final int id, final @NotNull String name,
-						 final @NotNull String abbreviation) {
-		this.id = id;
-		this.name = name;
-		this.abbreviation = abbreviation;
+	public DanceTypeImpl {
 	}
 
 	@Override
 	public boolean equals(final Object obj) {
 		if (obj instanceof DanceType type) {
-			return id == type.getId() && name.equals(type.getName()) &&
-						   abbreviation.equals(((DanceType) obj).getAbbreviation());
+			return id == type.id() && name.equals(type.name()) &&
+					   abbreviation.equals(((DanceType) obj).abbreviation());
 		} else {
 			return false;
 		}
 	}
 
-	@Override
-	public int hashCode() {
-		return id + 31 * Objects.hash(name, abbreviation);
-	}
 }

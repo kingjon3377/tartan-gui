@@ -56,7 +56,7 @@ public class DanceSelectionPanel extends JSplitPane {
 		final @Nullable DanceRow selection = danceList.getSelectedValue();
 		if (selection != null && program.stream().filter(Dance.class::isInstance)
 										 .map(Dance.class::cast).map(Dance::getTitle)
-										 .noneMatch(selection.getName()::equals)) {
+										 .noneMatch(selection.name()::equals)) {
 			final Dance dance =
 					DatabaseAdapter.convertDance(selection, db.cribText(selection));
 			final int target = selectedList.getSelectedIndex();

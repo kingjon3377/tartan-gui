@@ -36,10 +36,10 @@ public final class DatabaseAdapter {
 	public static Dance convertDance(final @NotNull DanceRow dbRow,
 									 final @Nullable String crib) {
 		final Dance retval =
-				new Dance(dbRow.getName(), dbRow.getSource(), dbRow.getType().getName(),
-						timesThrough(dbRow.getShape(), dbRow.getProgression(),
-								dbRow.getCouples()), dbRow.getLength(),
-						dbRow.getShape().getAbbreviation());
+				new Dance(dbRow.name(), dbRow.source(), dbRow.type().name(),
+						timesThrough(dbRow.shape(), dbRow.progression(),
+								dbRow.couples()), dbRow.length(),
+						dbRow.shape().getAbbreviation());
 		if (crib != null) {
 			if (crib.startsWith("<table>")) {
 				retval.getContents().addAll(convertHtmlCrib(crib));
@@ -47,7 +47,7 @@ public final class DatabaseAdapter {
 							.map(Figure.class::cast).map(Figure::getDescription)
 							.anyMatch((str) -> str.contains("><"))) {
 					LOGGER.warning(() -> "Looks like HTML leaked in while parsing " +
-												 dbRow.getName());
+												 dbRow.name());
 				}
 			} else {
 				retval.getContents().addAll(convertAceCrib(crib));
