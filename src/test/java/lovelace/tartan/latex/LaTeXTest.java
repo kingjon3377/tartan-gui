@@ -23,7 +23,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Some tests for LaTeX reading and writing code.
@@ -93,10 +94,8 @@ public class LaTeXTest {
 				deserializationResults = new LaTeXReader().readLaTeXProgram(serialized);
 		final ProgramMetadata readMetadata = deserializationResults.getFirst();
 		final List<ProgramElement> readProgram = deserializationResults.getSecond();
-		assertEquals("Metadata should be (de)serialized correctly", startingMetadata,
-				readMetadata);
-		assertEquals("Dances should be (de)serialized correctly", startingProgram,
-				readProgram);
+		assertThat("Metadata should be (de)serialized correctly", readMetadata, is(startingMetadata));
+		assertThat("Dances should be (de)serialized correctly", readProgram, is(startingProgram));
 	}
 
 	@NotNull
@@ -165,9 +164,7 @@ public class LaTeXTest {
 				deserializationResults = new LaTeXReader().readLaTeXProgram(serialized);
 		final ProgramMetadata readMetadata = deserializationResults.getFirst();
 		final List<ProgramElement> readProgram = deserializationResults.getSecond();
-		assertEquals("Metadata should be (de)serialized correctly", startingMetadata,
-				readMetadata);
-		assertEquals("Dances should be (de)serialized correctly", startingProgram,
-				readProgram);
+		assertThat("Metadata should be (de)serialized correctly", readMetadata, is(startingMetadata));
+		assertThat("Dances should be (de)serialized correctly", readProgram, is(startingProgram));
 	}
 }
