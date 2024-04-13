@@ -18,7 +18,7 @@ public final class ImageLoader {
 
 	public static Image loadImage(final String filename) throws IOException {
 		try (final InputStream stream =
-				Thread.currentThread().getContextClassLoader()
+					Thread.currentThread().getContextClassLoader()
 						.getResourceAsStream(filename)) {
 			if (stream == null) {
 				throw new FileNotFoundException(

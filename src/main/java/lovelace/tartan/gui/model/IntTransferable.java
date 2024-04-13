@@ -52,7 +52,7 @@ public final class IntTransferable implements Transferable {
 	@Override
 	public boolean equals(final Object obj) {
 		return obj instanceof IntTransferable &&
-					   payload == ((IntTransferable) obj).payload &&
-					   flavor.equals(((IntTransferable) obj).flavor);
+				payload == ((IntTransferable) obj).payload &&
+				flavor.equals(((IntTransferable) obj).flavor);
 	}
 }

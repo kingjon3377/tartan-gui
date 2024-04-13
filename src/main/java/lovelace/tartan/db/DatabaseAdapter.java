@@ -47,7 +47,7 @@ public final class DatabaseAdapter {
 							.map(Figure.class::cast).map(Figure::getDescription)
 							.anyMatch((str) -> str.contains("><"))) {
 					LOGGER.warning(() -> "Looks like HTML leaked in while parsing " +
-												 dbRow.name());
+						dbRow.name());
 				}
 			} else {
 				retval.getContents().addAll(convertAceCrib(crib));

@@ -58,7 +58,7 @@ public class Intermission implements ProgramElement {
 	@Override
 	public boolean equals(final Object other) {
 		return other instanceof Intermission &&
-					   description.equals(((Intermission) other).description);
+			description.equals(((Intermission) other).description);
 	}
 
 	/**

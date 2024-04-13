@@ -809,7 +809,7 @@ public final class LaTeXReader {
 	 * @throws ParseException on parsing failure
 	 */
 	public Pair<@NotNull ProgramMetadata,
-				   @NotNull List<@NotNull ProgramElement>> readLaTeXProgram(
+				@NotNull List<@NotNull ProgramElement>> readLaTeXProgram(
 			final @NotNull String input) throws ParseException {
 		final ProgramMetadata mRetval = new ProgramMetadata();
 		final List<@NotNull ProgramElement> pRetval = new ArrayList<>();

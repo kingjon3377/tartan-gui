@@ -60,7 +60,7 @@ public record DanceTypeImpl(int id, @NotNull String name, @NotNull String abbrev
 	public boolean equals(final Object obj) {
 		if (obj instanceof DanceType type) {
 			return id == type.id() && name.equals(type.name()) &&
-					   abbreviation.equals(((DanceType) obj).abbreviation());
+				abbreviation.equals(((DanceType) obj).abbreviation());
 		} else {
 			return false;
 		}

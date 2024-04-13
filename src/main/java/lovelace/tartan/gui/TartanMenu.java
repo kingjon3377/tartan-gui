@@ -92,7 +92,7 @@ public final class TartanMenu {
 			return;
 		}
 		final Optional<Pair<@NotNull ProgramMetadata,
-								   @NotNull List<@NotNull ProgramElement>>>
+					@NotNull List<@NotNull ProgramElement>>>
 				pair = readFromSpecifiedFile(filename.toPath(), parent);
 		if (pair.isPresent()) {
 			assignMetadata(pair.get().getFirst(), metadata);
@@ -106,13 +106,13 @@ public final class TartanMenu {
 	}
 
 	public static Optional<Pair<@NotNull ProgramMetadata,
-									   @NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
+			@NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
 		final @NotNull Path file) {
 		return readFromSpecifiedFile(file, null);
 	}
 
 	public static Optional<Pair<@NotNull ProgramMetadata,
-									   @NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
+			@NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
 		final @NotNull Path file, final @Nullable Component parent) {
 		try {
 			final List<String> lines = Files.readAllLines(file);

@@ -70,7 +70,7 @@ public class DanceFormationImpl implements DanceFormation {
 	public boolean equals(final Object obj) {
 		if (obj instanceof DanceFormation formation) {
 			return id == formation.getId() && name.equals(formation.getName()) &&
-						   abbreviation.equals(formation.getAbbreviation());
+				abbreviation.equals(formation.getAbbreviation());
 		} else {
 			return false;
 		}

@@ -352,21 +352,21 @@ public final class ProgramMetadata {
 	public boolean equals(final Object other) {
 		if (other instanceof ProgramMetadata that) {
 			return titleOnCover == that.titleOnCover &&
-						   printAuldLangSyne == that.printAuldLangSyne &&
-						   groupCoverName.equals(that.groupCoverName) &&
-						   groupTitleName.equals(that.groupTitleName) &&
-						   eventCoverName.equals(that.eventCoverName) &&
-						   eventTitleName.equals(that.eventTitleName) &&
-						   coverDate.equals(that.coverDate) &&
-						   titleDate.equals(that.titleDate) &&
-						   coverLocation.equals(that.coverLocation) &&
-						   titleLocation.equals(that.titleLocation) &&
-						   locationAddress.equals(that.locationAddress) &&
-						   titleTimes.equals(that.titleTimes) &&
-						   musicians.equals(that.musicians) &&
-						   Objects.equals(coverImage, that.coverImage) &&
-						   Objects.equals(backCoverImage, that.backCoverImage) &&
-						   insidePostDanceImages.equals(that.insidePostDanceImages);
+				printAuldLangSyne == that.printAuldLangSyne &&
+				groupCoverName.equals(that.groupCoverName) &&
+				groupTitleName.equals(that.groupTitleName) &&
+				eventCoverName.equals(that.eventCoverName) &&
+				eventTitleName.equals(that.eventTitleName) &&
+				coverDate.equals(that.coverDate) &&
+				titleDate.equals(that.titleDate) &&
+				coverLocation.equals(that.coverLocation) &&
+				titleLocation.equals(that.titleLocation) &&
+				locationAddress.equals(that.locationAddress) &&
+				titleTimes.equals(that.titleTimes) &&
+				musicians.equals(that.musicians) &&
+				Objects.equals(coverImage, that.coverImage) &&
+				Objects.equals(backCoverImage, that.backCoverImage) &&
+				insidePostDanceImages.equals(that.insidePostDanceImages);
 		} else {
 			return false;
 		}

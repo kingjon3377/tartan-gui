@@ -40,8 +40,8 @@ public class DanceElementEditor implements TableCellEditor {
 			return new FigureEditor((Figure) value, this::stopCellEditing);
 		} else {
 			return defaultEditor
-						   .getTableCellEditorComponent(table, value, isSelected, row,
-								   column);
+				.getTableCellEditorComponent(table, value, isSelected, row,
+					column);
 		}
 	}
 

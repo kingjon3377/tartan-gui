@@ -50,7 +50,7 @@ public final class SimplestMember implements NamedFigureMember, DanceMember {
 	@Override
 	public boolean equals(final Object other) {
 		return other instanceof SimplestMember &&
-					   string.equals(((SimplestMember) other).string);
+			string.equals(((SimplestMember) other).string);
 	}
 
 	/**

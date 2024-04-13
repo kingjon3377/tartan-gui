@@ -94,7 +94,7 @@ public class ProgramEditingWindow extends JFrame {
 		final PlatformFileDialog chooser = new PlatformFileDialog(null);
 		final FilenameFilter filter =
 				(dir, name) -> name.endsWith(".db") || name.endsWith(".sqlite") ||
-									   name.endsWith(".sqlite3");
+						name.endsWith(".sqlite3");
 		if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac")) {
 			chooser.setFileFilter(filter);
 		} else {
@@ -127,7 +127,7 @@ public class ProgramEditingWindow extends JFrame {
 	private static DanceDatabase initializeDatabaseFromArgs(final String... args) {
 		final FilenameFilter filter =
 				(dir, name) -> name.endsWith(".db") || name.endsWith(".sqlite") ||
-									   name.endsWith(".sqlite3");
+						name.endsWith(".sqlite3");
 		for (final String arg : args) {
 			final Path file = Paths.get(arg);
 			if (file.toFile().canRead() && filter.accept(file.toFile(), arg)) {
@@ -156,7 +156,7 @@ public class ProgramEditingWindow extends JFrame {
 		final DanceDatabase db;
 		final FilenameFilter filter =
 				(dir, name) -> name.endsWith(".db") || name.endsWith(".sqlite") ||
-									   name.endsWith(".sqlite3");
+						name.endsWith(".sqlite3");
 		if (args.length == 0) {
 			db = initializeDatabaseNoArgs();
 		} else {
@@ -169,7 +169,7 @@ public class ProgramEditingWindow extends JFrame {
 			if (arg.endsWith(".tex") && new File(arg).canRead()) {
 				final Path file = Paths.get(arg);
 				final Optional<Pair<@NotNull ProgramMetadata,
-										   @NotNull List<@NotNull ProgramElement>>>
+							@NotNull List<@NotNull ProgramElement>>>
 						maybePair = TartanMenu.readFromSpecifiedFile(file, null);
 				if (maybePair.isPresent()) {
 					TartanMenu.assignMetadata(maybePair.get().getFirst(), metadata);

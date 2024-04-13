@@ -42,7 +42,7 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	public SingleColumnTableModel(final List<Element> wrapped, final Class<Element> cls,
-			final String columnName) {
+								  final String columnName) {
 		this.wrapped = wrapped;
 		this.cls = cls;
 		this.columnName = columnName;

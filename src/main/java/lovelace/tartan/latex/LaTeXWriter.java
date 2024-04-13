@@ -30,18 +30,18 @@ public final class LaTeXWriter {
 
 	private static String quoted(final @NotNull String string) {
 		return string.replace("&", "\\&").replace("{", "\\{").replace("}", "\\}")
-					   .replace("<b>", "\\textbf{").replace("</b>", "}")
-					   .replace("<i>", "\\textit{").replace("</i>", "}")
-					   .replace("½", "\\nicefrac{1}{2}")
-					   .replace("<sup>", "\\textsuperscript").replace("</sup>", "}")
-					   .replace("¾", "\\nicefrac{3}{4}").replace("“", "``")
-					   .replace("”", "''").replace("–", "---").replace("’", "'")
-					   .replace("„", "``").replace("‟", "''").replace("‘", "'")
-					   .replace("‗", "`").replace("\f", "")
-					   .replace("¼", "\\nicefrac{1}{4}").replace("‑", "--")
-					   .replace("─", "---").replace("—", "---").replace(";", ";")
-					   .replace("⅔", "\\nicefrac{2}{3}").replace("⅜", "\\nicefrac{3}{8}")
-					   .replace("⅞", "\\nicefrac{7}{8}");
+			.replace("<b>", "\\textbf{").replace("</b>", "}")
+			.replace("<i>", "\\textit{").replace("</i>", "}")
+			.replace("½", "\\nicefrac{1}{2}")
+			.replace("<sup>", "\\textsuperscript").replace("</sup>", "}")
+			.replace("¾", "\\nicefrac{3}{4}").replace("“", "``")
+			.replace("”", "''").replace("–", "---").replace("’", "'")
+			.replace("„", "``").replace("‟", "''").replace("‘", "'")
+			.replace("‗", "`").replace("\f", "")
+			.replace("¼", "\\nicefrac{1}{4}").replace("‑", "--")
+			.replace("─", "---").replace("—", "---").replace(";", ";")
+			.replace("⅔", "\\nicefrac{2}{3}").replace("⅜", "\\nicefrac{3}{8}")
+			.replace("⅞", "\\nicefrac{7}{8}");
 	}
 
 	private static void writePrologueLine(final @NotNull Appendable ostream,
@@ -71,7 +71,7 @@ public final class LaTeXWriter {
 		writePrologueLine(ostream, "tartanhall*", metadata.getTitleLocation());
 		writePrologueLine(ostream, "tartanhalladdress", metadata.getLocationAddress());
 		writePrologueLine(ostream, "tartantimes", metadata.getTitleTimes()
-														  .replace("\n", "\\\\*\n"));
+			.replace("\n", "\\\\*\n"));
 		writePrologueLine(ostream, "tartanmusicians", metadata.getMusicians());
 	}
 
@@ -147,27 +147,27 @@ public final class LaTeXWriter {
 		if (Objects.nonNull(coverImage)) {
 			// TODO: Add helper "allCoverFieldsEmpty() method to ProgramMetadata
 			if (metadata.getGroupCoverName().isEmpty() &&
-						metadata.getEventCoverName().isEmpty() &&
-						metadata.getCoverDate().isEmpty() &&
-						metadata.getCoverLocation().isEmpty()) {
+					metadata.getEventCoverName().isEmpty() &&
+					metadata.getCoverDate().isEmpty() &&
+					metadata.getCoverLocation().isEmpty()) {
 				writeSimpleCommand(out, "tartanimage", latexImage(coverImage));
 			} else {
 				writeSimpleCommand(out, "tartanimagecover", latexImage(coverImage));
 			}
 		} else if (!metadata.getGroupCoverName().isEmpty() ||
-						   !metadata.getEventCoverName().isEmpty() ||
-						   !metadata.getCoverDate().isEmpty() ||
-						   !metadata.getCoverLocation().isEmpty()) {
+				!metadata.getEventCoverName().isEmpty() ||
+				!metadata.getCoverDate().isEmpty() ||
+				!metadata.getCoverLocation().isEmpty()) {
 			writeSimpleCommand(out, "tartancover");
 		}
 		// TODO: Add helper method "allTitleFieldsEmpty()" to ProgramMetadata
 		if (!metadata.getGroupTitleName().isEmpty() ||
-					!metadata.getEventTitleName().isEmpty() ||
-					!metadata.getTitleDate().isEmpty() ||
-					!metadata.getTitleLocation().isEmpty() ||
-					!metadata.getLocationAddress().isEmpty() ||
-					!metadata.getTitleTimes().isEmpty() ||
-					!metadata.getMusicians().isEmpty()) {
+				!metadata.getEventTitleName().isEmpty() ||
+				!metadata.getTitleDate().isEmpty() ||
+				!metadata.getTitleLocation().isEmpty() ||
+				!metadata.getLocationAddress().isEmpty() ||
+				!metadata.getTitleTimes().isEmpty() ||
+				!metadata.getMusicians().isEmpty()) {
 			if (metadata.getTitleOnCover()) {
 				writeSimpleCommand(out, "clearpage");
 			} else {
@@ -192,7 +192,7 @@ public final class LaTeXWriter {
 					} else if (figure instanceof NamedFigure) {
 						out.append("\\namedfigure{");
 						for (final NamedFigureMember subfigure : ((NamedFigure) figure)
-																   .getContents()) {
+								.getContents()) {
 							if (subfigure instanceof Figure) {
 								writeSimpleFigure(out, (Figure) subfigure);
 							} else if (subfigure instanceof SimplestMember) {

@@ -50,7 +50,7 @@ public final class NamedFigure implements DanceMember, FigureParent {
 	@Override
 	public boolean equals(final Object other) {
 		return other instanceof NamedFigure &&
-					   contents.equals(((NamedFigure) other).contents);
+			contents.equals(((NamedFigure) other).contents);
 	}
 
 	/**
