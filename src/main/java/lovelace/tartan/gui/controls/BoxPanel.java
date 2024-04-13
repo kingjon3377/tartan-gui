@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -38,7 +39,7 @@ public class BoxPanel extends JPanel {
 		}
 
 		BoxDirection(final int constant, final @NotNull Supplier<Component> glue,
-					 final @NotNull IntFunction<Component> strut) {
+		             final @NotNull IntFunction<Component> strut) {
 			this.constant = constant;
 			this.glue = glue;
 			this.strut = strut;

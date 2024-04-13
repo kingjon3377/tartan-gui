@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
 import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.ImageButton;
 import lovelace.tartan.gui.controls.ImageLoader;
@@ -40,9 +41,10 @@ public final class DanceStringEditor extends JPanel {
 	public DanceStringEditor(final String string, final Consumer<@NotNull String> consumer) {
 		this(string, consumer, DanceStringEditor::noop);
 	}
+
 	public DanceStringEditor(final @NotNull String string,
-							 final @NotNull Consumer<@NotNull String> consumer,
-							 final @NotNull Runnable cancel) {
+	                         final @NotNull Consumer<@NotNull String> consumer,
+	                         final @NotNull Runnable cancel) {
 		super(new BorderLayout());
 		this.string = string;
 		field = new JTextField(string, 26);
@@ -64,7 +66,7 @@ public final class DanceStringEditor extends JPanel {
 			cancelButton =
 					new ImageButton(ImageLoader.loadImage(
 							// TODO: Check image path once port back to Java complete
-								"lovelace/tartan/gui/Red-X-Icon-300px.png"));
+							"lovelace/tartan/gui/Red-X-Icon-300px.png"));
 		} catch (final IOException e) {
 			cancelButton = new JButton("Cancel");
 		}

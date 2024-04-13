@@ -3,6 +3,7 @@ package lovelace.tartan.gui.model;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
+
 import org.jetbrains.annotations.NotNull;
 
 /**

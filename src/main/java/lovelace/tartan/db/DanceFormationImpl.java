@@ -1,6 +1,7 @@
 package lovelace.tartan.db;
 
 import java.util.Objects;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -60,7 +61,7 @@ public class DanceFormationImpl implements DanceFormation {
 	 * @param abbreviation the "name" of this formation, in abbreviated form
 	 */
 	public DanceFormationImpl(final int id, final @NotNull String name,
-							  final @NotNull String abbreviation) {
+	                          final @NotNull String abbreviation) {
 		this.id = id;
 		this.name = name;
 		this.abbreviation = abbreviation;
@@ -70,7 +71,7 @@ public class DanceFormationImpl implements DanceFormation {
 	public boolean equals(final Object obj) {
 		if (obj instanceof DanceFormation formation) {
 			return id == formation.getId() && name.equals(formation.getName()) &&
-				abbreviation.equals(formation.getAbbreviation());
+					abbreviation.equals(formation.getAbbreviation());
 		} else {
 			return false;
 		}

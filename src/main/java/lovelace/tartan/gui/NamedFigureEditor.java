@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.model.Figure;
