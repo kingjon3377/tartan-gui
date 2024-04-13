@@ -1,8 +1,6 @@
 package lovelace.tartan.latex;
 
-import java.io.IOException;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -50,7 +48,7 @@ public class LaTeXTest {
 	}
 
 	@Test
-	public void noImageTest() throws IOException, ParseException {
+	public void noImageTest() throws Exception {
 		final List<ProgramElement> startingProgram = Arrays.asList(
 				new Dance("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
 						new Figure("1s & 2s advance and retire and dance back to back",
@@ -116,7 +114,7 @@ public class LaTeXTest {
 	}
 
 	@Test
-	public void withImageTest() throws IOException, ParseException {
+	public void withImageTest() throws Exception {
 		final List<ProgramElement> startingProgram = Arrays.asList(
 				new Dance("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
 						new Figure("1s & 2s advance and retire and dance back to back",
