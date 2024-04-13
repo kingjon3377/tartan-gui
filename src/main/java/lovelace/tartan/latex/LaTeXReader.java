@@ -788,9 +788,7 @@ public final class LaTeXReader {
 						currentContext, inputQueue)) {
 					break;
 				}
-			} else if (Character.isWhitespace(top)) {
-				continue;
-			} else {
+			} else if (!Character.isWhitespace(top)) {
 				throw new ParseException(String.format("Unhandled character '%c'", top),
 						-1);
 			}
