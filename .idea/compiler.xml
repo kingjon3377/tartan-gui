@@ -19,7 +19,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="lovelace.tartan" />
-        <module name="tartan-gui" />
       </profile>
     </annotationProcessing>
   </component>
