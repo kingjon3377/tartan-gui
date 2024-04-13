@@ -36,6 +36,7 @@ public final class DanceStringEditor extends JPanel {
 		cancel.run();
 	}
 
+	@SuppressWarnings("EmptyMethod")
 	private static void noop() { /* deliberate no-op */ }
 
 	public DanceStringEditor(final String string, final Consumer<@NotNull String> consumer) {

@@ -104,6 +104,7 @@ public class FigureEditor extends JPanel {
 		cancel.run();
 	}
 
+	@SuppressWarnings("EmptyMethod")
 	private static void noop() { // deliberate no-op
 	}
 }

@@ -64,6 +64,7 @@ public class DanceDetailsPanel extends JPanel {
 		intermission.setDescription(titleField.getText().trim());
 	}
 
+	@SuppressWarnings("EmptyMethod")
 	private void noop() { // deliberate no-op
 	}
 
