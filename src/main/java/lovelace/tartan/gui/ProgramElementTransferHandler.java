@@ -37,9 +37,8 @@ public class ProgramElementTransferHandler extends TransferHandler {
 	}
 
 	/**
-	 * A drag-and-drop operation is supported iff it is using a supported flavor and
-	 * it is
-	 * or can be coerced to be a move operation.
+	 * A drag-and-drop operation is supported iff it is both using a supported flavor and
+	 * is or can be coerced to be a move operation.
 	 */
 	@Override
 	public boolean canImport(final TransferSupport support) {

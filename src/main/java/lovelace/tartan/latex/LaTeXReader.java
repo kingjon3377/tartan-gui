@@ -417,13 +417,12 @@ public final class LaTeXReader {
 	}
 
 	/**
-	 * Parse the contents of a LaTeX environment. This is separated out so it can object
-	 * to constructs that the LaTeX compiler might not refuse to compile but that don't
-	 * make sense, like a dance inside another dance. However, while we log an error if
+	 * Parse the contents of a LaTeX environment. This is separated out in order to be able
+	 * to object to constructs that the LaTeX compiler might not refuse to compile but that
+	 * don't make sense, like a dance inside another dance. However, while we log an error if
 	 * the dance-length parameter of a dance can't be parsed (it's supposed to be TxB,
 	 * where T is the number of times through and B is the length of each time through
-	 * the
-	 * dance in bars), that will not cause parsing of the document to fail.
+	 * the dance in bars), that will not cause parsing of the document to fail.
 	 *
 	 * @param environment  the environment we're being asked to parse the contents of
 	 * @param mRetval      the document metadata object to put metadata into

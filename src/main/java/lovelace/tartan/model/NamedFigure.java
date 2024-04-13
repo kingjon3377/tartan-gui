@@ -45,7 +45,7 @@ public final class NamedFigure implements DanceMember, FigureParent {
 
 	/**
 	 * @param other an object
-	 * @return whether it is an identical named figure or not
+	 * @return whether it is an identical named-figure or not
 	 */
 	@Override
 	public boolean equals(final Object other) {

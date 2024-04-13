@@ -56,8 +56,8 @@ public final class ProgramMetadata {
 	 */
 	private @NotNull String locationAddress = "";
 	/**
-	 * The time(s) of the event (e.g. "Gather 6 p.m., Dinner 6:30 p.m., Dance 7:30 p.m."
-	 * Newlines will replaced with hard-linebreak commands for LaTeX.
+	 * The time(s) of the event (e.g. "Gather 6 p.m., Dinner 6:30 p.m., Dance 7:30 p.m.")
+	 * Newlines will be replaced with hard-linebreak commands for LaTeX.
 	 */
 	private @NotNull String titleTimes = "";
 	/**

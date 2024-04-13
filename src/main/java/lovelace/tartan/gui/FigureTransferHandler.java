@@ -27,9 +27,8 @@ public class FigureTransferHandler extends TransferHandler {
 			Logger.getLogger(FigureTransferHandler.class.getName());
 
 	/**
-	 * A drag/drop operation is supported iff it is a supported flavor and it is or
-	 * can be
-	 * coerced to be a move operation.
+	 * A drag/drop operation is supported iff it both is a supported flavor and is or
+	 * can be scoerced to be a move operation.
 	 */
 	@Override
 	public boolean canImport(final TransferSupport support) {
