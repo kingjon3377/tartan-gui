@@ -2,6 +2,8 @@ package lovelace.tartan.db;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * An implementation of {@link DanceType}.
  *
@@ -66,4 +68,8 @@ public record DanceTypeImpl(int id, @NotNull String name, @NotNull String abbrev
 		}
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, abbreviation);
+	}
 }
