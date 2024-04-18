@@ -170,7 +170,7 @@ public class Dance implements ProgramElement, FigureParent {
 	 */
 	@Override
 	public boolean equals(final Object other) {
-		if (other instanceof Dance that) {
+		if (other instanceof final Dance that) {
 			return title.equals(that.title) && source.equals(that.source) &&
 				tempo.equals(that.tempo) && times == that.times &&
 				length == that.length && formation.equals(that.formation) &&

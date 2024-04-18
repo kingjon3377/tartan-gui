@@ -108,7 +108,7 @@ public record DanceRowImpl(int id, @NotNull String name, int length,
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj instanceof DanceRow that) {
+		if (obj instanceof final DanceRow that) {
 			return id == that.id() && name.equals(that.name()) &&
 				length == that.length() && shape.equals(that.shape()) &&
 				type.equals(that.type()) && couples == that.couples() &&
