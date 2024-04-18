@@ -161,4 +161,9 @@ public class DanceDatabase {
 			return null;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "DanceDatabase with %d dances".formatted(dances.size());
+	}
 }

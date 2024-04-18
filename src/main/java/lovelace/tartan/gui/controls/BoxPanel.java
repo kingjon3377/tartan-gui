@@ -44,6 +44,11 @@ public class BoxPanel extends JPanel {
 			this.glue = glue;
 			this.strut = strut;
 		}
+
+		@Override
+		public String toString() {
+			return name();
+		}
 	}
 
 	public interface BoxParameter {
@@ -70,6 +75,11 @@ public class BoxPanel extends JPanel {
 		@Override
 		public Component getComponent(final BoxDirection direction) {
 			return direction.createStrut(size);
+		}
+
+		@Override
+		public String toString() {
+			return "BoxStrut{size=%d}".formatted(size);
 		}
 	}
 

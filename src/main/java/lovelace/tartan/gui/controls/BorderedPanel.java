@@ -104,4 +104,9 @@ public class BorderedPanel extends JPanel {
 											 final @Nullable Component pageEnd) {
 		return new BorderedPanel(center, pageStart, pageEnd, null, null);
 	}
+
+	@Override
+	public final String toString() {
+		return "BorderedPanel";
+	}
 }
