@@ -95,6 +95,7 @@ public class ProgramEditingWindow extends JFrame {
 		final FilenameFilter filter =
 				(dir, name) -> name.endsWith(".db") || name.endsWith(".sqlite") ||
 						name.endsWith(".sqlite3");
+		// Accessing "os.name" property should be safe //noinspection AccessOfSystemProperties
 		if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac")) {
 			chooser.setFileFilter(filter);
 		} else {
@@ -148,6 +149,10 @@ public class ProgramEditingWindow extends JFrame {
 		}
 		return initializeDatabaseNoArgs();
 	}
+
+	// Suppression of "access of system properties" is warranted, as setting these three
+	// properties still seems to be the prescribed invocation.
+	@SuppressWarnings("AccessOfSystemProperties")
 	public static void main(final String... args) {
 		System.setProperty("com.apple.mrj.application.apple.menu.about.name",
 				"SCD Program Editor");

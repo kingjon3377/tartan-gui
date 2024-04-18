@@ -194,7 +194,7 @@ public final class TartanMenu {
 		final @NotNull ReorderableListModel<@NotNull ProgramElement> program,
 		final @NotNull ProgramMetadata metadata,
 		final @NotNull MetadataEditingPanel metadataPanel) {
-		final boolean onMac =
+		@SuppressWarnings("AccessOfSystemProperties") final boolean onMac =
 				System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac");
 		final int shortcutMask =
 				(onMac) ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;
