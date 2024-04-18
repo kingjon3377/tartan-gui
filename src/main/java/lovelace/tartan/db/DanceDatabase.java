@@ -42,8 +42,8 @@ public class DanceDatabase {
 		sql = ds.getConnection();
 		final Map<Integer, DanceType> typesMap = new HashMap<>();
 		try (final PreparedStatement typesStatement = sql.prepareStatement(
-				"SELECT id, name, short_name FROM dancetype");
-		     final ResultSet typesResults = typesStatement.executeQuery()) {
+					"SELECT id, name, short_name FROM dancetype");
+				final ResultSet typesResults = typesStatement.executeQuery()) {
 			while (typesResults.next()) {
 				final int id = typesResults.getInt("id");
 				final String name = typesResults.getString("name");
@@ -53,8 +53,8 @@ public class DanceDatabase {
 		}
 		final Map<Integer, DanceFormation> shapesMap = new HashMap<>();
 		try (final PreparedStatement shapesStatement = sql.prepareStatement(
-				"SELECT id, name, shortname FROM shape");
-		     final ResultSet shapesResults = shapesStatement.executeQuery()) {
+					"SELECT id, name, shortname FROM shape");
+				final ResultSet shapesResults = shapesStatement.executeQuery()) {
 			while (shapesResults.next()) {
 				final int id = shapesResults.getInt("id");
 				final String name = shapesResults.getString("name");
@@ -64,8 +64,8 @@ public class DanceDatabase {
 		}
 		final Map<Integer, DanceProgression> progressionsMap = new HashMap<>();
 		try (final PreparedStatement progressionsStatement = sql.prepareStatement(
-				"SELECT id, name FROM progression");
-		     final ResultSet progressionsResults = progressionsStatement.executeQuery()) {
+					"SELECT id, name FROM progression");
+				final ResultSet progressionsResults = progressionsStatement.executeQuery()) {
 			while (progressionsResults.next()) {
 				final int id = progressionsResults.getInt("id");
 				final String name = progressionsResults.getString("name");
@@ -80,7 +80,7 @@ public class DanceDatabase {
 						"dancespublicationsmap, publication WHERE dance.id = " +
 						"dancespublicationsmap.dance_id AND publication.id = " +
 						"dancespublicationsmap.publication_id");
-		     final ResultSet danceResults = danceStatement.executeQuery()) {
+				final ResultSet danceResults = danceStatement.executeQuery()) {
 			while (danceResults.next()) {
 				final int id = danceResults.getInt("id");
 				final String name = danceResults.getString("name");
