@@ -247,10 +247,10 @@ public final class LaTeXReader {
 				}
 				if ('\\' == localInput.peekFirst()) {
 					localInput.pop();
-					if (localInput.peekFirst() == '*') {
+					if (Character.valueOf('*').equals(localInput.peekFirst())) {
 						localInput.pop();
 					}
-					if (localInput.peekFirst() == '\n') { // TODO: Handle \r as well?
+					if (Character.valueOf('\n').equals(localInput.peekFirst())) { // TODO: Handle \r as well?
 						localInput.pop();
 					}
 					buffer.append(System.lineSeparator());
