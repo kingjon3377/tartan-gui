@@ -26,23 +26,18 @@ public class NamedFigureEditor extends JPanel {
 	public NamedFigureEditor(final NamedFigure namedFigure, final Runnable stopOperation) {
 		super(new GridLayout(0, 1));
 		for (final NamedFigureMember member : namedFigure.getContents()) {
-			if (member instanceof Figure) {
-				add(new FigureEditor((Figure) member));
-			} else if (member instanceof SimplestMember) {
-				add(new DanceStringEditor(((SimplestMember) member).getString(),
+			switch (member) {
+				case final Figure figure -> add(new FigureEditor(figure));
+				case final SimplestMember simplestMember -> add(new DanceStringEditor(simplestMember.getString(),
 						(str) -> {
 							if (str.isEmpty()) {
-								namedFigure.getContents()
-										.remove(member); // TODO: Remove this editor as
-								// well, and in the non-editing view
+								// TODO: Remove this editor as well, and in the non-editing view
+								namedFigure.getContents().remove(member);
 							} else {
-								((SimplestMember) member).setString(
-										str); // TODO: Make sure the non-editing view is
-								// updated?
+								simplestMember.setString(str); // TODO: Make sure the non-editing view is updated?
 							}
 						}));
-			} else {
-				LOGGER.info("Unexpected NamedFigureMember implementation");
+				default -> LOGGER.info("Unexpected NamedFigureMember implementation");
 			}
 		}
 		final JButton addButton = new JButton("Add movement");
