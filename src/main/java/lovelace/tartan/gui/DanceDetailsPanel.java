@@ -118,41 +118,45 @@ public class DanceDetailsPanel extends JPanel {
 
 	public void setCurrent(final @Nullable ProgramElement current) {
 		this.current = current;
-		if (current == null) {
-			titleField.setEnabled(false);
-			sourceField.setEnabled(false);
-			tempoBox.setEnabled(false);
-			timesBox.setEnabled(false);
-			barsBox.setEnabled(false);
-			formationBox.setEnabled(false);
-			applyButton.setEnabled(false);
-			revertButton.setEnabled(false);
-			apply = this::noop;
-			revert = this::noop;
-		} else if (current instanceof Dance) {
-			titleField.setEnabled(true);
-			sourceField.setEnabled(true);
-			tempoBox.setEnabled(true);
-			timesBox.setEnabled(true);
-			barsBox.setEnabled(true);
-			formationBox.setEnabled(true);
-			applyButton.setEnabled(true);
-			revertButton.setEnabled(true);
-			apply = () -> applyToDance((Dance) current);
-			revert = () -> revertDance((Dance) current);
-		} else if (current instanceof Intermission) {
-			titleField.setEnabled(true);
-			sourceField.setEnabled(false);
-			tempoBox.setEnabled(false);
-			timesBox.setEnabled(false);
-			barsBox.setEnabled(false);
-			formationBox.setEnabled(false);
-			applyButton.setEnabled(true);
-			revertButton.setEnabled(true);
-			apply = () -> applyToIntermission((Intermission) current);
-			revert = () -> revertIntermission((Intermission) current);
-		} else {
-			throw new IllegalArgumentException(
+		// TODO: Make 'enableAll' and 'disableAll' (varargs?) methods, to condense the below cases
+		switch (current) {
+			case null -> {
+				titleField.setEnabled(false);
+				sourceField.setEnabled(false);
+				tempoBox.setEnabled(false);
+				timesBox.setEnabled(false);
+				barsBox.setEnabled(false);
+				formationBox.setEnabled(false);
+				applyButton.setEnabled(false);
+				revertButton.setEnabled(false);
+				apply = this::noop;
+				revert = this::noop;
+			}
+			case final Dance dance -> {
+				titleField.setEnabled(true);
+				sourceField.setEnabled(true);
+				tempoBox.setEnabled(true);
+				timesBox.setEnabled(true);
+				barsBox.setEnabled(true);
+				formationBox.setEnabled(true);
+				applyButton.setEnabled(true);
+				revertButton.setEnabled(true);
+				apply = () -> applyToDance(dance);
+				revert = () -> revertDance(dance);
+			}
+			case final Intermission intermission -> {
+				titleField.setEnabled(true);
+				sourceField.setEnabled(false);
+				tempoBox.setEnabled(false);
+				timesBox.setEnabled(false);
+				barsBox.setEnabled(false);
+				formationBox.setEnabled(false);
+				applyButton.setEnabled(true);
+				revertButton.setEnabled(true);
+				apply = () -> applyToIntermission(intermission);
+				revert = () -> revertIntermission(intermission);
+			}
+			default -> throw new IllegalArgumentException(
 					"Dance details panel can only show details of dance or intermission");
 		}
 		revert.run();
