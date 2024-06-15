@@ -48,15 +48,13 @@ public class FigureTransferHandler extends TransferHandler {
 	 */
 	@Override
 	public Transferable createTransferable(final JComponent component) {
-		if (component instanceof JList<?>) {
-			return new IntTransferable(FLAVOR,
-					((JList<?>) component).getSelectedIndex());
-		} else if (component instanceof JTable) {
-			return new IntTransferable(FLAVOR, ((JTable) component).getSelectedRow());
-		} else {
-			throw new IllegalArgumentException(
+		return switch (component) {
+			case final JList<?> list -> new IntTransferable(FLAVOR,
+					list.getSelectedIndex());
+			case final JTable table -> new IntTransferable(FLAVOR, table.getSelectedRow());
+			case null, default -> throw new IllegalArgumentException(
 					"Can only create transferable from table or list");
-		}
+		};
 	}
 
 	/**
@@ -85,20 +83,20 @@ public class FigureTransferHandler extends TransferHandler {
 			LOGGER.log(Level.INFO, "Transfer failure", except);
 			return false;
 		}
-		if (component instanceof JList<?> &&
-					((JList<?>) component).getModel() instanceof Reorderable &&
-					dropLocation instanceof JList.DropLocation) {
-			((Reorderable) ((JList<?>) component).getModel())
-					.reorder(payload, ((JList.DropLocation) dropLocation).getIndex());
-			return true;
-		} else if (component instanceof JTable &&
-				((JTable) component).getModel() instanceof Reorderable &&
-					dropLocation instanceof JTable.DropLocation) {
-			((Reorderable) ((JTable) component).getModel())
-					.reorder(payload, ((JTable.DropLocation) dropLocation).getRow());
-			return true;
-		} else {
-			return false;
+		switch (component) {
+			case final JList<?> list when list.getModel() instanceof final Reorderable model &&
+					dropLocation instanceof final JList.DropLocation dl -> {
+				model.reorder(payload, dl.getIndex());
+				return true;
+			}
+			case final JTable table when table.getModel() instanceof final Reorderable model &&
+					dropLocation instanceof final JTable.DropLocation dl -> {
+				model.reorder(payload, dl.getRow());
+				return true;
+			}
+			case null, default -> {
+				return false;
+			}
 		}
 	}
 }
