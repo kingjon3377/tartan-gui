@@ -695,26 +695,24 @@ public final class LaTeXReader {
 			}
 			return true;
 		case "scfigure":
-			if (currentContext instanceof Dance) {
-				((Dance) currentContext).getContents().add(parseFigure(ourQueue));
-			} else if (currentContext instanceof NamedFigure) {
-				((NamedFigure) currentContext).getContents().add(parseFigure(ourQueue));
-			} else {
-				throw new ParseException("Figure outside any dance", -1);
+			switch (currentContext) {
+				case final Dance dance -> dance.getContents().add(parseFigure(ourQueue));
+				case final NamedFigure namedFigure -> namedFigure.getContents().add(parseFigure(ourQueue));
+				case null, default -> throw new ParseException("Figure outside any dance", -1);
 			}
 			break;
 		case "namedfigure":
-			if (currentContext instanceof Dance) {
-				final NamedFigure namedFigure = new NamedFigure();
-				final String contents = blockContents(ourQueue);
-				parseTokens(contents.chars().mapToObj(i -> (char) i).collect(
-						Collectors.toCollection(LinkedList::new)),
-						mRetval, pRetval, namedFigure);
-				((Dance) currentContext).getContents().add(namedFigure);
-			} else if (currentContext instanceof NamedFigure) {
-				throw new ParseException("Named figure nested inside named figure", -1);
-			} else {
-				throw new ParseException("Named figure outside any dance", -1);
+			switch (currentContext) {
+				case final Dance dance -> {
+					final NamedFigure namedFigure = new NamedFigure();
+					final String contents = blockContents(ourQueue);
+					parseTokens(contents.chars().mapToObj(i -> (char) i).collect(
+									Collectors.toCollection(LinkedList::new)),
+							mRetval, pRetval, namedFigure);
+					dance.getContents().add(namedFigure);
+				}
+				case final NamedFigure ignored -> throw new ParseException("Named figure nested inside named figure", -1);
+				case null, default -> throw new ParseException("Named figure outside any dance", -1);
 			}
 			break;
 		case "intermission":
