@@ -13,15 +13,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * A wrapper around {@link java.awt.FileDialog} on the Mac platform and {@link
- * javax.swing.JFileChooser} on other platforms.
+ * A wrapper around {@link FileDialog} on the Mac platform and {@link
+ * JFileChooser} on other platforms.
  *
  * @author Jonathan Lovelace
  */
 public final class PlatformFileDialog {
 	/**
-	 * The wrapped dialog. Must be either a {@link java.awt.FileDialog} or {@link
-	 * javax.swing.JFileChooser}.
+	 * The wrapped dialog. Must be either a {@link FileDialog} or {@link
+	 * JFileChooser}.
 	 */
 	private final @NotNull Component wrapped;
 	/**
@@ -74,7 +74,7 @@ public final class PlatformFileDialog {
 
 	/**
 	 * @return the dialog's file filter, which will be either a
-	 * {@link javax.swing.filechooser.FileFilter} or a {@link java.io.FilenameFilter}.
+	 * {@link FileFilter} or a {@link FilenameFilter}.
 	 */
 	public Object getFileFilter() {
 		if (wrapped instanceof FileDialog) {
@@ -89,24 +89,27 @@ public final class PlatformFileDialog {
 	 *               FileFilter} or a {@link FilenameFilter}.
 	 */
 	public void setFileFilter(final Object filter) {
-		if (wrapped instanceof FileDialog) {
-			if (filter instanceof FilenameFilter) {
-				((FileDialog) wrapped).setFilenameFilter((FilenameFilter) filter);
-			} else if (filter instanceof FileFilter) {
-				((FileDialog) wrapped).setFilenameFilter(
-						(dir, name) -> ((FileFilter) filter).accept(new File(dir,
-								name)));
-			} else {
-				throw new IllegalArgumentException(
-						"filter must be a FilenameFilter or a FileFilter");
+		switch (wrapped) {
+			case final FileDialog fileDialog -> {
+				switch (filter) {
+					case final FilenameFilter filenameFilter ->
+							fileDialog.setFilenameFilter(filenameFilter);
+					case FileFilter fileFilter -> fileDialog.setFilenameFilter(
+							(dir, name) -> fileFilter.accept(new File(dir, name)));
+					case null, default -> throw new IllegalArgumentException(
+							"filter must be a FilenameFilter or a FileFilter");
+				}
 			}
-		} else {
-			if (filter instanceof FileFilter) {
-				((JFileChooser) wrapped).setFileFilter((FileFilter) filter);
-			} else if (filter instanceof FilenameFilter) {
-				((JFileChooser) wrapped).setFileFilter(new FilenameFilterWrapper(
-					(FilenameFilter) filter));
+			case final JFileChooser chooser -> {
+				switch (filter) {
+					case final FileFilter fileFilter -> chooser.setFileFilter(fileFilter);
+					case final FilenameFilter filenameFilter ->
+							chooser.setFileFilter(new FilenameFilterWrapper(filenameFilter));
+					case null, default -> {
+					}
+				}
 			}
+			default -> throw new IllegalStateException("Impossible file-chooser type");
 		}
 	}
 
