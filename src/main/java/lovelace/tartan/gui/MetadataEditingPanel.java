@@ -87,14 +87,12 @@ public final class MetadataEditingPanel extends JPanel {
 												  final Object... members) {
 		@NotNull GroupLayout.Group retval = groupLayout.createParallelGroup(alignment);
 		for (final Object member : members) {
-			if (member instanceof Component) {
-				retval = retval.addComponent((Component) member);
-			} else if (member instanceof GroupLayout.Group) {
-				retval = retval.addGroup((GroupLayout.Group) member);
-			} else {
-				throw new IllegalArgumentException(
+			retval = switch (member) {
+				case final Component component -> retval.addComponent(component);
+				case final GroupLayout.Group group -> retval.addGroup(group);
+				case null, default -> throw new IllegalArgumentException(
 						"Can only add a component or a group to a group");
-			}
+			};
 		}
 		return retval;
 	}
@@ -102,14 +100,12 @@ public final class MetadataEditingPanel extends JPanel {
 	private GroupLayout.Group createSequentialGroup(final Object... members) {
 		@NotNull GroupLayout.Group retval = groupLayout.createSequentialGroup();
 		for (final Object member : members) {
-			if (member instanceof Component) {
-				retval = retval.addComponent((Component) member);
-			} else if (member instanceof GroupLayout.Group) {
-				retval = retval.addGroup((GroupLayout.Group) member);
-			} else {
-				throw new IllegalArgumentException(
+			retval = switch (member) {
+				case final Component component -> retval.addComponent(component);
+				case final GroupLayout.Group group -> retval.addGroup(group);
+				case null, default -> throw new IllegalArgumentException(
 						"Can only add a component or a group to a group");
-			}
+			};
 		}
 		return retval;
 	}
