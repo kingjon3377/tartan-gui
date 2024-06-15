@@ -51,7 +51,7 @@ public final class BoxPanel extends JPanel {
 		}
 	}
 
-	public interface BoxParameter {
+	public sealed interface BoxParameter {
 		Component getComponent(final BoxDirection direction);
 	}
 
