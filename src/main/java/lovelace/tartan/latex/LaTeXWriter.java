@@ -181,43 +181,46 @@ public final class LaTeXWriter {
 		writeSimpleCommand(out, "vspace", "\\fill");
 		writeSimpleCommand(out, "clearpage");
 		for (final ProgramElement item : program) {
-			if (item instanceof final Dance dance) {
-				out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
-						dance.getTitle(), dance.getSource(),
-						dance.getTempo(), dance.getTimes(),
-						dance.getLength(), dance.getFormation()));
-				for (final DanceMember figure : dance.getContents()) {
-					if (figure instanceof Figure) {
-						writeSimpleFigure(out, (Figure) figure);
-					} else if (figure instanceof NamedFigure) {
-						out.append("\\namedfigure{");
-						for (final NamedFigureMember subfigure : ((NamedFigure) figure)
-								.getContents()) {
-							if (subfigure instanceof Figure) {
-								writeSimpleFigure(out, (Figure) subfigure);
-							} else if (subfigure instanceof SimplestMember) {
-								out.append(((SimplestMember) subfigure).getString());
-							} else {
-								throw new IllegalStateException("Impossible NamedFigureMember");
+			switch (item) {
+				case final Dance dance -> {
+					out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
+							dance.getTitle(), dance.getSource(),
+							dance.getTempo(), dance.getTimes(),
+							dance.getLength(), dance.getFormation()));
+					for (final DanceMember figure : dance.getContents()) {
+						switch (figure) {
+							case final Figure fig -> writeSimpleFigure(out, fig);
+							case final NamedFigure named -> {
+								out.append("\\namedfigure{");
+								for (final NamedFigureMember subfigure : named
+										.getContents()) {
+									switch (subfigure) {
+										case final Figure fig -> writeSimpleFigure(out, fig);
+										case final SimplestMember simplestMember ->
+												out.append(simplestMember.getString());
+										default -> throw new IllegalStateException("Impossible NamedFigureMember");
+									}
+								}
+								out.append("}\n");
 							}
+							case final SimplestMember simplestMember -> out.append(simplestMember.getString());
+							default -> throw new IllegalStateException("Impossible DanceMember");
 						}
-						out.append("}\n");
-					} else if (figure instanceof SimplestMember) {
-						out.append(((SimplestMember) figure).getString());
+					}
+					writeLine(out, "\\end{scdance}");
+				}
+				case final Intermission intermission -> {
+					final String text = intermission.getDescription();
+					if ("Intermission".equals(text) || text.isEmpty()) {
+						writeSimpleCommand(out, "intermission");
 					} else {
-						throw new IllegalStateException("Impossible DanceMember");
+						writeSimpleCommand(out, "intermission");
+						out.append('[');
+						out.append(text);
+						out.append(']');
 					}
 				}
-				writeLine(out, "\\end{scdance}");
-			} else if (item instanceof Intermission) {
-				final String text = ((Intermission) item).getDescription();
-				if ("Intermission".equals(text) || text.isEmpty()) {
-					writeSimpleCommand(out, "intermission");
-				} else {
-					writeSimpleCommand(out, "intermission");
-					out.append('[');
-					out.append(text);
-					out.append(']');
+				default -> {
 				}
 			}
 		}
