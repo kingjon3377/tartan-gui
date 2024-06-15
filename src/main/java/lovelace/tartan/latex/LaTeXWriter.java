@@ -183,9 +183,9 @@ public final class LaTeXWriter {
 		for (final ProgramElement item : program) {
 			if (item instanceof final Dance dance) {
 				out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
-						((Dance) item).getTitle(), ((Dance) item).getSource(),
-						((Dance) item).getTempo(), ((Dance) item).getTimes(),
-						((Dance) item).getLength(), ((Dance) item).getFormation()));
+						dance.getTitle(), dance.getSource(),
+						dance.getTempo(), dance.getTimes(),
+						dance.getLength(), dance.getFormation()));
 				for (final DanceMember figure : dance.getContents()) {
 					if (figure instanceof Figure) {
 						writeSimpleFigure(out, (Figure) figure);
