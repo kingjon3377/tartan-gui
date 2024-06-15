@@ -35,7 +35,8 @@ public final class PlatformFileDialog {
 	 * @param parentWindow The parent window for this dialog.
 	 */
 	public PlatformFileDialog(final @Nullable Frame parentWindow) {
-		// Accessing "os.name" property should be safe //noinspection AccessOfSystemProperties
+		// Accessing "os.name" property should be safe
+		// noinspection AccessOfSystemProperties
 		if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac")) {
 			wrapped = new FileDialog(parentWindow);
 		} else {
