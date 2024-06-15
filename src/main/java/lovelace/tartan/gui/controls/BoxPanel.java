@@ -87,12 +87,10 @@ public final class BoxPanel extends JPanel {
 		//noinspection MagicConstant
 		setLayout(new BoxLayout(this, direction.getConstant()));
 		for (final Object item : contents) {
-			if (item instanceof BoxParameter bp) {
-				add(bp.getComponent(direction));
-			} else if (item instanceof Component c) {
-				add(c);
-			} else {
-				throw new IllegalArgumentException(
+			switch (item) {
+				case BoxParameter bp -> add(bp.getComponent(direction));
+				case Component c -> add(c);
+				default -> throw new IllegalArgumentException(
 						"All BoxPanel contents must be Components, BoxGlue, or BoxStruts");
 			}
 		}
