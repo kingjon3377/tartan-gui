@@ -31,18 +31,15 @@ public class DanceElementEditor implements TableCellEditor {
 												 final boolean isSelected, final int row,
 												 final int column) {
 		current = value;
-		if (value instanceof NamedFigure) {
-			return new NamedFigureEditor((NamedFigure) value, this::stopCellEditing);
-		} else if (value instanceof SimplestMember) {
-			return new DanceStringEditor(((SimplestMember) value).getString(),
-					((SimplestMember) value)::setString, this::stopCellEditing);
-		} else if (value instanceof Figure) {
-			return new FigureEditor((Figure) value, this::stopCellEditing);
-		} else {
-			return defaultEditor
-				.getTableCellEditorComponent(table, value, isSelected, row,
-					column);
-		}
+		return switch (value) {
+			case final NamedFigure namedFigure -> new NamedFigureEditor(namedFigure, this::stopCellEditing);
+			case final SimplestMember simplestMember -> new DanceStringEditor(simplestMember.getString(),
+					simplestMember::setString, this::stopCellEditing);
+			case final Figure figure -> new FigureEditor(figure, this::stopCellEditing);
+			case null, default -> defaultEditor
+					.getTableCellEditorComponent(table, value, isSelected, row,
+							column);
+		};
 	}
 
 	@Override
