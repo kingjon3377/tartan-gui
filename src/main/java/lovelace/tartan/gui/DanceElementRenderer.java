@@ -27,41 +27,50 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 												   final boolean isSelected,
 												   final boolean hasFocus,
 												   final int row, final int column) {
-		if (value instanceof SimplestMember) {
-			return super.getTableCellRendererComponent(table,
-					((SimplestMember) value).getString(), isSelected, hasFocus, row,
-					column);
-		} else if (value instanceof Figure) {
-			return super.getTableCellRendererComponent(table,
-					String.format(FIGURE_FORMAT,
-							Objects.toString(((Figure) value).getBars(), ""),
-							((Figure) value).getDescription()), isSelected, hasFocus,
-					row, column);
-		} else if (value instanceof NamedFigure) {
-			final StringBuilder builder = new StringBuilder();
-			builder.append("<html><table>");
-			for (final NamedFigureMember movement : ((NamedFigure) value).getContents()) {
-				builder.append("<tr><td width=\"10%\">");
-				if (movement instanceof Figure) {
-					builder.append(
-							Objects.toString(((Figure) movement).getBars(), "&nbsp;"));
-					builder.append("</td><td>");
-					builder.append(((Figure) movement).getDescription());
-				} else if (movement instanceof SimplestMember) {
-					builder.append("&nbsp;</td><td>");
-					builder.append(((SimplestMember) movement).getString());
-				} else {
-					LOGGER.warning("Unexpected type of member of named figure");
-					builder.append(movement);
-				}
-				builder.append("</td></tr>");
+		switch (value) {
+			case final SimplestMember simplestMember -> {
+				return super.getTableCellRendererComponent(table,
+						simplestMember.getString(), isSelected, hasFocus, row,
+						column);
 			}
-			builder.append("</table></html>");
-			return super.getTableCellRendererComponent(table, builder.toString(),
-					isSelected, hasFocus, row, column);
-		} else {
-			return super.getTableCellRendererComponent(table, value, isSelected,
-					hasFocus, row, column);
+			case final Figure figure -> {
+				return super.getTableCellRendererComponent(table,
+						String.format(FIGURE_FORMAT,
+								Objects.toString(figure.getBars(), ""),
+								figure.getDescription()), isSelected, hasFocus,
+						row, column);
+			}
+			case final NamedFigure namedFigure -> {
+				final StringBuilder builder = new StringBuilder();
+				builder.append("<html><table>");
+				for (final NamedFigureMember movement : namedFigure.getContents()) {
+					builder.append("<tr><td width=\"10%\">");
+					switch (movement) { // TODO: Extract method
+						case final Figure figure -> {
+							builder.append(
+									Objects.toString(figure.getBars(), "&nbsp;"));
+							builder.append("</td><td>");
+							builder.append(figure.getDescription());
+						}
+						case final SimplestMember simplestMember -> {
+							builder.append("&nbsp;</td><td>");
+							builder.append(simplestMember.getString());
+						}
+						default -> {
+							LOGGER.warning("Unexpected type of member of named figure");
+							builder.append(movement);
+						}
+					}
+					builder.append("</td></tr>");
+				}
+				builder.append("</table></html>");
+				return super.getTableCellRendererComponent(table, builder.toString(),
+						isSelected, hasFocus, row, column);
+			}
+			case null, default -> {
+				return super.getTableCellRendererComponent(table, value, isSelected,
+						hasFocus, row, column);
+			}
 		}
 	}
 }
