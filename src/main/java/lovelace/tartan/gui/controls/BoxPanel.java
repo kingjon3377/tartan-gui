@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Jonathan Lovelace
  */
-public class BoxPanel extends JPanel {
+public final class BoxPanel extends JPanel {
 	public static final BoxGlue GLUE = new BoxGlue();
 
 	public enum BoxDirection {
