@@ -113,27 +113,8 @@ public final class DanceSelectionPanel extends JSplitPane {
 		selectedList.setDropMode(DropMode.INSERT);
 		selectedList.setDragEnabled(true);
 		rightButton.addActionListener((evt) -> addDance());
-		danceList.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(final KeyEvent evt) {
-				if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-					addDance();
-				}
-			}
-
-			@Override
-			public void keyPressed(final KeyEvent evt) {
-				keyTyped(evt);
-			}
-		});
-		danceList.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(final MouseEvent evt) {
-				if (evt.getClickCount() == 2 || evt.getClickCount() == 3) {
-					addDance();
-				}
-			}
-		});
+		danceList.addKeyListener(new AddDanceKeyListener());
+		danceList.addMouseListener(new AddDanceMouseListener());
 		leftButton.addActionListener((evt) -> {
 			final int selection = selectedList.getSelectedIndex();
 			if (selection >= 0) {
@@ -156,5 +137,28 @@ public final class DanceSelectionPanel extends JSplitPane {
 		setRightComponent(secondSplitPane);
 		secondSplitPane.setResizeWeight(0.0);
 		setResizeWeight(0.5);
+	}
+
+	private class AddDanceKeyListener extends KeyAdapter {
+		@Override
+		public void keyTyped(final KeyEvent evt) {
+			if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+				addDance();
+			}
+		}
+
+		@Override
+		public void keyPressed(final KeyEvent evt) {
+			keyTyped(evt);
+		}
+	}
+
+	private class AddDanceMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(final MouseEvent evt) {
+			if (evt.getClickCount() == 2 || evt.getClickCount() == 3) {
+				addDance();
+			}
+		}
 	}
 }
