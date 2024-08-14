@@ -212,6 +212,7 @@ public final class LaTeXReader {
 	 * @throws ParseException if there are fewer <pre>}</pre> than <pre>{</pre> in the
 	 *                        input
 	 */
+	@SuppressWarnings("ContinueStatement")
 	static String blockContents(final @NotNull Deque<Character> localInput)
 			throws ParseException {
 		// TODO: Keep track of cursor position so we can give accurate data in thrown
