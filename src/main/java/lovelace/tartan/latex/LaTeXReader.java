@@ -229,83 +229,88 @@ public final class LaTeXReader {
 		int braceLevel = 0;
 		while (!localInput.isEmpty()) {
 			final char top = localInput.pop();
-			if (top == '}') {
-				braceLevel--;
-				final int temp = braceLevel;
-				if (braceLevel == 0) { // TODO: Use <= instead of ==?
-					return buffer.toString();
-				} else {
-					buffer.append(top);
-				}
-			} else if (top == '{') {
-				braceLevel++;
-				if (braceLevel > 1) {
-					buffer.append(top);
-				}
-			} else if (top == '\\') {
-				if (localInput.isEmpty()) {
-					throw new ParseException("EOF after backslash", -1);
-				}
-				if ('\\' == localInput.peekFirst()) {
-					localInput.pop();
-					if (Character.valueOf('*').equals(localInput.peekFirst())) {
-						localInput.pop();
+			switch (top) {
+				case '}' -> {
+					braceLevel--;
+					final int temp = braceLevel;
+					if (braceLevel == 0) { // TODO: Use <= instead of ==?
+						return buffer.toString();
+					} else {
+						buffer.append(top);
 					}
-					if (Character.valueOf('\n').equals(localInput.peekFirst())) { // TODO: Handle \r as well?
-						localInput.pop();
+				}
+				case '{' -> {
+					braceLevel++;
+					if (braceLevel > 1) {
+						buffer.append(top);
 					}
-					buffer.append(System.lineSeparator());
-					continue;
 				}
-				final char next = localInput.peekFirst();
-				if ('&' == next || '{' == next || '}' == next) {
-					localInput.pop();
-					buffer.append(next);
-					continue;
+				case '\\' -> {
+					if (localInput.isEmpty()) {
+						throw new ParseException("EOF after backslash", -1);
+					}
+					if ('\\' == localInput.peekFirst()) {
+						localInput.pop();
+						if (Character.valueOf('*').equals(localInput.peekFirst())) {
+							localInput.pop();
+						}
+						if (Character.valueOf('\n').equals(localInput.peekFirst())) { // TODO: Handle \r as well?
+							localInput.pop();
+						}
+						buffer.append(System.lineSeparator());
+						continue;
+					}
+					final char next = localInput.peekFirst();
+					if ('&' == next || '{' == next || '}' == next) {
+						localInput.pop();
+						buffer.append(next);
+						continue;
+					}
+					final String nextCommand = parseCommand(localInput);
+					switch (nextCommand) {
+						case "textbf":
+							buffer.append("<b>");
+							buffer.append(blockContents(localInput));
+							buffer.append("</b>");
+							break;
+						case "nicefrac":
+							final String numerator = blockContents(localInput).trim();
+							final String denominator = blockContents(localInput).trim();
+							parseFraction(numerator, denominator, buffer);
+							break;
+						case "textit": // TODO: Handle \emph as well
+							buffer.append("<i>");
+							buffer.append(blockContents(localInput));
+							buffer.append("</i>");
+							break;
+						case "textsuperscript":
+							buffer.append("<sup>");
+							buffer.append(blockContents(localInput));
+							buffer.append("</sup>");
+							break;
+						default:
+							buffer.append(top);
+							buffer.append(nextCommand);
+							break;
+					}
 				}
-				final String nextCommand = parseCommand(localInput);
-				switch (nextCommand) {
-				case "textbf":
-					buffer.append("<b>");
-					buffer.append(blockContents(localInput));
-					buffer.append("</b>");
-					break;
-				case "nicefrac":
-					final String numerator = blockContents(localInput).trim();
-					final String denominator = blockContents(localInput).trim();
-					parseFraction(numerator, denominator, buffer);
-					break;
-				case "textit": // TODO: Handle \emph as well
-					buffer.append("<i>");
-					buffer.append(blockContents(localInput));
-					buffer.append("</i>");
-					break;
-				case "textsuperscript":
-					buffer.append("<sup>");
-					buffer.append(blockContents(localInput));
-					buffer.append("</sup>");
-					break;
-				default:
-					buffer.append(top);
-					buffer.append(nextCommand);
-					break;
+				case '`' -> {
+					if (!localInput.isEmpty() && '`' == localInput.peekFirst()) {
+						localInput.pop();
+						buffer.append('"');
+					} else {
+						buffer.append(top);
+					}
 				}
-			} else if (top == '`') {
-				if (!localInput.isEmpty() && '`' == localInput.peekFirst()) {
-					localInput.pop();
-					buffer.append('"');
-				} else {
-					buffer.append(top);
+				case '\'' -> {
+					if (!localInput.isEmpty() && '\'' == localInput.peekFirst()) {
+						localInput.pop();
+						buffer.append('"');
+					} else {
+						buffer.append(top);
+					}
 				}
-			} else if (top == '\'') {
-				if (!localInput.isEmpty() && '\'' == localInput.peekFirst()) {
-					localInput.pop();
-					buffer.append('"');
-				} else {
-					buffer.append(top);
-				}
-			} else {
-				buffer.append(top);
+				default -> buffer.append(top);
 			}
 		}
 		throw new ParseException("Unbalanced curly braces in block", -1);
