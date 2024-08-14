@@ -19,7 +19,7 @@ import lovelace.tartan.model.SimplestMember;
  *
  * @author Jonathan Lovelace
  */
-public class NamedFigureEditor extends JPanel {
+public final class NamedFigureEditor extends JPanel {
 	private static final Logger LOGGER =
 			Logger.getLogger(NamedFigureEditor.class.getName());
 

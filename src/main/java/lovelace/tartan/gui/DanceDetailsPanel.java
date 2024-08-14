@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Jonathan Lovelace
  */
-public class DanceDetailsPanel extends JPanel {
+public final class DanceDetailsPanel extends JPanel {
 	private final JLabel titleLabel = new JLabel("Dance Title:");
 	private final JTextField titleField = new JTextField();
 	private final JTextField sourceField = new JTextField();

@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Jonathan Lovelace
  */
-public class FigureEditor extends JPanel {
+public final class FigureEditor extends JPanel {
 	private final Figure figure;
 	private final Runnable cancel;
 	private final JTextField barsField;

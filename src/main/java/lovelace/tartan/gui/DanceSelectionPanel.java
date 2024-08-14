@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Jonathan Lovelace
  */
-public class DanceSelectionPanel extends JSplitPane {
+public final class DanceSelectionPanel extends JSplitPane {
 	private final DanceSearchResultsListModel danceListModel;
 	private final JList<DanceRow> danceList;
 	private final JTextField filterField = new JTextField(15);

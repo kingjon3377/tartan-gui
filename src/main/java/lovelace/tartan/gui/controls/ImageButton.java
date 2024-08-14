@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Jonathan Lovelace
  */
-public class ImageButton extends JButton {
+public final class ImageButton extends JButton {
 	private final @NotNull Image image;
 	public ImageButton(final @NotNull Image image) {
 		this.image = image;

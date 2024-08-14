@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Jonathan Lovelace
  */
-public class ListenedButton extends JButton {
+public final class ListenedButton extends JButton {
 	/**
 	 * @param text the text of the button
 	 * @param action what to do when the button is pressed

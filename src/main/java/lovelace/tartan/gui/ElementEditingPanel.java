@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Jonathan Lovelace
  */
-public class ElementEditingPanel extends JPanel {
+public final class ElementEditingPanel extends JPanel {
 	private @Nullable ProgramElement current = null;
 
 	private @NotNull SingleColumnTableModel<DanceMember> tableModel =

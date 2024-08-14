@@ -37,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Jonathan Lovelace
  */
-public class ProgramEditingWindow extends JFrame {
+public final class ProgramEditingWindow extends JFrame {
 	private static final Logger LOGGER =
 			Logger.getLogger(ProgramEditingWindow.class.getName());
 
