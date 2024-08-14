@@ -84,7 +84,7 @@ public final class BoxPanel extends JPanel {
 	}
 
 	public BoxPanel(final BoxDirection direction, final @NotNull Object... contents) {
-		//noinspection MagicConstant
+		//noinspection MagicConstant,ThisEscapedInObjectConstruction
 		setLayout(new BoxLayout(this, direction.getConstant()));
 		for (final Object item : contents) {
 			switch (item) {

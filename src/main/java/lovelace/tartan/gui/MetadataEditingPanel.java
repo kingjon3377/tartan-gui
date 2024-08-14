@@ -133,6 +133,7 @@ public final class MetadataEditingPanel extends JPanel {
 	}
 
 	public MetadataEditingPanel(final @NotNull ProgramMetadata metadata) {
+		//noinspection ThisEscapedInObjectConstruction
 		groupLayout = new GroupLayout(this);
 		setLayout(groupLayout);
 		this.metadata = metadata;
@@ -160,8 +161,10 @@ public final class MetadataEditingPanel extends JPanel {
 		setupTextFieldListener(musiciansBox, metadata::setMusicians);
 		final JSeparator firstSeparator = new JSeparator();
 		final JLabel coverImageLabel = new JLabel("Cover Image:");
+		//noinspection ThisEscapedInObjectConstruction
 		coverImageSelector = new ImageFileChooser(metadata::setCoverImage, this);
 		final JLabel backImageLabel = new JLabel("Back Cover Image:");
+		//noinspection ThisEscapedInObjectConstruction
 		backImageSelector = new ImageFileChooser(metadata::setBackCoverImage, this);
 		final JLabel fillerImageLabel = new JLabel("Images after last dance:");
 		final ReorderableListModel<Path> fillerImageListModel =
