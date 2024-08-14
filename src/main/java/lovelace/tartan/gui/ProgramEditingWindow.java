@@ -121,6 +121,8 @@ public class ProgramEditingWindow extends JFrame {
 				LOGGER.log(Level.SEVERE, "Error opening SQLite database",
 						except);
 				System.exit(1);
+				// This is an impossible condition, that the compiler isn't smart enough to detect yet
+				//noinspection ThrowInsideCatchBlockWhichIgnoresCaughtException
 				throw new IllegalStateException("Returned from System.exit()"); // NOPMD
 			}
 		}
@@ -143,6 +145,8 @@ public class ProgramEditingWindow extends JFrame {
 					LOGGER.log(Level.SEVERE, "Error opening SQLite database",
 							except);
 					System.exit(1);
+					// This is an impossible condition, that the compiler isn't smart enough to detect yet
+					//noinspection ThrowInsideCatchBlockWhichIgnoresCaughtException
 					throw new IllegalStateException("Returned from System.exit()"); // NOPMD
 				}
 			}
