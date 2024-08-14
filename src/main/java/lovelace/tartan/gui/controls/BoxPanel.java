@@ -88,8 +88,8 @@ public final class BoxPanel extends JPanel {
 		setLayout(new BoxLayout(this, direction.getConstant()));
 		for (final Object item : contents) {
 			switch (item) {
-				case BoxParameter bp -> add(bp.getComponent(direction));
-				case Component c -> add(c);
+				case final BoxParameter bp -> add(bp.getComponent(direction));
+				case final Component c -> add(c);
 				default -> throw new IllegalArgumentException(
 						"All BoxPanel contents must be Components, BoxGlue, or BoxStruts");
 			}

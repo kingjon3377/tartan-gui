@@ -95,7 +95,7 @@ public final class PlatformFileDialog {
 				switch (filter) {
 					case final FilenameFilter filenameFilter ->
 							fileDialog.setFilenameFilter(filenameFilter);
-					case FileFilter fileFilter -> fileDialog.setFilenameFilter(
+					case final FileFilter fileFilter -> fileDialog.setFilenameFilter(
 							(dir, name) -> fileFilter.accept(new File(dir, name)));
 					case null, default -> throw new IllegalArgumentException(
 							"filter must be a FilenameFilter or a FileFilter");

@@ -57,7 +57,7 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 		}
 	}
 
-	private static void renderFigureMovement(NamedFigureMember movement, StringBuilder builder) {
+	private static void renderFigureMovement(final NamedFigureMember movement, final StringBuilder builder) {
 		builder.append("<tr><td width=\"10%\">");
 		switch (movement) { // TODO: Extract method
 			case final Figure figure -> {
