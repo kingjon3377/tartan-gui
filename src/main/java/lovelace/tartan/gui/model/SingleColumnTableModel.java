@@ -110,9 +110,9 @@ public final class SingleColumnTableModel<Element>
 			if (rowIndex >= 0 && rowIndex <= wrapped.size()) {
 				if (cls.isInstance(val)) {
 					if (rowIndex == wrapped.size()) {
-						wrapped.add((Element) val);
+						wrapped.add(cls.cast(val));
 					} else {
-						wrapped.set(rowIndex, (Element) val);
+						wrapped.set(rowIndex, cls.cast(val));
 					}
 				} else {
 					throw new IllegalArgumentException(
