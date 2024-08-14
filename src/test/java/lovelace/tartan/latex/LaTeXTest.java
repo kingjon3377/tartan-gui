@@ -31,8 +31,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 @RunWith(Parameterized.class)
 public class LaTeXTest {
+	@SuppressWarnings("InstanceVariableMayNotBeInitialized")
 	@Parameter
 	public boolean titleOnCover;
+	@SuppressWarnings("InstanceVariableMayNotBeInitialized")
 	@Parameter(1)
 	public boolean printAuldLangSyne;
 
