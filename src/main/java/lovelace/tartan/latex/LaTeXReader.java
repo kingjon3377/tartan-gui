@@ -107,99 +107,77 @@ public final class LaTeXReader {
 									  final @NotNull String denominator,
 									  final @NotNull StringBuilder buffer) {
 		switch (numerator) {
-		case "1":
-			switch (denominator) {
-			case "2":
-				buffer.append('½');
-				break;
-			case "3":
-				buffer.append("⅓");
-				break;
-			case "4":
-				buffer.append("¼");
-				break;
-			case "5":
-				buffer.append("⅕");
-				break;
-			case "6":
-				buffer.append("⅙");
-				break;
-			case "7":
-				buffer.append("⅐");
-				break;
-			case "8":
-				buffer.append("⅛");
-				break;
-			case "9":
-				buffer.append("⅑");
-				break;
-			case "10":
-				buffer.append("⅒");
-				break;
-			default:
-				defaultFraction(numerator, denominator, buffer);
-				break;
+			case "1" -> {
+				switch (denominator) {
+					case "2" -> buffer.append('½');
+					case "3" -> buffer.append("⅓");
+					case "4" -> buffer.append("¼");
+					case "5" -> buffer.append("⅕");
+					case "6" -> buffer.append("⅙");
+					case "7" -> buffer.append("⅐");
+					case "8" -> buffer.append("⅛");
+					case "9" -> buffer.append("⅑");
+					case "10" -> buffer.append("⅒");
+					default -> defaultFraction(numerator, denominator, buffer);
+				}
 			}
-			break;
-		case "2":
-			switch (denominator) {
-			case "3":
-				buffer.append("⅔");
-				break;
-			case "5":
-				buffer.append("⅖");
-				break;
-			default:
-				defaultFraction(numerator, denominator, buffer);
-				break;
+			case "2" -> {
+				switch (denominator) {
+					case "3":
+						buffer.append("⅔");
+						break;
+					case "5":
+						buffer.append("⅖");
+						break;
+					default:
+						defaultFraction(numerator, denominator, buffer);
+						break;
+				}
 			}
-			break;
-		case "3":
-			switch (denominator) {
-			case "4":
-				buffer.append("¾");
-				break;
-			case "5":
-				buffer.append("⅗");
-				break;
-			case "8":
-				buffer.append("⅜");
-				break;
-			default:
-				defaultFraction(numerator, denominator, buffer);
-				break;
+			case "3" -> {
+				switch (denominator) {
+					case "4":
+						buffer.append("¾");
+						break;
+					case "5":
+						buffer.append("⅗");
+						break;
+					case "8":
+						buffer.append("⅜");
+						break;
+					default:
+						defaultFraction(numerator, denominator, buffer);
+						break;
+				}
 			}
-			break;
-		case "4":
-			if ("5".equals(denominator)) {
-				buffer.append("⅘");
-			} else {
-				defaultFraction(numerator, denominator, buffer);
+			case "4" -> {
+				if ("5".equals(denominator)) {
+					buffer.append("⅘");
+				} else {
+					defaultFraction(numerator, denominator, buffer);
+				}
 			}
-			break;
-		case "5":
-			switch (denominator) {
-			case "6":
-				buffer.append("⅚");
-				break;
-			case "8":
-				buffer.append("⅝");
-				break;
-			default:
-				defaultFraction(numerator, denominator, buffer);
-				break;
+			case "5" -> {
+				switch (denominator) {
+					case "6":
+						buffer.append("⅚");
+						break;
+					case "8":
+						buffer.append("⅝");
+						break;
+					default:
+						defaultFraction(numerator, denominator, buffer);
+						break;
+				}
 			}
-			break;
-		case "7":
-			if ("8".equals(denominator)) {
-				buffer.append("⅞");
-			} else {
-				defaultFraction(numerator, denominator, buffer);
+			case "7" -> {
+				if ("8".equals(denominator)) {
+					buffer.append("⅞");
+				} else {
+					defaultFraction(numerator, denominator, buffer);
+				}
 			}
-			break;
-		default:
-			defaultFraction(numerator, denominator, buffer);
-			break;
+			default -> defaultFraction(numerator, denominator, buffer);
 		}
 	}
 
