@@ -57,19 +57,7 @@ public final class FigureEditor extends JPanel {
 		} catch (final IOException e) {
 			cancelButton = new JButton("Cancel");
 		}
-		final KeyListener escapeListener = new KeyAdapter() {
-			@Override
-			public void keyTyped(final KeyEvent event) {
-				if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					cancelListener(event);
-				}
-			}
-
-			@Override
-			public void keyReleased(final KeyEvent event) {
-				keyTyped(event);
-			}
-		};
+		final KeyListener escapeListener = new CancelKeyListener();
 		barsField.addKeyListener(escapeListener);
 		descriptionField.addKeyListener(escapeListener);
 		cancelButton.addActionListener(this::cancelListener);
@@ -106,5 +94,19 @@ public final class FigureEditor extends JPanel {
 
 	@SuppressWarnings("EmptyMethod")
 	private static void noop() { // deliberate no-op
+	}
+
+	private class CancelKeyListener extends KeyAdapter {
+		@Override
+		public void keyTyped(final KeyEvent event) {
+			if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				cancelListener(event);
+			}
+		}
+
+		@Override
+		public void keyReleased(final KeyEvent event) {
+			keyTyped(event);
+		}
 	}
 }
