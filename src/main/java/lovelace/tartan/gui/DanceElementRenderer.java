@@ -44,24 +44,7 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 				final StringBuilder builder = new StringBuilder();
 				builder.append("<html><table>");
 				for (final NamedFigureMember movement : namedFigure.getContents()) {
-					builder.append("<tr><td width=\"10%\">");
-					switch (movement) { // TODO: Extract method
-						case final Figure figure -> {
-							builder.append(
-									Objects.toString(figure.getBars(), "&nbsp;"));
-							builder.append("</td><td>");
-							builder.append(figure.getDescription());
-						}
-						case final SimplestMember simplestMember -> {
-							builder.append("&nbsp;</td><td>");
-							builder.append(simplestMember.getString());
-						}
-						default -> {
-							LOGGER.warning("Unexpected type of member of named figure");
-							builder.append(movement);
-						}
-					}
-					builder.append("</td></tr>");
+					renderFigureMovement(movement, builder);
 				}
 				builder.append("</table></html>");
 				return super.getTableCellRendererComponent(table, builder.toString(),
@@ -72,5 +55,26 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 						hasFocus, row, column);
 			}
 		}
+	}
+
+	private static void renderFigureMovement(NamedFigureMember movement, StringBuilder builder) {
+		builder.append("<tr><td width=\"10%\">");
+		switch (movement) { // TODO: Extract method
+			case final Figure figure -> {
+				builder.append(
+						Objects.toString(figure.getBars(), "&nbsp;"));
+				builder.append("</td><td>");
+				builder.append(figure.getDescription());
+			}
+			case final SimplestMember simplestMember -> {
+				builder.append("&nbsp;</td><td>");
+				builder.append(simplestMember.getString());
+			}
+			default -> {
+				LOGGER.warning("Unexpected type of member of named figure");
+				builder.append(movement);
+			}
+		}
+		builder.append("</td></tr>");
 	}
 }
