@@ -73,14 +73,14 @@ public class DanceDatabase {
 			}
 		}
 		try (final PreparedStatement danceStatement = sql.prepareStatement(
-				"SELECT dance.id, dance.name, dance.barsperrepeat, dance.shape_id, " +
-						"dance" +
-						".type_id, dance.couples_id, publication.name AS " +
-						"publicationName, dance.progression_id FROM dance, " +
-						"dancespublicationsmap, publication WHERE dance.id = " +
-						"dancespublicationsmap.dance_id AND publication.id = " +
-						"dancespublicationsmap.publication_id");
-				final ResultSet danceResults = danceStatement.executeQuery()) {
+				"""
+						SELECT dance.id, dance.name, dance.barsperrepeat, dance.shape_id, \
+						dance.type_id, dance.couples_id, publication.name AS publicationName, \
+						dance.progression_id \
+						FROM dance, dancespublicationsmap, publication \
+						WHERE dance.id = dancespublicationsmap.dance_id AND \
+						publication.id = dancespublicationsmap.publication_id""");
+		     final ResultSet danceResults = danceStatement.executeQuery()) {
 			while (danceResults.next()) {
 				final int id = danceResults.getInt("id");
 				final String name = danceResults.getString("name");
@@ -139,8 +139,9 @@ public class DanceDatabase {
 			}
 		}
 		cribStatement = sql.prepareStatement(
-				"SELECT text FROM dancecrib WHERE dance_id = ? ORDER BY format ASC LIMIT" +
-						" 1");
+				"""
+						SELECT text FROM dancecrib WHERE dance_id = ? ORDER BY format ASC \
+						LIMIT 1""");
 	}
 
 	public @Nullable String cribText(final DanceRow dance) {

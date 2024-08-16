@@ -138,8 +138,9 @@ public final class LaTeXWriter {
 		writeLine(out,
 				"% This LaTeX file was produced by the tartan-gui graphical editor;");
 		writeLine(out,
-				"% if you edit it by hand, that editor may not be able to read it " +
-						"again.");
+				"""
+						% if you edit it by hand, that editor may not be able to read it \
+						again.""");
 		writeSimpleCommand(out, "documentclass", "tartan");
 		writePrologue(out, metadata);
 		writeSimpleCommand(out, "begin", "document");
