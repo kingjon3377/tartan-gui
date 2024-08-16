@@ -42,6 +42,7 @@ public class DanceElementEditor implements TableCellEditor {
 		};
 	}
 
+	@SuppressWarnings("SuspiciousGetterSetter")
 	@Override
 	public @Nullable Object getCellEditorValue() {
 		return current;
