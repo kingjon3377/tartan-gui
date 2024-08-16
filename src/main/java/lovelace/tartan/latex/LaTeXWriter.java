@@ -25,6 +25,7 @@ public final class LaTeXWriter {
 	/**
 	 * The extensions the graphicx package supports.
 	 */
+	@SuppressWarnings("StaticCollection") // unmodifiable
 	private static final List<String> SUPPORTED_IMAGE_EXTENSIONS =
 			List.of(".png", ".jpg", ".pdf");
 
