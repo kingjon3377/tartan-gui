@@ -95,10 +95,9 @@ public final class DatabaseAdapter {
 			throw new IllegalArgumentException("Can't handle HTML cribs here");
 		}
 		@Nullable String currentBars = null;
-		final String[] split = crib.split("\n");
-		final List<@NotNull Figure> retval = new ArrayList<>(split.length);
-		for (final String longLine : split) {
-			final String line = longLine.trim();
+		final List<String> split = crib.lines().map(String::trim).toList();
+		final List<@NotNull Figure> retval = new ArrayList<>(split.size());
+		for (final String line : split) {
 			if (line.endsWith("::")) {
 				currentBars = line.substring(0, line.length() - 2);
 			} else {
@@ -134,10 +133,9 @@ public final class DatabaseAdapter {
 	private static @NotNull List<@NotNull Figure> convertHtmlCrib(final @NotNull String crib) {
 		final String base =
 				stripFromEnd(stripFromStart(crib, "<table>"), "</table>").trim();
-		final String[] split = base.split("\n");
+		final List<String> split = base.lines().map(String::trim).toList();
 		final List<@NotNull Figure> retval = new ArrayList<>(split.length);
-		for (final String longLine : split) {
-			final String line = longLine.trim();
+		for (final String line : split) {
 			if (line.startsWith("<tr><td class=\"expl\" colspan=\"2\">")) {
 				final String current = stripFromEnd(
 						stripFromStart(line, "<tr><td class=\"expl\" colspan=\"2\">"),
