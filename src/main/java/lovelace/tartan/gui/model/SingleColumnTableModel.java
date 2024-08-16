@@ -3,6 +3,7 @@ package lovelace.tartan.gui.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -210,7 +211,7 @@ public final class SingleColumnTableModel<Element>
 
 	@Override
 	public boolean containsAll(final @NotNull Collection<?> collection) {
-		return wrapped.containsAll(collection);
+		return new HashSet<>(wrapped).containsAll(collection);
 	}
 
 	@Override
