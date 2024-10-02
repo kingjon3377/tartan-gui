@@ -60,8 +60,8 @@ public class LaTeXTest {
 								"9-16"),
 						new Figure(
 								"""
-										1s lead down the middle & up to 2d place (2s step up \
-										on 19-20""",
+										1s lead down the middle & up to 2d place (2s \
+										step up on 19-20""",
 								"17-24"),
 						new Figure("2s & 1s circle 4H around to the left and back",
 								"25-32")),
@@ -69,14 +69,14 @@ public class LaTeXTest {
 						new Figure("1s & 2s dance the Targe:", "1-8"), new NamedFigure(
 						new Figure(
 								"""
-										1L & 2L turn RH 3/4 <b>while</b> Men dance 1/4 round \
-										anticlockwise""",
+										1L & 2L turn RH 3/4 <b>while</b> Men dance 1/4 \
+										round anticlockwise""",
 								"1-2"),
 						new Figure("1M with 2L & 1L with 2M full turn", "3-4"),
 						new Figure(
 								"""
-										1L & 2L turn RH 3/4 <b>while</b> Men dance 1/4 way \
-										round anticlockwise""",
+										1L & 2L turn RH 3/4 <b>while</b> Men dance 1/4 \
+										way round anticlockwise""",
 								"5-6"),
 						new Figure("1M with 2L & 1L with 2M full turn", "7-8")),
 						new Figure("remainder of dance description here")),
@@ -96,8 +96,10 @@ public class LaTeXTest {
 				deserializationResults = new LaTeXReader().readLaTeXProgram(serialized);
 		final ProgramMetadata readMetadata = deserializationResults.getFirst();
 		final List<ProgramElement> readProgram = deserializationResults.getSecond();
-		assertThat("Metadata should be (de)serialized correctly", readMetadata, is(startingMetadata));
-		assertThat("Dances should be (de)serialized correctly", readProgram, is(startingProgram));
+		assertThat("Metadata should be (de)serialized correctly", readMetadata,
+				is(startingMetadata));
+		assertThat("Dances should be (de)serialized correctly", readProgram,
+				is(startingProgram));
 	}
 
 	@NotNull
@@ -128,8 +130,8 @@ public class LaTeXTest {
 								"9-16"),
 						new Figure(
 								"""
-										1s lead down the middle & up to 2d place (2s step up on\
-										 19-20""",
+										1s lead down the middle & up to 2d place (2s \
+										step up on 19-20""",
 								"17-24"),
 						new Figure("2s & 1s circle 4H around to the left and back",
 								"25-32")),
@@ -137,14 +139,14 @@ public class LaTeXTest {
 						new Figure("1s & 2s dance the Targe:", "1-8"),
 						new NamedFigure(new Figure(
 								"""
-										1L & 2L turn RH 3/4 <b>while</b> Men dance 1/4 round \
-										anticlockwise""",
+										1L & 2L turn RH 3/4 <b>while</b> Men dance 1/4 \
+										round anticlockwise""",
 								"1-2"),
 								new Figure("1M with 2L & 1L with 2M full turn", "3-4"),
 								new Figure(
 										"""
-												1L & 2L turn RH 3/4 <b>while</b> Men dance 1/4 \
-												way round anticlockwise""",
+												1L & 2L turn RH 3/4 <b>while</b> Men \
+												dance 1/4 way round anticlockwise""",
 										"5-6"),
 								new Figure("1M with 2L & 1L with 2M full turn", "7-8")),
 						new Figure("remainder of dance description here")),
@@ -169,7 +171,9 @@ public class LaTeXTest {
 				deserializationResults = new LaTeXReader().readLaTeXProgram(serialized);
 		final ProgramMetadata readMetadata = deserializationResults.getFirst();
 		final List<ProgramElement> readProgram = deserializationResults.getSecond();
-		assertThat("Metadata should be (de)serialized correctly", readMetadata, is(startingMetadata));
-		assertThat("Dances should be (de)serialized correctly", readProgram, is(startingProgram));
+		assertThat("Metadata should be (de)serialized correctly", readMetadata,
+				is(startingMetadata));
+		assertThat("Dances should be (de)serialized correctly", readProgram,
+				is(startingProgram));
 	}
 }

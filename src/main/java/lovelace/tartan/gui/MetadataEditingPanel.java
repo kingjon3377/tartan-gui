@@ -50,9 +50,10 @@ public final class MetadataEditingPanel extends JPanel {
 	private final GroupLayout groupLayout;
 
 	// TODO: Make a JTextBox subclass taking both a Consumer<String> and a
-		//  Supplier<String>, and has revert() as an instance method
+		//  Supplier<String>, with revert() as an instance method
 		private record TextBoxChangeListener(@NotNull JTextComponent field,
-		                                     @NotNull Consumer<String> assignee) implements DocumentListener {
+		                                     @NotNull Consumer<String> assignee)
+			implements DocumentListener {
 
 		@Override
 			public void insertUpdate(final DocumentEvent ignored) {

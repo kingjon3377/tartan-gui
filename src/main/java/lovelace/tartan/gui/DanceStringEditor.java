@@ -39,7 +39,8 @@ public final class DanceStringEditor extends JPanel {
 	@SuppressWarnings("EmptyMethod")
 	private static void noop() { /* deliberate no-op */ }
 
-	public DanceStringEditor(final String string, final Consumer<@NotNull String> consumer) {
+	public DanceStringEditor(final String string,
+	                         final Consumer<@NotNull String> consumer) {
 		this(string, consumer, DanceStringEditor::noop);
 	}
 

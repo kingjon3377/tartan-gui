@@ -23,18 +23,20 @@ public final class NamedFigureEditor extends JPanel {
 	private static final Logger LOGGER =
 			Logger.getLogger(NamedFigureEditor.class.getName());
 
-	public NamedFigureEditor(final NamedFigure namedFigure, final Runnable stopOperation) {
+	public NamedFigureEditor(final NamedFigure namedFigure,
+	                         final Runnable stopOperation) {
 		super(new GridLayout(0, 1));
 		for (final NamedFigureMember member : namedFigure.getContents()) {
 			switch (member) {
 				case final Figure figure -> add(new FigureEditor(figure));
-				case final SimplestMember simplestMember -> add(new DanceStringEditor(simplestMember.getString(),
-						(str) -> {
+				case final SimplestMember simplestMember -> add(
+						new DanceStringEditor(simplestMember.getString(), (str) -> {
 							if (str.isEmpty()) {
-								// TODO: Remove this editor as well, and in the non-editing view
+								// TODO: Remove this editor as well, & in non-editing view
 								namedFigure.getContents().remove(member);
 							} else {
-								simplestMember.setString(str); // TODO: Make sure the non-editing view is updated?
+								simplestMember.setString(str);
+								// TODO: Make sure the non-editing view is updated?
 							}
 						}));
 				default -> LOGGER.info("Unexpected NamedFigureMember implementation");

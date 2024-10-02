@@ -91,7 +91,7 @@ public final class BoxPanel extends JPanel {
 				case final BoxParameter bp -> add(bp.getComponent(direction));
 				case final Component c -> add(c);
 				default -> throw new IllegalArgumentException(
-						"All BoxPanel contents must be Components, BoxGlue, or BoxStruts");
+						"BoxPanel contents must be Components, BoxGlue, or BoxStruts");
 			}
 		}
 	}

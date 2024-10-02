@@ -83,13 +83,15 @@ public final class LaTeXWriter {
 	}
 
 	private static void writeSimpleCommand(final @NotNull Appendable ostream,
-										   final @NotNull String command) throws IOException {
+										   final @NotNull String command)
+			throws IOException {
 		writeSimpleCommand(ostream, command, null);
 	}
 
 	private static void writeSimpleCommand(final @NotNull Appendable ostream,
 										   final @NotNull String command,
-										   final @Nullable String arg) throws IOException {
+										   final @Nullable String arg)
+			throws IOException {
 		ostream.append('\\');
 		ostream.append(command);
 		if (arg != null) {
@@ -197,16 +199,20 @@ public final class LaTeXWriter {
 								for (final NamedFigureMember subfigure : named
 										.getContents()) {
 									switch (subfigure) {
-										case final Figure fig -> writeSimpleFigure(out, fig);
+										case final Figure fig ->
+												writeSimpleFigure(out, fig);
 										case final SimplestMember simplestMember ->
 												out.append(simplestMember.getString());
-										default -> throw new IllegalStateException("Impossible NamedFigureMember");
+										default -> throw new IllegalStateException(
+												"Impossible NamedFigureMember");
 									}
 								}
 								out.append("}\n");
 							}
-							case final SimplestMember simplestMember -> out.append(simplestMember.getString());
-							default -> throw new IllegalStateException("Impossible DanceMember");
+							case final SimplestMember simplestMember ->
+									out.append(simplestMember.getString());
+							default -> throw new IllegalStateException(
+									"Impossible DanceMember");
 						}
 					}
 					writeLine(out, "\\end{scdance}");

@@ -97,7 +97,8 @@ public class ProgramElementTransferHandler extends TransferHandler {
 		}
 		if (component instanceof JList<?>) {
 			final ListModel<?> model = ((JList<?>) component).getModel();
-			if (model instanceof Reorderable && dropLocation instanceof JList.DropLocation) {
+			if (model instanceof Reorderable &&
+					    dropLocation instanceof JList.DropLocation) {
 				final int index = ((JList.DropLocation) dropLocation).getIndex();
 				((Reorderable) model).reorder(payload, index);
 				return true;

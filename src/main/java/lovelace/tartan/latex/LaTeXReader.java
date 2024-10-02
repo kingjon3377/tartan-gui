@@ -232,7 +232,8 @@ public final class LaTeXReader {
 						if (Character.valueOf('*').equals(localInput.peekFirst())) {
 							localInput.pop();
 						}
-						if (Character.valueOf('\n').equals(localInput.peekFirst())) { // TODO: Handle \r as well?
+						if (Character.valueOf('\n').equals(localInput.peekFirst())) {
+							// TODO: Handle \r as well?
 							localInput.pop();
 						}
 						buffer.append(System.lineSeparator());
@@ -342,8 +343,8 @@ public final class LaTeXReader {
 				return Integer.parseInt(array[0]);
 			} catch (final NumberFormatException except) {
 				LOGGER.severe(() -> String.format(
-						"Times through couldn't be extracted from dance-length parameter " +
-								"for dance '%s'",
+						"Times through couldn't be extracted from dance-length " +
+								"parameter for dance '%s'",
 						dance));
 				return 0;
 			}
@@ -368,8 +369,8 @@ public final class LaTeXReader {
 				return Integer.parseInt(array[1]);
 			} catch (final NumberFormatException except) {
 				LOGGER.severe(() -> String.format(
-						"Length-in-bars couldn't be extracted from dance-length parameter " +
-								"for dance '%s'",
+						"Length-in-bars couldn't be extracted from dance-length " +
+								"parameter for dance '%s'",
 						dance));
 				return 0;
 			}
@@ -401,12 +402,13 @@ public final class LaTeXReader {
 	}
 
 	/**
-	 * Parse the contents of a LaTeX environment. This is separated out in order to be able
-	 * to object to constructs that the LaTeX compiler might not refuse to compile but that
-	 * don't make sense, like a dance inside another dance. However, while we log an error if
-	 * the dance-length parameter of a dance can't be parsed (it's supposed to be TxB,
-	 * where T is the number of times through and B is the length of each time through
-	 * the dance in bars), that will not cause parsing of the document to fail.
+	 * Parse the contents of a LaTeX environment. This is separated out in order to be
+	 * able to object to constructs that the LaTeX compiler might not refuse to compile
+	 * but that don't make sense, like a dance inside another dance. However, while we
+	 * log an error if the dance-length parameter of a dance can't be parsed (it's
+	 * supposed to be TxB, where T is the number of times through and B is the length of
+	 * each time through the dance in bars), that will not cause parsing of the document
+	 * to fail.
 	 *
 	 * @param environment  the environment we're being asked to parse the contents of
 	 * @param mRetval      the document metadata object to put metadata into
@@ -681,8 +683,10 @@ public final class LaTeXReader {
 		case "scfigure":
 			switch (currentContext) {
 				case final Dance dance -> dance.getContents().add(parseFigure(ourQueue));
-				case final NamedFigure namedFigure -> namedFigure.getContents().add(parseFigure(ourQueue));
-				case null, default -> throw new ParseException("Figure outside any dance", -1);
+				case final NamedFigure namedFigure ->
+						namedFigure.getContents().add(parseFigure(ourQueue));
+				case null, default ->
+						throw new ParseException("Figure outside any dance", -1);
 			}
 			break;
 		case "namedfigure":
@@ -695,8 +699,10 @@ public final class LaTeXReader {
 							mRetval, pRetval, namedFigure);
 					dance.getContents().add(namedFigure);
 				}
-				case final NamedFigure ignored -> throw new ParseException("Named figure nested inside named figure", -1);
-				case null, default -> throw new ParseException("Named figure outside any dance", -1);
+				case final NamedFigure ignored -> throw new ParseException(
+						"Named figure nested inside named figure", -1);
+				case null, default ->
+						throw new ParseException("Named figure outside any dance", -1);
 			}
 			break;
 		case "intermission":

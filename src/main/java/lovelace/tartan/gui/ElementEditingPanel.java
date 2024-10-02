@@ -90,7 +90,8 @@ public final class ElementEditingPanel extends JPanel {
 	private void removeFigure(final Object ignored) {
 		// TODO: Disable the button when not a dance or no figure selected
 		final int selection = table.getSelectedRow();
-		if (current instanceof Dance && selection >= 0 && selection < table.getRowCount()) {
+		if (current instanceof Dance && selection >= 0 &&
+				    selection < table.getRowCount()) {
 			tableModel.remove(selection);
 		}
 	}

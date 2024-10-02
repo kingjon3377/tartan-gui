@@ -105,7 +105,8 @@ public final class PlatformFileDialog {
 				switch (filter) {
 					case final FileFilter fileFilter -> chooser.setFileFilter(fileFilter);
 					case final FilenameFilter filenameFilter ->
-							chooser.setFileFilter(new FilenameFilterWrapper(filenameFilter));
+							chooser.setFileFilter(
+									new FilenameFilterWrapper(filenameFilter));
 					case null, default -> {
 					}
 				}

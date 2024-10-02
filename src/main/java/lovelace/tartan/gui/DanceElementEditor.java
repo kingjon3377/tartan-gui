@@ -32,9 +32,11 @@ public class DanceElementEditor implements TableCellEditor {
 												 final int column) {
 		current = value;
 		return switch (value) {
-			case final NamedFigure namedFigure -> new NamedFigureEditor(namedFigure, this::stopCellEditing);
-			case final SimplestMember simplestMember -> new DanceStringEditor(simplestMember.getString(),
-					simplestMember::setString, this::stopCellEditing);
+			case final NamedFigure namedFigure -> new NamedFigureEditor(namedFigure,
+					this::stopCellEditing);
+			case final SimplestMember simplestMember ->
+					new DanceStringEditor(simplestMember.getString(),
+							simplestMember::setString, this::stopCellEditing);
 			case final Figure figure -> new FigureEditor(figure, this::stopCellEditing);
 			case null, default -> defaultEditor
 					.getTableCellEditorComponent(table, value, isSelected, row,

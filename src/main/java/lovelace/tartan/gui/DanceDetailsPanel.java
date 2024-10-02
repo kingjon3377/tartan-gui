@@ -118,7 +118,7 @@ public final class DanceDetailsPanel extends JPanel {
 
 	public void setCurrent(final @Nullable ProgramElement current) {
 		this.current = current;
-		// TODO: Make 'enableAll' and 'disableAll' (varargs?) methods, to condense the below cases
+		// TODO: Make 'enableAll'/'disableAll' (varargs?) methods, to condense below cases
 		switch (current) {
 			case null -> {
 				titleField.setEnabled(false);

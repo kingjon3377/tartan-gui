@@ -95,7 +95,7 @@ public final class ProgramEditingWindow extends JFrame {
 		final FilenameFilter filter =
 				(dir, name) -> name.endsWith(".db") || name.endsWith(".sqlite") ||
 						name.endsWith(".sqlite3");
-		// Accessing "os.name" property should be safe //noinspection AccessOfSystemProperties
+		// "os.name" property should be safe //noinspection AccessOfSystemProperties
 		if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac")) {
 			chooser.setFileFilter(filter);
 		} else {
@@ -121,7 +121,8 @@ public final class ProgramEditingWindow extends JFrame {
 				LOGGER.log(Level.SEVERE, "Error opening SQLite database",
 						except);
 				System.exit(1);
-				// This is an impossible condition, that the compiler isn't smart enough to detect yet
+				// This is an impossible condition, that the compiler isn't smart enough
+				// to detect yet
 				//noinspection ThrowInsideCatchBlockWhichIgnoresCaughtException
 				throw new IllegalStateException("Returned from System.exit()"); // NOPMD
 			}
@@ -145,9 +146,10 @@ public final class ProgramEditingWindow extends JFrame {
 					LOGGER.log(Level.SEVERE, "Error opening SQLite database",
 							except);
 					System.exit(1);
-					// This is an impossible condition, that the compiler isn't smart enough to detect yet
+					// This is an impossible condition, that the compiler isn't smart
+					// enough to detect yet
 					//noinspection ThrowInsideCatchBlockWhichIgnoresCaughtException
-					throw new IllegalStateException("Returned from System.exit()"); // NOPMD
+					throw new IllegalStateException("Returned from System.exit()");
 				}
 			}
 		}

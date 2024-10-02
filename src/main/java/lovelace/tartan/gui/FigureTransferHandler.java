@@ -51,7 +51,8 @@ public class FigureTransferHandler extends TransferHandler {
 		return switch (component) {
 			case final JList<?> list -> new IntTransferable(FLAVOR,
 					list.getSelectedIndex());
-			case final JTable table -> new IntTransferable(FLAVOR, table.getSelectedRow());
+			case final JTable table ->
+					new IntTransferable(FLAVOR, table.getSelectedRow());
 			case null, default -> throw new IllegalArgumentException(
 					"Can only create transferable from table or list");
 		};
@@ -84,13 +85,15 @@ public class FigureTransferHandler extends TransferHandler {
 			return false;
 		}
 		switch (component) {
-			case final JList<?> list when list.getModel() instanceof final Reorderable model &&
-					dropLocation instanceof final JList.DropLocation dl -> {
+			case final JList<?> list
+					when list.getModel() instanceof final Reorderable model &&
+							     dropLocation instanceof final JList.DropLocation dl -> {
 				model.reorder(payload, dl.getIndex());
 				return true;
 			}
-			case final JTable table when table.getModel() instanceof final Reorderable model &&
-					dropLocation instanceof final JTable.DropLocation dl -> {
+			case final JTable table
+					when table.getModel() instanceof final Reorderable model &&
+							     dropLocation instanceof final JTable.DropLocation dl -> {
 				model.reorder(payload, dl.getRow());
 				return true;
 			}

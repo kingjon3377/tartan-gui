@@ -90,7 +90,8 @@ public final class DatabaseAdapter {
 	 * @param crib the crib to parse
 	 * @return the figures it represents
 	 */
-	private static @NotNull List<@NotNull Figure> convertAceCrib(final @NotNull String crib) {
+	private static @NotNull List<@NotNull Figure> convertAceCrib(
+			final @NotNull String crib) {
 		if (crib.startsWith("<table>")) {
 			throw new IllegalArgumentException("Can't handle HTML cribs here");
 		}
@@ -130,7 +131,8 @@ public final class DatabaseAdapter {
 		}
 	}
 
-	private static @NotNull List<@NotNull Figure> convertHtmlCrib(final @NotNull String crib) {
+	private static @NotNull List<@NotNull Figure> convertHtmlCrib(
+			final @NotNull String crib) {
 		final String base =
 				stripFromEnd(stripFromStart(crib, "<table>"), "</table>").trim();
 		final List<String> split = base.lines().map(String::trim).toList();
