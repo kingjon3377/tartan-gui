@@ -136,7 +136,7 @@ public final class DatabaseAdapter {
 		final String base =
 				stripFromEnd(stripFromStart(crib, "<table>"), "</table>").trim();
 		final List<String> split = base.lines().map(String::trim).toList();
-		final List<@NotNull Figure> retval = new ArrayList<>(split.length);
+		final List<@NotNull Figure> retval = new ArrayList<>(split.size());
 		for (final String line : split) {
 			if (line.startsWith("<tr><td class=\"expl\" colspan=\"2\">")) {
 				final String current = stripFromEnd(
