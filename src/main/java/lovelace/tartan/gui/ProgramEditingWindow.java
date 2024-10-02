@@ -95,7 +95,8 @@ public final class ProgramEditingWindow extends JFrame {
 		final FilenameFilter filter =
 				(dir, name) -> name.endsWith(".db") || name.endsWith(".sqlite") ||
 						name.endsWith(".sqlite3");
-		// "os.name" property should be safe //noinspection AccessOfSystemProperties
+		// "os.name" property should be safe
+		// noinspection AccessOfSystemProperties
 		if (System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac")) {
 			chooser.setFileFilter(filter);
 		} else {
