@@ -157,5 +157,15 @@ public final class PlatformFileDialog {
 		public String getDescription() {
 			return "Unknown";
 		}
+
+		@Override
+		public String toString() {
+			return "FilenameFilteerWrapper for " + getDescription();
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "PlatformFileDialog wrapping " + wrapped.getClass().getSimpleName();
 	}
 }

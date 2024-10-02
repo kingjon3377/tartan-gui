@@ -86,4 +86,9 @@ public class DanceElementEditor implements TableCellEditor {
 	public void removeCellEditorListener(final CellEditorListener listener) {
 		listeners.remove(listener);
 	}
+
+	@Override
+	public String toString() {
+		return "DanceElementEditor with value " + current;
+	}
 }

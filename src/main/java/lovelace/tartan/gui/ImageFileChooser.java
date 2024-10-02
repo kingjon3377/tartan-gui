@@ -83,4 +83,9 @@ public class ImageFileChooser {
 		chooser.setFileFilter(IMAGE_FILTER);
 		this.handler = handler;
 	}
+
+	@Override
+	public String toString() {
+		return "ImageFileChooser, currently holding '%s'".formatted(filename);
+	}
 }

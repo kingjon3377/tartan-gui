@@ -804,4 +804,10 @@ public final class LaTeXReader {
 		parseTokens(inputQueue, mRetval, pRetval);
 		return Pair.of(mRetval, pRetval);
 	}
+
+	@Override
+	public String toString() {
+		return "LaTeXReader (cover: %s, title: %s, inside back cover: %s)"
+				       .formatted(haveHadCover, haveHadTitle, nextIsBackCover);
+	}
 }

@@ -81,4 +81,9 @@ public class DanceFormationImpl implements DanceFormation {
 	public int hashCode() {
 		return Objects.hash(id, name, abbreviation);
 	}
+
+	@Override
+	public String toString() {
+		return "%s (%s)".formatted(name, abbreviation);
+	}
 }

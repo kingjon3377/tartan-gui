@@ -109,4 +109,9 @@ public final class FigureEditor extends JPanel {
 			keyTyped(event);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "FigureEditor for '%s'".formatted(figure);
+	}
 }

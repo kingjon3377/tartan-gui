@@ -77,4 +77,9 @@ public final class DanceStringEditor extends JPanel {
 		add(BorderedPanel.horizontalLine(okButton, null, cancelButton),
 				BorderLayout.LINE_END);
 	}
+
+	@Override
+	public String toString() {
+		return "DanceStringEditor editing '%s'".formatted(string);
+	}
 }

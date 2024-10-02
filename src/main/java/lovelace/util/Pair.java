@@ -44,4 +44,9 @@ public final class Pair<First, Second> {
 														 final Second second) {
 		return new Pair<>(first, second);
 	}
+
+	@Override
+	public String toString() {
+		return "(%s, %s)".formatted(first, second);
+	}
 }

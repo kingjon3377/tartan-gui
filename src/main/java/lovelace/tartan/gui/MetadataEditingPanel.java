@@ -265,4 +265,9 @@ public final class MetadataEditingPanel extends JPanel {
 										createSequentialGroup(fillerImageAdd,
 												fillerImageRemove)))));
 	}
+
+	@Override
+	public String toString() {
+		return "MetadataEditingPanel"; // TODO: report something about state
+	}
 }

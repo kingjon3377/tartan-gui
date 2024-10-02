@@ -161,4 +161,9 @@ public final class DanceSelectionPanel extends JSplitPane {
 			}
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "DanceSelectionPanel with %d program elements".formatted(program.size());
+	}
 }

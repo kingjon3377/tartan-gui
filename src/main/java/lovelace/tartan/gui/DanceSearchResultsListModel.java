@@ -89,4 +89,9 @@ public final class DanceSearchResultsListModel implements ListModel<DanceRow> {
 			listener.intervalAdded(event);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "DDanceSearchResultsListModel showing %d rows".formatted(backing.size());
+	}
 }

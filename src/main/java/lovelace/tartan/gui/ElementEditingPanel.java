@@ -112,4 +112,15 @@ public final class ElementEditingPanel extends JPanel {
 							new ListenedButton("Remove Selected Figure",
 									this::removeFigure)), BorderLayout.PAGE_END);
 	}
+
+	@Override
+	public String toString() {
+		if (current instanceof Dance d) {
+			return "ElementEditingPanel editing '%s'".formatted(d.getTitle());
+		} else if (current == null) {
+			return "ElementEditingPanel (empty)";
+		} else {
+			return "ElementEditingPanel editing %s".formatted(current.getClass().getSimpleName());
+		}
+	}
 }

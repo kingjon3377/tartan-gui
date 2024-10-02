@@ -35,6 +35,7 @@ public final class DanceDetailsPanel extends JPanel {
 	private final JSpinner timesBox = new JSpinner(timesModel);
 	private final SpinnerNumberModel barsModel = new SpinnerNumberModel(0, 0, 256, 4);
 	private final JSpinner barsBox = new JSpinner(barsModel);
+	// TODO: Take formations from database
 	private final JComboBox<String> formationBox = new JComboBox<>(
 			new String[]{"2C (3C set)", "2C (4C set)", "3C (4C set)", "3C set",
 					"3C Triangle", "4C set", "Sq Set", "5C Set"});
@@ -160,5 +161,14 @@ public final class DanceDetailsPanel extends JPanel {
 					"Dance details panel can only show details of dance or intermission");
 		}
 		revert.run();
+	}
+
+	@Override
+	public String toString() {
+		if (titleField.getText().isBlank()) {
+			return "DanceDetailsPanel showing nothing";
+		} else {
+			return "DanceDetailsPanel showing %s".formatted(titleField.getText());
+		}
 	}
 }

@@ -24,4 +24,10 @@ public final class ImageButton extends JButton {
 	protected void paintComponent(final @NotNull Graphics pen) {
 		pen.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 	}
+
+	@Override
+	public String toString() {
+		return "ImageButton for %dx%d image"
+				       .formatted(image.getWidth(null), image.getHeight(null));
+	}
 }

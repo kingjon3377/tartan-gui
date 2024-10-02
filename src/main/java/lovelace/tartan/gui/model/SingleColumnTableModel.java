@@ -320,4 +320,9 @@ public final class SingleColumnTableModel<Element>
 	public @NotNull List<Element> subList(final int fromIndex, final int toIndex) {
 		return wrapped.subList(fromIndex, toIndex);
 	}
+
+	@Override
+	public String toString() {
+		return "SingleColumnTableModel with %d elements".formatted(wrapped.size());
+	}
 }

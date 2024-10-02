@@ -121,4 +121,9 @@ public class ReorderableListModel<Element> extends AbstractList<Element>
 		}
 		return retval;
 	}
+
+	@Override
+	public String toString() {
+		return "ReorderableListModel with %d items".formatted(wrapped.size());
+	}
 }

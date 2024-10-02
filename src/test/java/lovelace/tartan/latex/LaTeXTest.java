@@ -176,4 +176,9 @@ public class LaTeXTest {
 		assertThat("Dances should be (de)serialized correctly", readProgram,
 				is(startingProgram));
 	}
+
+	@Override
+	public String toString() {
+		return "LaTeXTest";
+	}
 }
