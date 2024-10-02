@@ -25,11 +25,13 @@ public final class IntTransferable implements Transferable {
 		return new DataFlavor[]{flavor};
 	}
 
+	@SuppressWarnings("ParameterHidesMemberVariable")
 	@Override
 	public boolean isDataFlavorSupported(final DataFlavor flavor) {
 		return this.flavor.equals(flavor);
 	}
 
+	@SuppressWarnings("ParameterHidesMemberVariable")
 	@Override
 	public @NotNull Object getTransferData(final DataFlavor flavor)
 			throws UnsupportedFlavorException {
