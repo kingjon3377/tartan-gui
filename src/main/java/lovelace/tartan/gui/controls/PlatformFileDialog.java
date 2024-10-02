@@ -141,10 +141,10 @@ public final class PlatformFileDialog {
 	/**
 	 * A wrapper around a {@link FilenameFilter} to meet the {@link FileFilter} interface.
 	 */
-	private static class FilenameFilterWrapper extends FileFilter {
+	private final static class FilenameFilterWrapper extends FileFilter {
 		private final FilenameFilter filter;
 
-		public FilenameFilterWrapper(final FilenameFilter filter) {
+		private FilenameFilterWrapper(final FilenameFilter filter) {
 			this.filter = filter;
 		}
 
