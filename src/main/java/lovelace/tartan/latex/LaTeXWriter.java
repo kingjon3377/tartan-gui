@@ -159,29 +159,15 @@ public final class LaTeXWriter {
 		writeSimpleCommand(out, "begin", "document");
 		final @Nullable Path coverImage = metadata.getCoverImage();
 		if (Objects.nonNull(coverImage)) {
-			// TODO: Add helper "allCoverFieldsEmpty() method to ProgramMetadata
-			if (metadata.getGroupCoverName().isEmpty() &&
-					metadata.getEventCoverName().isEmpty() &&
-					metadata.getCoverDate().isEmpty() &&
-					metadata.getCoverLocation().isEmpty()) {
+			if (!metadata.hasCoverContent()) {
 				writeSimpleCommand(out, "tartanimage", latexImage(coverImage));
 			} else {
 				writeSimpleCommand(out, "tartanimagecover", latexImage(coverImage));
 			}
-		} else if (!metadata.getGroupCoverName().isEmpty() ||
-				!metadata.getEventCoverName().isEmpty() ||
-				!metadata.getCoverDate().isEmpty() ||
-				!metadata.getCoverLocation().isEmpty()) {
+		} else if (metadata.hasCoverContent()) {
 			writeSimpleCommand(out, "tartancover");
 		}
-		// TODO: Add helper method "allTitleFieldsEmpty()" to ProgramMetadata
-		if (!metadata.getGroupTitleName().isEmpty() ||
-				!metadata.getEventTitleName().isEmpty() ||
-				!metadata.getTitleDate().isEmpty() ||
-				!metadata.getTitleLocation().isEmpty() ||
-				!metadata.getLocationAddress().isEmpty() ||
-				!metadata.getTitleTimes().isEmpty() ||
-				!metadata.getMusicians().isEmpty()) {
+		if (metadata.hasTitlePageContent()) {
 			if (metadata.getTitleOnCover()) {
 				writeSimpleCommand(out, "clearpage");
 			} else {

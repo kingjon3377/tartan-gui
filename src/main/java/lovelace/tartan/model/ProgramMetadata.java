@@ -383,4 +383,27 @@ public final class ProgramMetadata {
 				titleTimes, musicians, coverImage, titleOnCover, printAuldLangSyne,
 				backCoverImage, insidePostDanceImages);
 	}
+
+	/**
+	 * TODO: Should probably use isBlank() instead.
+	 *
+	 * @return whether any of the fields that would be included on the cover is non-empty.
+	 */
+	public boolean hasCoverContent() {
+		return !groupCoverName.isEmpty() || !eventCoverName.isEmpty() ||
+				       !coverDate.isEmpty() || !coverLocation.isEmpty();
+	}
+
+	/**
+	 * TODO: Should probably use isBlank() instead
+	 *
+	 * @return whether any of the fields that would be included on the title page is
+	 * non-empty.
+	 */
+	public boolean hasTitlePageContent() {
+		return !groupTitleName.isEmpty() || !eventTitleName.isEmpty() ||
+				       !titleDate.isEmpty() || !titleLocation.isEmpty() ||
+				       !locationAddress.isEmpty() || !titleTimes.isEmpty() ||
+				       !musicians.isEmpty();
+	}
 }
