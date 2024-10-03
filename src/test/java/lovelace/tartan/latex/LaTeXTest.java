@@ -120,6 +120,7 @@ public class LaTeXTest {
 	}
 
 	@Test
+	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public void withImageTest() throws Exception {
 		final List<ProgramElement> startingProgram = Arrays.asList(
 				new Dance("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",

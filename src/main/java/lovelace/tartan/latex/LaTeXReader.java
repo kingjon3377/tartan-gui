@@ -86,6 +86,7 @@ public final class LaTeXReader {
 	 * @param denominator the denominator of the fraction
 	 * @param buffer      the buffer to write to
 	 */
+	@SuppressWarnings("HardcodedFileSeparator") // Not a file separator
 	private static void defaultFraction(final @NotNull String numerator,
 										final @NotNull String denominator,
 										final @NotNull StringBuilder buffer) {
@@ -190,7 +191,7 @@ public final class LaTeXReader {
 	 * @throws ParseException if there are fewer <pre>}</pre> than <pre>{</pre> in the
 	 *                        input
 	 */
-	@SuppressWarnings("ContinueStatement")
+	@SuppressWarnings({"ContinueStatement", "HardcodedFileSeparator"}) // '/' is cross-platform in Java!
 	static String blockContents(final @NotNull Deque<Character> localInput)
 			throws ParseException {
 		// TODO: Keep track of cursor position so we can give accurate data in thrown

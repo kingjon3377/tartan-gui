@@ -89,6 +89,7 @@ public final class DanceDetailsPanel extends JPanel {
 		formationBox.setSelectedItem("");
 	}
 
+	@SuppressWarnings("HardcodedFileSeparator") // Not a file separator at all
 	public DanceDetailsPanel() {
 		super(new BorderLayout());
 		final JPanel topPanel = BorderedPanel.verticalLine(

@@ -44,6 +44,7 @@ public final class DanceStringEditor extends JPanel {
 		this(string, consumer, DanceStringEditor::noop);
 	}
 
+	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public DanceStringEditor(final @NotNull String string,
 	                         final @NotNull Consumer<@NotNull String> consumer,
 	                         final @NotNull Runnable cancel) {

@@ -162,6 +162,7 @@ public final class TartanMenu {
 		to.getInsidePostDanceImages().addAll(from.getInsidePostDanceImages());
 	}
 
+	@SuppressWarnings("HardcodedFileSeparator") // Not a file separator
 	static void saveToFile(
 		final @NotNull ReorderableListModel<@NotNull ProgramElement> program,
 		final @NotNull ProgramMetadata metadata, final @Nullable Path passedFilename,

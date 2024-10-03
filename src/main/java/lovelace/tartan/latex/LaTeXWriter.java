@@ -29,6 +29,7 @@ public final class LaTeXWriter {
 	private static final List<String> SUPPORTED_IMAGE_EXTENSIONS =
 			List.of(".png", ".jpg", ".pdf");
 
+	@SuppressWarnings("HardcodedFileSeparator") // Not a file separator
 	private static String quoted(final @NotNull String string) {
 		return string.replace("&", "\\&").replace("{", "\\{").replace("}", "\\}")
 			.replace("<b>", "\\textbf{").replace("</b>", "}")
@@ -50,6 +51,8 @@ public final class LaTeXWriter {
 										  final @NotNull String arg)
 			throws IOException {
 		if (!arg.trim().isEmpty()) {
+			// not a file separator
+			//noinspection HardcodedFileSeparator
 			ostream.append("\\");
 			ostream.append(command);
 			ostream.append("{");
@@ -92,6 +95,8 @@ public final class LaTeXWriter {
 										   final @NotNull String command,
 										   final @Nullable String arg)
 			throws IOException {
+		// Not a file separator
+		//noinspection HardcodedFileSeparator
 		ostream.append('\\');
 		ostream.append(command);
 		if (arg != null) {
@@ -114,6 +119,8 @@ public final class LaTeXWriter {
 	private static void writeSimpleFigure(final @NotNull Appendable ostream,
 										  final @NotNull Figure figure)
 			throws IOException {
+		// Not a file separator
+		//noinspection HardcodedFileSeparator
 		ostream.append("\\scfigure");
 		final @Nullable String bars = figure.getBars();
 		if (bars != null) {
@@ -134,6 +141,7 @@ public final class LaTeXWriter {
 	 * @param metadata the metadata to write in the prologue
 	 * @throws IOException on I/O error while writing
 	 */
+	@SuppressWarnings("HardcodedFileSeparator") // double-backslash isn't a file separator
 	public void writeLaTeXProgram(final @NotNull Appendable out,
 								  final @NotNull List<@NotNull ProgramElement> program,
 								  final @NotNull ProgramMetadata metadata)

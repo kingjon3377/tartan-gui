@@ -68,6 +68,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 		}
 	}
 
+	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public DanceSelectionPanel(final DanceDatabase db,
 							   final ReorderableListModel<ProgramElement> program) {
 		super(JSplitPane.HORIZONTAL_SPLIT, true);

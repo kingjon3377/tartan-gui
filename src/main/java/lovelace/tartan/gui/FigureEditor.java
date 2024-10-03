@@ -28,6 +28,7 @@ public final class FigureEditor extends JPanel {
 	private final JTextField barsField;
 	private final JTextField descriptionField;
 
+	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public FigureEditor(final Figure figure, final Runnable cancel) {
 		super(new BorderLayout());
 		this.figure = figure;
