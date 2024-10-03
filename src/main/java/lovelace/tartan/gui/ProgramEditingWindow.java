@@ -1,5 +1,7 @@
 package lovelace.tartan.gui;
 
+import java.awt.Desktop;
+import java.awt.Desktop.Action;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -67,6 +69,7 @@ public final class ProgramEditingWindow extends JFrame {
 								final ProgramMetadata metadata,
 								final @NotNull List<ProgramElement> program) {
 		super("Dance Program Editor");
+		final Desktop desktop = Desktop.getDesktop();
 		final ReorderableListModel<@NotNull ProgramElement> programModel =
 				new ReorderableListModel<>(program);
 		setMinimumSize(new Dimension(400, 300));
@@ -88,7 +91,11 @@ public final class ProgramEditingWindow extends JFrame {
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		final JMenuBar menuBar = new JMenuBar();
 		menuBar.add(TartanMenu.fileMenu(programModel, metadata, mep));
-		setJMenuBar(menuBar);
+		if (desktop.isSupported(Action.APP_MENU_BAR)) {
+			desktop.setDefaultMenuBar(menuBar);
+		} else if (!TartanMenu.isOnMac()) {
+			setJMenuBar(menuBar);
+		}
 	}
 	private static DanceDatabase initializeDatabaseNoArgs() {
 		final PlatformFileDialog chooser = new PlatformFileDialog(null);

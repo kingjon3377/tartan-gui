@@ -47,6 +47,12 @@ public final class TartanMenu {
 	private TartanMenu() {
 	}
 
+	@SuppressWarnings("AccessOfSystemProperties")
+	public static boolean isOnMac() {
+		 return System.getProperty("os.name").toLowerCase(Locale.ENGLISH)
+				        .startsWith("mac");
+	}
+
 	private static JMenuItem menuItem(final String text, final int mnemonic,
 									  final String description,
 									  final Runnable handler,
@@ -194,9 +200,7 @@ public final class TartanMenu {
 		final @NotNull ReorderableListModel<@NotNull ProgramElement> program,
 		final @NotNull ProgramMetadata metadata,
 		final @NotNull MetadataEditingPanel metadataPanel) {
-		@SuppressWarnings("AccessOfSystemProperties") final boolean onMac =
-				System.getProperty("os.name").toLowerCase(Locale.ENGLISH)
-						.startsWith("mac");
+		final boolean onMac = isOnMac();
 		final int shortcutMask =
 				(onMac) ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;
 		final JMenu retval = new JMenu("File");
