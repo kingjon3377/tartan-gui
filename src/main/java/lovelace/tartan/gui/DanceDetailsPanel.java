@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.util.Objects;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -118,43 +119,37 @@ public final class DanceDetailsPanel extends JPanel {
 		return current;
 	}
 
+	private static void enableFields(JComponent... fields) {
+		for (JComponent field : fields) {
+			field.setEnabled(true);
+		}
+	}
+
+	private static void disableFields(JComponent... fields) {
+		for (JComponent field : fields) {
+			field.setEnabled(false);
+		}
+	}
+
 	public void setCurrent(final @Nullable ProgramElement current) {
 		this.current = current;
 		// TODO: Make 'enableAll'/'disableAll' (varargs?) methods, to condense below cases
 		switch (current) {
 			case null -> {
-				titleField.setEnabled(false);
-				sourceField.setEnabled(false);
-				tempoBox.setEnabled(false);
-				timesBox.setEnabled(false);
-				barsBox.setEnabled(false);
-				formationBox.setEnabled(false);
-				applyButton.setEnabled(false);
-				revertButton.setEnabled(false);
+				disableFields(titleField, sourceField, tempoBox, timesBox, barsBox,
+						formationBox, applyButton, revertButton)
 				apply = this::noop;
 				revert = this::noop;
 			}
 			case final Dance dance -> {
-				titleField.setEnabled(true);
-				sourceField.setEnabled(true);
-				tempoBox.setEnabled(true);
-				timesBox.setEnabled(true);
-				barsBox.setEnabled(true);
-				formationBox.setEnabled(true);
-				applyButton.setEnabled(true);
-				revertButton.setEnabled(true);
+				enableFields(titleField, sourceField, tempoBox, timesBox, barsBox,
+						formationBox, applyButton, revertButton);
 				apply = () -> applyToDance(dance);
 				revert = () -> revertDance(dance);
 			}
 			case final Intermission intermission -> {
-				titleField.setEnabled(true);
-				sourceField.setEnabled(false);
-				tempoBox.setEnabled(false);
-				timesBox.setEnabled(false);
-				barsBox.setEnabled(false);
-				formationBox.setEnabled(false);
-				applyButton.setEnabled(true);
-				revertButton.setEnabled(true);
+				enableFields(titleField, applyButton, revertButton);
+				disableFields(sourceField, tempoBox, timesBox, barsBox, formationBox);
 				apply = () -> applyToIntermission(intermission);
 				revert = () -> revertIntermission(intermission);
 			}
