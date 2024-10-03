@@ -57,10 +57,11 @@ public final class LaTeXWriter {
 			ostream.append(command);
 			ostream.append("{");
 			ostream.append(quoted(arg).trim());
-			ostream.append("}\n");
+			writeLine(ostream, "}");
 		}
 	}
 
+	@SuppressWarnings("HardcodedLineSeparator") // unavoidable
 	private static void writePrologue(final @NotNull Appendable ostream,
 									  final @NotNull ProgramMetadata metadata)
 			throws IOException {
@@ -79,6 +80,7 @@ public final class LaTeXWriter {
 		writePrologueLine(ostream, "tartanmusicians", metadata.getMusicians());
 	}
 
+	@SuppressWarnings("HardcodedLineSeparator") // unavoidable
 	private static void writeLine(final @NotNull Appendable ostream,
 								  final @NotNull String string) throws IOException {
 		ostream.append(string);
@@ -102,7 +104,7 @@ public final class LaTeXWriter {
 		if (arg != null) {
 			ostream.append('{');
 			ostream.append(arg);
-			ostream.append("}\n");
+			writeLine(ostream, "}");
 		}
 	}
 
@@ -130,7 +132,7 @@ public final class LaTeXWriter {
 		}
 		ostream.append('{');
 		ostream.append(quoted(figure.getDescription()));
-		ostream.append("}\n");
+		writeLine(ostream, "}");
 	}
 
 	/**
@@ -215,7 +217,7 @@ public final class LaTeXWriter {
 												"Impossible NamedFigureMember");
 									}
 								}
-								out.append("}\n");
+								writeLine(out, "}");
 							}
 							case final SimplestMember simplestMember ->
 									out.append(simplestMember.getString());
