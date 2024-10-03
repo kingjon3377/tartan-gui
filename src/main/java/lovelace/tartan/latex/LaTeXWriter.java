@@ -196,48 +196,9 @@ public final class LaTeXWriter {
 		writeSimpleCommand(out, "clearpage");
 		for (final ProgramElement item : program) {
 			switch (item) {
-				case final Dance dance -> {
-					out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
-							dance.getTitle(), dance.getSource(),
-							dance.getTempo(), dance.getTimes(),
-							dance.getLength(), dance.getFormation()));
-					for (final DanceMember figure : dance.getContents()) {
-						switch (figure) {
-							case final Figure fig -> writeSimpleFigure(out, fig);
-							case final NamedFigure named -> {
-								out.append("\\namedfigure{");
-								for (final NamedFigureMember subfigure : named
-										.getContents()) {
-									switch (subfigure) {
-										case final Figure fig ->
-												writeSimpleFigure(out, fig);
-										case final SimplestMember simplestMember ->
-												out.append(simplestMember.getString());
-										default -> throw new IllegalStateException(
-												"Impossible NamedFigureMember");
-									}
-								}
-								writeLine(out, "}");
-							}
-							case final SimplestMember simplestMember ->
-									out.append(simplestMember.getString());
-							default -> throw new IllegalStateException(
-									"Impossible DanceMember");
-						}
-					}
-					writeLine(out, "\\end{scdance}");
-				}
-				case final Intermission intermission -> {
-					final String text = intermission.getDescription();
-					if ("Intermission".equals(text) || text.isEmpty()) {
-						writeSimpleCommand(out, "intermission");
-					} else {
-						writeSimpleCommand(out, "intermission");
-						out.append('[');
-						out.append(text);
-						out.append(']');
-					}
-				}
+				case final Dance dance -> writeDance(out, dance);
+				case final Intermission intermission ->
+						writeIntermission(out, intermission);
 				default -> {
 				}
 			}
@@ -256,5 +217,54 @@ public final class LaTeXWriter {
 			writeSimpleCommand(out, "tartanimage", latexImage(image));
 		}
 		writeLine(out, "\\end{document}");
+	}
+
+	private static void writeIntermission(final @NotNull Appendable out,
+	                              final Intermission intermission) throws IOException {
+		final String text = intermission.getDescription();
+		if ("Intermission".equals(text) || text.isEmpty()) {
+			writeSimpleCommand(out, "intermission");
+		} else {
+			writeSimpleCommand(out, "intermission");
+			out.append('[');
+			out.append(text);
+			out.append(']');
+		}
+	}
+
+	private static void writeDance(final @NotNull Appendable out, final Dance dance)
+			throws IOException {
+		out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
+				dance.getTitle(), dance.getSource(),
+				dance.getTempo(), dance.getTimes(),
+				dance.getLength(), dance.getFormation()));
+		for (final DanceMember figure : dance.getContents()) {
+			switch (figure) {
+				case final Figure fig -> writeSimpleFigure(out, fig);
+				case final NamedFigure named -> writeNamedFigure(out, named);
+				case final SimplestMember simplestMember ->
+						out.append(simplestMember.getString());
+				default -> throw new IllegalStateException(
+						"Impossible DanceMember");
+			}
+		}
+		writeLine(out, "\\end{scdance}");
+	}
+
+	private static void writeNamedFigure(final @NotNull Appendable out, final NamedFigure named)
+			throws IOException {
+		out.append("\\namedfigure{");
+		for (final NamedFigureMember subfigure : named
+				.getContents()) {
+			switch (subfigure) {
+				case final Figure fig ->
+						writeSimpleFigure(out, fig);
+				case final SimplestMember simplestMember ->
+						out.append(simplestMember.getString());
+				default -> throw new IllegalStateException(
+						"Impossible NamedFigureMember");
+			}
+		}
+		writeLine(out, "}");
 	}
 }
