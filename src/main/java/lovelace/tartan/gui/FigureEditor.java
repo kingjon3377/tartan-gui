@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -58,7 +59,7 @@ public final class FigureEditor extends JPanel {
 		} catch (final IOException e) {
 			cancelButton = new JButton("Cancel");
 		}
-		final KeyListener escapeListener = new CancelKeyListener();
+		final KeyListener escapeListener = new EscapeKeyListener(this::cancelListener);
 		barsField.addKeyListener(escapeListener);
 		descriptionField.addKeyListener(escapeListener);
 		cancelButton.addActionListener(this::cancelListener);
@@ -97,17 +98,21 @@ public final class FigureEditor extends JPanel {
 	private static void noop() { // deliberate no-op
 	}
 
-	private class CancelKeyListener extends KeyAdapter {
+	private static class EscapeKeyListener extends KeyAdapter {
+		private final Consumer<AWTEvent> consumer;
+		private EscapeKeyListener(final Consumer<AWTEvent> consumer) {
+			this.consumer = consumer;
+		}
 		@Override
 		public void keyTyped(final KeyEvent event) {
 			if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
-				cancelListener(event);
+				consumer.accept(event);
 			}
 		}
 
 		@Override
 		public void keyReleased(final KeyEvent event) {
-			keyTyped(event);
+			consumer.accept(event);
 		}
 	}
 
