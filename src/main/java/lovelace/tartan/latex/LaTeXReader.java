@@ -124,6 +124,72 @@ public final class LaTeXReader {
 	}
 
 	/**
+	 * Write a fraction with numerator 1 and the given denominator to the given buffer,
+	 * using a "nice" Unicode glyph if one is available.
+	 */
+	private static void parseFractionNumeratorOne(final @NotNull String denominator,
+	                                              final @NotNull StringBuilder buffer) {
+		switch (denominator) {
+			case "2" -> buffer.append("½");
+			case "3" -> buffer.append("⅓");
+			case "4" -> buffer.append("¼");
+			case "5" -> buffer.append("⅕");
+			case "6" -> buffer.append("⅙");
+			case "7" -> buffer.append("⅐");
+			case "8" -> buffer.append("⅛");
+			case "9" -> buffer.append("⅑");
+			case "10" -> buffer.append("⅒");
+			default -> defaultFraction("1", denominator, buffer);
+		}
+	}
+
+	/**
+	 * Write a fraction with numerator 2 and the given denominator to the given buffer,
+	 * using a "nice" Unicode glyph if one is available.
+	 */
+	private static void parseFractionNumeratorTwo(final @NotNull String denominator,
+	                                              final @NotNull StringBuilder buffer) {
+		switch (denominator) {
+			case "3" -> buffer.append("⅔");
+			case "5" -> buffer.append("⅖");
+			default -> defaultFraction("2", denominator, buffer);
+		}
+	}
+
+	/**
+	 * Write a fraction with numerator 3 and the given denominator to the given buffer,
+	 * using a "nice" Unicode glyph if one is available.
+	 */
+	private static void parseFractionNumeratorThree(final @NotNull String denominator,
+	                                                final @NotNull StringBuilder buffer) {
+		switch (denominator) {
+		case "4" -> buffer.append("¾");
+		case "5" -> buffer.append("⅗");
+		case "8" -> buffer.append("⅜");
+		default -> defaultFraction("3", denominator, buffer);
+		}
+	}
+
+
+	/**
+	 * Write a fraction with numerator 5 and the given denominator to the given buffer,
+	 * using a "nice" Unicode glyph if one is available.
+	 */
+	private static void parseFractionNumeratorFive(final @NotNull String denominator,
+	                                               final @NotNull StringBuilder buffer) {
+		switch (denominator) {
+		case "6":
+			buffer.append("⅚");
+			break;
+		case "8":
+			buffer.append("⅝");
+			break;
+		default:
+			defaultFraction("5", denominator, buffer);
+			break;
+		}
+	}
+	/**
 	 * Write the given fraction to the given buffer. If a "nice" Unicode glyph is
 	 * available, use it; otherwise, simply separate the numerator from the denominator
 	 * with a slash.
@@ -136,49 +202,9 @@ public final class LaTeXReader {
 									  final @NotNull String denominator,
 									  final @NotNull StringBuilder buffer) {
 		switch (numerator) {
-			case "1" -> {
-				switch (denominator) {
-					case "2" -> buffer.append('½');
-					case "3" -> buffer.append("⅓");
-					case "4" -> buffer.append("¼");
-					case "5" -> buffer.append("⅕");
-					case "6" -> buffer.append("⅙");
-					case "7" -> buffer.append("⅐");
-					case "8" -> buffer.append("⅛");
-					case "9" -> buffer.append("⅑");
-					case "10" -> buffer.append("⅒");
-					default -> defaultFraction(numerator, denominator, buffer);
-				}
-			}
-			case "2" -> {
-				switch (denominator) {
-					case "3":
-						buffer.append("⅔");
-						break;
-					case "5":
-						buffer.append("⅖");
-						break;
-					default:
-						defaultFraction(numerator, denominator, buffer);
-						break;
-				}
-			}
-			case "3" -> {
-				switch (denominator) {
-					case "4":
-						buffer.append("¾");
-						break;
-					case "5":
-						buffer.append("⅗");
-						break;
-					case "8":
-						buffer.append("⅜");
-						break;
-					default:
-						defaultFraction(numerator, denominator, buffer);
-						break;
-				}
-			}
+			case "1" -> parseFractionNumeratorOne(denominator, buffer);
+			case "2" -> parseFractionNumeratorTwo(denominator, buffer);
+			case "3" -> parseFractionNumeratorThree(denominator, buffer);
 			case "4" -> {
 				if ("5".equals(denominator)) {
 					buffer.append("⅘");
@@ -186,19 +212,7 @@ public final class LaTeXReader {
 					defaultFraction(numerator, denominator, buffer);
 				}
 			}
-			case "5" -> {
-				switch (denominator) {
-					case "6":
-						buffer.append("⅚");
-						break;
-					case "8":
-						buffer.append("⅝");
-						break;
-					default:
-						defaultFraction(numerator, denominator, buffer);
-						break;
-				}
-			}
+			case "5" -> parseFractionNumeratorFive(denominator, buffer);
 			case "7" -> {
 				if ("8".equals(denominator)) {
 					buffer.append("⅞");
