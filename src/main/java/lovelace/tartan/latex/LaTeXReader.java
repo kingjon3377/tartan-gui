@@ -35,6 +35,32 @@ public final class LaTeXReader {
 	 */
 	private static final Logger LOGGER = Logger.getLogger(LaTeXReader.class.getName());
 
+	private static boolean isLinebreak(Character character) {
+		return character != null && ('\n' == character || '\r' == character);
+	}
+
+	/**
+	 * Skip a newline, represented by either a carriage return, a line feed, or the two
+	 * in either order, but <em>not</em> multiple consecutive newlines.
+	 */
+	private static void skipNewline(final @NotNull Deque<Character> localInput) {
+		if (localInput.isEmpty()) {
+			return;
+		}
+		final char first = localInput.peek();
+		if (!isLinebreak(first)) {
+			return;
+		}
+		localInput.pop();
+		if (localInput.isEmpty()) {
+			return;
+		}
+		final char second = localInput.peek();
+		if (isLinebreak(second) && first != second) {
+			localInput.pop();
+		}
+	}
+
 	/**
 	 * Skip a comment, not including the initial '%' character.
 	 *
@@ -42,9 +68,11 @@ public final class LaTeXReader {
 	 */
 	private static void skipComment(final @NotNull Deque<Character> localInput) {
 		while (!localInput.isEmpty()) {
-			final char top = localInput.pop(); // TODO: inline
-			if ('\n' == top) {
+			if (isLinebreak(localInput.peek())) {
+				skipNewline(localInput);
 				break;
+			} else {
+				localInput.pop();
 			}
 		}
 	}
@@ -233,10 +261,7 @@ public final class LaTeXReader {
 						if (Character.valueOf('*').equals(localInput.peekFirst())) {
 							localInput.pop();
 						}
-						if (Character.valueOf('\n').equals(localInput.peekFirst())) {
-							// TODO: Handle \r as well?
-							localInput.pop();
-						}
+						skipNewline(localInput);
 						buffer.append(System.lineSeparator());
 						continue;
 					}
