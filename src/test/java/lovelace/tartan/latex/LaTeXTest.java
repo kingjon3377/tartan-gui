@@ -114,7 +114,9 @@ public class LaTeXTest {
 		startingMetadata.setCoverLocation("coverLocation");
 		startingMetadata.setTitleLocation("titleLocation");
 		startingMetadata.setLocationAddress("locationAddress");
-		startingMetadata.setTitleTimes("titleTimes\nsecondLine");
+		startingMetadata.setTitleTimes("""
+				titleTimes
+				secondLine""");
 		startingMetadata.setMusicians("musicians");
 		return startingMetadata;
 	}
