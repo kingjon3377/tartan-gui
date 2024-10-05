@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class ImageButton extends JButton {
 	private final @NotNull Image image;
+	@SuppressWarnings("MagicNumber")
 	public ImageButton(final @NotNull Image image) {
 		this.image = image;
 		setMaximumSize(new Dimension(60, 60));
