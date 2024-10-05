@@ -115,7 +115,7 @@ public final class ElementEditingPanel extends JPanel {
 
 	@Override
 	public String toString() {
-		if (current instanceof Dance d) {
+		if (current instanceof final Dance d) {
 			return "ElementEditingPanel editing '%s'".formatted(d.getTitle());
 		} else if (current == null) {
 			return "ElementEditingPanel (empty)";

@@ -119,14 +119,14 @@ public final class DanceDetailsPanel extends JPanel {
 		return current;
 	}
 
-	private static void enableFields(JComponent... fields) {
-		for (JComponent field : fields) {
+	private static void enableFields(final JComponent... fields) {
+		for (final JComponent field : fields) {
 			field.setEnabled(true);
 		}
 	}
 
-	private static void disableFields(JComponent... fields) {
-		for (JComponent field : fields) {
+	private static void disableFields(final JComponent... fields) {
+		for (final JComponent field : fields) {
 			field.setEnabled(false);
 		}
 	}

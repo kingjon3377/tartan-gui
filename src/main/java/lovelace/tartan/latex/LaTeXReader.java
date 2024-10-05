@@ -35,7 +35,7 @@ public final class LaTeXReader {
 	 */
 	private static final Logger LOGGER = Logger.getLogger(LaTeXReader.class.getName());
 
-	private static boolean isLinebreak(Character character) {
+	private static boolean isLinebreak(final Character character) {
 		return character != null && ('\n' == character || '\r' == character);
 	}
 
