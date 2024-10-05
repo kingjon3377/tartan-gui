@@ -21,6 +21,7 @@ import javax.swing.text.JTextComponent;
 import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.gui.controls.PlatformFileDialog;
 import lovelace.tartan.gui.model.ReorderableListModel;
+import lovelace.tartan.gui.model.ReorderableListModelImpl;
 import lovelace.tartan.model.ProgramMetadata;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -162,7 +163,7 @@ public final class MetadataEditingPanel extends JPanel {
 		backImageSelector = new ImageFileChooser(metadata::setBackCoverImage, this);
 		final JLabel fillerImageLabel = new JLabel("Images after last dance:");
 		final ReorderableListModel<Path> fillerImageListModel =
-				new ReorderableListModel<>(metadata.getInsidePostDanceImages());
+				new ReorderableListModelImpl<>(metadata.getInsidePostDanceImages());
 		final JList<Path> fillerImageList =
 				new JList<>(fillerImageListModel); // TODO: Need a renderer
 		final JScrollPane fillerImageListWrapped = new JScrollPane(fillerImageList);

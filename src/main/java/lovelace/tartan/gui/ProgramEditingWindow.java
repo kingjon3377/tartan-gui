@@ -28,6 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import lovelace.tartan.db.DanceDatabase;
 import lovelace.tartan.gui.controls.PlatformFileDialog;
 import lovelace.tartan.gui.model.ReorderableListModel;
+import lovelace.tartan.gui.model.ReorderableListModelImpl;
 import lovelace.tartan.model.ProgramElement;
 import lovelace.tartan.model.ProgramMetadata;
 import lovelace.util.Pair;
@@ -71,7 +72,7 @@ public final class ProgramEditingWindow extends JFrame {
 		super("Dance Program Editor");
 		final Desktop desktop = Desktop.getDesktop();
 		final ReorderableListModel<@NotNull ProgramElement> programModel =
-				new ReorderableListModel<>(program);
+				new ReorderableListModelImpl<>(program);
 		setMinimumSize(new Dimension(400, 300));
 		final JTabbedPane pane =
 				new JTabbedPane(SwingConstants.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
