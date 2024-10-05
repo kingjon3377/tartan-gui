@@ -137,7 +137,7 @@ public final class DanceDetailsPanel extends JPanel {
 		switch (current) {
 			case null -> {
 				disableFields(titleField, sourceField, tempoBox, timesBox, barsBox,
-						formationBox, applyButton, revertButton)
+						formationBox, applyButton, revertButton);
 				apply = this::noop;
 				revert = this::noop;
 			}
