@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Jonathan Lovelace
  */
 public final class BoxPanel extends JPanel {
-	public static final BoxGlue GLUE = new BoxGlue();
+	public static final BoxParameter GLUE = new BoxGlue();
 
 	public enum BoxDirection {
 		PageAxis(BoxLayout.PAGE_AXIS, Box::createVerticalGlue, Box::createVerticalStrut),
