@@ -11,17 +11,19 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Jonathan Lovelace
  */
-public class BorderedPanel extends JPanel {
+public class BorderedPanel extends JPanel implements BorderedContainer {
 	private @Nullable Component center;
 	private @Nullable Component pageStart;
 	private @Nullable Component pageEnd;
 	private @Nullable Component lineStart;
 	private @Nullable Component lineEnd;
 
+	@Override
 	public final @Nullable Component getCenter() {
 		return center;
 	}
 
+	@Override
 	public final void setCenter(final @Nullable Component center) {
 		if (Objects.nonNull(center)) {
 			add(center, BorderLayout.CENTER);
@@ -31,10 +33,12 @@ public class BorderedPanel extends JPanel {
 		this.center = center;
 	}
 
+	@Override
 	public final @Nullable Component getPageStart() {
 		return pageStart;
 	}
 
+	@Override
 	public final void setPageStart(final @Nullable Component pageStart) {
 		if (Objects.nonNull(pageStart)) {
 			add(pageStart, BorderLayout.PAGE_START);
@@ -44,10 +48,12 @@ public class BorderedPanel extends JPanel {
 		this.pageStart = pageStart;
 	}
 
+	@Override
 	public final @Nullable Component getPageEnd() {
 		return pageEnd;
 	}
 
+	@Override
 	public final void setPageEnd(final @Nullable Component pageEnd) {
 		if (Objects.nonNull(pageEnd)) {
 			add(pageEnd, BorderLayout.PAGE_END);
@@ -57,10 +63,12 @@ public class BorderedPanel extends JPanel {
 		this.pageEnd = pageEnd;
 	}
 
+	@Override
 	public final @Nullable Component getLineStart() {
 		return lineStart;
 	}
 
+	@Override
 	public final void setLineStart(final @Nullable Component lineStart) {
 		if (Objects.nonNull(lineStart)) {
 			add(lineStart, BorderLayout.LINE_START);
@@ -70,10 +78,12 @@ public class BorderedPanel extends JPanel {
 		this.lineStart = lineStart;
 	}
 
+	@Override
 	public final @Nullable Component getLineEnd() {
 		return lineEnd;
 	}
 
+	@Override
 	public final void setLineEnd(final @Nullable Component lineEnd) {
 		if (Objects.nonNull(lineEnd)) {
 			add(lineEnd, BorderLayout.LINE_END);
