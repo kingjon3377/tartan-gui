@@ -68,6 +68,17 @@ public final class DanceSelectionPanel extends JSplitPane {
 		}
 	}
 
+	@SuppressWarnings("MagicNumber")
+	private static JPanel createButtonPanel(final JButton rightButton,
+	                                        final JButton leftButton) {
+		final JPanel retval = new BoxPanel(BoxDirection.PageAxis, BoxPanel.GLUE,
+				rightButton, new BoxPanel.BoxStrut(5), leftButton, BoxPanel.GLUE);
+		retval.setMaximumSize(new Dimension(60, 4096));
+		retval.setPreferredSize(new Dimension(40, 480));
+		retval.setMinimumSize(new Dimension(20, 45));
+		return retval;
+	}
+
 	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public DanceSelectionPanel(final DanceDatabase db,
 							   final ReorderableListModel<ProgramElement> program) {
@@ -92,12 +103,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 		} catch (final IOException e) {
 			leftButton = new JButton("Add");
 		}
-		final JPanel inner =
-				new BoxPanel(BoxDirection.PageAxis, BoxPanel.GLUE, rightButton,
-						new BoxPanel.BoxStrut(5), leftButton, BoxPanel.GLUE);
-		inner.setMaximumSize(new Dimension(60, 4096));
-		inner.setPreferredSize(new Dimension(40, 480));
-		inner.setMinimumSize(new Dimension(20, 45));
+		final JPanel inner = createButtonPanel(rightButton, leftButton);
 
 		danceListModel = new DanceSearchResultsListModel(db);
 		danceList = new JList<>(danceListModel);
