@@ -159,10 +159,10 @@ public final class LaTeXWriter {
 		writeSimpleCommand(out, "begin", "document");
 		final @Nullable Path coverImage = metadata.getCoverImage();
 		if (Objects.nonNull(coverImage)) {
-			if (!metadata.hasCoverContent()) {
-				writeSimpleCommand(out, "tartanimage", latexImage(coverImage));
-			} else {
+			if (metadata.hasCoverContent()) {
 				writeSimpleCommand(out, "tartanimagecover", latexImage(coverImage));
+			} else {
+				writeSimpleCommand(out, "tartanimage", latexImage(coverImage));
 			}
 		} else if (metadata.hasCoverContent()) {
 			writeSimpleCommand(out, "tartancover");
