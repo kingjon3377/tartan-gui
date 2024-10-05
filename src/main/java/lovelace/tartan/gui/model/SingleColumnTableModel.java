@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class SingleColumnTableModel<Element>
 		implements TableModel, Reorderable, List<Element> {
-	private final List<TableModelListener> listeners = new ArrayList<>();
+	private final Collection<TableModelListener> listeners = new ArrayList<>();
 
 	private final List<Element> wrapped;
 	private final String columnName;

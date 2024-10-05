@@ -1,6 +1,7 @@
 package lovelace.tartan.gui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -18,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public final class DanceSearchResultsListModel implements ListModel<DanceRow> {
 	private final DanceDatabase db;
-	private final List<ListDataListener> listeners = new ArrayList<>();
+	private final Collection<ListDataListener> listeners = new ArrayList<>();
 	private final List<DanceRow> backing;
 	private @Nullable String currentSearch = null;
 

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.ParseException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -77,7 +78,7 @@ public final class TartanMenu {
 		readFromFile(program, metadata, metadataPanel, null);
 	}
 
-	static void readFromFile(final @NotNull ReorderableListModel<ProgramElement> program,
+	static void readFromFile(final @NotNull Collection<ProgramElement> program,
 							 final @NotNull ProgramMetadata metadata,
 							 final @Nullable MetadataEditingPanel metadataPanel,
 							 final @Nullable Component parent) {
@@ -165,7 +166,7 @@ public final class TartanMenu {
 
 	@SuppressWarnings("HardcodedFileSeparator") // Not a file separator
 	static void saveToFile(
-		final @NotNull ReorderableListModel<@NotNull ProgramElement> program,
+		final @NotNull List<@NotNull ProgramElement> program,
 		final @NotNull ProgramMetadata metadata, final @Nullable Path passedFilename,
 		final @Nullable Component parent) {
 		final Path filename;

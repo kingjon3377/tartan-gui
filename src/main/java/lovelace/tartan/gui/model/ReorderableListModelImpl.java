@@ -2,6 +2,7 @@ package lovelace.tartan.gui.model;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
@@ -13,7 +14,7 @@ import javax.swing.event.ListDataListener;
  */
 public class ReorderableListModelImpl<Element> extends AbstractList<Element>
 		implements ReorderableListModel<Element> {
-	private final List<ListDataListener> listeners = new ArrayList<>();
+	private final Collection<ListDataListener> listeners = new ArrayList<>();
 	private final List<Element> wrapped;
 
 	public ReorderableListModelImpl(final List<Element> list) {

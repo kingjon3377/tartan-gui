@@ -145,7 +145,7 @@ public final class LaTeXWriter {
 	 */
 	@SuppressWarnings("HardcodedFileSeparator") // double-backslash isn't a file separator
 	public void writeLaTeXProgram(final @NotNull Appendable out,
-								  final @NotNull List<@NotNull ProgramElement> program,
+								  final @NotNull Iterable<@NotNull ProgramElement> program,
 								  final @NotNull ProgramMetadata metadata)
 			throws IOException {
 		writeLine(out,
