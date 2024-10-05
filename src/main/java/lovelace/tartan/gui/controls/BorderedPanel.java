@@ -104,11 +104,13 @@ public class BorderedPanel extends JPanel implements BorderedContainer {
 		setLineStart(lineStart);
 		setLineEnd(lineEnd);
 	}
+	@SuppressWarnings("UseOfConcreteClass")
 	public static BorderedPanel horizontalLine(final @Nullable Component lineStart,
 											   final @Nullable Component center,
 											   final @Nullable Component lineEnd) {
 		return new BorderedPanel(center, null, null, lineStart, lineEnd);
 	}
+	@SuppressWarnings("UseOfConcreteClass")
 	public static BorderedPanel verticalLine(final @Nullable Component pageStart,
 											 final @Nullable Component center,
 											 final @Nullable Component pageEnd) {
