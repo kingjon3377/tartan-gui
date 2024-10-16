@@ -98,7 +98,7 @@ public final class FigureEditor extends JPanel {
 	private static void noop() { // deliberate no-op
 	}
 
-	private static class EscapeKeyListener extends KeyAdapter {
+	private static final class EscapeKeyListener extends KeyAdapter {
 		private final Consumer<AWTEvent> consumer;
 		private EscapeKeyListener(final Consumer<AWTEvent> consumer) {
 			this.consumer = consumer;

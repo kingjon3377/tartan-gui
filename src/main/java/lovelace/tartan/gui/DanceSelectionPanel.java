@@ -146,7 +146,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 		setResizeWeight(0.5);
 	}
 
-	private static class EnterKeyListener extends KeyAdapter {
+	private static final class EnterKeyListener extends KeyAdapter {
 		private final Runnable method;
 		private EnterKeyListener(final Runnable method) {
 			this.method = method;
@@ -159,7 +159,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 		}
 	}
 
-	private static class DoubleClickListener extends MouseAdapter {
+	private static final class DoubleClickListener extends MouseAdapter {
 		private final Runnable method;
 		private DoubleClickListener(final Runnable method) {
 			this.method = method;
