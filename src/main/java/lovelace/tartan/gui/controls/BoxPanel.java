@@ -18,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
 public final class BoxPanel extends JPanel {
 	public static final BoxParameter GLUE = new BoxGlue();
 
+	// Extracting an interface from an enum won't help abstraction.
+	@SuppressWarnings("PublicMethodNotExposedInInterface")
 	public enum BoxDirection {
 		PageAxis(BoxLayout.PAGE_AXIS, Box::createVerticalGlue, Box::createVerticalStrut),
 		LineAxis(BoxLayout.LINE_AXIS, Box::createHorizontalGlue,
