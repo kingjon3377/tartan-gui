@@ -24,7 +24,6 @@ import lovelace.tartan.gui.controls.ImageButton;
 import lovelace.tartan.gui.controls.ImageLoader;
 import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.gui.model.ReorderableListModel;
-import lovelace.tartan.gui.model.ReorderableListModelImpl;
 import lovelace.tartan.model.Dance;
 import lovelace.tartan.model.Intermission;
 import lovelace.tartan.model.ProgramElement;

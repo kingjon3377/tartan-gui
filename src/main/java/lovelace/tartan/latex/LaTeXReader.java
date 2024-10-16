@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import lovelace.tartan.model.Dance;
+import lovelace.tartan.model.DanceImpl;
 import lovelace.tartan.model.Figure;
 import lovelace.tartan.model.FigureParent;
 import lovelace.tartan.model.Intermission;
@@ -487,7 +488,7 @@ public final class LaTeXReader {
 			final String complexLength = blockContents(innerQueue);
 			final String formation = blockContents(innerQueue);
 			final String[] lengthParsed = complexLength.split("x", 2);
-			final Dance temp = new Dance(danceTitle, danceSource, danceTempo,
+			final Dance temp = new DanceImpl(danceTitle, danceSource, danceTempo,
 					parseTimesThrough(lengthParsed, danceTitle),
 					parseBars(lengthParsed, danceTitle), formation);
 			pRetval.add(temp);

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 import lovelace.tartan.model.Dance;
+import lovelace.tartan.model.DanceImpl;
 import lovelace.tartan.model.Figure;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +37,7 @@ public final class DatabaseAdapter {
 	public static Dance convertDance(final @NotNull DanceRow dbRow,
 									 final @Nullable String crib) {
 		final Dance retval =
-				new Dance(dbRow.name(), dbRow.source(), dbRow.type().name(),
+				new DanceImpl(dbRow.name(), dbRow.source(), dbRow.type().name(),
 						timesThrough(dbRow.shape(), dbRow.progression(),
 								dbRow.couples()), dbRow.length(),
 						dbRow.shape().getAbbreviation());

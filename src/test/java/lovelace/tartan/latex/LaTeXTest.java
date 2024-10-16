@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
-import lovelace.tartan.model.Dance;
+import lovelace.tartan.model.DanceImpl;
 import lovelace.tartan.model.Figure;
 import lovelace.tartan.model.Intermission;
 import lovelace.tartan.model.NamedFigure;
@@ -52,7 +52,7 @@ public class LaTeXTest {
 	@Test
 	public void noImageTest() throws Exception {
 		final List<ProgramElement> startingProgram = Arrays.asList(
-				new Dance("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
+				new DanceImpl("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
 						new Figure("1s & 2s advance and retire and dance back to back",
 								"1-8"),
 						new Figure(
@@ -65,7 +65,7 @@ public class LaTeXTest {
 								"17-24"),
 						new Figure("2s & 1s circle 4H around to the left and back",
 								"25-32")),
-				new Dance("Random Reel", "A. Mouse", "Reel", 6, 40, "2C (3C set)",
+				new DanceImpl("Random Reel", "A. Mouse", "Reel", 6, 40, "2C (3C set)",
 						new Figure("1s & 2s dance the Targe:", "1-8"), new NamedFigure(
 						new Figure(
 								"""
@@ -81,9 +81,9 @@ public class LaTeXTest {
 						new Figure("1M with 2L & 1L with 2M full turn", "7-8")),
 						new Figure("remainder of dance description here")),
 				new Intermission(),
-				new Dance("Odd Example", "Bk -1", "Strathspey", 3, 32, "3C Triangle",
+				new DanceImpl("Odd Example", "Bk -1", "Strathspey", 3, 32, "3C Triangle",
 						new Figure("dance description here")),
-				new Dance("Unsourced Medley", "", "Medley", 1, 64, "Sq. Set",
+				new DanceImpl("Unsourced Medley", "", "Medley", 1, 64, "Sq. Set",
 						new Figure("dance description here"), new Figure("xyzzy")),
 				new Intermission("Break"));
 		final ProgramMetadata startingMetadata = makeTestMetadata();
@@ -125,7 +125,7 @@ public class LaTeXTest {
 	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public void withImageTest() throws Exception {
 		final List<ProgramElement> startingProgram = Arrays.asList(
-				new Dance("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
+				new DanceImpl("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
 						new Figure("1s & 2s advance and retire and dance back to back",
 								"1-8"),
 						new Figure(
@@ -138,7 +138,7 @@ public class LaTeXTest {
 								"17-24"),
 						new Figure("2s & 1s circle 4H around to the left and back",
 								"25-32")),
-				new Dance("Random Reel", "A. Mouse", "Reel", 6, 40, "2C (3C set)",
+				new DanceImpl("Random Reel", "A. Mouse", "Reel", 6, 40, "2C (3C set)",
 						new Figure("1s & 2s dance the Targe:", "1-8"),
 						new NamedFigure(new Figure(
 								"""
@@ -154,9 +154,9 @@ public class LaTeXTest {
 								new Figure("1M with 2L & 1L with 2M full turn", "7-8")),
 						new Figure("remainder of dance description here")),
 				new Intermission(),
-				new Dance("Odd Example", "Bk -1", "Strathspey", 3, 32, "3C Triangle",
+				new DanceImpl("Odd Example", "Bk -1", "Strathspey", 3, 32, "3C Triangle",
 						new Figure("dance description here")),
-				new Dance("Unsourced Medley", "", "Medley", 1, 64, "Sq. Set",
+				new DanceImpl("Unsourced Medley", "", "Medley", 1, 64, "Sq. Set",
 						new Figure("dance description here"), new Figure("xyzzy")),
 				new Intermission("Break")
 		);
