@@ -112,7 +112,7 @@ public final class FigureEditor extends JPanel {
 
 		@Override
 		public void keyReleased(final KeyEvent event) {
-			consumer.accept(event);
+			keyTyped(event);
 		}
 	}
 
