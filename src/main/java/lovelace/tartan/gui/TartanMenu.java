@@ -26,7 +26,6 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import lovelace.tartan.gui.controls.PlatformFileDialog;
 import lovelace.tartan.gui.model.ReorderableListModel;
-import lovelace.tartan.gui.model.ReorderableListModelImpl;
 import lovelace.tartan.latex.LaTeXReader;
 import lovelace.tartan.latex.LaTeXWriter;
 import lovelace.tartan.model.ProgramElement;
