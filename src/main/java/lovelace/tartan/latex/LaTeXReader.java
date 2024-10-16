@@ -286,32 +286,7 @@ public final class LaTeXReader {
 						continue;
 					}
 					final String nextCommand = parseCommand(localInput);
-					switch (nextCommand) {
-						case "textbf":
-							buffer.append("<b>");
-							buffer.append(blockContents(localInput));
-							buffer.append("</b>");
-							break;
-						case "nicefrac":
-							final String numerator = blockContents(localInput).trim();
-							final String denominator = blockContents(localInput).trim();
-							parseFraction(numerator, denominator, buffer);
-							break;
-						case "textit": // TODO: Handle \emph as well
-							buffer.append("<i>");
-							buffer.append(blockContents(localInput));
-							buffer.append("</i>");
-							break;
-						case "textsuperscript":
-							buffer.append("<sup>");
-							buffer.append(blockContents(localInput));
-							buffer.append("</sup>");
-							break;
-						default:
-							buffer.append(top);
-							buffer.append(nextCommand);
-							break;
-					}
+					handleSingleCommand(localInput, nextCommand, buffer, top);
 				}
 				case '`' -> {
 					if (!localInput.isEmpty() && '`' == localInput.peekFirst()) {
@@ -333,6 +308,37 @@ public final class LaTeXReader {
 			}
 		}
 		throw new ParseException("Unbalanced curly braces in block", -1);
+	}
+
+	private static void handleSingleCommand(final @NotNull Deque<Character> localInput,
+	                              final String nextCommand, final StringBuilder buffer,
+	                              final char top) throws ParseException {
+		switch (nextCommand) {
+			case "textbf":
+				buffer.append("<b>");
+				buffer.append(blockContents(localInput));
+				buffer.append("</b>");
+				break;
+			case "nicefrac":
+				final String numerator = blockContents(localInput).trim();
+				final String denominator = blockContents(localInput).trim();
+				parseFraction(numerator, denominator, buffer);
+				break;
+			case "textit": // TODO: Handle \emph as well
+				buffer.append("<i>");
+				buffer.append(blockContents(localInput));
+				buffer.append("</i>");
+				break;
+			case "textsuperscript":
+				buffer.append("<sup>");
+				buffer.append(blockContents(localInput));
+				buffer.append("</sup>");
+				break;
+			default:
+				buffer.append(top);
+				buffer.append(nextCommand);
+				break;
+		}
 	}
 
 	/**
