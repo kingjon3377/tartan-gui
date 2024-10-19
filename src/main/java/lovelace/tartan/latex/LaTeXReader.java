@@ -254,7 +254,6 @@ public final class LaTeXReader {
 			switch (top) {
 				case '}' -> {
 					braceLevel--;
-					final int temp = braceLevel;
 					if (braceLevel == 0) { // TODO: Use <= instead of ==?
 						return buffer.toString();
 					} else {
