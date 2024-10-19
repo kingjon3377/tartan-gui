@@ -88,7 +88,8 @@ public final class PlatformFileDialog {
 	private static FilenameFilter toFilenameFilter(final Object filter) {
 		return switch (filter) {
 			case final FilenameFilter filenameFilter -> filenameFilter;
-			case final FileFilter fileFilter -> (dir, name) -> fileFilter.accept(new File(dir, name));
+			case final FileFilter fileFilter ->
+					(dir, name) -> fileFilter.accept(new File(dir, name));
 			case null, default -> throw new IllegalArgumentException(
 					"filter must be a FilenameFilter or a FileFilter");
 		};
@@ -97,7 +98,8 @@ public final class PlatformFileDialog {
 	private static FileFilter toFileFilter(final Object filter) {
 		return switch (filter) {
 			case final FileFilter fileFilter -> fileFilter;
-			case final FilenameFilter filenameFilter -> new FilenameFilterWrapper(filenameFilter);
+			case final FilenameFilter filenameFilter ->
+					new FilenameFilterWrapper(filenameFilter);
 			case null, default -> throw new IllegalArgumentException(
 					"filter must be a FilenameFilter or a FileFilter");
 		};

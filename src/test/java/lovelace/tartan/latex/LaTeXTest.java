@@ -52,7 +52,8 @@ public class LaTeXTest {
 	@Test
 	public void noImageTest() throws Exception {
 		final List<ProgramElement> startingProgram = Arrays.asList(
-				new DanceImpl("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
+				new DanceImpl("Fiddler's Choice", "M. Morgan", "Jig", 8, 32,
+						"2C (4C set)",
 						new Figure("1s & 2s advance and retire and dance back to back",
 								"1-8"),
 						new Figure(
@@ -125,7 +126,8 @@ public class LaTeXTest {
 	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public void withImageTest() throws Exception {
 		final List<ProgramElement> startingProgram = Arrays.asList(
-				new DanceImpl("Fiddler's Choice", "M. Morgan", "Jig", 8, 32, "2C (4C set)",
+				new DanceImpl("Fiddler's Choice", "M. Morgan", "Jig", 8, 32,
+						"2C (4C set)",
 						new Figure("1s & 2s advance and retire and dance back to back",
 								"1-8"),
 						new Figure(

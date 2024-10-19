@@ -234,7 +234,8 @@ public final class LaTeXReader {
 	 * @throws ParseException if there are fewer <pre>}</pre> than <pre>{</pre> in the
 	 *                        input
 	 */
-	@SuppressWarnings({"ContinueStatement", "HardcodedFileSeparator"}) // '/' is cross-platform in Java!
+	// HardcodedFileSeparator: '/' is cross-platform in Java!
+	@SuppressWarnings({"ContinueStatement", "HardcodedFileSeparator"})
 	static String blockContents(final @NotNull Deque<Character> localInput)
 			throws ParseException {
 		// TODO: Keep track of cursor position so we can give accurate data in thrown
@@ -517,10 +518,12 @@ public final class LaTeXReader {
 			return new Figure(desc, bars);
 		}
 	}
-	private static void requireNullContext(final String command, final @Nullable FigureParent currentContext)
+	private static void requireNullContext(final String command,
+	                                       final @Nullable FigureParent currentContext)
 			throws ParseException {
 		if (currentContext != null) {
-			throw new ParseException("\\%s in the middle of a dance".formatted(command), -1);
+			throw new ParseException("\\%s in the middle of a dance"
+					                         .formatted(command), -1);
 		}
 	}
 

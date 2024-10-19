@@ -237,8 +237,8 @@ public final class LaTeXWriter {
 		writeLine(out, "\\end{scdance}");
 	}
 
-	private static void writeNamedFigure(final @NotNull Appendable out, final NamedFigure named)
-			throws IOException {
+	private static void writeNamedFigure(final @NotNull Appendable out,
+	                                     final NamedFigure named) throws IOException {
 		out.append("\\namedfigure{");
 		for (final NamedFigureMember subfigure : named
 				.getContents()) {

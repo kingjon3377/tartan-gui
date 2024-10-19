@@ -120,7 +120,8 @@ public final class ElementEditingPanel extends JPanel {
 		} else if (current == null) {
 			return "ElementEditingPanel (empty)";
 		} else {
-			return "ElementEditingPanel editing %s".formatted(current.getClass().getSimpleName());
+			return "ElementEditingPanel editing %s"
+					       .formatted(current.getClass().getSimpleName());
 		}
 	}
 }
