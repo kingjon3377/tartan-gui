@@ -293,26 +293,26 @@ public final class LaTeXReader {
 	private static void handleBackslashQuote(final @NotNull Deque<Character> localInput,
 	                              final StringBuilder buffer, final char top)
 			throws ParseException {
-		if (localInput.isEmpty()) {
-			throw new ParseException("EOF after backslash", -1);
-		}
-		if ('\\' == localInput.peekFirst()) {
-			localInput.pop();
-			if (Character.valueOf('*').equals(localInput.peekFirst())) {
+		final Character next = localInput.peekFirst();
+		switch (next) {
+			case null -> throw new ParseException("EOF after backslash", -1);
+			case '\\' -> {
 				localInput.pop();
+				if (Character.valueOf('*').equals(localInput.peekFirst())) {
+					localInput.pop();
+				}
+				skipNewline(localInput);
+				buffer.append(System.lineSeparator());
 			}
-			skipNewline(localInput);
-			buffer.append(System.lineSeparator());
-			return;
+			case '&', '{', '}' -> {
+				localInput.pop();
+				buffer.append(next);
+			}
+			default -> {
+				final String nextCommand = parseCommand(localInput);
+				handleSingleCommand(localInput, nextCommand, buffer, top);
+			}
 		}
-		final char next = localInput.peekFirst();
-		if ('&' == next || '{' == next || '}' == next) {
-			localInput.pop();
-			buffer.append(next);
-			return;
-		}
-		final String nextCommand = parseCommand(localInput);
-		handleSingleCommand(localInput, nextCommand, buffer, top);
 	}
 
 	private static void handleSingleCommand(final @NotNull Deque<Character> localInput,
