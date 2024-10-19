@@ -85,32 +85,34 @@ public final class PlatformFileDialog {
 		}
 	}
 
+	private static FilenameFilter toFilenameFilter(final Object filter) {
+		return switch (filter) {
+			case final FilenameFilter filenameFilter -> filenameFilter;
+			case final FileFilter fileFilter -> (dir, name) -> fileFilter.accept(new File(dir, name));
+			case null, default -> throw new IllegalArgumentException(
+					"filter must be a FilenameFilter or a FileFilter");
+		};
+	}
+
+	private static FileFilter toFileFilter(final Object filter) {
+		return switch (filter) {
+			case final FileFilter fileFilter -> fileFilter;
+			case final FilenameFilter filenameFilter -> new FilenameFilterWrapper(filenameFilter);
+			case null, default -> throw new IllegalArgumentException(
+					"filter must be a FilenameFilter or a FileFilter");
+		};
+	}
+
 	/**
 	 * @param filter the new file filter for the dialog; must be either a {@link
 	 *               FileFilter} or a {@link FilenameFilter}.
 	 */
 	public void setFileFilter(final Object filter) {
 		switch (wrapped) {
-			case final FileDialog fileDialog -> {
-				switch (filter) {
-					case final FilenameFilter filenameFilter ->
-							fileDialog.setFilenameFilter(filenameFilter);
-					case final FileFilter fileFilter -> fileDialog.setFilenameFilter(
-							(dir, name) -> fileFilter.accept(new File(dir, name)));
-					case null, default -> throw new IllegalArgumentException(
-							"filter must be a FilenameFilter or a FileFilter");
-				}
-			}
-			case final JFileChooser chooser -> {
-				switch (filter) {
-					case final FileFilter fileFilter -> chooser.setFileFilter(fileFilter);
-					case final FilenameFilter filenameFilter ->
-							chooser.setFileFilter(
-									new FilenameFilterWrapper(filenameFilter));
-					case null, default -> {
-					}
-				}
-			}
+			case final FileDialog fileDialog ->
+					fileDialog.setFilenameFilter(toFilenameFilter(filter));
+			case final JFileChooser chooser ->
+					chooser.setFileFilter(toFileFilter(filter));
 			default -> throw new IllegalStateException("Impossible file-chooser type");
 		}
 	}
