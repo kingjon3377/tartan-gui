@@ -687,29 +687,10 @@ public final class LaTeXReader {
 			}
 			return true;
 		case "scfigure":
-			switch (currentContext) {
-				case final Dance dance -> dance.getContents().add(parseFigure(ourQueue));
-				case final NamedFigure namedFigure ->
-						namedFigure.getContents().add(parseFigure(ourQueue));
-				case null, default ->
-						throw new ParseException("Figure outside any dance", -1);
-			}
+			parseSimpleFigure(currentContext, ourQueue);
 			break;
 		case "namedfigure":
-			switch (currentContext) {
-				case final Dance dance -> {
-					final NamedFigure namedFigure = new NamedFigure();
-					final String contents = blockContents(ourQueue);
-					parseTokens(contents.chars().mapToObj(i -> (char) i).collect(
-									Collectors.toCollection(LinkedList::new)),
-							mRetval, pRetval, namedFigure);
-					dance.getContents().add(namedFigure);
-				}
-				case final NamedFigure ignored -> throw new ParseException(
-						"Named figure nested inside named figure", -1);
-				case null, default ->
-						throw new ParseException("Named figure outside any dance", -1);
-			}
+			parseNamedFigure(mRetval, pRetval, currentContext, ourQueue);
 			break;
 		case "intermission":
 			requireNullContext(command, currentContext);
@@ -732,6 +713,39 @@ public final class LaTeXReader {
 			throw new ParseException("Unhandled command \\" + command, -1);
 		}
 		return false;
+	}
+
+	private void parseNamedFigure(final @NotNull ProgramMetadata mRetval,
+	                       final @NotNull List<@NotNull ProgramElement> pRetval,
+	                       final @Nullable FigureParent currentContext,
+	                       final @NotNull Deque<Character> ourQueue)
+			throws ParseException {
+		switch (currentContext) {
+			case final Dance dance -> {
+				final NamedFigure namedFigure = new NamedFigure();
+				final String contents = blockContents(ourQueue);
+				parseTokens(contents.chars().mapToObj(i -> (char) i).collect(
+								Collectors.toCollection(LinkedList::new)),
+						mRetval, pRetval, namedFigure);
+				dance.getContents().add(namedFigure);
+			}
+			case final NamedFigure ignored -> throw new ParseException(
+					"Named figure nested inside named figure", -1);
+			case null, default ->
+					throw new ParseException("Named figure outside any dance", -1);
+		}
+	}
+
+	private static void parseSimpleFigure(final @Nullable FigureParent currentContext,
+	                              final @NotNull Deque<Character> ourQueue)
+			throws ParseException {
+		switch (currentContext) {
+			case final Dance dance -> dance.getContents().add(parseFigure(ourQueue));
+			case final NamedFigure namedFigure ->
+					namedFigure.getContents().add(parseFigure(ourQueue));
+			case null, default ->
+					throw new ParseException("Figure outside any dance", -1);
+		}
 	}
 
 	/**
