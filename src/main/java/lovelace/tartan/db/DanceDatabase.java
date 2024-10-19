@@ -22,7 +22,7 @@ import org.sqlite.SQLiteDataSource;
  *
  * @author Jonathan Lovelace
  */
-public class DanceDatabase {
+public class DanceDatabase implements AutoCloseable {
 
 	private static final Logger LOGGER = Logger.getLogger(DanceDatabase.class.getName());
 
@@ -166,5 +166,10 @@ public class DanceDatabase {
 	@Override
 	public String toString() {
 		return "DanceDatabase with %d dances".formatted(dances.size());
+	}
+
+	@Override
+	public void close() throws SQLException {
+		sql.close();
 	}
 }
