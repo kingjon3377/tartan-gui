@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class DanceDatabase implements AutoCloseable {
 	private final @NotNull PreparedStatement cribStatement;
 
 	public Collection<DanceRow> getDances() {
-		return dances;
+		return Collections.unmodifiableList(dances);
 	}
 
 	public DanceDatabase(final @NotNull Path filename) throws SQLException {
