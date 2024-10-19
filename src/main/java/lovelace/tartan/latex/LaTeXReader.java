@@ -517,6 +517,12 @@ public final class LaTeXReader {
 			return new Figure(desc, bars);
 		}
 	}
+	private static void requireNullContext(final String command, final @Nullable FigureParent currentContext)
+			throws ParseException {
+		if (currentContext != null) {
+			throw new ParseException("\\%s in the middle of a dance".formatted(command), -1);
+		}
+	}
 
 	/**
 	 * Handle any LaTeX (backslash-prefixed) command. For "metadata" commands
@@ -555,105 +561,67 @@ public final class LaTeXReader {
 		case "":
 			throw new ParseException("Unhandled backslash-quoted character", -1);
 		case "documentclass":
-			if (currentContext != null) {
-				throw new ParseException("documentclass in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			if (!"tartan".equals(blockContents(ourQueue))) {
 				throw new ParseException("We only support the tartan documentclass", -1);
 			}
 			return false;
 		case "tartangroupname":
-			if (currentContext != null) {
-				throw new ParseException("\\tartangroupname in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setGroupCoverName(blockContents(ourQueue));
 			break;
 		case "tartangroupname*":
-			if (currentContext != null) {
-				throw new ParseException("\\tartangroupname* in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setGroupTitleName(blockContents(ourQueue));
 			break;
 		case "tartanballname":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanballname in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setEventCoverName(blockContents(ourQueue));
 			break;
 		case "tartanballname*":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanballname* in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setEventTitleName(blockContents(ourQueue));
 			break;
 		case "tartanballdate":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanballdate in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setCoverDate(blockContents(ourQueue));
 			break;
 		case "tartanballdate*":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanballdate* in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setTitleDate(blockContents(ourQueue));
 			break;
 		case "tartanhall":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanhall in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setCoverLocation(blockContents(ourQueue));
 			break;
 		case "tartanhall*":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanhall* in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setTitleLocation(blockContents(ourQueue));
 			break;
 		case "tartanhalladdress":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanhalladdress in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setLocationAddress(blockContents(ourQueue));
 			break;
 		case "tartantimes":
-			if (currentContext != null) {
-				throw new ParseException("\\tartantimes in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setTitleTimes(blockContents(ourQueue).trim());
 			break;
 		case "tartanmusicians":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanmusicians in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setMusicians(blockContents(ourQueue).trim());
 			break;
 		case "tartancover":
-			if (currentContext != null) {
-				throw new ParseException("\\tartancover in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setCoverImage(null);
 			haveHadCover = true;
 			break;
 		case "listofdances":
-			if (currentContext != null) {
-				throw new ParseException("\\listofdances in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			haveHadCover = true;
 			haveHadTitle = true;
 			break;
 		case "tartanimage":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanimage in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			if (nextIsBackCover) {
 				final @Nullable Path oldBackCover = mRetval.getBackCoverImage();
 				if (oldBackCover != null) {
@@ -669,16 +637,11 @@ public final class LaTeXReader {
 			}
 			break;
 		case "cleartoverso":
-			if (currentContext != null) {
-				throw new ParseException("\\cleartoverso in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			nextIsBackCover = true;
 			break;
 		case "tartanimagecover":
-			if (currentContext != null) {
-				throw new ParseException("\\tartanimagecover in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setCoverImage(Paths.get(blockContents(ourQueue)));
 			haveHadCover = true;
 			break;
@@ -703,10 +666,7 @@ public final class LaTeXReader {
 			}
 			break;
 		case "maketartantitle":
-			if (currentContext != null) {
-				throw new ParseException("\\maketartantitle in the middle of a dance",
-						-1);
-			}
+			requireNullContext(command, currentContext);
 			haveHadCover = true;
 			haveHadTitle = true;
 			break;
@@ -752,9 +712,7 @@ public final class LaTeXReader {
 			}
 			break;
 		case "intermission":
-			if (currentContext != null) {
-				throw new ParseException("Intermission in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			final String argument = parseOptionalBlock(ourQueue);
 			if (argument.isEmpty()) {
 				pRetval.add(new Intermission());
@@ -763,9 +721,7 @@ public final class LaTeXReader {
 			}
 			break;
 		case "auldlangsyne":
-			if (currentContext != null) {
-				throw new ParseException("Auld Lang Syne in the middle of a dance", -1);
-			}
+			requireNullContext(command, currentContext);
 			mRetval.setPrintAuldLangSyne(true);
 			break;
 		case "vspace":
