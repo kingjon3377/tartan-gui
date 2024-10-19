@@ -267,28 +267,7 @@ public final class LaTeXReader {
 						buffer.append(top);
 					}
 				}
-				case '\\' -> {
-					if (localInput.isEmpty()) {
-						throw new ParseException("EOF after backslash", -1);
-					}
-					if ('\\' == localInput.peekFirst()) {
-						localInput.pop();
-						if (Character.valueOf('*').equals(localInput.peekFirst())) {
-							localInput.pop();
-						}
-						skipNewline(localInput);
-						buffer.append(System.lineSeparator());
-						continue;
-					}
-					final char next = localInput.peekFirst();
-					if ('&' == next || '{' == next || '}' == next) {
-						localInput.pop();
-						buffer.append(next);
-						continue;
-					}
-					final String nextCommand = parseCommand(localInput);
-					handleSingleCommand(localInput, nextCommand, buffer, top);
-				}
+				case '\\' -> handleBackslashQuote(localInput, buffer, top);
 				case '`' -> {
 					if (!localInput.isEmpty() && '`' == localInput.peekFirst()) {
 						localInput.pop();
@@ -309,6 +288,31 @@ public final class LaTeXReader {
 			}
 		}
 		throw new ParseException("Unbalanced curly braces in block", -1);
+	}
+
+	private static void handleBackslashQuote(final @NotNull Deque<Character> localInput,
+	                              final StringBuilder buffer, final char top)
+			throws ParseException {
+		if (localInput.isEmpty()) {
+			throw new ParseException("EOF after backslash", -1);
+		}
+		if ('\\' == localInput.peekFirst()) {
+			localInput.pop();
+			if (Character.valueOf('*').equals(localInput.peekFirst())) {
+				localInput.pop();
+			}
+			skipNewline(localInput);
+			buffer.append(System.lineSeparator());
+			return;
+		}
+		final char next = localInput.peekFirst();
+		if ('&' == next || '{' == next || '}' == next) {
+			localInput.pop();
+			buffer.append(next);
+			return;
+		}
+		final String nextCommand = parseCommand(localInput);
+		handleSingleCommand(localInput, nextCommand, buffer, top);
 	}
 
 	private static void handleSingleCommand(final @NotNull Deque<Character> localInput,
