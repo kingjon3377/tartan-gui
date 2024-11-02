@@ -144,9 +144,9 @@ public final class LaTeXWriter {
 	 * @throws IOException on I/O error while writing
 	 */
 	@SuppressWarnings("HardcodedFileSeparator") // double-backslash isn't a file separator
-	public void writeLaTeXProgram(final @NotNull Appendable out,
-								  final @NotNull Iterable<@NotNull ProgramElement> program,
-								  final @NotNull ProgramMetadata metadata)
+	public static void writeLaTeXProgram(final @NotNull Appendable out,
+	                                     final @NotNull Iterable<@NotNull ProgramElement> program,
+	                                     final @NotNull ProgramMetadata metadata)
 			throws IOException {
 		writeLine(out,
 				"% This LaTeX file was produced by the tartan-gui graphical editor;");

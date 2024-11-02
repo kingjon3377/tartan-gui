@@ -190,7 +190,7 @@ public final class TartanMenu {
 			filename = passedFilename;
 		}
 		try (final BufferedWriter writer = Files.newBufferedWriter(filename)) {
-			new LaTeXWriter().writeLaTeXProgram(writer, program, metadata);
+			LaTeXWriter.writeLaTeXProgram(writer, program, metadata);
 		} catch (final IOException except) {
 			JOptionPane.showMessageDialog(parent, "Error writing to " + filename,
 					"I/O Error", JOptionPane.ERROR_MESSAGE);

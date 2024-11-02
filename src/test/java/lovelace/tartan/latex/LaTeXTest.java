@@ -91,7 +91,7 @@ public class LaTeXTest {
 		startingMetadata.setTitleOnCover(titleOnCover);
 		startingMetadata.setPrintAuldLangSyne(printAuldLangSyne);
 		final StringBuilder builder = new StringBuilder();
-		new LaTeXWriter().writeLaTeXProgram(builder, startingProgram, startingMetadata);
+		LaTeXWriter.writeLaTeXProgram(builder, startingProgram, startingMetadata);
 		final String serialized = builder.toString();
 		final Pair<@NotNull ProgramMetadata, @NotNull List<@NotNull ProgramElement>>
 				deserializationResults = new LaTeXReader().readLaTeXProgram(serialized);
@@ -170,7 +170,7 @@ public class LaTeXTest {
 		startingMetadata.setTitleOnCover(titleOnCover);
 		startingMetadata.setPrintAuldLangSyne(printAuldLangSyne);
 		final StringBuilder builder = new StringBuilder();
-		new LaTeXWriter().writeLaTeXProgram(builder, startingProgram, startingMetadata);
+		LaTeXWriter.writeLaTeXProgram(builder, startingProgram, startingMetadata);
 		final String serialized = builder.toString();
 		final Pair<@NotNull ProgramMetadata, @NotNull List<@NotNull ProgramElement>>
 				deserializationResults = new LaTeXReader().readLaTeXProgram(serialized);
