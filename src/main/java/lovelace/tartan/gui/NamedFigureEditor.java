@@ -45,13 +45,15 @@ public final class NamedFigureEditor extends JPanel {
 		final JButton addButton = new JButton("Add movement");
 		final JPanel buttonPanel = BorderedPanel.horizontalLine(addButton, null,
 				new ListenedButton("Done Editing", (ignored) -> stopOperation.run()));
-		addButton.addActionListener((ignored) -> {
-			final Figure newFigure = new Figure("description of movement", "bars");
-			namedFigure.getContents().add(newFigure);
-			remove(buttonPanel);
-			add(new FigureEditor(newFigure));
-			add(buttonPanel);
-		});
+		addButton.addActionListener((ignored) -> createNewFigure(namedFigure, buttonPanel));
+		add(buttonPanel);
+	}
+
+	private void createNewFigure(final NamedFigure namedFigure, final JPanel buttonPanel) {
+		final Figure newFigure = new Figure("description of movement", "bars");
+		namedFigure.getContents().add(newFigure);
+		remove(buttonPanel);
+		add(new FigureEditor(newFigure));
 		add(buttonPanel);
 	}
 }
