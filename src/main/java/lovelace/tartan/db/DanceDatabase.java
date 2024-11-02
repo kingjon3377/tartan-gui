@@ -29,7 +29,7 @@ public class DanceDatabase implements AutoCloseable {
 
 	private final @NotNull Connection sql;
 
-	private final @NotNull List<DanceRow> dances = new ArrayList<>();
+	private final @NotNull List<DanceRow> dances;
 
 	private final @NotNull PreparedStatement cribStatement;
 
@@ -41,10 +41,11 @@ public class DanceDatabase implements AutoCloseable {
 		final SQLiteDataSource ds = new SQLiteDataSource();
 		ds.setUrl("jdbc:sqlite:" + filename);
 		sql = ds.getConnection();
-		final Map<Integer, DanceType> typesMap = new HashMap<>();
+		final Map<Integer, DanceType> typesMap;
 		try (final PreparedStatement typesStatement = sql.prepareStatement(
 				"SELECT id, name, short_name FROM dancetype");
 			 final ResultSet typesResults = typesStatement.executeQuery()) {
+			typesMap = new HashMap<>(typesResults.getFetchSize());
 			while (typesResults.next()) {
 				final int id = typesResults.getInt("id");
 				final String name = typesResults.getString("name");
@@ -52,10 +53,11 @@ public class DanceDatabase implements AutoCloseable {
 				typesMap.put(id, new DanceTypeImpl(id, name, abbreviation));
 			}
 		}
-		final Map<Integer, DanceFormation> shapesMap = new HashMap<>();
+		final Map<Integer, DanceFormation> shapesMap;
 		try (final PreparedStatement shapesStatement = sql.prepareStatement(
 				"SELECT id, name, shortname FROM shape");
 			 final ResultSet shapesResults = shapesStatement.executeQuery()) {
+			shapesMap = new HashMap<>(shapesResults.getFetchSize());
 			while (shapesResults.next()) {
 				final int id = shapesResults.getInt("id");
 				final String name = shapesResults.getString("name");
@@ -63,10 +65,11 @@ public class DanceDatabase implements AutoCloseable {
 				shapesMap.put(id, new DanceFormationImpl(id, name, abbreviation));
 			}
 		}
-		final Map<Integer, DanceProgression> progressionsMap = new HashMap<>();
+		final Map<Integer, DanceProgression> progressionsMap;
 		try (final PreparedStatement progressionsQuery = sql.prepareStatement(
 				"SELECT id, name FROM progression");
 			 final ResultSet progressionsResults = progressionsQuery.executeQuery()) {
+			progressionsMap = new HashMap<>(progressionsResults.getFetchSize());
 			while (progressionsResults.next()) {
 				final int id = progressionsResults.getInt("id");
 				final String name = progressionsResults.getString("name");
@@ -82,6 +85,7 @@ public class DanceDatabase implements AutoCloseable {
 						WHERE dance.id = dancespublicationsmap.dance_id AND \
 						publication.id = dancespublicationsmap.publication_id""");
 			 final ResultSet danceResults = danceStatement.executeQuery()) {
+			dances = new ArrayList<>(danceResults.getFetchSize());
 			while (danceResults.next()) {
 				final int id = danceResults.getInt("id");
 				final String name = danceResults.getString("name");
