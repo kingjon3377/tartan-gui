@@ -172,10 +172,8 @@ public final class MetadataEditingPanel extends JPanel {
 		final JButton fillerImageAdd = new ListenedButton("Add Image",
 				(ignored) -> { // TODO: convert from lambda to class method?
 					fillerChooser.showOpenDialog();
-					final @Nullable File file = fillerChooser.getFilename();
-					if (file != null) {
-						fillerImageListModel.add(file.toPath());
-					}
+					Optional.ofNullable(fillerChooser.getFilename())
+							.map(File::toPath).ifPresent(fillerImageListModel::add);
 				});
 		final JButton fillerImageRemove = new ListenedButton("Remove Image",
 				(ignored) -> { // TODO: convert from lambda to class method?
