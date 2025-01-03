@@ -218,6 +218,7 @@ public final class LaTeXWriter {
 		}
 	}
 
+	@SuppressWarnings("HardcodedFileSeparator") // \\ is not a file separator here
 	private static void writeDance(final @NotNull Appendable out, final Dance dance)
 			throws IOException {
 		out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",

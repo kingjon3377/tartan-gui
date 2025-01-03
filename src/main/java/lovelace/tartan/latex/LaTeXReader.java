@@ -290,6 +290,7 @@ public final class LaTeXReader {
 		throw new ParseException("Unbalanced curly braces in block", -1);
 	}
 
+	@SuppressWarnings("HardcodedFileSeparator") // \\ is not a file separator here
 	private static void handleBackslashQuote(final @NotNull Deque<Character> localInput,
 	                              final StringBuilder buffer, final char top)
 			throws ParseException {
