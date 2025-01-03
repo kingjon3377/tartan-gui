@@ -24,7 +24,6 @@ import lovelace.tartan.gui.model.ReorderableListModel;
 import lovelace.tartan.gui.model.ReorderableListModelImpl;
 import lovelace.tartan.model.ProgramMetadata;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * A panel to let the user edit the parts of the program document other than the dances.
