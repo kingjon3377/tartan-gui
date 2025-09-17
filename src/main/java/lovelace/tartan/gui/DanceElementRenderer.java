@@ -41,7 +41,8 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 						row, column);
 			}
 			case final NamedFigure namedFigure -> {
-				final StringBuilder builder = new StringBuilder();
+				final StringBuilder builder =
+						new StringBuilder(calculateTextSize(namedFigure) + 28);
 				builder.append("<html><table>");
 				for (final NamedFigureMember movement : namedFigure.getContents()) {
 					renderFigureMovement(movement, builder);
@@ -55,6 +56,22 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 						hasFocus, row, column);
 			}
 		}
+	}
+
+	private static int calculateTextSize(final NamedFigure figure) {
+		return figure.getContents().stream()
+				       .mapToInt(DanceElementRenderer::calculateTextSize).sum();
+	}
+
+	private static int calculateTextSize(final NamedFigureMember member) {
+		return 30 + switch (member) {
+			case final Figure figure ->
+					Objects.requireNonNullElse(figure.getBars(), "&nbsp;").length() + 9 +
+							figure.getDescription().length();
+			case final SimplestMember simplestMember ->
+					15 + simplestMember.getString().length();
+			default -> Objects.toString(member).length();
+		};
 	}
 
 	private static void renderFigureMovement(final NamedFigureMember movement,

@@ -329,7 +329,8 @@ public final class ProgramMetadata {
 	 */
 	@Override
 	public String toString() {
-		final StringBuilder builder = new StringBuilder();
+		final StringBuilder builder =
+				new StringBuilder(ProgramMetadata.class.getDeclaredFields().length * 20);
 		for (final Field field : ProgramMetadata.class.getDeclaredFields()) {
 			builder.append("- ");
 			builder.append(field.getName());

@@ -90,7 +90,7 @@ public final class LaTeXReader {
 	 * @param localInput the queue from which to read
 	 */
 	private static String parseCommand(final @NotNull Deque<Character> localInput) {
-		final StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder(localInput.size());
 		while (!localInput.isEmpty()) {
 			final char top = localInput.peekFirst();
 			if (Character.isWhitespace(top)) {
@@ -248,7 +248,7 @@ public final class LaTeXReader {
 		} else if ('{' != localInput.peekFirst()) {
 			return "";
 		}
-		final StringBuilder buffer = new StringBuilder();
+		final StringBuilder buffer = new StringBuilder(localInput.size());
 		int braceLevel = 0;
 		while (!localInput.isEmpty()) {
 			final char top = localInput.pop();
@@ -365,7 +365,7 @@ public final class LaTeXReader {
 			return "";
 		}
 		localInput.pop();
-		final StringBuilder buffer = new StringBuilder();
+		final StringBuilder buffer = new StringBuilder(localInput.size());
 		int braceLevel = 1;
 		while (!localInput.isEmpty()) {
 			final char top = localInput.pop();

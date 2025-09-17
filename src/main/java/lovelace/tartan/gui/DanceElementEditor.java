@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
  * @author Jonathan Lovelace
  */
 public class DanceElementEditor implements TableCellEditor {
-	private final List<CellEditorListener> listeners = new ArrayList<>();
+	private final List<CellEditorListener> listeners = new ArrayList<>(10);
 	private final TableCellEditor defaultEditor =
 			new DefaultCellEditor(new JTextField());
 	private @Nullable Object current = null;

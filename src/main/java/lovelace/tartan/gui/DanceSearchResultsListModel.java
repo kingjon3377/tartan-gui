@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public final class DanceSearchResultsListModel implements ListModel<DanceRow> {
 	private final DanceDatabase db;
-	private final Collection<ListDataListener> listeners = new ArrayList<>();
+	private final Collection<ListDataListener> listeners = new ArrayList<>(10);
 	private final List<DanceRow> backing;
 	private @Nullable String currentSearch = null;
 

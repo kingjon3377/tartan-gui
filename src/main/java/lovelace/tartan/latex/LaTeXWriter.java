@@ -254,4 +254,94 @@ public final class LaTeXWriter {
 		}
 		writeLine(out, "}");
 	}
+
+	public static int estimateSize(final List<ProgramElement> program,
+	                               final ProgramMetadata metadata) {
+		int retval = 328;
+		retval += estimatePrologueSize(metadata);
+		retval += Optional.ofNullable(metadata.getCoverImage()).map(Path::toString)
+				          .stream().mapToInt(String::length).sum();
+		for (final ProgramElement item : program) {
+			retval += switch (item) {
+			case final Dance dance -> estimateDanceSize(dance);
+			case final Intermission intermission ->
+					estimateIntermissionSize(intermission);
+			default -> 0;
+			};
+		}
+		for (final Path image : metadata.getInsidePostDanceImages()) {
+			retval += 26;
+			retval += image.toString().length();
+		}
+		if (metadata.getPrintAuldLangSyne()) {
+			retval += 11 + 14;
+		}
+		final Path image = metadata.getBackCoverImage();
+		if (image != null) {
+			retval += 29;
+			retval += image.toString().length();
+		}
+		return retval;
+	}
+
+	private static int estimateIntermissionSize(final Intermission intermission) {
+		final String text = intermission.getDescription();
+		if ("Intermission".equals(text) || text.isEmpty()) {
+			return 14;
+		} else {
+			return 16 + text.length();
+		}
+	}
+
+	private static int estimateDanceSize(final Dance dance) {
+		int retval = 41;
+		retval += Stream.of(dance.getTitle(), dance.getSource(), dance.getTempo(),
+				Integer.toString(dance.getTimes()), Integer.toString(dance.getLength()),
+				dance.getFormation()).mapToInt(String::length).sum();
+		for (final DanceMember figure : dance.getContents()) {
+			retval += switch (figure) {
+			case final Figure fig -> estimateSimpleFigureSize(fig);
+			case final NamedFigure named -> estimateNamedFigureSize(named);
+			case final SimplestMember simplestMember ->
+					simplestMember.getString().length();
+			default -> throw new IllegalStateException(
+					"Impossible DanceMember");
+			};
+		}
+		return retval;
+	}
+
+	private static int estimateNamedFigureSize(final NamedFigure named) {
+		int retval = 15;
+		for (final NamedFigureMember subfigure : named.getContents()) {
+			retval += switch (subfigure) {
+			case final Figure fig ->
+					estimateSimpleFigureSize(fig);
+			case final SimplestMember simplestMember ->
+					simplestMember.getString().length();
+			default -> throw new IllegalStateException(
+					"Impossible NamedFigureMember");
+			};
+		}
+		return retval;
+	}
+
+	private static int estimateSimpleFigureSize(final Figure fig) {
+		return 12 + Optional.ofNullable(fig.getBars()).stream().mapToInt(String::length)
+				            .map(i -> i + 2).sum() + fig.getDescription().length();
+	}
+
+	@SuppressWarnings("HardcodedLineSeparator")
+	private static int estimatePrologueSize(final ProgramMetadata metadata) {
+		// TODO: keep in sync with writePrologue()
+		return 197 + Stream.of(metadata.getGroupCoverName(),
+						metadata.getGroupTitleName(), metadata.getEventCoverName(),
+						metadata.getEventTitleName(), metadata.getCoverDate(),
+						metadata.getTitleDate(), metadata.getCoverLocation(),
+						metadata.getTitleLocation(), metadata.getLocationAddress(),
+						metadata.getTitleTimes(),
+						metadata.getMusicians()).filter(Objects::nonNull)
+				             .map(s -> s.replace("\n", "\\\\*\n"))
+				             .mapToInt(String::length).sum();
+	}
 }

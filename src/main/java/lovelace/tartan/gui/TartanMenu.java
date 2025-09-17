@@ -123,7 +123,10 @@ public final class TartanMenu {
 		final @NotNull Path file, final @Nullable Component parent) {
 		try {
 			final List<String> lines = Files.readAllLines(file);
-			final StringBuilder builder = new StringBuilder();
+			// If a file is big enough that a StringBuilder of size Integer.MAX_VALUE
+			// isn't big enough, this isn't likely to be the bottleneck.
+			@SuppressWarnings("NumericCastThatLosesPrecision")
+			final StringBuilder builder = new StringBuilder((int) Files.size(file));
 			for (final String line : lines) {
 				builder.append(line);
 				builder.append(System.lineSeparator());

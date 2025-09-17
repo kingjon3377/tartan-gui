@@ -90,7 +90,8 @@ public class LaTeXTest {
 		final ProgramMetadata startingMetadata = makeTestMetadata();
 		startingMetadata.setTitleOnCover(titleOnCover);
 		startingMetadata.setPrintAuldLangSyne(printAuldLangSyne);
-		final StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder(
+				LaTeXWriter.estimateSize(startingProgram, startingMetadata));
 		LaTeXWriter.writeLaTeXProgram(builder, startingProgram, startingMetadata);
 		final String serialized = builder.toString();
 		final Pair<@NotNull ProgramMetadata, @NotNull List<@NotNull ProgramElement>>
@@ -169,7 +170,8 @@ public class LaTeXTest {
 				Paths.get("firstExtra"), Paths.get("secondExtra"));
 		startingMetadata.setTitleOnCover(titleOnCover);
 		startingMetadata.setPrintAuldLangSyne(printAuldLangSyne);
-		final StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder(
+				LaTeXWriter.estimateSize(startingProgram, startingMetadata));
 		LaTeXWriter.writeLaTeXProgram(builder, startingProgram, startingMetadata);
 		final String serialized = builder.toString();
 		final Pair<@NotNull ProgramMetadata, @NotNull List<@NotNull ProgramElement>>
