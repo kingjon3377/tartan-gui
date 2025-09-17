@@ -42,11 +42,10 @@ public class DanceDatabase implements AutoCloseable {
 		T apply(ResultSet results) throws SQLException;
 	}
 
-	private <T> Map<Integer, T> resultsToMap(final String query,
-	                                         final ResultsFunction<T> reader)
+	private static <T> Map<Integer, T> resultsToMap(final PreparedStatement statement,
+	                                                final ResultsFunction<T> reader)
 			throws SQLException {
-		try (final PreparedStatement statement = sql.prepareStatement(query);
-		     final ResultSet results = statement.executeQuery()) {
+		try (final ResultSet results = statement.executeQuery()) {
 			final Map<Integer, T> retval = new HashMap<>(results.getFetchSize());
 			while (results.next()) {
 				retval.put(results.getInt("id"), reader.apply(results));
@@ -55,10 +54,10 @@ public class DanceDatabase implements AutoCloseable {
 		}
 	}
 
-	private <T> List<T> resultsToList(final String query, final ResultsFunction<T> reader)
+	private static <T> List<T> resultsToList(final PreparedStatement statement,
+	                                         final ResultsFunction<T> reader)
 			throws SQLException {
-		try (final PreparedStatement statement = sql.prepareStatement(query);
-		     final ResultSet results = statement.executeQuery()) {
+		try (final ResultSet results = statement.executeQuery()) {
 			final List<T> retval = new ArrayList<>(results.getFetchSize());
 			while (results.next()) {
 				retval.add(reader.apply(results));
@@ -72,26 +71,28 @@ public class DanceDatabase implements AutoCloseable {
 		ds.setUrl("jdbc:sqlite:" + filename);
 		sql = ds.getConnection();
 		final Map<Integer, DanceType> typesMap =
-				resultsToMap("SELECT id, name, short_name FROM dancetype",
+				resultsToMap(sql.prepareStatement(
+						"SELECT id, name, short_name FROM dancetype"),
 						results -> new DanceTypeImpl(results.getInt("id"),
 								results.getString("name"),
 								results.getString("short_name")));
 		final Map<Integer, DanceFormation> shapesMap =
-				resultsToMap("SELECT id, name, shortname FROM shape",
+				resultsToMap(sql.prepareStatement(
+						"SELECT id, name, shortname FROM shape"),
 						results -> new DanceFormationImpl(results.getInt("id"),
 								results.getString("name"),
 								results.getString("shortname")));
 		final Map<Integer, DanceProgression> progressionsMap =
-				resultsToMap("SELECT id, name FROM progression",
+				resultsToMap(sql.prepareStatement("SELECT id, name FROM progression"),
 						results -> new DanceProgressionImpl(results.getInt("id"),
 								results.getString("name")));
-		dances = resultsToList("""
+		dances = resultsToList(sql.prepareStatement("""
 						SELECT dance.id, dance.name, dance.barsperrepeat, \
 						dance.shape_id, dance.type_id, dance.couples_id, \
 						publication.name AS publicationName, dance.progression_id \
 						FROM dance \
 						JOIN dancepublicationsmap dpm ON dance.id = dpm.dance_id \
-						JOIN publication ON publication.id = dpm.publication_id""",
+						JOIN publication ON publication.id = dpm.publication_id"""),
 				results -> parseDance(results, shapesMap, typesMap, progressionsMap));
 		cribStatement = sql.prepareStatement(
 				"""
