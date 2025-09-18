@@ -79,30 +79,26 @@ public final class DanceSelectionPanel extends JSplitPane {
 		return retval;
 	}
 
+	private static JButton optionalImageButton(final String imagePath, final String alt) {
+		try {
+			return new ImageButton(ImageLoader.loadImage(imagePath));
+		} catch (final IOException except) {
+			return new JButton(alt);
+		}
+	}
+
 	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public DanceSelectionPanel(final DanceDatabase db,
 							   final ReorderableListModel<ProgramElement> program) {
 		super(JSplitPane.HORIZONTAL_SPLIT, true);
 		this.program = program;
 		this.db = db;
-		JButton rightButton;
-		try {
-			rightButton =
-					new ImageButton(ImageLoader.loadImage(
-							// TODO: Check image path once port back to Java complete
-							"lovelace/tartan/gui/arrow-right-300px.png"));
-		} catch (final IOException e) {
-			rightButton = new JButton("Add");
-		}
-		JButton leftButton;
-		try {
-			leftButton =
-					new ImageButton(ImageLoader.loadImage(
-							// TODO: Check image path once port back to Java complete
-							"lovelace/tartan/gui/arrow-left-300px.png"));
-		} catch (final IOException e) {
-			leftButton = new JButton("Add");
-		}
+		// TODO: Check image paths
+		final JButton rightButton =
+				optionalImageButton("lovelace/tartan/gui/arrow-right-300px.png", "Add");
+		// FIXME: Left button should be "Remove", right?
+		final JButton leftButton = optionalImageButton(
+				"lovelace/tartan/gui/arrow-left-300px.png", "Add");
 		final JPanel inner = createButtonPanel(rightButton, leftButton);
 
 		danceListModel = new DanceSearchResultsListModel(db);
