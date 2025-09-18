@@ -158,6 +158,11 @@ public final class DanceSelectionPanel extends JSplitPane {
 				method.run();
 			}
 		}
+
+		@Override
+		public String toString() {
+			return "EnterKeyListener";
+		}
 	}
 
 	private static final class DoubleClickListener extends MouseAdapter {
@@ -170,6 +175,11 @@ public final class DanceSelectionPanel extends JSplitPane {
 			if (evt.getClickCount() == 2 || evt.getClickCount() == 3) {
 				method.run();
 			}
+		}
+
+		@Override
+		public String toString() {
+			return "DoubleClickListener";
 		}
 	}
 

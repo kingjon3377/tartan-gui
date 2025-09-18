@@ -113,6 +113,11 @@ public final class FigureEditor extends JPanel {
 		public void keyReleased(final KeyEvent event) {
 			keyTyped(event);
 		}
+
+		@Override
+		public String toString() {
+			return "EscapeKeyListener";
+		}
 	}
 
 	@Override
