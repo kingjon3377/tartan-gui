@@ -72,7 +72,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 	private static JPanel createButtonPanel(final JButton rightButton,
 	                                        final JButton leftButton) {
 		final JPanel retval = new BoxPanel(BoxDirection.PageAxis, BoxPanel.GLUE,
-				rightButton, new BoxPanel.BoxStrut(5), leftButton, BoxPanel.GLUE);
+				rightButton, BoxPanel.strut(5), leftButton, BoxPanel.GLUE);
 		retval.setMaximumSize(new Dimension(60, 4096));
 		retval.setPreferredSize(new Dimension(40, 480));
 		retval.setMinimumSize(new Dimension(20, 45));

@@ -55,7 +55,7 @@ public final class BoxPanel extends JPanel {
 		Component getComponent(final BoxDirection direction);
 	}
 
-	public static final class BoxGlue implements BoxParameter {
+	private static final class BoxGlue implements BoxParameter {
 		protected BoxGlue() { // constructor provided for access specifier only
 		}
 
@@ -65,13 +65,7 @@ public final class BoxPanel extends JPanel {
 		}
 	}
 
-	public static final class BoxStrut implements BoxParameter {
-		private final int size;
-
-		public BoxStrut(final int size) {
-			this.size = size;
-		}
-
+	private record BoxStrut(int size) implements BoxParameter {
 		@Override
 		public Component getComponent(final BoxDirection direction) {
 			return direction.createStrut(size);
@@ -79,8 +73,12 @@ public final class BoxPanel extends JPanel {
 
 		@Override
 		public String toString() {
-			return "BoxStrut{size=%d}".formatted(size);
-		}
+				return "BoxStrut{size=%d}".formatted(size);
+			}
+	}
+
+	public static BoxParameter strut(final int size) {
+		return new BoxStrut(size);
 	}
 
 	public BoxPanel(final BoxDirection direction, final Object... contents) {
