@@ -104,19 +104,20 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public void setValueAt(final Object val, final int rowIndex,
-						   final int columnIndex) {
+	public void setValueAt(final Object aValue, final int rowIndex,
+	                       final int columnIndex) {
 		if (columnIndex == 0) {
 			if (rowIndex >= 0 && rowIndex <= wrapped.size()) {
-				if (cls.isInstance(val)) {
+				if (cls.isInstance(aValue)) {
 					if (rowIndex == wrapped.size()) {
-						wrapped.add(cls.cast(val));
+						wrapped.add(cls.cast(aValue));
 					} else {
-						wrapped.set(rowIndex, cls.cast(val));
+						wrapped.set(rowIndex, cls.cast(aValue));
 					}
 				} else {
 					throw new IllegalArgumentException(
-							"Unexpected type of list item: " + val.getClass().getName());
+							"Unexpected type of list item: " +
+									aValue.getClass().getName());
 				}
 			} else {
 				throw new IndexOutOfBoundsException(String.format(

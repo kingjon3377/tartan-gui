@@ -42,13 +42,13 @@ public final class SimplestMember implements NamedFigureMember, DanceMember {
 	}
 
 	/**
-	 * @param other an object
+	 * @param obj an object
 	 * @return whether it is also a NamedFigureMember and wraps an identical string.
 	 */
 	@Override
-	public boolean equals(final Object other) {
-		return other instanceof SimplestMember &&
-			string.equals(((SimplestMember) other).string);
+	public boolean equals(final Object obj) {
+		return obj instanceof SimplestMember &&
+			string.equals(((SimplestMember) obj).string);
 	}
 
 	/**

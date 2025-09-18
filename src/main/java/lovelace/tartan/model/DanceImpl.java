@@ -177,16 +177,17 @@ public class DanceImpl implements Dance {
 	}
 
 	/**
-	 * @param other an object
+	 * @param obj an object
 	 * @return whether it is an identical dance.
 	 */
 	@Override
-	public boolean equals(final Object other) {
-		if (other instanceof final Dance that) {
-			return title.equals(that.getTitle()) && source.equals(that.getSource()) &&
-				tempo.equals(that.getTempo()) && times == that.getTimes() &&
-				length == that.getLength() && formation.equals(that.getFormation()) &&
-				contents.equals(that.getContents());
+	public boolean equals(final Object obj) {
+		if (obj instanceof final Dance dance) {
+			//noinspection OverlyComplexBooleanExpression
+			return title.equals(dance.getTitle()) && source.equals(dance.getSource()) &&
+				tempo.equals(dance.getTempo()) && times == dance.getTimes() &&
+				length == dance.getLength() && formation.equals(dance.getFormation()) &&
+				contents.equals(dance.getContents());
 		} else {
 			return false;
 		}

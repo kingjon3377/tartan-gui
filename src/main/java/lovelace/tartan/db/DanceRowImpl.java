@@ -106,12 +106,13 @@ public record DanceRowImpl(int id, String name, int length,
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj instanceof final DanceRow that) {
-			return id == that.id() && name.equals(that.name()) &&
-				length == that.length() && shape.equals(that.shape()) &&
-				type.equals(that.type()) && couples == that.couples() &&
-				source.equals(that.source()) &&
-				progression.equals(that.progression());
+		if (obj instanceof final DanceRow row) {
+			//noinspection OverlyComplexBooleanExpression
+			return id == row.id() && name.equals(row.name()) &&
+				length == row.length() && shape.equals(row.shape()) &&
+				type.equals(row.type()) && couples == row.couples() &&
+				source.equals(row.source()) &&
+				progression.equals(row.progression());
 		} else {
 			return false;
 		}

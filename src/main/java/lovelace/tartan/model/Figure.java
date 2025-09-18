@@ -84,12 +84,12 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	}
 
 	/**
-	 * @param other another object
+	 * @param obj another object
 	 * @return whether it is the same as this
 	 */
 	@Override
-	public boolean equals(final Object other) {
-		if (other instanceof final Figure that) {
+	public boolean equals(final Object obj) {
+		if (obj instanceof final Figure that) {
 			return Objects.equals(bars, that.bars) &&
 					       description.equals(that.description);
 		} else {

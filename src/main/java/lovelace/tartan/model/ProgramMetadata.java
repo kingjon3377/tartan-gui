@@ -345,12 +345,13 @@ public final class ProgramMetadata {
 	}
 
 	/**
-	 * @param other another object
+	 * @param obj another object
 	 * @return if it is identical to this one
 	 */
 	@Override
-	public boolean equals(final Object other) {
-		if (other instanceof final ProgramMetadata that) {
+	public boolean equals(final Object obj) {
+		if (obj instanceof final ProgramMetadata that) {
+			//noinspection OverlyComplexBooleanExpression
 			return titleOnCover == that.titleOnCover &&
 				printAuldLangSyne == that.printAuldLangSyne &&
 				groupCoverName.equals(that.groupCoverName) &&

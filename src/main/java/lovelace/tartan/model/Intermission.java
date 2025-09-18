@@ -50,13 +50,13 @@ public class Intermission implements ProgramElement {
 	}
 
 	/**
-	 * @param other another object
+	 * @param obj another object
 	 * @return whether it is identical to this oe
 	 */
 	@Override
-	public boolean equals(final Object other) {
-		return other instanceof Intermission &&
-			description.equals(((Intermission) other).description);
+	public boolean equals(final Object obj) {
+		return obj instanceof Intermission &&
+			description.equals(((Intermission) obj).description);
 	}
 
 	/**

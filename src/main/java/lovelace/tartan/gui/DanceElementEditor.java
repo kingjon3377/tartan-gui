@@ -51,13 +51,13 @@ public class DanceElementEditor implements TableCellEditor {
 	}
 
 	@Override
-	public boolean isCellEditable(final EventObject event) {
-		return defaultEditor.isCellEditable(event);
+	public boolean isCellEditable(final EventObject anEvent) {
+		return defaultEditor.isCellEditable(anEvent);
 	}
 
 	@Override
-	public boolean shouldSelectCell(final EventObject event) {
-		return defaultEditor.shouldSelectCell(event);
+	public boolean shouldSelectCell(final EventObject anEvent) {
+		return defaultEditor.shouldSelectCell(anEvent);
 	}
 
 	@Override

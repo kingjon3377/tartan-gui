@@ -43,13 +43,13 @@ public final class NamedFigure implements DanceMember, FigureParent {
 	}
 
 	/**
-	 * @param other an object
+	 * @param obj an object
 	 * @return whether it is an identical named-figure or not
 	 */
 	@Override
-	public boolean equals(final Object other) {
-		return other instanceof NamedFigure &&
-			contents.equals(((NamedFigure) other).contents);
+	public boolean equals(final Object obj) {
+		return obj instanceof NamedFigure &&
+			contents.equals(((NamedFigure) obj).contents);
 	}
 
 	/**
