@@ -63,14 +63,12 @@ public final class SingleColumnTableModel<Element>
 		return 1;
 	}
 
-	/**
-	 * Returns the name of the column at <code>columnIndex</code>.  This is used to
-	 * initialize the table's column header name.  Note: this name does not need to be
-	 * unique; two columns in a table can have the same name.
-	 *
-	 * @param columnIndex the index of the column
-	 * @return the name of the column
-	 */
+	/// Returns the name of the column at `columnIndex`.  This is used to initialize the
+	/// table's column header name.  Note: this name does not need to be unique; two
+	/// columns in a table can have the same name.
+	///
+	/// @param columnIndex the index of the column
+	/// @return the name of the column
 	@Override
 	public String getColumnName(final int columnIndex) {
 		return columnName;

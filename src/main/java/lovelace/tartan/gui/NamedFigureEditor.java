@@ -12,13 +12,11 @@ import lovelace.tartan.model.NamedFigure;
 import lovelace.tartan.model.NamedFigureMember;
 import lovelace.tartan.model.SimplestMember;
 
-/**
- * A class to let the user edit a named figure.
- *
- * TODO: Need a way to allow drag-and-drop within a named figure.
- *
- * @author Jonathan Lovelace
- */
+/// A class to let the user edit a named figure.
+///
+/// TODO: Need a way to allow drag-and-drop within a named figure.
+///
+/// @author Jonathan Lovelace
 public final class NamedFigureEditor extends JPanel {
 	private static final Logger LOGGER =
 			Logger.getLogger(NamedFigureEditor.class.getName());

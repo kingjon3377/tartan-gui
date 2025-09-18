@@ -19,11 +19,9 @@ public class DanceImpl implements Dance {
 	 * The source from which the dance is taken, or the name of its deviser.
 	 */
 	private String source;
-	/**
-	 * The tempo of the dance: jig, reel, strathspey, or medley.
-	 *
-	 * TODO: make an Enum of cases instead of allowing arbitrary text.
-	 */
+	/// The tempo of the dance: jig, reel, strathspey, or medley.
+	///
+	/// TODO: make an Enum of cases instead of allowing arbitrary text.
 	private String tempo;
 	/**
 	 * How many times through the dance is danced.

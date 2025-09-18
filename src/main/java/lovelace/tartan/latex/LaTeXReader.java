@@ -535,33 +535,27 @@ public final class LaTeXReader {
 		}
 	}
 
-	/**
-	 * Handle any LaTeX (backslash-prefixed) command. For "metadata" commands
-	 * specified by
-	 * the <code>tartan</code> documentclass, changes the provided
-	 * {@link ProgramMetadata}
-	 * instance to match. For the <pre>\tartanimage</pre> command, uses some
-	 * heuristics to
-	 * figure out whether this is the cover image, back cover image, or other
-	 * end-of-program-filler image. <pre>\begin{}</pre> delegates to {@link
-	 * #handleEnvironment(String, ProgramMetadata, List, Deque, FigureParent)} . This
-	 * method returns true if this is an <pre>\end{}</pre>, so {@link
-	 * #handleEnvironment(String, ProgramMetadata, List, Deque, FigureParent)} can exit
-	 * cleanly. <pre>\scfigure{}</pre>, <pre>\namedfigure</pre>, and
-	 * <pre>\intermission</pre> are parsed into the model classes they represent, so
-	 * long as it's legal for them to appear here. Other <code>tartan</code>-provided
-	 * commands (and other commands used in our exporter) are mostly essentially no-ops
-	 * (except for helping the which-kind-of-image-is-this heuristics).
-	 *
-	 * @param command        the command to handle
-	 * @param mRetval        the metadata object to update if this is a metadata-storage
-	 *                       command
-	 * @param pRetval        the list of dances to add new dances to
-	 * @param currentContext the current dance or named figure, if any
-	 * @param ourQueue       the input queue
-	 * @throws ParseException if command name is empty, a documentclass other than tartan
-	 *                        is specified, or a legal-nesting invariant is violated
-	 */
+	/// Handle any LaTeX (backslash-prefixed) command. For "metadata" commands specified
+	/// by the`tartan` documentclass, changes the provided [ProgramMetadata] instance to
+	/// match. For the `\tartanimage` command, uses some heuristics to figure out whether
+	/// this is the cover image, back cover image, or other end-of-program-filler image.
+	/// `\begin{}` delegates to
+	/// [#handleEnvironment(String,ProgramMetadata,List,Deque,FigureParent)] . This
+	/// method returns true if this is an `\end{}`, so `handleEnvironment()` can exit
+	/// cleanly. `\scfigure{}`, `\namedfigure`, and `\intermission` are parsed into the
+	/// model classes they represent, so long as it's legal for them to appear here. Other
+	/// `tartan`-provided commands (and other commands used in our exporter) are mostly
+	/// essentially no-ops (except for helping the which-kind-of-image-is-this
+	/// heuristics).
+	///
+	/// @param command        the command to handle
+	/// @param mRetval        the metadata object to update if this is a metadata-storage
+	///                       command
+	/// @param pRetval        the list of dances to add new dances to
+	/// @param currentContext the current dance or named figure, if any
+	/// @param ourQueue       the input queue
+	/// @throws ParseException if command name is empty, a documentclass other than tartan
+	///                        is specified, or a legal-nesting invariant is violated
 	@SuppressWarnings({"VariableNotUsedInsideIf", "HardcodedFileSeparator"})
 	private boolean handleCommand(final String command,
 	                              final ProgramMetadata mRetval,

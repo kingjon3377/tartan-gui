@@ -15,13 +15,11 @@ import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.gui.controls.PlatformFileDialog;
 import org.jspecify.annotations.Nullable;
 
-/**
- * A class to help the user choose image files supported by LaTeX.
- *
- * TODO: Move to lovelace.tartan.gui.controls? Perhaps make more generic?
- *
- * @author Jonathan Lovelace
- */
+/// A class to help the user choose image files supported by LaTeX.
+///
+/// TODO: Move to lovelace.tartan.gui.controls? Perhaps make more generic?
+///
+/// @author Jonathan Lovelace
 public class ImageFileChooser {
 	public static final FileFilter IMAGE_FILTER =
 			new FileNameExtensionFilter("LaTeX-supported images", "png", "jpg", "pdf");
