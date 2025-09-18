@@ -197,6 +197,7 @@ public final class SingleColumnTableModel<Element>
 		return true;
 	}
 
+	@SuppressWarnings("SuspiciousMethodCalls")
 	@Override
 	public boolean remove(final Object obj) {
 		final int index = wrapped.indexOf(obj);

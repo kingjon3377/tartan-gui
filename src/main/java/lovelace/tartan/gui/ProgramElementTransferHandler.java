@@ -31,6 +31,7 @@ public class ProgramElementTransferHandler extends TransferHandler {
 	 * @param number a number
 	 * @return whether that bit is set in that number
 	 */
+	@SuppressWarnings("SameParameterValue")
 	private static boolean isBitSet(final int flag, final int number) {
 		return (flag & number) == flag;
 	}

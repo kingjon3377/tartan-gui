@@ -25,6 +25,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jonathan Lovelace
  */
+@SuppressWarnings("ClassNamePrefixedWithPackageName")
 public final class LaTeXReader {
 	private boolean haveHadCover = false;
 	private boolean haveHadTitle = false;
@@ -35,6 +36,7 @@ public final class LaTeXReader {
 	 */
 	private static final Logger LOGGER = Logger.getLogger(LaTeXReader.class.getName());
 
+	@SuppressWarnings("HardcodedLineSeparator")
 	private static boolean isLinebreak(final char character) {
 		return '\n' == character || '\r' == character;
 	}
@@ -234,7 +236,7 @@ public final class LaTeXReader {
 	 *                        input
 	 */
 	// HardcodedFileSeparator: '/' is cross-platform in Java!
-	@SuppressWarnings({"ContinueStatement", "HardcodedFileSeparator"})
+	@SuppressWarnings({"ContinueStatement", "HardcodedFileSeparator", "GrazieInspection"})
 	static String blockContents(final Deque<Character> localInput)
 			throws ParseException {
 		// TODO: Keep track of cursor position so we can give accurate data in thrown
@@ -523,6 +525,7 @@ public final class LaTeXReader {
 			return new Figure(desc, bars);
 		}
 	}
+	@SuppressWarnings({"VariableNotUsedInsideIf", "HardcodedFileSeparator"})
 	private static void requireNullContext(final String command,
 	                                       final @Nullable FigureParent currentContext)
 			throws ParseException {
@@ -559,6 +562,7 @@ public final class LaTeXReader {
 	 * @throws ParseException if command name is empty, a documentclass other than tartan
 	 *                        is specified, or a legal-nesting invariant is violated
 	 */
+	@SuppressWarnings({"VariableNotUsedInsideIf", "HardcodedFileSeparator"})
 	private boolean handleCommand(final String command,
 	                              final ProgramMetadata mRetval,
 	                              final List<ProgramElement> pRetval,
@@ -731,6 +735,7 @@ public final class LaTeXReader {
 			case final Dance dance -> {
 				final NamedFigure namedFigure = new NamedFigure();
 				final String contents = blockContents(ourQueue);
+				//noinspection NumericCastThatLosesPrecision
 				parseTokens(contents.chars().mapToObj(i -> (char) i).collect(
 								Collectors.toCollection(LinkedList::new)),
 						mRetval, pRetval, namedFigure);
@@ -822,6 +827,7 @@ public final class LaTeXReader {
 			final String input) throws ParseException {
 		final ProgramMetadata mRetval = new ProgramMetadata();
 		final List<ProgramElement> pRetval = new ArrayList<>();
+		@SuppressWarnings("NumericCastThatLosesPrecision")
 		final Deque<Character> inputQueue =
 				input.chars().mapToObj(i -> (char) i).collect(
 						Collectors.toCollection(LinkedList::new));

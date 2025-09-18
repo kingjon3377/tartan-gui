@@ -20,6 +20,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jonathan Lovelace
  */
+@SuppressWarnings("ClassNamePrefixedWithPackageName")
 public final class LaTeXWriter {
 	/**
 	 * The extensions the graphicx package supports.
@@ -237,6 +238,7 @@ public final class LaTeXWriter {
 		writeLine(out, "\\end{scdance}");
 	}
 
+	@SuppressWarnings("HardcodedFileSeparator")
 	private static void writeNamedFigure(final Appendable out,
 	                                     final NamedFigure named) throws IOException {
 		out.append("\\namedfigure{");

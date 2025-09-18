@@ -29,6 +29,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  *
  * @author Jonathan Lovelace
  */
+@SuppressWarnings("ClassNamePrefixedWithPackageName")
 @RunWith(Parameterized.class)
 public class LaTeXTest {
 	@SuppressWarnings("InstanceVariableMayNotBeInitialized")

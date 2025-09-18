@@ -65,6 +65,7 @@ public class DanceDatabase implements AutoCloseable {
 		}
 	}
 
+	@SuppressWarnings("SpellCheckingInspection")
 	public DanceDatabase(final Path filename) throws SQLException {
 		final SQLiteDataSource ds = new SQLiteDataSource();
 		ds.setUrl("jdbc:sqlite:" + filename);
@@ -111,6 +112,7 @@ public class DanceDatabase implements AutoCloseable {
 		}
 	}
 
+	@SuppressWarnings("SpellCheckingInspection")
 	private static DanceRowImpl parseDance(final ResultSet danceResults,
 	                                       final Map<Integer, DanceFormation> shapesMap,
 	                                       final Map<Integer, DanceType> typesMap,
