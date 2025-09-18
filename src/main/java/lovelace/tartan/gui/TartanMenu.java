@@ -135,7 +135,7 @@ public final class TartanMenu {
 			JOptionPane.showMessageDialog(null,
 					String.format(
 							"Error trying to read LaTeX from %s",
-							file.toString()), "Error Reading LaTeX Program",
+							file), "Error Reading LaTeX Program",
 					JOptionPane.ERROR_MESSAGE);
 			LOGGER.log(Level.SEVERE, "Error reading LaTeX program",
 					except);
