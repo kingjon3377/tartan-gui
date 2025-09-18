@@ -10,7 +10,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import lovelace.tartan.db.DanceDatabase;
 import lovelace.tartan.db.DanceRow;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The list model for the list of dance search results.

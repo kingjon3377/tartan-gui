@@ -18,8 +18,7 @@ import lovelace.tartan.model.NamedFigure;
 import lovelace.tartan.model.ProgramElement;
 import lovelace.tartan.model.ProgramMetadata;
 import lovelace.util.Pair;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A class to read a dance program from LaTeX.
@@ -36,15 +35,15 @@ public final class LaTeXReader {
 	 */
 	private static final Logger LOGGER = Logger.getLogger(LaTeXReader.class.getName());
 
-	private static boolean isLinebreak(final Character character) {
-		return character != null && ('\n' == character || '\r' == character);
+	private static boolean isLinebreak(final char character) {
+		return '\n' == character || '\r' == character;
 	}
 
 	/**
 	 * Skip a newline, represented by either a carriage return, a line feed, or the two
 	 * in either order, but <em>not</em> multiple consecutive newlines.
 	 */
-	private static void skipNewline(final @NotNull Deque<Character> localInput) {
+	private static void skipNewline(final Deque<Character> localInput) {
 		if (localInput.isEmpty()) {
 			return;
 		}
@@ -67,7 +66,7 @@ public final class LaTeXReader {
 	 *
 	 * @param localInput the queue from which to read
 	 */
-	private static void skipComment(final @NotNull Deque<Character> localInput) {
+	private static void skipComment(final Deque<Character> localInput) {
 		while (!localInput.isEmpty()) {
 			if (isLinebreak(localInput.peek())) {
 				skipNewline(localInput);
@@ -89,7 +88,7 @@ public final class LaTeXReader {
 	 *
 	 * @param localInput the queue from which to read
 	 */
-	private static String parseCommand(final @NotNull Deque<Character> localInput) {
+	private static String parseCommand(final Deque<Character> localInput) {
 		final StringBuilder builder = new StringBuilder(localInput.size());
 		while (!localInput.isEmpty()) {
 			final char top = localInput.peekFirst();
@@ -116,9 +115,9 @@ public final class LaTeXReader {
 	 * @param buffer      the buffer to write to
 	 */
 	@SuppressWarnings("HardcodedFileSeparator") // Not a file separator
-	private static void defaultFraction(final @NotNull String numerator,
-										final @NotNull String denominator,
-										final @NotNull StringBuilder buffer) {
+	private static void defaultFraction(final String numerator,
+										final String denominator,
+										final StringBuilder buffer) {
 		buffer.append(numerator);
 		buffer.append('/');
 		buffer.append(denominator);
@@ -128,8 +127,8 @@ public final class LaTeXReader {
 	 * Write a fraction with numerator 1 and the given denominator to the given buffer,
 	 * using a "nice" Unicode glyph if one is available.
 	 */
-	private static void parseFractionNumeratorOne(final @NotNull String denominator,
-	                                              final @NotNull StringBuilder buffer) {
+	private static void parseFractionNumeratorOne(final String denominator,
+	                                              final StringBuilder buffer) {
 		switch (denominator) {
 			case "2" -> buffer.append("½");
 			case "3" -> buffer.append("⅓");
@@ -148,8 +147,8 @@ public final class LaTeXReader {
 	 * Write a fraction with numerator 2 and the given denominator to the given buffer,
 	 * using a "nice" Unicode glyph if one is available.
 	 */
-	private static void parseFractionNumeratorTwo(final @NotNull String denominator,
-	                                              final @NotNull StringBuilder buffer) {
+	private static void parseFractionNumeratorTwo(final String denominator,
+	                                              final StringBuilder buffer) {
 		switch (denominator) {
 			case "3" -> buffer.append("⅔");
 			case "5" -> buffer.append("⅖");
@@ -161,8 +160,8 @@ public final class LaTeXReader {
 	 * Write a fraction with numerator 3 and the given denominator to the given buffer,
 	 * using a "nice" Unicode glyph if one is available.
 	 */
-	private static void parseFractionNumeratorThree(final @NotNull String denominator,
-	                                                final @NotNull StringBuilder buffer) {
+	private static void parseFractionNumeratorThree(final String denominator,
+	                                                final StringBuilder buffer) {
 		switch (denominator) {
 		case "4" -> buffer.append("¾");
 		case "5" -> buffer.append("⅗");
@@ -176,8 +175,8 @@ public final class LaTeXReader {
 	 * Write a fraction with numerator 5 and the given denominator to the given buffer,
 	 * using a "nice" Unicode glyph if one is available.
 	 */
-	private static void parseFractionNumeratorFive(final @NotNull String denominator,
-	                                               final @NotNull StringBuilder buffer) {
+	private static void parseFractionNumeratorFive(final String denominator,
+	                                               final StringBuilder buffer) {
 		switch (denominator) {
 		case "6":
 			buffer.append("⅚");
@@ -199,9 +198,9 @@ public final class LaTeXReader {
 	 * @param denominator the denominator of the fraction
 	 * @param buffer      the buffer to write to
 	 */
-	private static void parseFraction(final @NotNull String numerator,
-									  final @NotNull String denominator,
-									  final @NotNull StringBuilder buffer) {
+	private static void parseFraction(final String numerator,
+									  final String denominator,
+									  final StringBuilder buffer) {
 		switch (numerator) {
 			case "1" -> parseFractionNumeratorOne(denominator, buffer);
 			case "2" -> parseFractionNumeratorTwo(denominator, buffer);
@@ -236,7 +235,7 @@ public final class LaTeXReader {
 	 */
 	// HardcodedFileSeparator: '/' is cross-platform in Java!
 	@SuppressWarnings({"ContinueStatement", "HardcodedFileSeparator"})
-	static String blockContents(final @NotNull Deque<Character> localInput)
+	static String blockContents(final Deque<Character> localInput)
 			throws ParseException {
 		// TODO: Keep track of cursor position so we can give accurate data in thrown
 		//  error
@@ -291,7 +290,7 @@ public final class LaTeXReader {
 	}
 
 	@SuppressWarnings("HardcodedFileSeparator") // \\ is not a file separator here
-	private static void handleBackslashQuote(final @NotNull Deque<Character> localInput,
+	private static void handleBackslashQuote(final Deque<Character> localInput,
 	                              final StringBuilder buffer, final char top)
 			throws ParseException {
 		final Character next = localInput.peekFirst();
@@ -316,7 +315,7 @@ public final class LaTeXReader {
 		}
 	}
 
-	private static void handleSingleCommand(final @NotNull Deque<Character> localInput,
+	private static void handleSingleCommand(final Deque<Character> localInput,
 	                              final String nextCommand, final StringBuilder buffer,
 	                              final char top) throws ParseException {
 		switch (nextCommand) {
@@ -356,7 +355,7 @@ public final class LaTeXReader {
 	 * @throws ParseException if there are fewer <pre>]</pre> than <pre>[</pre> in the
 	 *                        input
 	 */
-	private static String parseOptionalBlock(final @NotNull Deque<Character> localInput)
+	private static String parseOptionalBlock(final Deque<Character> localInput)
 			throws ParseException {
 		if (localInput.isEmpty()) {
 			return "";
@@ -445,10 +444,10 @@ public final class LaTeXReader {
 	 *                        the empty string, or we're given an environment this parser
 	 *                        doesn't know how to handle
 	 */
-	private void handleEnvironment(final @NotNull String environment,
-								   final @NotNull ProgramMetadata mRetval,
-								   final @NotNull List<@NotNull ProgramElement> pRetval,
-								   final @NotNull Deque<Character> innerQueue)
+	private void handleEnvironment(final String environment,
+								   final ProgramMetadata mRetval,
+								   final List<ProgramElement> pRetval,
+								   final Deque<Character> innerQueue)
 			throws ParseException {
 		handleEnvironment(environment, mRetval, pRetval, innerQueue, null);
 	}
@@ -471,11 +470,12 @@ public final class LaTeXReader {
 	 *                        the empty string, or we're given an environment this parser
 	 *                        doesn't know how to handle
 	 */
-	private void handleEnvironment(final @NotNull String environment,
-								   final @NotNull ProgramMetadata mRetval,
-								   final @NotNull List<@NotNull ProgramElement> pRetval,
-								   final @NotNull Deque<Character> innerQueue,
-								   final @Nullable FigureParent currentDance)
+	@SuppressWarnings("VariableNotUsedInsideIf")
+	private void handleEnvironment(final String environment,
+	                               final ProgramMetadata mRetval,
+	                               final List<ProgramElement> pRetval,
+	                               final Deque<Character> innerQueue,
+	                               final @Nullable FigureParent currentDance)
 			throws ParseException {
 		switch (environment) {
 		case "":
@@ -513,7 +513,7 @@ public final class LaTeXReader {
 	 * @throws ParseException when thrown by {@link #parseOptionalBlock(Deque)} or {@link
 	 *                        #blockContents(Deque)}
 	 */
-	private static Figure parseFigure(final @NotNull Deque<Character> ourQueue)
+	private static Figure parseFigure(final Deque<Character> ourQueue)
 			throws ParseException {
 		final String bars = parseOptionalBlock(ourQueue);
 		final String desc = blockContents(ourQueue);
@@ -559,11 +559,11 @@ public final class LaTeXReader {
 	 * @throws ParseException if command name is empty, a documentclass other than tartan
 	 *                        is specified, or a legal-nesting invariant is violated
 	 */
-	private boolean handleCommand(final @NotNull String command,
-								  final @NotNull ProgramMetadata mRetval,
-								  final @NotNull List<@NotNull ProgramElement> pRetval,
-								  final @Nullable FigureParent currentContext,
-								  final @NotNull Deque<Character> ourQueue)
+	private boolean handleCommand(final String command,
+	                              final ProgramMetadata mRetval,
+	                              final List<ProgramElement> pRetval,
+	                              final @Nullable FigureParent currentContext,
+	                              final Deque<Character> ourQueue)
 			throws ParseException {
 		switch (command) {
 		case "":
@@ -722,10 +722,10 @@ public final class LaTeXReader {
 		return false;
 	}
 
-	private void parseNamedFigure(final @NotNull ProgramMetadata mRetval,
-	                       final @NotNull List<@NotNull ProgramElement> pRetval,
+	private void parseNamedFigure(final ProgramMetadata mRetval,
+	                       final List<ProgramElement> pRetval,
 	                       final @Nullable FigureParent currentContext,
-	                       final @NotNull Deque<Character> ourQueue)
+	                       final Deque<Character> ourQueue)
 			throws ParseException {
 		switch (currentContext) {
 			case final Dance dance -> {
@@ -744,7 +744,7 @@ public final class LaTeXReader {
 	}
 
 	private static void parseSimpleFigure(final @Nullable FigureParent currentContext,
-	                              final @NotNull Deque<Character> ourQueue)
+	                              final Deque<Character> ourQueue)
 			throws ParseException {
 		switch (currentContext) {
 			case final Dance dance -> dance.getContents().add(parseFigure(ourQueue));
@@ -766,9 +766,9 @@ public final class LaTeXReader {
 	 * @param pRetval    the list of dances etc. to add dances to
 	 * @throws ParseException if one of our invariants is violated
 	 */
-	private void parseTokens(final @NotNull Deque<Character> inputQueue,
-							 final @NotNull ProgramMetadata mRetval,
-							 final @NotNull List<ProgramElement> pRetval)
+	private void parseTokens(final Deque<Character> inputQueue,
+							 final ProgramMetadata mRetval,
+							 final List<ProgramElement> pRetval)
 			throws ParseException {
 		parseTokens(inputQueue, mRetval, pRetval, null);
 	}
@@ -785,10 +785,11 @@ public final class LaTeXReader {
 	 * @param currentContext the current dance or named figure, if any
 	 * @throws ParseException if one of our invariants is violated
 	 */
-	private void parseTokens(final @NotNull Deque<Character> inputQueue,
-							 final @NotNull ProgramMetadata mRetval,
-							 final @NotNull List<ProgramElement> pRetval,
-							 final @Nullable FigureParent currentContext)
+	@SuppressWarnings("HardcodedFileSeparator")
+	private void parseTokens(final Deque<Character> inputQueue,
+	                         final ProgramMetadata mRetval,
+	                         final List<ProgramElement> pRetval,
+	                         final @Nullable FigureParent currentContext)
 			throws ParseException {
 		while (!inputQueue.isEmpty()) {
 			final char top = inputQueue.pop();
@@ -816,11 +817,11 @@ public final class LaTeXReader {
 	 * @param input the LaTeX to parse
 	 * @throws ParseException on parsing failure
 	 */
-	public Pair<@NotNull ProgramMetadata,
-				@NotNull List<@NotNull ProgramElement>> readLaTeXProgram(
-			final @NotNull String input) throws ParseException {
+	public Pair<ProgramMetadata,
+				List<ProgramElement>> readLaTeXProgram(
+			final String input) throws ParseException {
 		final ProgramMetadata mRetval = new ProgramMetadata();
-		final List<@NotNull ProgramElement> pRetval = new ArrayList<>();
+		final List<ProgramElement> pRetval = new ArrayList<>();
 		final Deque<Character> inputQueue =
 				input.chars().mapToObj(i -> (char) i).collect(
 						Collectors.toCollection(LinkedList::new));

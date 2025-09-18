@@ -7,8 +7,7 @@ import java.util.logging.Logger;
 import lovelace.tartan.model.Dance;
 import lovelace.tartan.model.DanceImpl;
 import lovelace.tartan.model.Figure;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A collection of adapters from this package's database-model types and the
@@ -34,7 +33,7 @@ public final class DatabaseAdapter {
 	 *              available
 	 * @return the {@link Dance} object based on the row and the crib
 	 */
-	public static Dance convertDance(final @NotNull DanceRow dbRow,
+	public static Dance convertDance(final DanceRow dbRow,
 									 final @Nullable String crib) {
 		final Dance retval =
 				new DanceImpl(dbRow.name(), dbRow.source(), dbRow.type().name(),
@@ -91,14 +90,14 @@ public final class DatabaseAdapter {
 	 * @param crib the crib to parse
 	 * @return the figures it represents
 	 */
-	private static @NotNull List<@NotNull Figure> convertAceCrib(
-			final @NotNull String crib) {
+	private static List<Figure> convertAceCrib(
+			final String crib) {
 		if (crib.startsWith("<table>")) {
 			throw new IllegalArgumentException("Can't handle HTML cribs here");
 		}
-		@Nullable String currentBars = null;
+		String currentBars = null;
 		final List<String> split = crib.lines().map(String::trim).toList();
-		final List<@NotNull Figure> retval = new ArrayList<>(split.size());
+		final List<Figure> retval = new ArrayList<>(split.size());
 		for (final String line : split) {
 			if (line.endsWith("::")) {
 				currentBars = line.substring(0, line.length() - 2);
@@ -110,8 +109,8 @@ public final class DatabaseAdapter {
 		return Collections.unmodifiableList(retval);
 	}
 
-	private static @NotNull String stripFromStart(final @NotNull String string,
-												  final @NotNull String pattern) {
+	private static String stripFromStart(final String string,
+	                                     final String pattern) {
 		if (string.startsWith(pattern)) {
 			return string.substring(pattern.length());
 		} else {
@@ -121,8 +120,8 @@ public final class DatabaseAdapter {
 		}
 	}
 
-	private static @NotNull String stripFromEnd(final @NotNull String string,
-												final @NotNull String pattern) {
+	private static String stripFromEnd(final String string,
+	                                   final String pattern) {
 		if (string.endsWith(pattern)) {
 			return string.substring(0, string.length() - pattern.length());
 		} else {
@@ -132,12 +131,12 @@ public final class DatabaseAdapter {
 		}
 	}
 
-	private static @NotNull List<@NotNull Figure> convertHtmlCrib(
-			final @NotNull String crib) {
+	private static List<Figure> convertHtmlCrib(
+			final String crib) {
 		final String base =
 				stripFromEnd(stripFromStart(crib, "<table>"), "</table>").trim();
 		final List<String> split = base.lines().map(String::trim).toList();
-		final List<@NotNull Figure> retval = new ArrayList<>(split.size());
+		final List<Figure> retval = new ArrayList<>(split.size());
 		for (final String line : split) {
 			if (line.startsWith("<tr><td class=\"expl\" colspan=\"2\">")) {
 				final String current = stripFromEnd(

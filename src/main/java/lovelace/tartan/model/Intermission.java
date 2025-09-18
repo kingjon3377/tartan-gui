@@ -1,7 +1,5 @@
 package lovelace.tartan.model;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * A break between dances.
  *
@@ -11,19 +9,19 @@ public class Intermission implements ProgramElement {
 	/**
 	 * How to describe the break in the program.
 	 */
-	private @NotNull String description;
+	private String description;
 
 	/**
 	 * @return how to describe the break in the program
 	 */
-	public @NotNull String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
 	/**
 	 * @param description how to describe the break in the program
 	 */
-	public void setDescription(final @NotNull String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -32,7 +30,7 @@ public class Intermission implements ProgramElement {
 	 *
 	 * @param description how to describe the break in the program
 	 */
-	public Intermission(final @NotNull String description) {
+	public Intermission(final String description) {
 		this.description = description;
 	}
 

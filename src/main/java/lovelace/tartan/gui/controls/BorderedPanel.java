@@ -4,7 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.util.Objects;
 import javax.swing.JPanel;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A panel laid out with {@link java.awt.BorderLayout}, made more convenient for callers.

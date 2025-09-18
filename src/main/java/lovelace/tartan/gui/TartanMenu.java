@@ -31,8 +31,7 @@ import lovelace.tartan.latex.LaTeXWriter;
 import lovelace.tartan.model.ProgramElement;
 import lovelace.tartan.model.ProgramMetadata;
 import lovelace.util.Pair;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Code to provide the menu and handle menu-item selections.
@@ -71,17 +70,17 @@ public final class TartanMenu {
 		return retval;
 	}
 
-	static void readFromFile(final @NotNull ReorderableListModel<ProgramElement> program,
-							 final @NotNull ProgramMetadata metadata,
+	static void readFromFile(final ReorderableListModel<ProgramElement> program,
+							 final ProgramMetadata metadata,
 							 final @Nullable MetadataEditingPanel metadataPanel) {
 		readFromFile(program, metadata, metadataPanel, null);
 	}
 
-	static void readFromFile(final @NotNull Collection<ProgramElement> program,
-							 final @NotNull ProgramMetadata metadata,
+	static void readFromFile(final Collection<ProgramElement> program,
+							 final ProgramMetadata metadata,
 							 final @Nullable MetadataEditingPanel metadataPanel,
 							 final @Nullable Component parent) {
-		final @Nullable Frame parentFrame;
+		final Frame parentFrame;
 		if (parent instanceof Frame) {
 			parentFrame = (Frame) parent;
 		} else {
@@ -90,7 +89,7 @@ public final class TartanMenu {
 		final PlatformFileDialog chooser = new PlatformFileDialog(parentFrame);
 		chooser.setFileFilter(LATEX_FILTER);
 		chooser.showOpenDialog();
-		final @Nullable File filename = chooser.getFilename();
+		final File filename = chooser.getFilename();
 		if (filename == null) {
 			return;
 		} else if (!filename.canRead()) {
@@ -98,8 +97,8 @@ public final class TartanMenu {
 					"File Not Found", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		final Optional<Pair<@NotNull ProgramMetadata,
-					@NotNull List<@NotNull ProgramElement>>>
+		final Optional<Pair<ProgramMetadata,
+					List<ProgramElement>>>
 				pair = readFromSpecifiedFile(filename.toPath(), parent);
 		if (pair.isPresent()) {
 			assignMetadata(pair.get().getFirst(), metadata);
@@ -112,15 +111,15 @@ public final class TartanMenu {
 		}
 	}
 
-	public static Optional<Pair<@NotNull ProgramMetadata,
-			@NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
-		final @NotNull Path file) {
+	public static Optional<Pair<ProgramMetadata,
+			List<ProgramElement>>> readFromSpecifiedFile(
+		final Path file) {
 		return readFromSpecifiedFile(file, null);
 	}
 
-	public static Optional<Pair<@NotNull ProgramMetadata,
-			@NotNull List<@NotNull ProgramElement>>> readFromSpecifiedFile(
-		final @NotNull Path file, final @Nullable Component parent) {
+	public static Optional<Pair<ProgramMetadata,
+			List<ProgramElement>>> readFromSpecifiedFile(
+			final Path file, final @Nullable Component parent) {
 		try {
 			final List<String> lines = Files.readAllLines(file);
 			// If a file is big enough that a StringBuilder of size Integer.MAX_VALUE
@@ -168,12 +167,12 @@ public final class TartanMenu {
 
 	@SuppressWarnings("HardcodedFileSeparator") // Not a file separator
 	static void saveToFile(
-		final @NotNull List<@NotNull ProgramElement> program,
-		final @NotNull ProgramMetadata metadata, final @Nullable Path passedFilename,
-		final @Nullable Component parent) {
+			final List<ProgramElement> program,
+			final ProgramMetadata metadata, final @Nullable Path passedFilename,
+			final @Nullable Component parent) {
 		final Path filename;
 		if (passedFilename == null) {
-			final @Nullable Frame parentFrame;
+			final Frame parentFrame;
 			if (parent instanceof Frame) {
 				parentFrame = (Frame) parent;
 			} else {
@@ -182,7 +181,7 @@ public final class TartanMenu {
 			final PlatformFileDialog chooser = new PlatformFileDialog(parentFrame);
 			chooser.setFileFilter(LATEX_FILTER);
 			chooser.showSaveAsDialog();
-			final @Nullable File chosenFile = chooser.getFilename();
+			final File chosenFile = chooser.getFilename();
 			if (chosenFile == null) {
 				LOGGER.info("User canceled from save dialog");
 				return;
@@ -202,9 +201,9 @@ public final class TartanMenu {
 	}
 
 	public static JMenu fileMenu(
-		final @NotNull ReorderableListModel<@NotNull ProgramElement> program,
-		final @NotNull ProgramMetadata metadata,
-		final @NotNull MetadataEditingPanel metadataPanel) {
+		final ReorderableListModel<ProgramElement> program,
+		final ProgramMetadata metadata,
+		final MetadataEditingPanel metadataPanel) {
 		final boolean onMac = isOnMac();
 		final int shortcutMask =
 				(onMac) ? InputEvent.META_DOWN_MASK : InputEvent.CTRL_DOWN_MASK;

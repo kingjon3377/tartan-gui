@@ -23,7 +23,6 @@ import lovelace.tartan.gui.controls.PlatformFileDialog;
 import lovelace.tartan.gui.model.ReorderableListModel;
 import lovelace.tartan.gui.model.ReorderableListModelImpl;
 import lovelace.tartan.model.ProgramMetadata;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A panel to let the user edit the parts of the program document other than the dances.
@@ -46,13 +45,13 @@ public final class MetadataEditingPanel extends JPanel {
 	private final ImageFileChooser backImageSelector;
 	private final JCheckBox titleOnCoverField = new JCheckBox();
 	private final JCheckBox auldLangSyneField = new JCheckBox();
-	private final @NotNull ProgramMetadata metadata;
+	private final ProgramMetadata metadata;
 	private final GroupLayout groupLayout;
 
 	// TODO: Make a JTextBox subclass taking both a Consumer<String> and a
 		//  Supplier<String>, with revert() as an instance method
-		private record TextBoxChangeListener(@NotNull JTextComponent field,
-		                                     @NotNull Consumer<String> assignee)
+		private record TextBoxChangeListener(JTextComponent field,
+		                                     Consumer<String> assignee)
 			implements DocumentListener {
 
 		@Override
@@ -71,15 +70,15 @@ public final class MetadataEditingPanel extends JPanel {
 			}
 		}
 
-	private static void setupTextFieldListener(final @NotNull JTextComponent field,
-											   final @NotNull Consumer<String> handler) {
+	private static void setupTextFieldListener(final JTextComponent field,
+											   final Consumer<String> handler) {
 		field.getDocument()
 				.addDocumentListener(new TextBoxChangeListener(field, handler));
 	}
 
 	private GroupLayout.Group createParallelGroup(final GroupLayout.Alignment alignment,
 												  final Object... members) {
-		@NotNull GroupLayout.Group retval = groupLayout.createParallelGroup(alignment);
+		GroupLayout.Group retval = groupLayout.createParallelGroup(alignment);
 		for (final Object member : members) {
 			retval = switch (member) {
 				case final Component component -> retval.addComponent(component);
@@ -92,7 +91,7 @@ public final class MetadataEditingPanel extends JPanel {
 	}
 
 	private GroupLayout.Group createSequentialGroup(final Object... members) {
-		@NotNull GroupLayout.Group retval = groupLayout.createSequentialGroup();
+		GroupLayout.Group retval = groupLayout.createSequentialGroup();
 		for (final Object member : members) {
 			retval = switch (member) {
 				case final Component component -> retval.addComponent(component);
@@ -126,7 +125,7 @@ public final class MetadataEditingPanel extends JPanel {
 		auldLangSyneField.setSelected(metadata.getPrintAuldLangSyne());
 	}
 
-	public MetadataEditingPanel(final @NotNull ProgramMetadata metadata) {
+	public MetadataEditingPanel(final ProgramMetadata metadata) {
 		//noinspection ThisEscapedInObjectConstruction
 		groupLayout = new GroupLayout(this);
 		setLayout(groupLayout);

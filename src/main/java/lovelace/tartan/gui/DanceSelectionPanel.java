@@ -27,7 +27,7 @@ import lovelace.tartan.gui.model.ReorderableListModel;
 import lovelace.tartan.model.Dance;
 import lovelace.tartan.model.Intermission;
 import lovelace.tartan.model.ProgramElement;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A panel to let the user choose which dances are on the program.
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public final class DanceSelectionPanel extends JSplitPane {
 	private final DanceSearchResultsListModel danceListModel;
-	private final JList<DanceRow> danceList;
+	private final JList<@Nullable DanceRow> danceList;
 	private final JTextField filterField = new JTextField(15);
 	private final JList<ProgramElement> selectedList;
 	private final ReorderableListModel<ProgramElement> program;
@@ -53,7 +53,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 	}
 
 	private void addDance() {
-		final @Nullable DanceRow selection = danceList.getSelectedValue();
+		final DanceRow selection = danceList.getSelectedValue();
 		if (selection != null && program.stream().filter(Dance.class::isInstance)
 				.map(Dance.class::cast).map(Dance::getTitle)
 				.noneMatch(selection.name()::equals)) {

@@ -14,8 +14,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.sqlite.SQLiteDataSource;
 
 /**
@@ -27,11 +26,11 @@ public class DanceDatabase implements AutoCloseable {
 
 	private static final Logger LOGGER = Logger.getLogger(DanceDatabase.class.getName());
 
-	private final @NotNull Connection sql;
+	private final Connection sql;
 
-	private final @NotNull List<DanceRow> dances;
+	private final List<DanceRow> dances;
 
-	private final @NotNull PreparedStatement cribStatement;
+	private final PreparedStatement cribStatement;
 
 	public Collection<DanceRow> getDances() {
 		return Collections.unmodifiableList(dances);
@@ -66,7 +65,7 @@ public class DanceDatabase implements AutoCloseable {
 		}
 	}
 
-	public DanceDatabase(final @NotNull Path filename) throws SQLException {
+	public DanceDatabase(final Path filename) throws SQLException {
 		final SQLiteDataSource ds = new SQLiteDataSource();
 		ds.setUrl("jdbc:sqlite:" + filename);
 		sql = ds.getConnection();
@@ -112,10 +111,10 @@ public class DanceDatabase implements AutoCloseable {
 		}
 	}
 
-	private static @NotNull DanceRowImpl parseDance(final ResultSet danceResults,
-	                                                 final Map<Integer, DanceFormation> shapesMap,
-	                                                 final Map<Integer, DanceType> typesMap,
-	                                                 final Map<Integer, DanceProgression> progressionsMap)
+	private static DanceRowImpl parseDance(final ResultSet danceResults,
+	                                       final Map<Integer, DanceFormation> shapesMap,
+	                                       final Map<Integer, DanceType> typesMap,
+	                                       final Map<Integer, DanceProgression> progressionsMap)
 			throws SQLException {
 		final int id = danceResults.getInt("id");
 		final String name = danceResults.getString("name");

@@ -11,4 +11,7 @@
  *
  * @author Jonathan Lovelace
  */
+@NullMarked
 package lovelace.tartan.model;
+
+import org.jspecify.annotations.NullMarked;

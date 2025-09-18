@@ -10,7 +10,6 @@ import java.util.ListIterator;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A model for a single-column table.
@@ -176,17 +175,17 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public @NotNull Iterator<Element> iterator() {
+	public Iterator<Element> iterator() {
 		return wrapped.iterator();
 	}
 
 	@Override
-	public @NotNull Object @NotNull [] toArray() {
+	public Object[] toArray() {
 		return wrapped.toArray();
 	}
 
 	@Override
-	public @NotNull <T> T @NotNull [] toArray(final @NotNull T @NotNull [] array) {
+	public <T> T[] toArray(final T[] array) {
 		return wrapped.toArray(array);
 	}
 
@@ -210,12 +209,12 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public boolean containsAll(final @NotNull Collection<?> collection) {
+	public boolean containsAll(final Collection<?> collection) {
 		return new HashSet<>(wrapped).containsAll(collection);
 	}
 
 	@Override
-	public boolean addAll(final @NotNull Collection<? extends Element> collection) {
+	public boolean addAll(final Collection<? extends Element> collection) {
 		boolean retval = false;
 		for (final Element item : collection) {
 			add(item);
@@ -226,7 +225,7 @@ public final class SingleColumnTableModel<Element>
 
 	@Override
 	public boolean addAll(final int index,
-						  final @NotNull Collection<? extends Element> collection) {
+						  final Collection<? extends Element> collection) {
 		if (wrapped.addAll(index, collection)) {
 			fireEvents(new TableModelEvent(this, index, index + collection.size() - 1,
 					TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT));
@@ -237,7 +236,7 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public boolean removeAll(final @NotNull Collection<?> collection) {
+	public boolean removeAll(final Collection<?> collection) {
 		boolean retval = false;
 		for (final Object item : collection) {
 			if (remove(item)) {
@@ -248,7 +247,7 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public boolean retainAll(final @NotNull Collection<?> collection) {
+	public boolean retainAll(final Collection<?> collection) {
 		final int oldSize = wrapped.size();
 		// TODO: Implement more granularly
 		if (wrapped.retainAll(collection)) {
@@ -307,17 +306,17 @@ public final class SingleColumnTableModel<Element>
 	}
 
 	@Override
-	public @NotNull ListIterator<Element> listIterator() {
+	public ListIterator<Element> listIterator() {
 		return wrapped.listIterator();
 	}
 
 	@Override
-	public @NotNull ListIterator<Element> listIterator(final int index) {
+	public ListIterator<Element> listIterator(final int index) {
 		return wrapped.listIterator(index);
 	}
 
 	@Override
-	public @NotNull List<Element> subList(final int fromIndex, final int toIndex) {
+	public List<Element> subList(final int fromIndex, final int toIndex) {
 		return wrapped.subList(fromIndex, toIndex);
 	}
 

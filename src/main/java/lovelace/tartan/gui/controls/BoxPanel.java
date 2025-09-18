@@ -7,8 +7,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * A panel laid out with {@link javax.swing.BoxLayout} adding as much convenience for
  * callers as possible.
@@ -25,8 +23,8 @@ public final class BoxPanel extends JPanel {
 		LineAxis(BoxLayout.LINE_AXIS, Box::createHorizontalGlue,
 				Box::createHorizontalStrut);
 		private final int constant;
-		private final @NotNull Supplier<Component> glue;
-		private final @NotNull IntFunction<Component> strut;
+		private final Supplier<Component> glue;
+		private final IntFunction<Component> strut;
 
 		public int getConstant() {
 			return constant;
@@ -40,8 +38,8 @@ public final class BoxPanel extends JPanel {
 			return strut.apply(size);
 		}
 
-		BoxDirection(final int constant, final @NotNull Supplier<Component> glue,
-		             final @NotNull IntFunction<Component> strut) {
+		BoxDirection(final int constant, final Supplier<Component> glue,
+		             final IntFunction<Component> strut) {
 			this.constant = constant;
 			this.glue = glue;
 			this.strut = strut;
@@ -85,7 +83,7 @@ public final class BoxPanel extends JPanel {
 		}
 	}
 
-	public BoxPanel(final BoxDirection direction, final @NotNull Object... contents) {
+	public BoxPanel(final BoxDirection direction, final Object... contents) {
 		//noinspection MagicConstant,ThisEscapedInObjectConstruction
 		setLayout(new BoxLayout(this, direction.getConstant()));
 		for (final Object item : contents) {

@@ -13,8 +13,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.gui.controls.PlatformFileDialog;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A class to help the user choose image files supported by LaTeX.
@@ -27,7 +26,7 @@ public class ImageFileChooser {
 	public static final FileFilter IMAGE_FILTER =
 			new FileNameExtensionFilter("LaTeX-supported images", "png", "jpg", "pdf");
 	private @Nullable File filename = null;
-	private final @NotNull Consumer<@Nullable Path> handler;
+	private final Consumer<@Nullable Path> handler;
 	private final JTextField chosenFileField = new JTextField(10);
 	private final PlatformFileDialog chooser;
 	private final JButton button = new ListenedButton("Choose File", this::buttonHandler);
@@ -50,7 +49,7 @@ public class ImageFileChooser {
 
 	private void buttonHandler(final ActionEvent ignored) {
 		chooser.showOpenDialog();
-		final @Nullable File file = chooser.getFilename();
+		final File file = chooser.getFilename();
 		if (file == null) {
 			filename = null;
 			chosenFileField.setText("");
@@ -66,13 +65,13 @@ public class ImageFileChooser {
 		return button;
 	}
 
-	public ImageFileChooser(final @NotNull Consumer<@Nullable Path> handler) {
+	public ImageFileChooser(final Consumer<@Nullable Path> handler) {
 		this(handler, null);
 	}
 
-	public ImageFileChooser(final @NotNull Consumer<@Nullable Path> handler,
+	public ImageFileChooser(final Consumer<@Nullable Path> handler,
 							final @Nullable Component parent) {
-		final @Nullable Frame parentFrame;
+		final Frame parentFrame;
 		if (parent instanceof Frame) {
 			parentFrame = (Frame) parent;
 		} else {

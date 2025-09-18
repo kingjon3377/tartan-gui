@@ -1,7 +1,5 @@
 package lovelace.tartan.model;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * A trivial wrapper around a String to make it a possible member of a named figure or a
  * dance.
@@ -12,26 +10,26 @@ public final class SimplestMember implements NamedFigureMember, DanceMember {
 	/**
 	 * The string we wrap.
 	 */
-	private @NotNull String string;
+	private String string;
 
 	/**
 	 * @return The string we wrap
 	 */
-	public @NotNull String getString() {
+	public String getString() {
 		return string;
 	}
 
 	/**
 	 * @param string the string to now wrap
 	 */
-	public void setString(final @NotNull String string) {
+	public void setString(final String string) {
 		this.string = string;
 	}
 
 	/**
 	 * @param string The string to wrap
 	 */
-	public SimplestMember(final @NotNull String string) {
+	public SimplestMember(final String string) {
 		this.string = string;
 	}
 
@@ -39,7 +37,7 @@ public final class SimplestMember implements NamedFigureMember, DanceMember {
 	 * @return The string we wrap.
 	 */
 	@Override
-	public @NotNull String toString() {
+	public String toString() {
 		return string;
 	}
 

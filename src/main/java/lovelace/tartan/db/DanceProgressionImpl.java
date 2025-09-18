@@ -1,7 +1,5 @@
 package lovelace.tartan.db;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * An implementation of {@link DanceProgression}.
  *
@@ -9,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
  * @param name A brief textual description of this progression.
  * @author Jonathan Lovelace
  */
-public record DanceProgressionImpl(int id, @NotNull String name)
+public record DanceProgressionImpl(int id, String name)
 	implements DanceProgression {
 	/**
 	 * A singleton for cases where the database is missing progression information.
@@ -29,7 +27,7 @@ public record DanceProgressionImpl(int id, @NotNull String name)
 	 * @return a brief textual description of this progression
 	 */
 	@Override
-	public @NotNull String name() {
+	public String name() {
 		return name;
 	}
 

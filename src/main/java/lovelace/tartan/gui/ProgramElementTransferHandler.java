@@ -14,7 +14,6 @@ import javax.swing.TransferHandler;
 import lovelace.tartan.gui.model.IntTransferable;
 import lovelace.tartan.gui.model.Reorderable;
 import lovelace.tartan.model.Dance;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A transfer-handler to let the user drag items in the list of program elements.
@@ -58,7 +57,7 @@ public class ProgramElementTransferHandler extends TransferHandler {
 	 * @param component the component whose contents will be transferred.
 	 */
 	@Override
-	public final @NotNull Transferable createTransferable(final JComponent component) {
+	public final Transferable createTransferable(final JComponent component) {
 		if (component instanceof JList<?>) {
 			return new IntTransferable(FLAVOR,
 					((JList<?>) component).getSelectedIndex());

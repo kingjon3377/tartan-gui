@@ -1,7 +1,5 @@
 package lovelace.tartan.db;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * How couples (or dancers) "progress" from one round of the dance to the next.
  *
@@ -15,7 +13,7 @@ public interface DanceProgression {
 	/**
 	 * @return a brief textual description of this progression
 	 */
-	@NotNull String name();
+	String name();
 	/**
 	 * @return whether this dance is danced only once through
 	 */

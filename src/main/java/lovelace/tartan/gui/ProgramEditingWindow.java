@@ -32,8 +32,7 @@ import lovelace.tartan.gui.model.ReorderableListModelImpl;
 import lovelace.tartan.model.ProgramElement;
 import lovelace.tartan.model.ProgramMetadata;
 import lovelace.util.Pair;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A window to allow the user to edit the Ball program.
@@ -66,12 +65,12 @@ public final class ProgramEditingWindow extends JFrame {
 		return retval;
 	}
 
-	public ProgramEditingWindow(final @NotNull DanceDatabase db,
+	public ProgramEditingWindow(final DanceDatabase db,
 								final ProgramMetadata metadata,
-								final @NotNull List<ProgramElement> program) {
+								final List<ProgramElement> program) {
 		super("Dance Program Editor");
 		final Desktop desktop = Desktop.getDesktop();
-		final ReorderableListModel<@NotNull ProgramElement> programModel =
+		final ReorderableListModel<ProgramElement> programModel =
 				new ReorderableListModelImpl<>(program);
 		setMinimumSize(new Dimension(400, 300));
 		final JTabbedPane pane =
@@ -113,7 +112,7 @@ public final class ProgramEditingWindow extends JFrame {
 							"sqlite3"));
 		}
 		chooser.showOpenDialog();
-		final @Nullable File file = chooser.getFilename();
+		final File file = chooser.getFilename();
 		if (file == null) {
 			LOGGER.info("User probably pressed 'cancel'");
 			System.exit(0);
@@ -188,8 +187,8 @@ public final class ProgramEditingWindow extends JFrame {
 		for (final String arg : args) {
 			if (arg.endsWith(".tex") && new File(arg).canRead()) {
 				final Path file = Paths.get(arg);
-				final Optional<Pair<@NotNull ProgramMetadata,
-							@NotNull List<@NotNull ProgramElement>>>
+				final Optional<Pair<ProgramMetadata,
+							List<ProgramElement>>>
 						maybePair = TartanMenu.readFromSpecifiedFile(file, null);
 				if (maybePair.isPresent()) {
 					TartanMenu.assignMetadata(maybePair.get().getFirst(), metadata);

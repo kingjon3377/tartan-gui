@@ -3,4 +3,7 @@
  *
  * @author Jonathan Lovelace
  */
+@NullMarked
 package lovelace.tartan.gui.controls;
+
+import org.jspecify.annotations.NullMarked;

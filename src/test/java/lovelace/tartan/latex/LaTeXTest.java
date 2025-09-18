@@ -14,7 +14,7 @@ import lovelace.tartan.model.NamedFigure;
 import lovelace.tartan.model.ProgramElement;
 import lovelace.tartan.model.ProgramMetadata;
 import lovelace.util.Pair;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -94,7 +94,7 @@ public class LaTeXTest {
 				LaTeXWriter.estimateSize(startingProgram, startingMetadata));
 		LaTeXWriter.writeLaTeXProgram(builder, startingProgram, startingMetadata);
 		final String serialized = builder.toString();
-		final Pair<@NotNull ProgramMetadata, @NotNull List<@NotNull ProgramElement>>
+		final Pair<@NonNull ProgramMetadata, @NonNull List<@NonNull ProgramElement>>
 				deserializationResults = new LaTeXReader().readLaTeXProgram(serialized);
 		final ProgramMetadata readMetadata = deserializationResults.getFirst();
 		final List<ProgramElement> readProgram = deserializationResults.getSecond();
@@ -104,7 +104,7 @@ public class LaTeXTest {
 				is(startingProgram));
 	}
 
-	@NotNull
+	@NonNull
 	private static ProgramMetadata makeTestMetadata() {
 		final ProgramMetadata startingMetadata = new ProgramMetadata();
 		startingMetadata.setGroupCoverName("groupCoverName");
@@ -174,7 +174,7 @@ public class LaTeXTest {
 				LaTeXWriter.estimateSize(startingProgram, startingMetadata));
 		LaTeXWriter.writeLaTeXProgram(builder, startingProgram, startingMetadata);
 		final String serialized = builder.toString();
-		final Pair<@NotNull ProgramMetadata, @NotNull List<@NotNull ProgramElement>>
+		final Pair<@NonNull ProgramMetadata, @NonNull List<@NonNull ProgramElement>>
 				deserializationResults = new LaTeXReader().readLaTeXProgram(serialized);
 		final ProgramMetadata readMetadata = deserializationResults.getFirst();
 		final List<ProgramElement> readProgram = deserializationResults.getSecond();

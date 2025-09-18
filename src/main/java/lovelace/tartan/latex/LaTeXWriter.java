@@ -13,8 +13,7 @@ import lovelace.tartan.model.NamedFigureMember;
 import lovelace.tartan.model.ProgramElement;
 import lovelace.tartan.model.ProgramMetadata;
 import lovelace.tartan.model.SimplestMember;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Code to write a Ball program to LaTeX.
@@ -30,7 +29,7 @@ public final class LaTeXWriter {
 			List.of(".png", ".jpg", ".pdf");
 
 	@SuppressWarnings("HardcodedFileSeparator") // Not a file separator
-	private static String quoted(final @NotNull String string) {
+	private static String quoted(final String string) {
 		return string.replace("&", "\\&").replace("{", "\\{").replace("}", "\\}")
 			.replace("<b>", "\\textbf{").replace("</b>", "}")
 			.replace("<i>", "\\textit{").replace("</i>", "}")
@@ -46,9 +45,9 @@ public final class LaTeXWriter {
 			.replace("⅞", "\\nicefrac{7}{8}");
 	}
 
-	private static void writePrologueLine(final @NotNull Appendable ostream,
-										  final @NotNull String command,
-										  final @NotNull String arg)
+	private static void writePrologueLine(final Appendable ostream,
+										  final String command,
+										  final String arg)
 			throws IOException {
 		if (!arg.trim().isEmpty()) {
 			// not a file separator
@@ -62,8 +61,8 @@ public final class LaTeXWriter {
 	}
 
 	@SuppressWarnings("HardcodedLineSeparator") // unavoidable
-	private static void writePrologue(final @NotNull Appendable ostream,
-									  final @NotNull ProgramMetadata metadata)
+	private static void writePrologue(final Appendable ostream,
+									  final ProgramMetadata metadata)
 			throws IOException {
 		// TODO: Do't write starred forms when the same as unstarred
 		writePrologueLine(ostream, "tartangroupname", metadata.getGroupCoverName());
@@ -81,20 +80,20 @@ public final class LaTeXWriter {
 	}
 
 	@SuppressWarnings("HardcodedLineSeparator") // unavoidable
-	private static void writeLine(final @NotNull Appendable ostream,
-								  final @NotNull String string) throws IOException {
+	private static void writeLine(final Appendable ostream,
+								  final String string) throws IOException {
 		ostream.append(string);
 		ostream.append('\n');
 	}
 
-	private static void writeSimpleCommand(final @NotNull Appendable ostream,
-										   final @NotNull String command)
+	private static void writeSimpleCommand(final Appendable ostream,
+										   final String command)
 			throws IOException {
 		writeSimpleCommand(ostream, command, null);
 	}
 
-	private static void writeSimpleCommand(final @NotNull Appendable ostream,
-										   final @NotNull String command,
+	private static void writeSimpleCommand(final Appendable ostream,
+										   final String command,
 										   final @Nullable String arg)
 			throws IOException {
 		// Not a file separator
@@ -108,7 +107,7 @@ public final class LaTeXWriter {
 		}
 	}
 
-	private static String latexImage(final @NotNull Path imageFilename) {
+	private static String latexImage(final Path imageFilename) {
 		final String asString = imageFilename.toString();
 		for (final String extension : SUPPORTED_IMAGE_EXTENSIONS) {
 			if (asString.endsWith(extension)) {
@@ -118,13 +117,13 @@ public final class LaTeXWriter {
 		return asString;
 	}
 
-	private static void writeSimpleFigure(final @NotNull Appendable ostream,
-										  final @NotNull Figure figure)
+	private static void writeSimpleFigure(final Appendable ostream,
+										  final Figure figure)
 			throws IOException {
 		// Not a file separator
 		//noinspection HardcodedFileSeparator
 		ostream.append("\\scfigure");
-		final @Nullable String bars = figure.getBars();
+		final String bars = figure.getBars();
 		if (bars != null) {
 			ostream.append('[');
 			ostream.append(bars);
@@ -144,9 +143,9 @@ public final class LaTeXWriter {
 	 * @throws IOException on I/O error while writing
 	 */
 	@SuppressWarnings("HardcodedFileSeparator") // double-backslash isn't a file separator
-	public static void writeLaTeXProgram(final @NotNull Appendable out,
-	                                     final @NotNull Iterable<@NotNull ProgramElement> program,
-	                                     final @NotNull ProgramMetadata metadata)
+	public static void writeLaTeXProgram(final Appendable out,
+	                                     final Iterable<ProgramElement> program,
+	                                     final ProgramMetadata metadata)
 			throws IOException {
 		writeLine(out,
 				"% This LaTeX file was produced by the tartan-gui graphical editor;");
@@ -157,7 +156,7 @@ public final class LaTeXWriter {
 		writeSimpleCommand(out, "documentclass", "tartan");
 		writePrologue(out, metadata);
 		writeSimpleCommand(out, "begin", "document");
-		final @Nullable Path coverImage = metadata.getCoverImage();
+		final Path coverImage = metadata.getCoverImage();
 		if (Objects.nonNull(coverImage)) {
 			if (metadata.hasCoverContent()) {
 				writeSimpleCommand(out, "tartanimagecover", latexImage(coverImage));
@@ -197,7 +196,7 @@ public final class LaTeXWriter {
 			writeSimpleCommand(out, "clearpage");
 			writeSimpleCommand(out, "auldlangsyne");
 		}
-		final @Nullable Path image = metadata.getBackCoverImage();
+		final Path image = metadata.getBackCoverImage();
 		if (image != null) {
 			writeSimpleCommand(out, "cleartoverso");
 			writeSimpleCommand(out, "tartanimage", latexImage(image));
@@ -205,7 +204,7 @@ public final class LaTeXWriter {
 		writeLine(out, "\\end{document}");
 	}
 
-	private static void writeIntermission(final @NotNull Appendable out,
+	private static void writeIntermission(final Appendable out,
 	                              final Intermission intermission) throws IOException {
 		final String text = intermission.getDescription();
 		if ("Intermission".equals(text) || text.isEmpty()) {
@@ -219,7 +218,7 @@ public final class LaTeXWriter {
 	}
 
 	@SuppressWarnings("HardcodedFileSeparator") // \\ is not a file separator here
-	private static void writeDance(final @NotNull Appendable out, final Dance dance)
+	private static void writeDance(final Appendable out, final Dance dance)
 			throws IOException {
 		out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
 				dance.getTitle(), dance.getSource(),
@@ -238,7 +237,7 @@ public final class LaTeXWriter {
 		writeLine(out, "\\end{scdance}");
 	}
 
-	private static void writeNamedFigure(final @NotNull Appendable out,
+	private static void writeNamedFigure(final Appendable out,
 	                                     final NamedFigure named) throws IOException {
 		out.append("\\namedfigure{");
 		for (final NamedFigureMember subfigure : named

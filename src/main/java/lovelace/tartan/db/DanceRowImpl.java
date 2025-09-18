@@ -1,7 +1,5 @@
 package lovelace.tartan.db;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 /**
@@ -17,10 +15,10 @@ import java.util.Objects;
  * @param progression The progression used between times through the dance.
  * @author Jonathan Lovelace
  */
-public record DanceRowImpl(int id, @NotNull String name, int length,
-						   @NotNull DanceFormation shape, @NotNull DanceType type,
-						   int couples, @NotNull String source,
-						   @NotNull DanceProgression progression) implements DanceRow {
+public record DanceRowImpl(int id, String name, int length,
+						   DanceFormation shape, DanceType type,
+						   int couples, String source,
+						   DanceProgression progression) implements DanceRow {
 	/**
 	 * This dance's ID in the database.
 	 */
@@ -33,7 +31,7 @@ public record DanceRowImpl(int id, @NotNull String name, int length,
 	 * The name of this dance.
 	 */
 	@Override
-	public @NotNull String name() {
+	public String name() {
 		return name;
 	}
 
@@ -49,7 +47,7 @@ public record DanceRowImpl(int id, @NotNull String name, int length,
 	 * What shape of set the dance is danced in.
 	 */
 	@Override
-	public @NotNull DanceFormation shape() {
+	public DanceFormation shape() {
 		return shape;
 	}
 
@@ -57,7 +55,7 @@ public record DanceRowImpl(int id, @NotNull String name, int length,
 	 * What type of dance this is.
 	 */
 	@Override
-	public @NotNull DanceType type() {
+	public DanceType type() {
 		return type;
 	}
 
@@ -73,7 +71,7 @@ public record DanceRowImpl(int id, @NotNull String name, int length,
 	 * The source for this dance.
 	 */
 	@Override
-	public @NotNull String source() {
+	public String source() {
 		return source;
 	}
 
@@ -81,7 +79,7 @@ public record DanceRowImpl(int id, @NotNull String name, int length,
 	 * The progression used between times through the dance.
 	 */
 	@Override
-	public @NotNull DanceProgression progression() {
+	public DanceProgression progression() {
 		return progression;
 	}
 

@@ -15,8 +15,7 @@ import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.model.Dance;
 import lovelace.tartan.model.Intermission;
 import lovelace.tartan.model.ProgramElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A panel to let the user edit the details of (metadata about) a dance.
@@ -41,9 +40,9 @@ public final class DanceDetailsPanel extends JPanel {
 			new String[]{"2C (3C set)", "2C (4C set)", "3C (4C set)", "3C set",
 					"3C Triangle", "4C set", "Sq Set", "5C Set"});
 
-	private @NotNull Runnable revert = this::noop;
+	private Runnable revert = this::noop;
 
-	private @NotNull Runnable apply = this::noop;
+	private Runnable apply = this::noop;
 
 	private final JButton applyButton =
 			new ListenedButton("Apply", (ignored) -> apply.run());

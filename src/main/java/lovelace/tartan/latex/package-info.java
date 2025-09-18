@@ -10,4 +10,7 @@
  *
  * @author Jonathan Lovelace
  */
+@NullMarked
 package lovelace.tartan.latex;
+
+import org.jspecify.annotations.NullMarked;

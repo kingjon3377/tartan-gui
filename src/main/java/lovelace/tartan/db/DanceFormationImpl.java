@@ -2,8 +2,6 @@ package lovelace.tartan.db;
 
 import java.util.Objects;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * An implementation of {@link DanceFormation}
  *
@@ -23,11 +21,11 @@ public class DanceFormationImpl implements DanceFormation {
 	/**
 	 * The unabbreviated "name" of this formation.
 	 */
-	private final @NotNull String name;
+	private final String name;
 	/**
 	 * The "name" of this formation, in abbreviated form.
 	 */
-	private final @NotNull String abbreviation;
+	private final String abbreviation;
 
 	/**
 	 * @return the number that identifies this formation in the database.
@@ -41,7 +39,7 @@ public class DanceFormationImpl implements DanceFormation {
 	 * @return the unabbreviated "name" of this formation
 	 */
 	@Override
-	public @NotNull String getName() {
+	public String getName() {
 		return name;
 	}
 
@@ -49,7 +47,7 @@ public class DanceFormationImpl implements DanceFormation {
 	 * The "name" of this formation, in abbreviated form
 	 */
 	@Override
-	public @NotNull String getAbbreviation() {
+	public String getAbbreviation() {
 		return abbreviation;
 	}
 
@@ -60,8 +58,8 @@ public class DanceFormationImpl implements DanceFormation {
 	 * @param name         the unabbreviated "name" of this formation
 	 * @param abbreviation the "name" of this formation, in abbreviated form
 	 */
-	public DanceFormationImpl(final int id, final @NotNull String name,
-	                          final @NotNull String abbreviation) {
+	public DanceFormationImpl(final int id, final String name,
+	                          final String abbreviation) {
 		this.id = id;
 		this.name = name;
 		this.abbreviation = abbreviation;

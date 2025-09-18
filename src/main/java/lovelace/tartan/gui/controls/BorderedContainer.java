@@ -1,7 +1,7 @@
 package lovelace.tartan.gui.controls;
 
 import java.awt.Component;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * An interface for a container laid out with {@link java.awt.BorderLayout}, made more

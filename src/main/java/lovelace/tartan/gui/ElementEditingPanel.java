@@ -16,8 +16,7 @@ import lovelace.tartan.model.DanceMember;
 import lovelace.tartan.model.Figure;
 import lovelace.tartan.model.NamedFigure;
 import lovelace.tartan.model.ProgramElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A panel to hold the figures in a dance to let the user edit them.
@@ -27,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 public final class ElementEditingPanel extends JPanel {
 	private @Nullable ProgramElement current = null;
 
-	private @NotNull SingleColumnTableModel<DanceMember> tableModel =
+	private SingleColumnTableModel<DanceMember> tableModel =
 			new SingleColumnTableModel<>(new ArrayList<>(),
 					DanceMember.class, "Directions");
 	private final JTable table = new JTable(tableModel);
@@ -54,7 +53,7 @@ public final class ElementEditingPanel extends JPanel {
 		this.current = current;
 		detailsPanel.setCurrent(current);
 		if (current instanceof Dance dance) {
-			final @NotNull SingleColumnTableModel<DanceMember> model =
+			final SingleColumnTableModel<DanceMember> model =
 					new SingleColumnTableModel<>(
 							dance.getContents(), DanceMember.class,
 							"Directions");
@@ -63,7 +62,7 @@ public final class ElementEditingPanel extends JPanel {
 			table.setModel(model);
 			fixHeights(null);
 		} else {
-			final @NotNull SingleColumnTableModel<DanceMember> model =
+			final SingleColumnTableModel<DanceMember> model =
 					new SingleColumnTableModel<>(new ArrayList<>(), DanceMember.class,
 							"Directions");
 			tableModel = model;

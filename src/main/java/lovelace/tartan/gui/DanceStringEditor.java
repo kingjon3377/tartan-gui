@@ -11,7 +11,6 @@ import javax.swing.JTextField;
 import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.ImageButton;
 import lovelace.tartan.gui.controls.ImageLoader;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A panel to let the user edit movements in dances that are represented as just text, not
@@ -20,10 +19,10 @@ import org.jetbrains.annotations.NotNull;
  * @author Jonathan Lovelace
  */
 public final class DanceStringEditor extends JPanel {
-	private final @NotNull JTextField field;
-	private @NotNull String string;
-	private final @NotNull Consumer<@NotNull String> consumer;
-	private final @NotNull Runnable cancel;
+	private final JTextField field;
+	private String string;
+	private final Consumer<String> consumer;
+	private final Runnable cancel;
 
 	private void okListener(final ActionEvent ignored) {
 		final String text = field.getText();
@@ -40,14 +39,14 @@ public final class DanceStringEditor extends JPanel {
 	private static void noop() { /* deliberate no-op */ }
 
 	public DanceStringEditor(final String string,
-	                         final Consumer<@NotNull String> consumer) {
+	                         final Consumer<String> consumer) {
 		this(string, consumer, DanceStringEditor::noop);
 	}
 
 	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
-	public DanceStringEditor(final @NotNull String string,
-	                         final @NotNull Consumer<@NotNull String> consumer,
-	                         final @NotNull Runnable cancel) {
+	public DanceStringEditor(final String string,
+	                         final Consumer<String> consumer,
+	                         final Runnable cancel) {
 		super(new BorderLayout());
 		this.string = string;
 		field = new JTextField(string, 26);

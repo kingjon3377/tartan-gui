@@ -1,7 +1,5 @@
 package lovelace.tartan.db;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 /**
@@ -14,7 +12,7 @@ import java.util.Objects;
  *                     schema allows up to four.
  * @author Jonathan Lovelace
  */
-public record DanceTypeImpl(int id, @NotNull String name, @NotNull String abbreviation)
+public record DanceTypeImpl(int id, String name, String abbreviation)
 		implements DanceType {
 	/**
 	 * A singleton for cases where the database doesn't specify a type, if such exist.
@@ -33,7 +31,7 @@ public record DanceTypeImpl(int id, @NotNull String name, @NotNull String abbrev
 	 * @return the name of this type of dance
 	 */
 	@Override
-	public @NotNull String name() {
+	public String name() {
 		return name;
 	}
 
@@ -44,7 +42,7 @@ public record DanceTypeImpl(int id, @NotNull String name, @NotNull String abbrev
 	 * @return the short abbreviation of this type.
 	 */
 	@Override
-	public @NotNull String abbreviation() {
+	public String abbreviation() {
 		return abbreviation;
 	}
 

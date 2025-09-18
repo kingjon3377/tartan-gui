@@ -9,6 +9,7 @@ import lovelace.tartan.model.Figure;
 import lovelace.tartan.model.NamedFigure;
 import lovelace.tartan.model.NamedFigureMember;
 import lovelace.tartan.model.SimplestMember;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A renderer for the table (list) of figures in a dance.
@@ -23,7 +24,7 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 
 	@Override
 	public Component getTableCellRendererComponent(final JTable table,
-												   final Object value,
+												   final @Nullable Object value,
 												   final boolean isSelected,
 												   final boolean hasFocus,
 												   final int row, final int column) {

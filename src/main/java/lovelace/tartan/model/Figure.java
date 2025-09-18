@@ -1,8 +1,7 @@
 package lovelace.tartan.model;
 
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A movement in a dance.
@@ -13,7 +12,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	/**
 	 * The description of the figure.
 	 */
-	private @NotNull String description;
+	private String description;
 
 	/**
 	 * The bars on which this figure is danced, if any is specified.
@@ -23,14 +22,14 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	/**
 	 * @return The description of the figure.
 	 */
-	public @NotNull String getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
 	/**
 	 * @param description The new description of the figure.
 	 */
-	public void setDescription(final @NotNull String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 
@@ -56,7 +55,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @param description The description of the figure.
 	 * @param bars        The bars on which this figure is danced.
 	 */
-	public Figure(final @NotNull String description, final @Nullable String bars) {
+	public Figure(final String description, final @Nullable String bars) {
 		this.description = description;
 		this.bars = bars;
 	}
@@ -66,7 +65,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 *
 	 * @param description The description of the figure.
 	 */
-	public Figure(final @NotNull String description) {
+	public Figure(final String description) {
 		this.description = description;
 		this.bars = null;
 	}
@@ -76,7 +75,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 */
 	@Override
 	public String toString() {
-		final @Nullable String localBars = bars;
+		final String localBars = bars;
 		if (localBars == null) {
 			return description;
 		} else {

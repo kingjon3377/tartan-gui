@@ -3,7 +3,6 @@ package lovelace.tartan.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A "named figure" in a dance: a series of figures that should be grouped together and
@@ -15,7 +14,7 @@ public final class NamedFigure implements DanceMember, FigureParent {
 	/**
 	 * The list of sub-figures.
 	 */
-	private final List<@NotNull NamedFigureMember> contents;
+	private final List<NamedFigureMember> contents;
 
 	/**
 	 * Constructor.
@@ -28,7 +27,7 @@ public final class NamedFigure implements DanceMember, FigureParent {
 	/**
 	 * @return the list of sub-figures
 	 */
-	public @NotNull List<@NotNull NamedFigureMember> getContents() {
+	public List<NamedFigureMember> getContents() {
 		return contents;
 	}
 

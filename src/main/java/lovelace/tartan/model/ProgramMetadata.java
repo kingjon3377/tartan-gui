@@ -5,8 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A class to represent information related to the ball program as exported or imported,
@@ -22,49 +21,49 @@ public final class ProgramMetadata {
 	/**
 	 * The name of the group putting on the event, as it should appear on the cover.
 	 */
-	private @NotNull String groupCoverName = "";
+	private String groupCoverName = "";
 	/**
 	 * The name of the group putting on the event, as it should appear on the title page.
 	 */
-	private @NotNull String groupTitleName = "";
+	private String groupTitleName = "";
 	/**
 	 * The name of the event as it should appear on the cover.
 	 */
-	private @NotNull String eventCoverName = "";
+	private String eventCoverName = "";
 	/**
 	 * The name of the event as it should appear on the title page.
 	 */
-	private @NotNull String eventTitleName = "";
+	private String eventTitleName = "";
 	/**
 	 * The date of the event, as it should appear on the cover.
 	 */
-	private @NotNull String coverDate = "";
+	private String coverDate = "";
 	/**
 	 * The date of the event, as it should appear on the title page.
 	 */
-	private @NotNull String titleDate = "";
+	private String titleDate = "";
 	/**
 	 * The location of the event, as it should appear on the cover.
 	 */
-	private @NotNull String coverLocation = "";
+	private String coverLocation = "";
 	/**
 	 * The location of the event, as it should appear on the title page.
 	 */
-	private @NotNull String titleLocation = "";
+	private String titleLocation = "";
 	/**
 	 * The address of the event, if it should appear on the title page.
 	 */
-	private @NotNull String locationAddress = "";
+	private String locationAddress = "";
 	/**
 	 * The time(s) of the event (e.g. "Gather 6 p.m., Dinner 6:30 p.m., Dance 7:30 p.m.")
 	 * Newlines will be replaced with hard-linebreak commands for LaTeX.
 	 */
-	private @NotNull String titleTimes = "";
+	private String titleTimes = "";
 	/**
 	 * The name(s) of the musician(s) providing music for the event. If provided, this
 	 * will be typeset on the title page.
 	 */
-	private @NotNull String musicians = "";
+	private String musicians = "";
 	/**
 	 * The filename of an image to put on the cover.
 	 */
@@ -85,7 +84,7 @@ public final class ProgramMetadata {
 	 * Filenames of images to put after the last dance's crib, before Auld Lang Syne (or
 	 * before the back cover if Auld Lang Syne is not included).
 	 */
-	private final List<@NotNull Path> insidePostDanceImages = new ArrayList<>();
+	private final List<Path> insidePostDanceImages = new ArrayList<>();
 
 	/**
 	 * @return The filename this program was loaded from or should be saved to.
@@ -98,7 +97,7 @@ public final class ProgramMetadata {
 	 * @return The name of the group putting on the event, as it should appear on the
 	 * cover.
 	 */
-	public @NotNull String getGroupCoverName() {
+	public String getGroupCoverName() {
 		return groupCoverName;
 	}
 
@@ -106,70 +105,70 @@ public final class ProgramMetadata {
 	 * @return The name of the group putting on the event, as it should appear on the
 	 * title page.
 	 */
-	public @NotNull String getGroupTitleName() {
+	public String getGroupTitleName() {
 		return groupTitleName;
 	}
 
 	/**
 	 * @return The name of the event as it should appear on the cover.
 	 */
-	public @NotNull String getEventCoverName() {
+	public String getEventCoverName() {
 		return eventCoverName;
 	}
 
 	/**
 	 * @return The name of the event as it should appear on the title page.
 	 */
-	public @NotNull String getEventTitleName() {
+	public String getEventTitleName() {
 		return eventTitleName;
 	}
 
 	/**
 	 * @return The date of the event, as it should appear on the cover.
 	 */
-	public @NotNull String getCoverDate() {
+	public String getCoverDate() {
 		return coverDate;
 	}
 
 	/**
 	 * @return The date of the event, as it should appear on the title page.
 	 */
-	public @NotNull String getTitleDate() {
+	public String getTitleDate() {
 		return titleDate;
 	}
 
 	/**
 	 * @return The location of the event, as it should appear on the cover.
 	 */
-	public @NotNull String getCoverLocation() {
+	public String getCoverLocation() {
 		return coverLocation;
 	}
 
 	/**
 	 * @return The location of the event, as it should appear on the title page.
 	 */
-	public @NotNull String getTitleLocation() {
+	public String getTitleLocation() {
 		return titleLocation;
 	}
 
 	/**
 	 * @return The address of the event, if it should appear on the title page.
 	 */
-	public @NotNull String getLocationAddress() {
+	public String getLocationAddress() {
 		return locationAddress;
 	}
 
 	/**
 	 * @return The time(s) of the event
 	 */
-	public @NotNull String getTitleTimes() {
+	public String getTitleTimes() {
 		return titleTimes;
 	}
 
 	/**
 	 * @return The name(s) of the musician(s) providing music for the event.
 	 */
-	public @NotNull String getMusicians() {
+	public String getMusicians() {
 		return musicians;
 	}
 
@@ -206,7 +205,7 @@ public final class ProgramMetadata {
 	 * @return the list of filenames of images to put after the last dance's crib, before
 	 * Auld Lang Syne (or before the back cover if Auld Lang Syne is not included).
 	 */
-	public final @NotNull List<@NotNull Path> getInsidePostDanceImages() {
+	public final List<Path> getInsidePostDanceImages() {
 		return insidePostDanceImages;
 	}
 	/**
@@ -220,7 +219,7 @@ public final class ProgramMetadata {
 	 * @param name The name of the group putting on the event, as it should appear on the
 	 * cover.
 	 */
-	public void setGroupCoverName(final @NotNull String name) {
+	public void setGroupCoverName(final String name) {
 		groupCoverName = name;
 	}
 
@@ -228,70 +227,70 @@ public final class ProgramMetadata {
 	 * @param name The name of the group putting on the event, as it should appear on the
 	 * title page.
 	 */
-	public void setGroupTitleName(final @NotNull String name) {
+	public void setGroupTitleName(final String name) {
 		groupTitleName = name;
 	}
 
 	/**
 	 * @param name The name of the event as it should appear on the cover.
 	 */
-	public void setEventCoverName(final @NotNull String name) {
+	public void setEventCoverName(final String name) {
 		eventCoverName = name;
 	}
 
 	/**
 	 * @param name The name of the event as it should appear on the title page.
 	 */
-	public void setEventTitleName(final @NotNull String name) {
+	public void setEventTitleName(final String name) {
 		eventTitleName = name;
 	}
 
 	/**
 	 * @param date The date of the event, as it should appear on the cover.
 	 */
-	public void setCoverDate(final @NotNull String date) {
+	public void setCoverDate(final String date) {
 		coverDate = date;
 	}
 
 	/**
 	 * @param date The date of the event, as it should appear on the title page.
 	 */
-	public void setTitleDate(final @NotNull String date) {
+	public void setTitleDate(final String date) {
 		titleDate = date;
 	}
 
 	/**
 	 * @param location The location of the event, as it should appear on the cover.
 	 */
-	public void setCoverLocation(final @NotNull String location) {
+	public void setCoverLocation(final String location) {
 		coverLocation = location;
 	}
 
 	/**
 	 * @param location The location of the event, as it should appear on the title page.
 	 */
-	public void setTitleLocation(final @NotNull String location) {
+	public void setTitleLocation(final String location) {
 		titleLocation = location;
 	}
 
 	/**
 	 * @param address The address of the event, if it should appear on the title page.
 	 */
-	public void setLocationAddress(final @NotNull String address) {
+	public void setLocationAddress(final String address) {
 		locationAddress = address;
 	}
 
 	/**
 	 * @param times The time(s) of the event
 	 */
-	public void setTitleTimes(final @NotNull String times) {
+	public void setTitleTimes(final String times) {
 		titleTimes = times;
 	}
 
 	/**
 	 * @param musicians The name(s) of the musician(s) providing music for the event.
 	 */
-	public void setMusicians(final @NotNull String musicians) {
+	public void setMusicians(final String musicians) {
 		this.musicians = musicians;
 	}
 

@@ -9,8 +9,7 @@ import java.io.FilenameFilter;
 import java.util.Optional;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A wrapper around {@link FileDialog} on the Mac platform and {@link
@@ -23,7 +22,7 @@ public final class PlatformFileDialog {
 	 * The wrapped dialog. Must be either a {@link FileDialog} or {@link
 	 * JFileChooser}.
 	 */
-	private final @NotNull Component wrapped;
+	private final Component wrapped;
 	/**
 	 * The parent window for this dialog.
 	 */

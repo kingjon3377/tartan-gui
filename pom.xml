@@ -20,9 +20,9 @@
       <version>4.13.2</version>
     </dependency>
     <dependency>
-      <groupId>org.jetbrains</groupId>
-      <artifactId>annotations</artifactId>
-      <version>25.0.0</version>
+      <groupId>org.jspecify</groupId>
+      <artifactId>jspecify</artifactId>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.xerial</groupId>

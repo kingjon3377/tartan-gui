@@ -13,7 +13,7 @@ import javax.swing.table.TableCellEditor;
 import lovelace.tartan.model.Figure;
 import lovelace.tartan.model.NamedFigure;
 import lovelace.tartan.model.SimplestMember;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A component to allow the user to edit movements in a dance.
@@ -27,7 +27,7 @@ public class DanceElementEditor implements TableCellEditor {
 	private @Nullable Object current = null;
 
 	@Override
-	public Component getTableCellEditorComponent(final JTable table, final Object value,
+	public Component getTableCellEditorComponent(final JTable table, final @Nullable Object value,
 												 final boolean isSelected, final int row,
 												 final int column) {
 		current = value;

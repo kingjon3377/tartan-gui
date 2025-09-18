@@ -16,7 +16,6 @@ import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.ImageButton;
 import lovelace.tartan.gui.controls.ImageLoader;
 import lovelace.tartan.model.Figure;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A panel to allow the user to edit a figure in a dance on the program.
@@ -71,7 +70,7 @@ public final class FigureEditor extends JPanel {
 		this(figure, FigureEditor::noop);
 	}
 
-	private void setBars(final @NotNull String bars) {
+	private void setBars(final String bars) {
 		if (bars.isEmpty()) {
 			figure.setBars(null);
 		} else {
@@ -79,7 +78,7 @@ public final class FigureEditor extends JPanel {
 		}
 	}
 
-	private void setText(final @NotNull String text) {
+	private void setText(final String text) {
 		figure.setDescription(text);
 	}
 
