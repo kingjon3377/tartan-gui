@@ -125,10 +125,10 @@ public final class DanceSelectionPanel extends JSplitPane {
 		selectedList.setTransferHandler(new ProgramElementTransferHandler());
 		selectedList.setDropMode(DropMode.INSERT);
 		selectedList.setDragEnabled(true);
-		rightButton.addActionListener((evt) -> addDance());
+		rightButton.addActionListener(evt -> addDance());
 		danceList.addKeyListener(new EnterKeyListener(this::addDance));
 		danceList.addMouseListener(new DoubleClickListener(this::addDance));
-		leftButton.addActionListener((evt) -> {
+		leftButton.addActionListener(evt -> {
 			final int selection = selectedList.getSelectedIndex();
 			if (selection >= 0) {
 				program.remove(selection);
