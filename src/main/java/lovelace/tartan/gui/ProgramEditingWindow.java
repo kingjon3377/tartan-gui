@@ -22,6 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -43,6 +44,15 @@ public final class ProgramEditingWindow extends JFrame {
 	private static final Logger LOGGER =
 			Logger.getLogger(ProgramEditingWindow.class.getName());
 
+	private static @Nullable ProgramElement getSelection(
+			final ListModel<ProgramElement> program, final int index) {
+		if (index >= 0 && index < program.getSize()) {
+			return program.getElementAt(index);
+		} else {
+			return null;
+		}
+	}
+
 	private static JComponent programEditingPanel(
 			final ReorderableListModel<ProgramElement> program) {
 		final JList<ProgramElement> selectedList = new JList<>(program);
@@ -51,14 +61,9 @@ public final class ProgramEditingWindow extends JFrame {
 		selectedList.setDropMode(DropMode.INSERT);
 		selectedList.setDragEnabled(true);
 		final ElementEditingPanel eep = new ElementEditingPanel();
-		selectedList.addListSelectionListener((ignored) -> {
-			final int index = selectedList.getSelectedIndex();
-			if (index >= 0 && index < program.getSize()) {
-				eep.setCurrent(program.getElementAt(index));
-			} else {
-				eep.setCurrent(null);
-			}
-		});
+		selectedList.addListSelectionListener(
+				ignored -> eep.setCurrent(getSelection(program,
+						selectedList.getSelectedIndex())));
 		final JSplitPane retval =
 				new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, selectedList, eep);
 		retval.setResizeWeight(0.5);
