@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -79,6 +80,15 @@ public final class DanceSelectionPanel extends JSplitPane {
 		return retval;
 	}
 
+	private static void addIntermissionAt(final int index,
+	                                      final List<? super ProgramElement> program) {
+		if (index >= 0) {
+			program.add(index, new Intermission());
+		} else {
+			program.add(new Intermission());
+		}
+	}
+
 	private static JButton optionalImageButton(final String imagePath, final String alt) {
 		try {
 			return new ImageButton(ImageLoader.loadImage(imagePath));
@@ -126,14 +136,9 @@ public final class DanceSelectionPanel extends JSplitPane {
 		});
 		final JPanel rightPanel =
 				BorderedPanel.verticalLine(null, new JScrollPane(selectedList),
-						new ListenedButton("Add Break", (ignored) -> {
-							final int selection = selectedList.getSelectedIndex();
-							if (selection >= 0) {
-								program.add(selection, new Intermission());
-							} else {
-								program.add(new Intermission());
-							}
-						}));
+						new ListenedButton("Add Break",
+								ignored -> addIntermissionAt(
+										selectedList.getSelectedIndex(), program)));
 		final JSplitPane secondSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 			true, inner, rightPanel);
 		setLeftComponent(left);
