@@ -76,8 +76,8 @@ public final class SingleColumnTableModel<Element>
 
 	/**
 	 * Returns the most specific superclass for all the cell values in the column.  This
-	 * is used by the <code>JTable</code> to set up a default renderer and editor for the
-	 * column.
+	 * is used by the {@link javax.swing.JTable} to set up a default renderer and editor
+	 * for the column.
 	 *
 	 * @param columnIndex the index of the column
 	 * @return the common ancestor class of the object values in the model.
