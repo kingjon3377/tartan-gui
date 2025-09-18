@@ -52,7 +52,7 @@ public final class ElementEditingPanel extends JPanel {
 	public void setCurrent(final @Nullable ProgramElement current) {
 		this.current = current;
 		detailsPanel.setCurrent(current);
-		if (current instanceof Dance dance) {
+		if (current instanceof final Dance dance) {
 			final SingleColumnTableModel<DanceMember> model =
 					new SingleColumnTableModel<>(
 							dance.getContents(), DanceMember.class,
