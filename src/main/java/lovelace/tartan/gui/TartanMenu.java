@@ -1,6 +1,7 @@
 package lovelace.tartan.gui;
 
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Frame;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -199,6 +200,12 @@ public final class TartanMenu {
 		}
 	}
 
+	private static void handleQuit() {
+		// FIXME: Check whether program or metadata have been modified; if so, ask
+		//  whether to save first
+		System.exit(0);
+	}
+
 	public static JMenu fileMenu(
 		final ReorderableListModel<ProgramElement> program,
 		final ProgramMetadata metadata,
@@ -218,15 +225,12 @@ public final class TartanMenu {
 				() -> saveToFile(program, metadata, null, retval),
 				KeyStroke.getKeyStroke(
 						KeyEvent.VK_S, shortcutMask | InputEvent.SHIFT_DOWN_MASK)));
-		if (onMac) {
-			// TODO: Wire the "quit" code up to the Mac quit-handling system
-		} else {
+		Desktop.getDesktop().setQuitHandler((e, response) -> handleQuit());
+		if (!onMac) {
 			// TODO: Add an "about" dialog
 			retval.addSeparator();
-			// FIXME: Check whether program or metadata have been modified; if so, ask
-			//  whether to save first
 			retval.add(
-					menuItem("Exit", KeyEvent.VK_X, "Quit the app", () -> System.exit(0),
+					menuItem("Exit", KeyEvent.VK_X, "Quit the app", TartanMenu::handleQuit,
 							KeyStroke.getKeyStroke(KeyEvent.VK_Q, shortcutMask)));
 		}
 		return retval;
