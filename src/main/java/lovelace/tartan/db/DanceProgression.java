@@ -3,21 +3,20 @@ package lovelace.tartan.db;
 /**
  * How couples (or dancers) "progress" from one round of the dance to the next.
  *
+ * @param id   The number identifying this progression in the database.
+ * @param name A brief textual description of this progression.
  * @author Jonathan Lovelace
  */
-public interface DanceProgression {
+public record DanceProgression(int id, String name) {
 	/**
-	 * @return the number identifying this progression in the database
+	 * A singleton for cases where the database is missing progression information.
 	 */
-	int id();
-	/**
-	 * @return a brief textual description of this progression
-	 */
-	String name();
+	public static final DanceProgression UNKNOWN =
+		new DanceProgression(-1, "Unknown");
 	/**
 	 * @return whether this dance is danced only once through
 	 */
-	default boolean isOnlyOnce() {
-		return "OnceOnly".equals(name());
+	public boolean isOnlyOnce() {
+		return "OnceOnly".equals(name);
 	}
 }

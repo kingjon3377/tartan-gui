@@ -1,7 +1,5 @@
 package lovelace.tartan.db;
 
-import java.util.Objects;
-
 /**
  * A dance in the database.
  *

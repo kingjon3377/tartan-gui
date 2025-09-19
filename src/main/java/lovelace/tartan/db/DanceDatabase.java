@@ -84,7 +84,7 @@ public class DanceDatabase implements AutoCloseable {
 								results.getString("shortname")));
 		final Map<Integer, DanceProgression> progressionsMap =
 				resultsToMap(sql.prepareStatement("SELECT id, name FROM progression"),
-						results -> new DanceProgressionImpl(results.getInt("id"),
+						results -> new DanceProgression(results.getInt("id"),
 								results.getString("name")));
 		dances = resultsToList(sql.prepareStatement("""
 						SELECT dance.id, dance.name, dance.barsperrepeat, \
@@ -146,7 +146,7 @@ public class DanceDatabase implements AutoCloseable {
 		final String source = danceResults.getString("publicationname");
 		final DanceProgression progression = getFromMap(progressionsMap,
 				danceResults.getInt("progression_id"), "Progression", name,
-				DanceProgressionImpl.UNKNOWN);
+				DanceProgression.UNKNOWN);
 		return new DanceRow(id, name, length, shape, type, couples, source,
 				progression);
 	}
