@@ -396,15 +396,14 @@ public final class LaTeXReader {
 			try {
 				return Integer.parseInt(array[0]);
 			} catch (final NumberFormatException except) {
-				LOGGER.severe(() -> String.format(
-						"Times through couldn't be extracted from dance-length " +
-								"parameter for dance '%s'",
-						dance));
+				LOGGER.severe(
+						() -> ("Times through couldn't be extracted from dance-length " +
+								       "parameter for dance '%s'").formatted(dance));
 				return 0;
 			}
 		} else {
-			LOGGER.severe(() -> String.format(
-					"No dance-length parameter provided for dance '%s'", dance));
+			LOGGER.severe(() -> "No dance-length parameter provided for dance '%s'"
+					                    .formatted(dance));
 			return 0;
 		}
 	}
@@ -422,16 +421,15 @@ public final class LaTeXReader {
 			try {
 				return Integer.parseInt(array[1]);
 			} catch (final NumberFormatException except) {
-				LOGGER.severe(() -> String.format(
-						"Length-in-bars couldn't be extracted from dance-length " +
-								"parameter for dance '%s'",
-						dance));
+				LOGGER.severe(
+						() -> ("Length-in-bars couldn't be extracted from dance-length " +
+								       "parameter for dance '%s'").formatted(dance));
 				return 0;
 			}
 		} else {
-			LOGGER.severe(() -> String.format(
-					"No length-in-bars provided in dance-length parameter for dance '%s'",
-					dance));
+			LOGGER.severe(
+					() -> ("No length-in-bars provided in dance-length parameter for " +
+							       "dance '%s'").formatted(dance));
 			return 0;
 		}
 	}
@@ -794,7 +792,7 @@ public final class LaTeXReader {
 					break;
 				}
 			} else if (!Character.isWhitespace(top)) {
-				throw new ParseException(String.format("Unhandled character '%c'", top),
+				throw new ParseException("Unhandled character '%c'".formatted( top),
 						-1);
 			}
 		}

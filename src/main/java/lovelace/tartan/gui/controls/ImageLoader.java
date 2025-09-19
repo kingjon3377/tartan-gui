@@ -22,8 +22,7 @@ public final class ImageLoader {
 						.getResourceAsStream(filename)) {
 			if (stream == null) {
 				throw new FileNotFoundException(
-						String.format("File %s not found on the classpath",
-							filename));
+						"File %s not found on the classpath".formatted(filename));
 			} else {
 				return ImageIO.read(stream);
 			}

@@ -133,9 +133,8 @@ public final class TartanMenu {
 			return Optional.of(new LaTeXReader().readLaTeXProgram(builder.toString()));
 		} catch (final IOException | ParseException except) {
 			JOptionPane.showMessageDialog(null,
-					String.format(
-							"Error trying to read LaTeX from %s",
-							file), "Error Reading LaTeX Program",
+					"Error trying to read LaTeX from %s".formatted(file),
+					"Error Reading LaTeX Program",
 					JOptionPane.ERROR_MESSAGE);
 			LOGGER.log(Level.SEVERE, "Error reading LaTeX program",
 					except);

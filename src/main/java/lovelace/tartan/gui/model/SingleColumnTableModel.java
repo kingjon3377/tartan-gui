@@ -118,8 +118,8 @@ public final class SingleColumnTableModel<Element>
 									aValue.getClass().getName());
 				}
 			} else {
-				throw new IndexOutOfBoundsException(String.format(
-						"Row must be between 0 and %d", wrapped.size()));
+				throw new IndexOutOfBoundsException(
+						"Row must be between 0 and %d".formatted( wrapped.size()));
 			}
 		} else {
 			throw new IndexOutOfBoundsException("Column must be 0");

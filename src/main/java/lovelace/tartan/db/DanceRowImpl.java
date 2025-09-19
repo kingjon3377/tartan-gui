@@ -100,7 +100,7 @@ public record DanceRowImpl(int id, String name, int length,
 
 	@Override
 	public String toString() {
-		return String.format("%s is a %d-bar %s for %d couples in a %s, from \"%s\".",
+		return "%s is a %d-bar %s for %d couples in a %s, from \"%s\".".formatted(
 			name, length, type.name(), couples, shape.name(), source);
 	}
 

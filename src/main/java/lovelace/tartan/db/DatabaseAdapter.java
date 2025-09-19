@@ -115,7 +115,7 @@ public final class DatabaseAdapter {
 			return string.substring(pattern.length());
 		} else {
 			LOGGER.info(
-					() -> String.format("'%s' didn't start with '%s'", string, pattern));
+					() -> "'%s' didn't start with '%s'".formatted(string, pattern));
 			return string;
 		}
 	}
@@ -126,7 +126,7 @@ public final class DatabaseAdapter {
 			return string.substring(0, string.length() - pattern.length());
 		} else {
 			LOGGER.info(
-					() -> String.format("'%s' didn't end with '%s'", string, pattern));
+					() -> "'%s' didn't end with '%s'".formatted(string, pattern));
 			return string;
 		}
 	}

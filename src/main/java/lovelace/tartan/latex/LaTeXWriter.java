@@ -230,7 +230,7 @@ public final class LaTeXWriter {
 	@SuppressWarnings("HardcodedFileSeparator") // \\ is not a file separator here
 	private static void writeDance(final Appendable out, final Dance dance)
 			throws IOException {
-		out.append(String.format("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n",
+		out.append("\\begin{scdance}{%s}{%s}{%s}{%dx%d}{%s}%n".formatted(
 				dance.getTitle(), dance.getSource(),
 				dance.getTempo(), dance.getTimes(),
 				dance.getLength(), dance.getFormation()));

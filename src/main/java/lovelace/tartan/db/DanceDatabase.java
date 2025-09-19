@@ -138,9 +138,7 @@ public class DanceDatabase implements AutoCloseable {
 		if (couplesRaw > 0 && couplesRaw < 10) {
 			couples = couplesRaw;
 		} else if (couplesRaw == 0) {
-			LOGGER.fine(
-					() -> String.format("Number of couples for %s was SQL null",
-							name));
+			LOGGER.fine(() -> "Number of couples for %s was SQL null".formatted(name));
 			couples = -1;
 		} else {
 			couples = -1;

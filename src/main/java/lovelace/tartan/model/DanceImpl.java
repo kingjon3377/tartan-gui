@@ -171,7 +171,7 @@ public class DanceImpl implements Dance {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s (%dx%d%s) (%s)", title, times, length, tempo, source);
+		return "%s (%dx%d%s) (%s)".formatted( title, times, length, tempo, source);
 	}
 
 	/**

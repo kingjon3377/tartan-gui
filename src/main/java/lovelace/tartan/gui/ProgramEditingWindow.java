@@ -127,8 +127,7 @@ public final class ProgramEditingWindow extends JFrame {
 				return new DanceDatabase(file.toPath());
 			} catch (final SQLException except) {
 				JOptionPane.showMessageDialog(null,
-						String.format(
-								"Error trying to open %s as SQLite database",
+						"Error trying to open %s as SQLite database".formatted(
 								file.getName()), "Error Opening Database",
 						JOptionPane.ERROR_MESSAGE);
 				LOGGER.log(Level.SEVERE, "Error opening SQLite database",
@@ -152,9 +151,8 @@ public final class ProgramEditingWindow extends JFrame {
 					return new DanceDatabase(file);
 				} catch (final SQLException except) {
 					JOptionPane.showMessageDialog(null,
-							String.format(
-									"Error trying to open %s as SQLite database",
-									arg), "Error Opening Database",
+							"Error trying to open %s as SQLite database".formatted(arg),
+							"Error Opening Database",
 							JOptionPane.ERROR_MESSAGE);
 					LOGGER.log(Level.SEVERE, "Error opening SQLite database",
 							except);

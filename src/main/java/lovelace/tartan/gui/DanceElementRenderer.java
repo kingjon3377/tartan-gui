@@ -36,8 +36,7 @@ public class DanceElementRenderer extends DefaultTableCellRenderer {
 			}
 			case final Figure figure -> {
 				return super.getTableCellRendererComponent(table,
-						String.format(FIGURE_FORMAT,
-								Objects.toString(figure.getBars(), ""),
+						FIGURE_FORMAT.formatted(Objects.toString(figure.getBars(), ""),
 								figure.getDescription()), isSelected, hasFocus,
 						row, column);
 			}

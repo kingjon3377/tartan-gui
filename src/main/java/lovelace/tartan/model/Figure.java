@@ -79,7 +79,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 		if (localBars == null) {
 			return description;
 		} else {
-			return String.format("%s: %s", bars, description);
+			return "%s: %s".formatted( bars, description);
 		}
 	}
 
