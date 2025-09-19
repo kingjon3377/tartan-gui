@@ -334,7 +334,7 @@ public final class LaTeXReader {
 			final String denominator = blockContents(localInput).trim();
 			parseFraction(numerator, denominator, buffer);
 		}
-		case "textit" -> {
+		case "textit", "emph" -> {
 			buffer.append("<i>");
 			buffer.append(blockContents(localInput));
 			buffer.append("</i>");
