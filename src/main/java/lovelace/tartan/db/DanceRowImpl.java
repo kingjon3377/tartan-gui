@@ -16,9 +16,9 @@ import java.util.Objects;
  * @author Jonathan Lovelace
  */
 public record DanceRowImpl(int id, String name, int length,
-						   DanceFormation shape, DanceType type,
-						   int couples, String source,
-						   DanceProgression progression) implements DanceRow {
+                           DanceFormation shape, DanceType type,
+                           int couples, String source,
+                           DanceProgression progression) implements DanceRow {
 	/**
 	 * This dance's ID in the database.
 	 */
@@ -101,7 +101,7 @@ public record DanceRowImpl(int id, String name, int length,
 	@Override
 	public String toString() {
 		return String.format("%s is a %d-bar %s for %d couples in a %s, from \"%s\".",
-			name, length, type.name(), couples, shape.getName(), source);
+			name, length, type.name(), couples, shape.name(), source);
 	}
 
 	@Override

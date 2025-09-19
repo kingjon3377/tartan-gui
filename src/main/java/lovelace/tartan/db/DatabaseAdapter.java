@@ -39,7 +39,7 @@ public final class DatabaseAdapter {
 				new DanceImpl(dbRow.name(), dbRow.source(), dbRow.type().name(),
 						timesThrough(dbRow.shape(), dbRow.progression(),
 								dbRow.couples()), dbRow.length(),
-						dbRow.shape().getAbbreviation());
+						dbRow.shape().abbreviation());
 		if (crib != null) {
 			if (crib.startsWith("<table>")) {
 				retval.getContents().addAll(convertHtmlCrib(crib));
@@ -71,8 +71,8 @@ public final class DatabaseAdapter {
 									final Integer couples) {
 		if (progression.isOnlyOnce()) {
 			return 1;
-		} else if (shape.getName().startsWith("Longwise -")) {
-			final String abbreviation = shape.getAbbreviation();
+		} else if (shape.name().startsWith("Longwise -")) {
+			final String abbreviation = shape.abbreviation();
 			final char lastChar = abbreviation.charAt(abbreviation.length() - 1);
 			if (Character.isDigit(lastChar)) {
 				final int setSize = Character.getNumericValue(lastChar);
