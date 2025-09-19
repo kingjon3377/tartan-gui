@@ -257,7 +257,9 @@ public final class LaTeXReader {
 			switch (top) {
 				case '}' -> {
 					braceLevel--;
-					if (braceLevel == 0) { // TODO: Use <= instead of ==?
+					if (braceLevel <= 0) {
+						// Negative brace level shouldn't be possible, but
+						// let's be robust just in case.
 						return buffer.toString();
 					} else {
 						buffer.append(top);
