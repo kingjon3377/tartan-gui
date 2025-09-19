@@ -41,7 +41,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 	private final ReorderableListModel<ProgramElement> program;
 	private final DanceDatabase db;
 
-	private void filterDanceList(final ActionEvent ignored) {
+	private void filterDanceList(ActionEvent ignored) {
 		final String search = filterField.getText().trim();
 		if (search.isEmpty()) {
 			danceListModel.search(null);
@@ -126,7 +126,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 		final JPanel rightPanel =
 				BorderedPanel.verticalLine(null, new JScrollPane(selectedList),
 						new ListenedButton("Add Break",
-								ignored -> addIntermissionAt(
+								() -> addIntermissionAt(
 										selectedList.getSelectedIndex(), program)));
 		final JSplitPane secondSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 			true, inner, rightPanel);

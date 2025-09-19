@@ -18,4 +18,8 @@ public final class ListenedButton extends JButton {
 		super(text);
 		addActionListener(action);
 	}
+
+	public ListenedButton(final String text, final Runnable action) {
+		this(text, ignored -> action.run());
+	}
 }

@@ -168,13 +168,13 @@ public final class MetadataEditingPanel extends JPanel {
 		final PlatformFileDialog fillerChooser = new PlatformFileDialog(null);
 		fillerChooser.setFileFilter(ImageFileChooser.IMAGE_FILTER);
 		final JButton fillerImageAdd = new ListenedButton("Add Image",
-				(ignored) -> { // TODO: convert from lambda to class method?
+				() -> { // TODO: convert from lambda to class method?
 					fillerChooser.showOpenDialog();
 					Optional.ofNullable(fillerChooser.getFilename())
 							.map(File::toPath).ifPresent(fillerImageListModel::add);
 				});
 		final JButton fillerImageRemove = new ListenedButton("Remove Image",
-				(ignored) -> { // TODO: convert from lambda to class method?
+				() -> { // TODO: convert from lambda to class method?
 					final int index = fillerImageList.getSelectedIndex();
 					if (index >= 0) {
 						fillerImageListModel.remove(index);

@@ -45,7 +45,7 @@ public class ImageFileChooser {
 		return chosenFileField;
 	}
 
-	private void buttonHandler(final ActionEvent ignored) {
+	private void buttonHandler() {
 		chooser.showOpenDialog();
 		final File file = chooser.getFilename();
 		if (file == null) {

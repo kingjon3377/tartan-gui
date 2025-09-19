@@ -8,6 +8,7 @@ import javax.swing.DropMode;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
 import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.gui.model.SingleColumnTableModel;
@@ -37,7 +38,7 @@ public final class ElementEditingPanel extends JPanel {
 		return current;
 	}
 
-	private void fixHeights(final @Nullable Object ignored) {
+	private void fixHeights(@Nullable TableModelEvent ignored) {
 		for (int row = 0; row < table.getRowCount(); row++) {
 			final Component renderer =
 					table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);
@@ -70,23 +71,21 @@ public final class ElementEditingPanel extends JPanel {
 		}
 	}
 
-	private void addFigure(
-			final Object ignored) { // TODO: Disable the button when current not a dance
+	private void addFigure() { // TODO: Disable the button when current not a dance
 		if (current instanceof Dance) {
 			tableModel.add(new Figure("Figure To Be Entered", "Bars TBD"));
 		}
 	}
 
-	private void addNamedFigure(
-			final Object ignored) { // TODO: Disable the button when not a dance
+	private void addNamedFigure() { // TODO: Disable the button when not a dance
 		if (current instanceof Dance) {
 			tableModel.add(new NamedFigure(
 					new Figure("First Movement of Figure", "Bars TBD")));
-			fixHeights(ignored);
+			fixHeights(null);
 		}
 	}
 
-	private void removeFigure(final Object ignored) {
+	private void removeFigure() {
 		// TODO: Disable the button when not a dance or no figure selected
 		final int selection = table.getSelectedRow();
 		if (current instanceof Dance && selection >= 0 &&

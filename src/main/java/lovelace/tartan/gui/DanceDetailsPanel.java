@@ -45,9 +45,9 @@ public final class DanceDetailsPanel extends JPanel {
 	private Runnable apply = this::noop;
 
 	private final JButton applyButton =
-			new ListenedButton("Apply", (ignored) -> apply.run());
+			new ListenedButton("Apply", apply);
 	private final JButton revertButton =
-			new ListenedButton("Revert", (ignored) -> revert.run());
+			new ListenedButton("Revert", revert);
 
 	private @Nullable ProgramElement current = null;
 
