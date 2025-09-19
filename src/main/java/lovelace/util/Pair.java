@@ -5,6 +5,7 @@ package lovelace.util;
  *
  * @author Jonathan Lovelace
  */
+@SuppressWarnings("ClassCanBeRecord")
 public final class Pair<First, Second> {
 	/**
 	 * The first item in this pair.
