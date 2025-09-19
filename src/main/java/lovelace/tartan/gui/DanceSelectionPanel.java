@@ -94,11 +94,11 @@ public final class DanceSelectionPanel extends JSplitPane {
 		this.program = program;
 		this.db = db;
 		// TODO: Check image paths
-		final JButton rightButton = ImageButton.optionalImageButton(
+		final JButton addButton = ImageButton.optionalImageButton(
 				"lovelace/tartan/gui/arrow-right-300px.png", "Add");
-		final JButton leftButton = ImageButton.optionalImageButton(
+		final JButton removeButton = ImageButton.optionalImageButton(
 				"lovelace/tartan/gui/arrow-left-300px.png", "Remove");
-		final JPanel inner = createButtonPanel(rightButton, leftButton);
+		final JPanel inner = createButtonPanel(addButton, removeButton);
 
 		danceListModel = new DanceSearchResultsListModel(db);
 		danceList = new JList<>(danceListModel);
@@ -114,10 +114,10 @@ public final class DanceSelectionPanel extends JSplitPane {
 		selectedList.setTransferHandler(new ProgramElementTransferHandler());
 		selectedList.setDropMode(DropMode.INSERT);
 		selectedList.setDragEnabled(true);
-		rightButton.addActionListener(evt -> addDance());
+		addButton.addActionListener(evt -> addDance());
 		danceList.addKeyListener(new EnterKeyListener(this::addDance));
 		danceList.addMouseListener(new DoubleClickListener(this::addDance));
-		leftButton.addActionListener(evt -> {
+		removeButton.addActionListener(evt -> {
 			final int selection = selectedList.getSelectedIndex();
 			if (selection >= 0) {
 				program.remove(selection);
