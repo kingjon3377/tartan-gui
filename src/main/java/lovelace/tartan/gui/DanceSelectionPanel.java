@@ -96,9 +96,8 @@ public final class DanceSelectionPanel extends JSplitPane {
 		// TODO: Check image paths
 		final JButton rightButton = ImageButton.optionalImageButton(
 				"lovelace/tartan/gui/arrow-right-300px.png", "Add");
-		// FIXME: Left button should be "Remove", right?
 		final JButton leftButton = ImageButton.optionalImageButton(
-				"lovelace/tartan/gui/arrow-left-300px.png", "Add");
+				"lovelace/tartan/gui/arrow-left-300px.png", "Remove");
 		final JPanel inner = createButtonPanel(rightButton, leftButton);
 
 		danceListModel = new DanceSearchResultsListModel(db);
