@@ -63,19 +63,29 @@ public final class LaTeXWriter {
 		}
 	}
 
+	@SuppressWarnings("StringConcatenation")
+	private static void writePrologueLinePair(final Appendable ostream,
+	                                          final String command,
+	                                          final String unstarred,
+	                                          final String starred) throws IOException {
+		writePrologueLine(ostream, command, unstarred);
+		if (!Objects.equals(unstarred, starred)) {
+			writePrologueLine(ostream, command + "*", starred);
+		}
+	}
+
 	@SuppressWarnings("HardcodedLineSeparator") // unavoidable
 	private static void writePrologue(final Appendable ostream,
 									  final ProgramMetadata metadata)
 			throws IOException {
-		// TODO: Do't write starred forms when the same as unstarred
-		writePrologueLine(ostream, "tartangroupname", metadata.getGroupCoverName());
-		writePrologueLine(ostream, "tartangroupname*", metadata.getGroupTitleName());
-		writePrologueLine(ostream, "tartanballname", metadata.getEventCoverName());
-		writePrologueLine(ostream, "tartanballname*", metadata.getEventTitleName());
-		writePrologueLine(ostream, "tartanballdate", metadata.getCoverDate());
-		writePrologueLine(ostream, "tartanballdate*", metadata.getTitleDate());
-		writePrologueLine(ostream, "tartanhall", metadata.getCoverLocation());
-		writePrologueLine(ostream, "tartanhall*", metadata.getTitleLocation());
+		writePrologueLinePair(ostream, "tartangroupname", metadata.getGroupCoverName(),
+				metadata.getGroupTitleName());
+		writePrologueLinePair(ostream, "tartanballname", metadata.getEventCoverName(),
+				metadata.getEventTitleName());
+		writePrologueLinePair(ostream, "tartanballdate", metadata.getCoverDate(),
+				metadata.getTitleDate());
+		writePrologueLinePair(ostream, "tartanhall", metadata.getCoverLocation(),
+				metadata.getTitleLocation());
 		writePrologueLine(ostream, "tartanhalladdress", metadata.getLocationAddress());
 		writePrologueLine(ostream, "tartantimes", metadata.getTitleTimes()
 			.replace("\n", "\\\\*\n"));
