@@ -249,7 +249,7 @@ public final class LaTeXWriter {
 
 	@SuppressWarnings("HardcodedFileSeparator")
 	private static void writeNamedFigure(final Appendable out,
-	                                     final NamedFigure named) throws IOException {
+										 final NamedFigure named) throws IOException {
 		out.append("\\namedfigure{");
 		for (final NamedFigureMember subfigure : named
 				.getContents()) {
@@ -266,11 +266,11 @@ public final class LaTeXWriter {
 	}
 
 	public static int estimateSize(final List<ProgramElement> program,
-	                               final ProgramMetadata metadata) {
+								   final ProgramMetadata metadata) {
 		int retval = 328;
 		retval += estimatePrologueSize(metadata);
 		retval += Optional.ofNullable(metadata.getCoverImage()).map(Path::toString)
-				          .stream().mapToInt(String::length).sum();
+						  .stream().mapToInt(String::length).sum();
 		for (final ProgramElement item : program) {
 			retval += switch (item) {
 			case final Dance dance -> estimateDanceSize(dance);
@@ -338,7 +338,7 @@ public final class LaTeXWriter {
 
 	private static int estimateSimpleFigureSize(final Figure fig) {
 		return 12 + Optional.ofNullable(fig.getBars()).stream().mapToInt(String::length)
-				            .map(i -> i + 2).sum() + fig.getDescription().length();
+							.map(i -> i + 2).sum() + fig.getDescription().length();
 	}
 
 	@SuppressWarnings("HardcodedLineSeparator")
@@ -351,7 +351,7 @@ public final class LaTeXWriter {
 						metadata.getTitleLocation(), metadata.getLocationAddress(),
 						metadata.getTitleTimes(),
 						metadata.getMusicians()).filter(Objects::nonNull)
-				             .map(s -> s.replace("\n", "\\\\*\n"))
-				             .mapToInt(String::length).sum();
+							 .map(s -> s.replace("\n", "\\\\*\n"))
+							 .mapToInt(String::length).sum();
 	}
 }
