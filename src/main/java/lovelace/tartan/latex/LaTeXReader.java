@@ -657,8 +657,7 @@ public final class LaTeXReader {
 			if (currentContext != null) {
 				// we're clearly not delimiting the title page!
 				return false;
-			}
-			if (haveHadCover && !haveHadTitle) {
+			} else if (haveHadCover && !haveHadTitle) {
 				mRetval.setTitleOnCover(true);
 				haveHadTitle = true;
 			}
@@ -667,8 +666,7 @@ public final class LaTeXReader {
 			if (currentContext != null) {
 				// we're clearly not delimiting the title page!
 				return false;
-			}
-			if (haveHadCover && !haveHadTitle) {
+			} else if (haveHadCover && !haveHadTitle) {
 				mRetval.setTitleOnCover(false);
 				haveHadTitle = true;
 			}
