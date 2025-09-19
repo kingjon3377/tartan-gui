@@ -232,15 +232,13 @@ public final class LaTeXReader {
 		}
 	}
 
-	/**
-	 * If the cursor is at the beginning of a curly-brace block, return its contents,
-	 * replacing some LaTeX idioms with HTML equivalents (e.g. <pre>\\textbf{}</pre> with
-	 * HTML bold tags).
-	 *
-	 * @param localInput the queue from which to read
-	 * @throws ParseException if there are fewer <pre>}</pre> than <pre>{</pre> in the
-	 *                        input
-	 */
+	/// If the cursor is at the beginning of a curly-brace block, return its contents,
+	/// replacing some LaTeX idioms with HTML equivalents (e.g. `\textbf{}` with
+	/// HTML bold tags).
+	///
+	/// @param localInput the queue from which to read
+	/// @throws ParseException if there are fewer <pre>}</pre> than <pre>{</pre> in the
+	///                        input
 	// HardcodedFileSeparator: '/' is cross-platform in Java!
 	@SuppressWarnings({"ContinueStatement", "HardcodedFileSeparator", "GrazieInspection"})
 	static String blockContents(final Deque<Character> localInput)
