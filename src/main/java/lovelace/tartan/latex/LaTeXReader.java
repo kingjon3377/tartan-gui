@@ -226,6 +226,12 @@ public final class LaTeXReader {
 		}
 	}
 
+	private static void stripLeadingWhitespace(final Deque<Character> input) {
+		while (!input.isEmpty() && Character.isWhitespace(input.peekFirst())) {
+			input.pop();
+		}
+	}
+
 	/**
 	 * If the cursor is at the beginning of a curly-brace block, return its contents,
 	 * replacing some LaTeX idioms with HTML equivalents (e.g. <pre>\\textbf{}</pre> with
@@ -240,13 +246,10 @@ public final class LaTeXReader {
 	static String blockContents(final Deque<Character> localInput)
 			throws ParseException {
 		// TODO: Keep track of cursor position so we can give accurate data in thrown
-		//  error
-		while (!localInput.isEmpty() && Character.isWhitespace(localInput.peekFirst())) {
-			localInput.pop();
-		}
-		if (localInput.isEmpty()) { // TODO: Throw here instead?
-			return "";
-		} else if ('{' != localInput.peekFirst()) {
+		//  error (use an actual cursor instead of a stack)
+		stripLeadingWhitespace(localInput);
+		if (localInput.isEmpty() || '{' != localInput.peekFirst()) {
+			// TODO: Throw on empty (i.e. EOF) intead?
 			return "";
 		}
 		final StringBuilder buffer = new StringBuilder(localInput.size());
