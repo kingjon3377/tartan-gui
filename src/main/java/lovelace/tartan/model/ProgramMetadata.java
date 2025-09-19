@@ -386,25 +386,21 @@ public final class ProgramMetadata {
 	}
 
 	/**
-	 * TODO: Should probably use isBlank() instead.
-	 *
 	 * @return whether any of the fields that would be included on the cover is non-empty.
 	 */
 	public boolean hasCoverContent() {
-		return !groupCoverName.isEmpty() || !eventCoverName.isEmpty() ||
-				       !coverDate.isEmpty() || !coverLocation.isEmpty();
+		return !groupCoverName.isBlank() || !eventCoverName.isBlank() ||
+				       !coverDate.isBlank() || !coverLocation.isBlank();
 	}
 
 	/**
-	 * TODO: Should probably use isBlank() instead
-	 *
 	 * @return whether any of the fields that would be included on the title page is
 	 * non-empty.
 	 */
 	public boolean hasTitlePageContent() {
-		return !groupTitleName.isEmpty() || !eventTitleName.isEmpty() ||
-				       !titleDate.isEmpty() || !titleLocation.isEmpty() ||
-				       !locationAddress.isEmpty() || !titleTimes.isEmpty() ||
-				       !musicians.isEmpty();
+		return !groupTitleName.isBlank() || !eventTitleName.isBlank() ||
+				       !titleDate.isBlank() || !titleLocation.isBlank() ||
+				       !locationAddress.isBlank() || !titleTimes.isBlank() ||
+				       !musicians.isBlank();
 	}
 }

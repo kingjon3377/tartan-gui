@@ -520,7 +520,7 @@ public final class LaTeXReader {
 			throws ParseException {
 		final String bars = parseOptionalBlock(ourQueue);
 		final String desc = blockContents(ourQueue);
-		if (bars.isEmpty()) {
+		if (bars.isBlank()) {
 			return new Figure(desc, null);
 		} else {
 			return new Figure(desc, bars);
@@ -694,7 +694,7 @@ public final class LaTeXReader {
 		case "intermission":
 			requireNullContext(command, currentContext);
 			final String argument = parseOptionalBlock(ourQueue);
-			if (argument.isEmpty()) {
+			if (argument.isBlank()) {
 				pRetval.add(new Intermission());
 			} else {
 				pRetval.add(new Intermission(argument));

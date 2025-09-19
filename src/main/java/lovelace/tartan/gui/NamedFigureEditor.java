@@ -29,7 +29,7 @@ public final class NamedFigureEditor extends JPanel {
 				case final Figure figure -> add(new FigureEditor(figure));
 				case final SimplestMember simplestMember -> add(
 						new DanceStringEditor(simplestMember.getString(), (str) -> {
-							if (str.isEmpty()) {
+							if (str.isBlank()) {
 								// TODO: Remove this editor as well, & in non-editing view
 								namedFigure.getContents().remove(member);
 							} else {

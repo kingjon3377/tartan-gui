@@ -59,7 +59,7 @@ public final class FigureEditor extends JPanel {
 	}
 
 	private void setBars(final String bars) {
-		if (bars.isEmpty()) {
+		if (bars.isBlank()) {
 			figure.setBars(null);
 		} else {
 			figure.setBars(bars);

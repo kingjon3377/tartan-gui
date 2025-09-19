@@ -52,7 +52,7 @@ public final class LaTeXWriter {
 										  final String command,
 										  final String arg)
 			throws IOException {
-		if (!arg.trim().isEmpty()) {
+		if (!arg.isBlank()) {
 			// not a file separator
 			//noinspection HardcodedFileSeparator
 			ostream.append("\\");
@@ -227,7 +227,7 @@ public final class LaTeXWriter {
 	private static void writeIntermission(final Appendable out,
 	                              final Intermission intermission) throws IOException {
 		final String text = intermission.getDescription();
-		if ("Intermission".equals(text) || text.isEmpty()) {
+		if ("Intermission".equals(text) || text.isBlank()) {
 			writeSimpleCommand(out, "intermission");
 		} else {
 			writeSimpleCommand(out, "intermission");
@@ -306,7 +306,7 @@ public final class LaTeXWriter {
 
 	private static int estimateIntermissionSize(final Intermission intermission) {
 		final String text = intermission.getDescription();
-		if ("Intermission".equals(text) || text.isEmpty()) {
+		if ("Intermission".equals(text) || text.isBlank()) {
 			return 14;
 		} else {
 			return 16 + text.length();
