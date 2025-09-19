@@ -89,8 +89,7 @@ public class ProgramElementTransferHandler extends TransferHandler {
 		final Transferable transfer = support.getTransferable();
 		final int payload;
 		try {
-			final Object temp = transfer.getTransferData(FLAVOR); // TODO: inline
-			payload = (Integer) temp;
+			payload = (Integer) transfer.getTransferData(FLAVOR);
 		} catch (final UnsupportedFlavorException | IOException except) {
 			LOGGER.log(Level.INFO, "Transfer failure", except);
 			return false;
