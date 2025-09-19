@@ -324,30 +324,30 @@ public final class LaTeXReader {
 	                              final String nextCommand, final StringBuilder buffer,
 	                              final char top) throws ParseException {
 		switch (nextCommand) {
-			case "textbf":
-				buffer.append("<b>");
-				buffer.append(blockContents(localInput));
-				buffer.append("</b>");
-				break;
-			case "nicefrac":
-				final String numerator = blockContents(localInput).trim();
-				final String denominator = blockContents(localInput).trim();
-				parseFraction(numerator, denominator, buffer);
-				break;
-			case "textit": // TODO: Handle \emph as well
-				buffer.append("<i>");
-				buffer.append(blockContents(localInput));
-				buffer.append("</i>");
-				break;
-			case "textsuperscript":
-				buffer.append("<sup>");
-				buffer.append(blockContents(localInput));
-				buffer.append("</sup>");
-				break;
-			default:
-				buffer.append(top);
-				buffer.append(nextCommand);
-				break;
+		case "textbf" -> {
+			buffer.append("<b>");
+			buffer.append(blockContents(localInput));
+			buffer.append("</b>");
+		}
+		case "nicefrac" -> {
+			final String numerator = blockContents(localInput).trim();
+			final String denominator = blockContents(localInput).trim();
+			parseFraction(numerator, denominator, buffer);
+		}
+		case "textit" -> {
+			buffer.append("<i>");
+			buffer.append(blockContents(localInput));
+			buffer.append("</i>");
+		}
+		case "textsuperscript" -> {
+			buffer.append("<sup>");
+			buffer.append(blockContents(localInput));
+			buffer.append("</sup>");
+		}
+		default -> {
+			buffer.append(top);
+			buffer.append(nextCommand);
+		}
 		}
 	}
 
