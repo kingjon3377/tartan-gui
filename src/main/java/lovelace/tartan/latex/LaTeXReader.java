@@ -624,7 +624,7 @@ public final class LaTeXReader {
 			mRetval.setCoverImage(null);
 			haveHadCover = true;
 			break;
-		case "listofdances":
+		case "listofdances", "maketartantitle":
 			requireNullContext(command, currentContext);
 			haveHadCover = true;
 			haveHadTitle = true;
@@ -670,11 +670,6 @@ public final class LaTeXReader {
 				mRetval.setTitleOnCover(false);
 				haveHadTitle = true;
 			}
-			break;
-		case "maketartantitle":
-			requireNullContext(command, currentContext);
-			haveHadCover = true;
-			haveHadTitle = true;
 			break;
 		case "begin":
 			handleEnvironment(blockContents(ourQueue), mRetval, pRetval, ourQueue,

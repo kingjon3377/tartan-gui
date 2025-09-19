@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
 import lovelace.tartan.model.Dance;
 import lovelace.tartan.model.DanceMember;
 import lovelace.tartan.model.Figure;
@@ -135,6 +137,19 @@ public final class LaTeXWriter {
 		writeLine(ostream, "}");
 	}
 
+	private static void writeProgramElement(final Appendable out,
+	                                        final ProgramElement item)
+			throws IOException {
+		switch (item) {
+			case final Dance dance -> writeDance(out, dance);
+			case final Intermission intermission ->
+					writeIntermission(out, intermission);
+			default -> {
+				// TODO: Log?
+			}
+		}
+	}
+
 	/**
 	 * Write LaTeX code representing the given Ball program to the given stream.
 	 *
@@ -181,13 +196,7 @@ public final class LaTeXWriter {
 		writeSimpleCommand(out, "vspace", "\\fill");
 		writeSimpleCommand(out, "clearpage");
 		for (final ProgramElement item : program) {
-			switch (item) {
-				case final Dance dance -> writeDance(out, dance);
-				case final Intermission intermission ->
-						writeIntermission(out, intermission);
-				default -> {
-				}
-			}
+			writeProgramElement(out, item);
 		}
 		for (final Path image : metadata.getInsidePostDanceImages()) {
 			writeSimpleCommand(out, "clearpage");
