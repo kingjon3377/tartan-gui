@@ -1,12 +1,12 @@
 package lovelace.tartan.latex;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import lovelace.tartan.model.Dance;
@@ -630,11 +630,10 @@ public final class LaTeXReader {
 			break;
 		case "tartanimage":
 			requireNullContext(command, currentContext);
+			// TODO: Put logic for this inside ProgramMetadata?
 			if (nextIsBackCover) {
-				final @Nullable Path oldBackCover = mRetval.getBackCoverImage();
-				if (oldBackCover != null) {
-					mRetval.getInsidePostDanceImages().add(oldBackCover);
-				}
+				Optional.ofNullable(mRetval.getBackCoverImage())
+						.ifPresent(mRetval.getInsidePostDanceImages()::add);
 				mRetval.setBackCoverImage(Paths.get(blockContents(ourQueue)));
 			} else if (haveHadCover) {
 				mRetval.getInsidePostDanceImages()
