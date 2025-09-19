@@ -3,6 +3,7 @@ package lovelace.tartan.gui.controls;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 import javax.swing.JButton;
 
 /**
@@ -30,4 +31,13 @@ public final class ImageButton extends JButton {
 		return "ImageButton for %dx%d image"
 				       .formatted(image.getWidth(null), image.getHeight(null));
 	}
+
+	public static JButton optionalImageButton(final String imagePath, final String alt) {
+		try {
+			return new ImageButton(ImageLoader.loadImage(imagePath));
+		} catch (final IOException except) {
+			return new JButton(alt);
+		}
+	}
+
 }

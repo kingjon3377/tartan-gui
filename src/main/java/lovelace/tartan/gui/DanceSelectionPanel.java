@@ -6,7 +6,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.util.List;
 import javax.swing.DropMode;
 import javax.swing.JButton;
@@ -22,7 +21,6 @@ import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.BoxPanel;
 import lovelace.tartan.gui.controls.BoxPanel.BoxDirection;
 import lovelace.tartan.gui.controls.ImageButton;
-import lovelace.tartan.gui.controls.ImageLoader;
 import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.gui.model.ReorderableListModel;
 import lovelace.tartan.model.Dance;
@@ -89,14 +87,6 @@ public final class DanceSelectionPanel extends JSplitPane {
 		}
 	}
 
-	private static JButton optionalImageButton(final String imagePath, final String alt) {
-		try {
-			return new ImageButton(ImageLoader.loadImage(imagePath));
-		} catch (final IOException except) {
-			return new JButton(alt);
-		}
-	}
-
 	@SuppressWarnings("HardcodedFileSeparator") // '/' is cross-platform in Java!
 	public DanceSelectionPanel(final DanceDatabase db,
 							   final ReorderableListModel<ProgramElement> program) {
@@ -104,10 +94,10 @@ public final class DanceSelectionPanel extends JSplitPane {
 		this.program = program;
 		this.db = db;
 		// TODO: Check image paths
-		final JButton rightButton =
-				optionalImageButton("lovelace/tartan/gui/arrow-right-300px.png", "Add");
+		final JButton rightButton = ImageButton.optionalImageButton(
+				"lovelace/tartan/gui/arrow-right-300px.png", "Add");
 		// FIXME: Left button should be "Remove", right?
-		final JButton leftButton = optionalImageButton(
+		final JButton leftButton = ImageButton.optionalImageButton(
 				"lovelace/tartan/gui/arrow-left-300px.png", "Add");
 		final JPanel inner = createButtonPanel(rightButton, leftButton);
 

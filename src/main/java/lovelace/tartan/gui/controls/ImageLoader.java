@@ -28,6 +28,4 @@ public final class ImageLoader {
 			}
 		}
 	}
-
-	// TODO: Provide a factory method to try to create an ImageButton w/ JButton fallback
 }
