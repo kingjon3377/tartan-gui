@@ -73,7 +73,7 @@ public class DanceDatabase implements AutoCloseable {
 		final Map<Integer, DanceType> typesMap =
 				resultsToMap(sql.prepareStatement(
 						"SELECT id, name, short_name FROM dancetype"),
-						results -> new DanceTypeImpl(results.getInt("id"),
+						results -> new DanceType(results.getInt("id"),
 								results.getString("name"),
 								results.getString("short_name")));
 		final Map<Integer, DanceFormation> shapesMap =
@@ -125,7 +125,7 @@ public class DanceDatabase implements AutoCloseable {
 				danceResults.getInt("shape_id"), "Shape", name,
 				DanceFormation.UNKNOWN);
 		final DanceType type = getFromMap(typesMap, danceResults.getInt("type_id"),
-				"Type", name, DanceTypeImpl.UNKNOWN);
+				"Type", name, DanceType.UNKNOWN);
 		final int couplesRaw = danceResults.getInt("couples_id");
 		final int couples;
 		// The database helpfully uses the number of couples for the ID in that
