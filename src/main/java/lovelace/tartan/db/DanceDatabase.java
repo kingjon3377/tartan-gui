@@ -114,17 +114,17 @@ public class DanceDatabase implements AutoCloseable {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	private static DanceRow parseDance(final ResultSet danceResults,
-	                                   final Map<Integer, DanceFormation> shapesMap,
-	                                   final Map<Integer, DanceType> typesMap,
-	                                   final Map<Integer, DanceProgression> progressionsMap)
+	                                   final Map<Integer, DanceFormation> shapes,
+	                                   final Map<Integer, DanceType> types,
+	                                   final Map<Integer, DanceProgression> progressions)
 			throws SQLException {
 		final int id = danceResults.getInt("id");
 		final String name = danceResults.getString("name");
 		final int length = danceResults.getInt("barsperrepeat");
-		final DanceFormation shape = getFromMap(shapesMap,
+		final DanceFormation shape = getFromMap(shapes,
 				danceResults.getInt("shape_id"), "Shape", name,
 				DanceFormation.UNKNOWN);
-		final DanceType type = getFromMap(typesMap, danceResults.getInt("type_id"),
+		final DanceType type = getFromMap(types, danceResults.getInt("type_id"),
 				"Type", name, DanceType.UNKNOWN);
 		final int couplesRaw = danceResults.getInt("couples_id");
 		final int couples;
@@ -144,7 +144,7 @@ public class DanceDatabase implements AutoCloseable {
 			couples = -1;
 		}
 		final String source = danceResults.getString("publicationname");
-		final DanceProgression progression = getFromMap(progressionsMap,
+		final DanceProgression progression = getFromMap(progressions,
 				danceResults.getInt("progression_id"), "Progression", name,
 				DanceProgression.UNKNOWN);
 		return new DanceRow(id, name, length, shape, type, couples, source,
