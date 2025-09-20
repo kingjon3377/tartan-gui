@@ -27,7 +27,8 @@ public class DanceElementEditor implements TableCellEditor {
 	private @Nullable Object current = null;
 
 	@Override
-	public Component getTableCellEditorComponent(final JTable table, final @Nullable Object value,
+	public Component getTableCellEditorComponent(final JTable table,
+	                                             final @Nullable Object value,
 												 final boolean isSelected, final int row,
 												 final int column) {
 		current = value;

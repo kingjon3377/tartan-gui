@@ -230,7 +230,8 @@ public final class TartanMenu {
 			// TODO: Add an "about" dialog
 			retval.addSeparator();
 			retval.add(
-					menuItem("Exit", KeyEvent.VK_X, "Quit the app", TartanMenu::handleQuit,
+					menuItem("Exit", KeyEvent.VK_X, "Quit the app",
+							TartanMenu::handleQuit,
 							KeyStroke.getKeyStroke(KeyEvent.VK_Q, shortcutMask)));
 		}
 		return retval;
