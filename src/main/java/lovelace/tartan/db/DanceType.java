@@ -1,7 +1,5 @@
 package lovelace.tartan.db;
 
-import java.util.Objects;
-
 /**
  * A type of dance. With vanishingly-rare exceptions, all dances in the database are jigs,
  * reels, strathspeys, or medleys, but it's conceivable that the database's IDs for these

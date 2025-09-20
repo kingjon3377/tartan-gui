@@ -2,7 +2,6 @@ package lovelace.tartan.gui;
 
 import java.awt.Component;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.function.Consumer;

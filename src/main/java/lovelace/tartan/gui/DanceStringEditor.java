@@ -2,7 +2,6 @@ package lovelace.tartan.gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.function.Consumer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -10,7 +9,6 @@ import javax.swing.JTextField;
 
 import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.ImageButton;
-import lovelace.tartan.gui.controls.ImageLoader;
 
 /**
  * A panel to let the user edit movements in dances that are represented as just text, not
