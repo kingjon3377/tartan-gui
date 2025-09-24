@@ -19,7 +19,6 @@ import lovelace.tartan.db.DanceRow;
 import lovelace.tartan.db.DatabaseAdapter;
 import lovelace.tartan.gui.controls.BorderedPanel;
 import lovelace.tartan.gui.controls.BoxPanel;
-import lovelace.tartan.gui.controls.BoxPanel.BoxDirection;
 import lovelace.tartan.gui.controls.ImageButton;
 import lovelace.tartan.gui.controls.ListenedButton;
 import lovelace.tartan.gui.model.ReorderableListModel;
@@ -70,7 +69,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 	@SuppressWarnings("MagicNumber")
 	private static JPanel createButtonPanel(final JButton rightButton,
 	                                        final JButton leftButton) {
-		final JPanel retval = new BoxPanel(BoxDirection.PageAxis, BoxPanel.GLUE,
+		final JPanel retval = new BoxPanel(BoxPanel.BoxDirection.PageAxis, BoxPanel.GLUE,
 				rightButton, BoxPanel.strut(5), leftButton, BoxPanel.GLUE);
 		retval.setMaximumSize(new Dimension(60, 4096));
 		retval.setPreferredSize(new Dimension(40, 480));
