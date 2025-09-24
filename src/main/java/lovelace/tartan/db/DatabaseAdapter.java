@@ -63,8 +63,8 @@ public final class DatabaseAdapter {
 	 * @param shape       the shape of the set
 	 * @param progression the progression type (only used to check against "OnceOnly")
 	 * @param couples     the number of couples
-	 * @return 1 if "OnceOnly", twice the number of couples if a longwise set longer than
-	 * the number of couples, and otherwise the number of couples.
+	 * @return 1 if "OnceOnly", twice the number of couples in the set if a longwise set
+	 * longer than the number of dancing couples, and otherwise the number of couples.
 	 */
 	private static int timesThrough(final DanceFormation shape,
 									final DanceProgression progression,
@@ -77,7 +77,7 @@ public final class DatabaseAdapter {
 			if (Character.isDigit(lastChar)) {
 				final int setSize = Character.getNumericValue(lastChar);
 				if (setSize > couples) {
-					return couples * 2;
+					return setSize * 2;
 				}
 			}
 		}
