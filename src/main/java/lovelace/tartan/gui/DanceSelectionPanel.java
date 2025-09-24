@@ -40,7 +40,7 @@ public final class DanceSelectionPanel extends JSplitPane {
 	private final ReorderableListModel<ProgramElement> program;
 	private final DanceDatabase db;
 
-	private void filterDanceList(ActionEvent ignored) {
+	private void filterDanceList(final ActionEvent ignored) {
 		final String search = filterField.getText().trim();
 		if (search.isEmpty()) {
 			danceListModel.search(null);

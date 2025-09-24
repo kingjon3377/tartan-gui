@@ -52,12 +52,12 @@ public final class DanceStringEditor extends JPanel {
 		this.cancel = cancel;
 		this.consumer = consumer;
 		// TODO: Check image path once port back to Java complete
-		JButton okButton =
+		final JButton okButton =
 				ImageButton.optionalImageButton(
 						"lovelace/tartan/gui/Green-Check-Mark-Icon-300px.png", "OK");
 		okButton.addActionListener(this::okListener);
 		// TODO: Check image path once port back to Java complete
-		JButton cancelButton = ImageButton.optionalImageButton(
+		final JButton cancelButton = ImageButton.optionalImageButton(
 				"lovelace/tartan/gui/Red-X-Icon-300px.png", "Cancel");
 		cancelButton.addActionListener(this::cancelListener);
 		add(field, BorderLayout.LINE_START);

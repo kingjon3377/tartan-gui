@@ -36,13 +36,13 @@ public final class FigureEditor extends JPanel {
 		add(barsField, BorderLayout.LINE_START);
 		add(descriptionField, BorderLayout.CENTER);
 		// TODO: Check image path once port back to Java complete
-		JButton okButton = ImageButton.optionalImageButton(
+		final JButton okButton = ImageButton.optionalImageButton(
 				"lovelace/tartan/gui/Green-Check-Mark-Icon-300px.png", "OK");
 		okButton.addActionListener(this::okListener);
 		barsField.addActionListener(this::okListener);
 		descriptionField.addActionListener(this::okListener);
 		// TODO: Check image path once port back to Java complete
-		JButton cancelButton = ImageButton.optionalImageButton(
+		final JButton cancelButton = ImageButton.optionalImageButton(
 				"lovelace/tartan/gui/Red-X-Icon-300px.png", "Cancel");
 		final KeyListener escapeListener = new EscapeKeyListener(this::cancelListener);
 		barsField.addKeyListener(escapeListener);

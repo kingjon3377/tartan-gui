@@ -38,7 +38,7 @@ public final class ElementEditingPanel extends JPanel {
 		return current;
 	}
 
-	private void fixHeights(@Nullable TableModelEvent ignored) {
+	private void fixHeights(@Nullable final TableModelEvent ignored) {
 		for (int row = 0; row < table.getRowCount(); row++) {
 			final Component renderer =
 					table.prepareRenderer(table.getCellRenderer(row, 0), row, 0);
