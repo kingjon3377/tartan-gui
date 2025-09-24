@@ -12,6 +12,7 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Jonathan Lovelace
  */
+@SuppressWarnings("unused") // We want to provide all directions for completeness
 public interface BorderedContainer {
 	@Nullable Component getCenter();
 

@@ -32,13 +32,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @SuppressWarnings("ClassNamePrefixedWithPackageName")
 @RunWith(Parameterized.class)
 public class LaTeXTest {
-	@SuppressWarnings("InstanceVariableMayNotBeInitialized")
+	@SuppressWarnings(
+			{"InstanceVariableMayNotBeInitialized", "UnqualifiedInnerClassAccess"})
 	@Parameter
 	public boolean titleOnCover;
-	@SuppressWarnings("InstanceVariableMayNotBeInitialized")
+	@SuppressWarnings(
+			{"InstanceVariableMayNotBeInitialized", "UnqualifiedInnerClassAccess"})
 	@Parameter(1)
 	public boolean printAuldLangSyne;
 
+	@SuppressWarnings("UnqualifiedInnerClassAccess")
 	@Parameters(name = "{index}: [{0}, {1}]")
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][]{{true, true}, {true, false}, {false, true},
