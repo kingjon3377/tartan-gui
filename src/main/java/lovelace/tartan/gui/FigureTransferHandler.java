@@ -28,7 +28,7 @@ public class FigureTransferHandler extends TransferHandler {
 
 	/**
 	 * A drag/drop operation is supported iff it both is a supported flavor and is or
-	 * can be scoerced to be a move operation.
+	 * can be coerced to be a move operation.
 	 */
 	@Override
 	public boolean canImport(final TransferSupport support) {

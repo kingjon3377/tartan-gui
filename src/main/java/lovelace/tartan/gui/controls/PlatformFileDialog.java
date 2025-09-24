@@ -163,7 +163,7 @@ public final class PlatformFileDialog {
 
 		@Override
 		public String toString() {
-			return "FilenameFilteerWrapper for " + getDescription();
+			return "FilenameFilterWrapper for " + getDescription();
 		}
 	}
 
