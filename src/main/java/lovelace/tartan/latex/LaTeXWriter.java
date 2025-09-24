@@ -25,6 +25,10 @@ import org.jspecify.annotations.Nullable;
 @SuppressWarnings("ClassNamePrefixedWithPackageName")
 public final class LaTeXWriter {
 	/**
+	 * Don't instantiate; all methods are static, and there's no instance state.
+	 */
+	private LaTeXWriter() {}
+	/**
 	 * The extensions the graphicx package supports.
 	 */
 	@SuppressWarnings("StaticCollection") // unmodifiable
