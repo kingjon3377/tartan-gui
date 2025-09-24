@@ -66,8 +66,7 @@ public final class Figure implements NamedFigureMember, DanceMember {
 	 * @param description The description of the figure.
 	 */
 	public Figure(final String description) {
-		this.description = description;
-		this.bars = null;
+		this(description, null);
 	}
 
 	/**
