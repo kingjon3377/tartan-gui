@@ -91,7 +91,7 @@ public class DanceDatabase implements AutoCloseable {
 						dance.shape_id, dance.type_id, dance.couples_id, \
 						publication.name AS publicationName, dance.progression_id \
 						FROM dance \
-						JOIN dancepublicationsmap dpm ON dance.id = dpm.dance_id \
+						JOIN dancespublicationsmap dpm ON dance.id = dpm.dance_id \
 						JOIN publication ON publication.id = dpm.publication_id"""),
 				results -> parseDance(results, shapesMap, typesMap, progressionsMap));
 		cribStatement = sql.prepareStatement(
