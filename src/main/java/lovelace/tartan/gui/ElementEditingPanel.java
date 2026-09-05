@@ -27,8 +27,10 @@ import org.jspecify.annotations.Nullable;
 public final class ElementEditingPanel extends JPanel {
 	private @Nullable ProgramElement current = null;
 
+	// Most dances have 6 or fewer phrases, so default to an array size of 6
+	private static final int DEFAULT_ARRAY_SIZE = 6;
 	private SingleColumnTableModel<DanceMember> tableModel =
-			new SingleColumnTableModel<>(new ArrayList<>(),
+			new SingleColumnTableModel<>(new ArrayList<>(DEFAULT_ARRAY_SIZE),
 					DanceMember.class, "Directions");
 	private final JTable table = new JTable(tableModel);
 
@@ -64,7 +66,7 @@ public final class ElementEditingPanel extends JPanel {
 			fixHeights(null);
 		} else {
 			final SingleColumnTableModel<DanceMember> model =
-					new SingleColumnTableModel<>(new ArrayList<>(), DanceMember.class,
+					new SingleColumnTableModel<>(new ArrayList<>(DEFAULT_ARRAY_SIZE), DanceMember.class,
 							"Directions");
 			tableModel = model;
 			table.setModel(model);
